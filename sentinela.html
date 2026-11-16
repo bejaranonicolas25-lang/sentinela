@@ -3,101 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTINELA - Todo en uno</title>
+<title>CENTINELA - Pagá por lo que usás</title>
 <style>
-  body{font-family:Arial;background:#0a0a0a;color:#fff;margin:0;padding:20px}
-  .logo{font-size:28px;font-weight:bold;text-align:center;margin:20px 0}
-  .modulo{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:15px;margin:10px 0}
-  .modulo h2{margin:0 0 5px 0;color:#00ff88}
-  button{background:#00ff88;border:0;padding:10px 15px;border-radius:8px;font-weight:bold;width:100%;margin-top:10px}
-  .watermark{font-size:11px;color:#888;text-align:center;margin-top:5px}
+body{font-family:Arial,sans-serif;background:#0f172a;color:white;margin:0;padding:20px;text-align:center}
+h1{color:#38bdf8}
+.card{background:#1e293b;border-radius:15px;padding:20px;margin:15px auto;max-width:400px}
+button{background:#38bdf8;color:#000;border:none;padding:12px 20px;border-radius:10px;font-weight:bold;font-size:16px;margin:5px;width:100%}
+button.green{background:#22c55e}
+#saldo{font-size:32px;font-weight:bold;color:#22c55e}
+input{width:90%;padding:12px;border-radius:10px;border:none;margin:10px 0;font-size:16px}
 </style>
 </head>
 <body>
+<h1>CENTINELA</h1>
+<p>Pagá por lo que usás. Seguro. Sin mostrar tu info.</p>
 
-<div class="logo">🛡️ CENTINELA</div>
-<p style="text-align:center">Logo de entrada, de apertura.</p>
-
-<!-- CENTINELA FIND + ID -->
-<div class="modulo">
-  <h2>CENTINELA FIND + ID</h2>
-  <p>Protección anti-robo. A los 3 intentos fallidos: foto + ubicación + bloqueo.</p>
-  <p>Intentos fallidos: <span id="intentos">0</span>/3</p>
-  <button onclick="intentoFallido()">Simular intento fallido</button>
-  <p id="alerta-find"></p>
+<div class="card">
+<h2>WALLET</h2>
+<p>Saldo:</p>
+<div id="saldo">0</div>
+<p id="wallet-msg">Tu billetera está lista.</p>
+<button onclick="depositar()">Depositar $1000</button>
+<button class="green" onclick="enviarMercadoPago()">Enviar a Mercado Pago</button>
 </div>
 
-<!-- SENTINEL ACCORDED - IA CEREBRO -->
-<div class="modulo">
-  <h2>SENTINEL ACCORDED - IA Cerebro</h2>
-  <p>Genera toda la información. Todo con marca de agua si no pagás.</p>
-  <input id="prompt-acorded" placeholder="Pedile algo a la IA..." style="width:100%;padding:10px;border-radius:8px">
-  <button onclick="generarIA('acorded')">Generar con IA</button>
-  <p id="salida-acorded"></p>
-  <div class="watermark">Hecho con SENTINEL ACCORDED - Marca de agua CENTINELA</div>
-</div>
-
-<!-- CENTINELA CODE -->
-<div class="modulo">
-  <h2>CENTINELA CODE - Código propio</h2>
-  <p>Código 100% propio. Actualizaciones de seguridad cada vez que sea necesario.</p>
-  <button onclick="alert('Actualización de seguridad verificada: CENTINELA está al día')">Verificar actualización</button>
-</div>
-
-<!-- CENTINELA VAULT, CLOUD, OFFICE, etc -->
-<div class="modulo"><h2>CENTINELA VAULT</h2><p>Bóveda, caja fuerte. Tus archivos seguros.</p><button> Abrir Bóveda </button></div>
-<div class="modulo"><h2>CENTINELA CLOUD</h2><p>Nube propia. Todo guardado.</p><button> Abrir Nube </button></div>
-<div class="modulo"><h2>CENTINELA HABLA</h2><p>Idioma, boca hablando. Traduce todo.</p><button> Hablar / Traducir </button></div>
-<div class="modulo"><h2>CENTINELA OFFICE</h2><p>PDF, Excel, PowerPoint.</p><button> Abrir Office </button></div>
-<div class="modulo"><h2>CENTINELA SHARE</h2><p>Compartir pantalla. WhatsApp, Facebook, Instagram, X.</p><button> Compartir </button></div>
-<div class="modulo"><h2>CENTINELA CHECKBOOK</h2><p>Cuaderno, check. Tus tareas.</p><button> Abrir Checkbook </button></div>
-<div class="modulo"><h2>CENTINELA ACADEMY</h2><p>Escuela, aprender.</p><button> Entrar a Academy </button></div>
-<div class="modulo"><h2>CENTINELA PLAY</h2><p>Juego, puntaje.</p><button> Jugar </button></div>
-<div class="modulo"><h2>CENTINELA SETTINGS</h2><p>Engranaje. Configuración.</p><button> Ajustes </button></div>
-
-<!-- CENTINELA TRADER -->
-<div class="modulo">
-  <h2>CENTINELA TRADER</h2>
-  <p>Trading, plata, mercado. Análisis con IA.</p>
-  <button onclick="document.getElementById('trader-out').innerText='Análisis IA: Mercado en subida. Señal generada con marca de agua.'">Analizar mercado</button>
-  <p id="trader-out"></p>
-</div>
-
-<!-- CENTINELA WALLET -->
-<div class="modulo">
-  <h2>CENTINELA WALLET</h2>
-  <p>Billetera solo DENTRO de la app. Seguro 100%. Si pagás afuera, es inseguro.</p>
-  <p>Saldo: $<span id="saldo">0</span></p>
-  <button onclick="depositar()">Depositar $1000 (simulado)</button>
-  <button onclick="enviarMercadoPago()">Enviar a Mercado Pago (IA automática)</button>
-  <p id="wallet-msg"></p>
-  <p style="color:#ff5555;font-size:12px">⚠️ Si pagás con un link de afuera: te pueden robar, estafar. CENTINELA no se hace cargo. Pagá siempre adentro.</p>
+<div class="card">
+<h2>SIMULADOR CENTINELA</h2>
+<p>¿Cuánto querés gastar hoy?</p>
+<input type="number" id="monto" placeholder="Ej: 5000">
+<button onclick="pagar()">Pagar con Centinela</button>
+<p id="pagar-msg"></p>
 </div>
 
 <script>
-// CENTINELA FIND - 3 intentos
-let intentos = 0;
-function intentoFallido(){
-  intentos++;
-  document.getElementById('intentos').innerText = intentos;
-  if(intentos >= 3){
-    document.getElementById('alerta-find').innerText = "🚨 3 INTENTOS FALLIDOS: Foto tomada, ubicación enviada a tu correo de respaldo, dispositivo bloqueado. Solo el dueño puede desbloquear.";
-    alert("CENTINELA FIND: Foto + ubicación enviada a tu correo de respaldo");
-    intentos = 0;
+let saldo = 0;
+function depositar(){
+  saldo += 1000;
+  document.getElementById('saldo').innerText = saldo;
+  document.getElementById('wallet-msg').innerText = "Depósito adentro, seguro. Tu información no se mostró.";
+}
+function enviarMercadoPago(){
+  if(saldo>0){
+    document.getElementById('wallet-msg').innerText = "IA enviando $" + saldo + " a tu Mercado Pago vinculado... ¡Listo!";
+    saldo=0;
+    document.getElementById('saldo').innerText = saldo;
+  } else {
+    document.getElementById('wallet-msg').innerText = "No hay saldo para enviar.";
   }
 }
-// IA con marca de agua
-function generarIA(tipo){
-  let prompt = document.getElementById('prompt-'+tipo).value || "Hola";
-  document.getElementById('salida-'+tipo).innerText = "Resultado IA para: " + prompt + " [Con marca de agua CENTINELA - Pagá para sacarla]";
-}
-// WALLET
-let saldo = 0;
-function depositar(){ saldo += 1000; document.getElementById('saldo').innerText = saldo; document.getElementById('wallet-msg').innerText = "Depósito adentro, seguro. Tu información no se mostró."; }
-function enviarMercadoPago(){ 
-  if(saldo>0){ document.getElementById('wallet-msg').innerText = "IA enviando $" + saldo + " a tu Mercado Pago vinculado... ¡Listo!"; saldo=0; document.getElementById('saldo').innerText = saldo; }
-  else { document.getElementById('wallet-msg').innerText = "No hay saldo para enviar."; }
+function pagar(){
+  let m = document.getElementById('monto').value;
+  if(!m){ document.getElementById('pagar-msg').innerText = "Escribí un monto primero"; return; }
+  if(saldo >= m){
+    saldo -= m;
+    document.getElementById('saldo').innerText = saldo;
+    document.getElementById('pagar-msg').innerText = "Pago de $" + m + " hecho con Centinela. Nadie vio tus datos.";
+  } else {
+    document.getElementById('pagar-msg').innerText = "Te falta saldo. Depositá primero.";
+  }
 }
 </script>
 </body>
-  </html>
+</html>
