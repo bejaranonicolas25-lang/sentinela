@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA IA - Cerebro</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff}
+.top{background:#0A1628;padding:16px;text-align:center;border-bottom:2px solid #00C6FF}
+.top b{color:#00C6FF;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F}
+#chat{height:280px;overflow:auto;background:#000;border-radius:12px;padding:12px;font-size:14px;line-height:1.6}
+.yo{color:#00C6FF}
+.ia{color:#00E676}
+input{width:100%;padding:13px;border-radius:12px;border:none;margin-top:10px}
+.btn{width:100%;padding:14px;border:none;border-r<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA - Inicio</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff;text-align:center}
+.top{padding:22px 16px;background:#0A1628;border-bottom:2px solid #00C6FF}
+.top b{font-size:28px;color:#00C6FF}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:18px;padding:18px;margin-bottom:14px;border:1px solid #1E3A5F;text-align:left}
+.card b{font-size:18px}
+.card p{color:#A9B8D0;font-size:13px;margin:6px 0 12px}
+.btn{display:block;text-decoration:none;text-align:center;padding:15px;border-radius:14px;font-weight:900;color:#000;margin-top:10px}
+.verde{background:#00E676}
+.azul{background:#00C6FF}
+.naranja{background:#FF9F00}
+.rojo{background:#FF3B3B;color:#fff}
+</style>
+</head>
+<body>
+<div class="top"><b>CENTINELA</b><br><span style="color:#A9B8D0;font-size:13px">Tu sistema de seguridad - Todo en un lugar</span></div>
+<div class="wrap">
+<div class="card"><b>🧠 01 - CEREBRO IA</b><p>Habla con tu IA. Te dice si es VERDE, AMARILLO o ROJO y que hacer.</p><a class="btn verde" href="centinela_ia.html">ABRIR CEREBRO IA</a></div>
+<div class="card"><b>📋 02 - LABORATORIO / REGISTRO</b><p>Anota todo lo que pasa, con hora, foto y nivel.</p><a class="btn azul" href="centinela_laboratorio_01.html">ABRIR REGISTRO</a></div>
+<div class="card"><b>🛡️ 03 - PANEL / CONTROL</b><p>Tu panel de control rapido, controles y estado.</p><a class="btn naranja" href="centinela_laboratorio_02.html">ABRIR PANEL</a></div>
+<div class="card" style="text-align:center"><b style="color:#FF3B3B">EMERGENCIA</b><p>Si hay peligro real, no dudes.</p><a class="btn rojo" href="tel:911">LLAMAR 911</a></div>
+<p style="color:#A9B8D0;font-size:12px">CENTINELA v1.0 - Creado por vos. Guardalo en pantalla de inicio para usarlo como App.</p>
+</div>
+</body>
+</html>adius:12px;font-weight:900;margin-top:10px
+CENTINELA - Menu principal
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA IA v2 - Cerebro</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff}
+.top{background:#0A1628;padding:16px;text-align:center;border-bottom:2px solid #00C6FF}
+.top b{color:#00C6FF;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F}
+#chat{height:320px;overflow:auto;background:#000;border-radius:12px;padding:12px;font-size:14px;line-height:1.6}
+.yo{color:#00C6FF}
+.ia{color:#00E676}
+input{width:100%;padding:13px;border-radius:12px;border:none;margin-top:10px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer}
+.verde{background:#00E676}
+.naranja{background:#FF9F00}
+.rojo{background:#FF3B3B;color:#fff}
+.opciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.opciones button{background:#1E3A5F;color:#fff;border:1px solid #00C6FF;padding:8px 10px;border-radius:20px;cursor:pointer}
+.nivel{padding:10px;border-radius:10px;text-align:center;font-weight:900;margin-bottom:10px}
+.v{background:#00E676;color:#000}
+.a{background:#FF9F00;color:#000}
+.r{background:#FF3B3B}
+</style>
+</head>
+<body>
+<div class="top"><b>CENTINELA IA v2</b><br><span style="font-size:12px;color:#A9B8D0">Cerebro Mejorado - Aprende de vos</span></div>
+<div class="wrap">
+<div id="nivelBox" class="nivel v">NIVEL ACTUAL: VERDE - TODO TRANQUILO</div>
+<div class="card"><div id="chat"><span class="ia"><b>CENTINELA IA:</b> Hola jefe, soy tu Cerebro v2. Ahora soy mas inteligente. Te recuerdo tus ultimos reportes, te digo el nivel y te guio paso a paso. Que esta pasando?</span></div>
+<div class="opciones">
+<button onclick="rapido('Hay ruido afuera')">🔊 Ruido</button>
+<button onclick="rapido('Persona sospechosa')">👤 Sospechoso</button>
+<button onclick="rapido('Auto sospechoso')">🚗 Auto</button>
+<button onclick="rapido('Todo tranquilo, control hecho')">✅ Control</button>
+<button onclick="rapido('Necesito ayuda urgente')">🆘 Ayuda</button>
+</div>
+<input id="entrada" placeholder="Escribi aca que pasa...">
+<button class="btn verde" onclick="enviar()">ENVIAR A LA IA</button>
+<button class="btn naranja" onclick="guardarChat()">GUARDAR EN MEMORIA</button>
+<a href="tel:911" style="text-decoration:none"><button class="btn rojo" style="width:100%">LLAMAR 911</button></a>
+<div id="ok" style="text-align:center;color:#00E676;margin-top:8px"></div>
+</div>
+<div class="card" style="font-size:12px;color:#A9B8D0"><b>COMO USA TU CEREBRO:</b><br>1. Decime que pasa<br>2. Yo te digo VERDE / AMARILLO / ROJO<br>3. Seguime paso a paso<br>4. Guarda para que aprenda tu zona</div>
+</div>
+<script>
+let historial = JSON.parse(localStorage.getItem('centinela_ia_chat') || '[]');
+function setNivel(n,t){ let b=document.getElementById('nivelBox'); b.className='nivel '+n; b.innerText='NIVEL ACTUAL: '+t; }
+function responder(q){
+ q=q.toLowerCase();
+ if(q.includes('ayuda')||q.includes('urgente')||q.includes('robo')||q.includes('arma')||q.includes('entraron')||q.includes('me siguen')){ setNivel('r','ROJO - PELIGRO - BUSCA LUGAR SEGURO'); return 'NIVEL ROJO. 1- Anda a un lugar seguro YA. 2- No te enfrentes. 3- Llama al 911 con el boton rojo. 4- Cuando estes seguro, escribime que paso para dejarlo registrado. Estas seguro ahora?'; }
+ if(q.includes('ruido')){ setNivel('a','AMARILLO - ALERTA'); return 'NIVEL AMARILLO. No salgas. 1- Quedate adentro. 2- Mira por ventana/camara. 3- Anota hora y de donde viene. Es la primera vez o ya paso antes?'; }
+ if(q.includes('sospechoso')||q.includes('persona')||q.includes('auto')||q.includes('moto')){ setNivel('a','AMARILLO - ALERTA'); return 'NIVEL AMARILLO. No te acerques. 1- Saca foto desde adentro sin riesgo. 2- Anota: ropa, color de auto, para donde fue. 3- Avisame si sigue ahi. Sigue ahi ahora?'; }
+ if(q.includes('tranquilo')||q.includes('control')){ setNivel('v','VERDE - TODO TRANQUILO'); return 'NIVEL VERDE. Perfecto, control registrado. Seguimos vigilando. Te aviso si hay algo raro. Queres que te recuerde el proximo control?'; }
+ if(q.includes('hola')||q.includes('quien sos')) return 'Soy tu Cerebro CENTINELA v2. Te ayudo a pensar en frio, a no exponerte y a dejar todo registrado. Decime que pasa y te guio.';
+ return 'Entendido, registrado. Contame: 1- Donde paso? 2- Hace cuanto? 3- Sigue pasando ahora? Con eso te digo si es VERDE, AMARILLO o ROJO.';
+}
+function rapido(t){ document.getElementById('entrada').value=t; enviar(); }
+function enviar(){
+ let e=document.getElementById('entrada'); let t=e.value.trim(); if(!t) return;
+ let chat=document.getElementById('chat');
+ chat.innerHTML+='<br><br><span class="yo"><b>TU:</b> '+t+'</span>';
+ let r=responder(t);
+ chat.innerHTML+='<br><br><span class="ia"><b>CENTINELA IA:</b> '+r+'</span>';
+ historial.push({yo:t, ia:r, hora:new Date().toLocaleString('es-AR')});
+ localStorage.setItem('centinela_ia_chat', JSON.stringify(historial));
+ e.value=''; chat.scrollTop=chat.scrollHeight;
+}
+function guardarChat(){ document.getElementById('ok').innerText='GUARDADO. Tu Cerebro tiene '+historial.length+' mensajes en memoria.'; }
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA - Mapa de Zonas</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff}
+.top{background:#0A1628;padding:16px;text-align:center;border-bottom:2px solid #00C6FF}
+.top b{color:#00C6FF;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F}
+select,input{width:100%;padding:13px;border-radius:12px;border:none;margin-top:8px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer}
+.verde{background:#00E676}
+.rojo{background:#FF3B3B;color:#fff}
+.zona{padding:12px;border-radius:12px;margin-top:10px;font-size:14px}
+.v{background:#0B3D2A;border:1px solid #00E676}
+.a{background:#3D2A0B;border:1px solid #FF9F00}
+.r{background:#3D0B0B;border:1<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA SUPREMO</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff}
+.top{background:#0A1628;padding:16px;text-align:center;border-bottom:2px solid #FFD700}
+.top b{color:#FFD700;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F}
+#chat{height:260px;overflow:auto;background:#000;border-radius:12px;padding:12px;font-size:14px;line-height:1.6}
+.yo{color:#00C6FF}
+.ia{color:#FFD700}
+input{width:100%;padding:13px;border-radius:12px;border:none;margin-top:10px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer}
+.verde{background:#00E676}
+.dorado{background:#FFD700}
+.rojo{background:#FF3B3B;color:#fff}
+.opciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.opciones button{background:#1E3A5F;color:#fff;border:1px solid #FFD700;padding:8px 10px;border-radius:20px;cursor:pointer}
+#bloqueo{text-align:center;padding:40px 16px}
+</style>
+</head>
+<body>
+<div id="bloqueo">
+<div class="top"><b>👑 CENTINELA SUPREMO</b><br><span style="font-size:12px;color:#A9B8D0">Solo el Jefe Supremo puede entrar</span></div>
+<div class="wrap"><div class="card">
+<b>INGRESA TU CLAVE SECRETA</b>
+<p style="color:#A9B8D0;font-size:13px">La primera vez que entras, crea tu clave. Despues solo vos entras con esa clave.</p>
+<input id="clave" type="password" placeholder="Tu clave secreta...">
+<button class="btn dorado" onclick="entrar()">ENTRAR COMO JEFE SUPREMO</button>
+<div id="err" style="color:#FF3B3B;text-align:center;margin-top:8px"></div>
+</div></div>
+</div>
+
+<div id="app" style="display:none">
+<div class="top"><b>👑 CENTINELA SUPREMO</b><br><span style="font-size:12px;color:#A9B8D0">Modo Jefe - Memoria Activa</span></div>
+<div class="wrap">
+<div class="card" id="memoriaBox" style="font-size:13px;color:#FFD700">Cargando memoria...</div>
+<div class="card"><div id="chat"><span class="ia"><b>SUPREMO:</b> Jefe, soy tu Cerebro Supremo. Ya recuerdo todo lo que guardaste antes. Decime que pasa y te digo el nivel y si hay un patron peligroso.</span></div>
+<div class="opciones">
+<button onclick="rapido('Hay ruido afuera')">🔊 Ruido</button>
+<button onclick="rapido('Persona sospechosa')">👤 Sospechoso</button>
+<button onclick="rapido('Todo tranquilo, control hecho')">✅ Control</button>
+<button onclick="rapido('Dame mi resumen')">📊 Mi resumen</button>
+</div>
+<input id="entrada" placeholder="Decime que pasa, jefe...">
+<button class="btn verde" onclick="enviar()">ENVIAR AL SUPREMO</button>
+<button class="btn dorado" onclick="cerrar()">CERRAR SESION DE JEFE</button>
+</div>
+</div>
+</div>
+<script>
+let historial = JSON.parse(localStorage.getItem('centinela_ia_chat') || '[]');
+let zonas = JSON.parse(localStorage.getItem('centinela_zonas') || '[]');
+function entrar(){
+ let c=document.getElementById('clave').value.trim();
+ if(!c){ document.getElementById('err').innerText='Pone una clave'; return; }
+ let guardada = localStorage.getItem('centinela_clave_supremo');
+ if(!guardada){ localStorage.setItem('centinela_clave_supremo', c); alert('Clave creada! Ahora sos el Jefe Supremo. No la olvides.'); }
+ else if(guardada !== c){ document.getElementById('err').innerText='CLAVE INCORRECTA. Solo el Jefe puede entrar.'; return; }
+ document.getElementByCerebro Supremo 1 de 5<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA VOZ</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff;text-align:center}
+.top{background:#0A1628;padding:16px;border-bottom:2px solid #00C6FF}
+.top b{color:#00C6FF;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:18px;margin-bottom:12px;border:1px solid #1E3A5F}
+#escucha{font-size:18px;color:#FFD700;min-height:30px;margin:10px 0}
+#respuesta{font-size:15px;color:#00E676;min-height:40px;background:#000;border-radius:12px;padding:12px;text-align:left}
+.btn{width:100%;padding:16px;border:none;border-radius:14px;font-weight:900;margin-top:10px;cursor:pointer;font-size:16px}
+.azul{background:#00C6FF}
+.verde{background:#00E676}
+.rojo{background:#FF3B3B;color:#fff}
+.gris{background:#333;color:#fff}
+.mic{font-size:60px;margin:10px}
+</style>
+</head>
+<body>
+<div class="top"><b>🎤 CENTINELA VOZ</b><br><span style="font-size:12px;color:#A9B8D0">Hablale a tu IA - Sin escribir</span></div>
+<div class="wrap">
+<div class="card">
+<div class="mic">🎤</div>
+<b>APRETA Y HABLA</b>
+<p style="color:#A9B8D0;font-size:13px">Deci: "hay ruido", "persona sospechosa", "todo tranquilo", "ayuda"</p>
+<div id="escucha">Aca aparece lo que escucho...</div>
+<button class="btn azul" onclick="escuchar()">🎤 EMPEZAR A ESCUCHAR</button>
+<button class="btn gris" onclick="parar()">⏹️ PARAR</button>
+</div>
+<div class="card"><b>RESPUESTA DE TU IA:</b><div id="respuesta">Te estoy esperando, jefe...</div>
+<button class="btn verde" onclick="hablar(document.getElementById('respuesta').innerText)">🔊 ESCUCHAR RESPUESTA EN VOZ<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA GUARDIA</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff;text-align:center}
+.top{background:#0A1628;padding:16px;border-bottom:2px solid #00E676}
+.top b{color:#00E676;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:18px;margin-bottom:12px;border:1px solid #1E3A5F}
+.big{font-size:42px;font-weight:900;color:#00E676}
+.btn{width:100%;padding:16px;border:none;border-radius:14px;font-weight:900;margin-top:10px;cursor:pointer;font-size:16px}
+.verde{background:#00E676}
+.naranja{background:#FF9F00}
+.rojo{background:#FF3B3B;color:#fff}
+.gris{background:#333;color:#fff}
+#estado{font-size:16px;margin:10px 0}
+#historial{font-size:13px;text-align:left;background:#000;border-radius:12px;padding:12px;min-height:80px}
+</style>
+</head>
+<body>
+<div class="top"><b>🛡️ MODO CENTINELA</b><br><span style="font-size:12px;color:#A9B8D0">Vigila solo - Te pregunta cada 1 hora</span></div>
+<div class="wrap">
+<div class="card">
+<b>ESTADO DE GUARDIA</b>
+<div id="estado">Guardia APAGADA</div>
+<div class="big" id="contador">--:--</div>
+<p style="color:#A9B8D0;font-size:13px">Proximo control automatico en:</p>
+<button class="btn verde" onclick="activar()">▶️ ACTIVAR GUARDIA</button>
+<button class="btn gris" onclick="apagar()">⏹️ APAGAR GUARDIA</button>
+</div>
+<div class="card">
+<b>RESPONDE TU CONTROL:</b>
+<button class="btn verde" onclick="responder('VERDE')">✅ TODO TRANQUILO</button>
+<button class="btn naranja" onclick="responder('AMARILLO')">⚠️ ALGO RARO</button>
+<button class="btn rojo" onclick="responder('ROJO')">🆘 NECESITO AYUDA</button>
+</div>
+<div class="card"><b>REGISTRO DE GUARDIA:</b><div id="historial">Sin controles todavia...</div></div>
+<div class="card"><a href="tel:911" style="text-decoration:none"><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA STATS - Jefe</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff}
+.top{background:#0A1628;padding:16px;text-align:center;border-bottom:2px solid #FFD700}
+.top b{color:#FFD700;font-size:22px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F}
+.num{font-size:36px;font-weight:900}
+.barra{height:18px;background:#000;border-radius:10px;overflow:hidden;margin:6px 0 12px}
+.relleno{height:100%}
+.verde{background:#00E676}
+.amarillo{background:#FF9F00}
+.rojo{background:#FF3B3B}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer}
+.dorado{background:#FFD700}
+</style>
+</head>
+<body>
+<div class="top"><b>📊 ESTADÍSTICAS DEL JEFE</b><br><span style="font-size:12px;color:#A9B8D0">Tu poder en números</span></div>
+<div class="wrap">
+<div class="card"><b>📈 TU ACTIVIDAD TOTAL</b><br><span<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA - Centro de Mando</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050A14;color:#fff;text-align:center}
+.top{background:#0A1628;padding:20px 16px;border-bottom:2px solid #FFD700}
+.top b{color:#FFD700;font-size:26px}
+.wrap{padding:16px;max-width:520px;margin:auto}
+.card{background:#101E33;border-radius:18px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F;text-align:left}
+.btn{display:block;text-decoration:none;text-align:center;padding:15px;border-radius:14px;font-weight:900;color:#000;margin-top:10px}
+.dorado{background:#FFD700}
+.verde{background:#00E676}
+.azul{background
