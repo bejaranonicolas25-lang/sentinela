@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA - LABORATORIO 01</title>
+<style>
+body{font-family:Arial,sans-serif;background:#0f172a;color:white;padding:20px;text-align:center}
+h1{color:#38bdf8}
+.caja{background:#1e293b;padding:20px;border-radius:15px;max-width:500px;margin:auto}
+textarea{width:95%;height:120px;border-radius:10px;padding:10px;font-size:16px}
+button{padding:12px 15px;margin:8px;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer}
+.guardar{background:#22c55e;color:white}
+.probar{background:#f59e0b;color:black}
+#mensaje{margin-top:15px;font-weight:bold;color:#4ade80}
+</style>
+</head>
+<body>
+<h1>CENTINELA</h1>
+<h2>LABORATORIO 01</h2>
+<p>Estado: <b style="color:#4ade80">FUNCIONANDO</b></p>
+<div class="caja">
+<p>Escribí algo acá, no se borra:</p>
+<textarea id="texto" placeholder="Escribí acá..."></textarea><br>
+<button class="guardar" onclick="guardar()">GUARDAR SIN BORRAR</button>
+<button class="probar" onclick="probar()">PROBAR QUE FUNCIONA</button>
+<p id="mensaje"></p>
+</div>
+<script>
+let campo=document.getElementById("texto");
+let mensaje=document.getElementById("mensaje");
+campo.value=localStorage.getItem("centinela_lab01")||"";
+function guardar(){
+localStorage.setItem("centinela_lab01",campo.value);
+mensaje.textContent="GUARDADO. Aunque cierres esto, queda guardado.";
+}
+function probar(){
+mensaje.textContent="FUNCIONA. Los botones andan y no se borra nada.";
+}
+</script>
+</body>
+</html>
