@@ -463,4 +463,70 @@ echo.
 echo  Abri en tu navegador: http://localhost:3000/ping
 echo  Te tiene que decir: CENTINELA CORE PRENDIDO
 echo.
-pause
+pause<div style="width:100%;max-width:340px;background:#0f2a1a;border:1px solid #22c07a;border-radius:12px;padding:10px;margin-top:10px;font-size:13px;text-align:left">🌐 <b>Servidor nuestro:</b>
+                                                                                                                                                                                                            
+<div style="width:100%;max-width:340px;background:#0f2a1a;border:1px solid #22c07a;border-radius:12px;padding:10px;margin-top:10px;font-size:13px;text-align:left">
+<b style="color:#00e676">¿CÓMO QUERÉS USARLO HOY?</b><br>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn gris" id="btnLocal" onclick="setModo('local')" style="flex:1">🟢 SOLO YO<br><small style="font-weight:400;font-size:11px">Sin servidor<br>Solo en mi celu</small></button>
+<button class="btn azul" id="btnCore" onclick="setModo('core')" style="flex:1">🔵 CENTINELA CORE<br><small style="font-weight:400;font-size:11px">Conectado<br>Guardado en CORE</small></button>
+</div>
+<p id="textoModo" style="color:#9bb8a5;font-size:12px;margin-top:8px">🟢 Estás en MODO SOLO YO - Todo queda en tu celu, nadie te obliga a conectarte.</p>
+<div id="cajaCore" style="display:none;margin-top:8px">🌐 <b>CENTINELA CORE:</b><br><input id="serverUrl" placeholder="https://tu-link-trycloudflare.com o http://localhost:3000" value=""><button class="btn azul" style="margin-top:6px" onclick="conectarServidor()">🔌 CONECTAR A CENTINELA CORE</button><p id="estadoServer" style="color:#ff6b6b;font-size:12px;margin-top:6px">Sin conectar - Si querés te conectás, si no, seguís en SOLO YO</p></div>
+<p style="color:#9bb8a5;font-size:11px;margin-top:4px">Dueño: Nicolás Bejarano • Vos elegís, el cliente elige. Nadie obligado.</p></div>let SERVIDOR = localStorage.getItem('CENTINELA_SERVER') || '';
+                                                                                                                                                                                                            // CENTINELA CORE - MODO A ELECCIÓN - NADIE OBLIGADO
+let MODO = localStorage.getItem('CENTINELA_MODO') || 'local'; // local = Solo Yo, core = Conectado
+let SERVIDOR = localStorage.getItem('CENTINELA_SERVER') || '';
+
+function setModo(m){
+  MODO = m; localStorage.setItem('CENTINELA_MODO', m);
+  let caja = document.getElementById('cajaCore');
+  let txt = document.getElementById('textoModo');
+  let bL = document.getElementById('btnLocal');
+  let bC = document.getElementById('btnCore');
+  if(m==='local'){
+    if(caja) caja.style.display='none';
+    if(txt) txt.innerHTML='🟢 Estás en <b>MODO SOLO YO</b> - Todo queda en tu celu, sin servidor. Cuando quieras te conectás a CENTINELA CORE.';
+    if(bL) bL.style.border='2px solid #00e676';
+    if(bC) bC.style.border='none';
+  } else {
+    if(caja) caja.style.display='block';
+    if(txt) txt.innerHTML='🔵 Estás en <b>MODO CENTINELA CORE</b> - Todo se guarda en nuestro servidor. Si no querés, volvé a SOLO YO.';
+    if(bC) bC.style.border='2px solid #00e676';
+    if(bL) bL.style.border='none';
+  }
+  // Actualizar botones de Dueño / Cliente según modo
+  let info = document.getElementById('serverInfo');
+  if(info) info.innerText = m==='local' ? '🟢 MODO SOLO YO - Sin servidor, solo en tu celu' : '🔵 MODO CENTINELA CORE - Conectado: ' + (SERVIDOR || 'Poné tu link y conectá');
+}
+
+// API INTELIGENTE - Si es SOLO YO usa tu celu, si es CORE usa servidor
+async function api(path, body){
+  // MODO SOLO YO - No necesita servidor, guarda en tu celu
+  if(MODO==='local'){
+    let key = 'LOCAL'+path;
+    if(body){
+      let lista = JSON.parse(localStorage.getItem(key+'_LIST')||'[]');
+      // Para crear dueño/cliente en local
+      if(path==='/crear-dueno'){ if(localStorage.getItem('LOCAL_DUENO')) return {ok:false,msg:'Ya hay Dueño en tu celu'}; localStorage.setItem('LOCAL_DUENO', JSON.stringify(body)); return {ok:true, dueno:body}; }
+      if(path==='/login-dueno'){ let d=JSON.parse(localStorage.getItem('LOCAL_DUENO')||'null'); if(!d || d.pin!==body.pin) return {ok:false,msg:'PIN incorrecto'}; return {ok:true, dueno:d}; }
+      if(path==='/crear-cliente'){ let cs=JSON.parse(localStorage.getItem('LOCAL_CLIENTES')||'[]'); if(cs.find(x=>x.usuario===body.usuario)) return {ok:false,msg:'Cliente ya existe'}; cs.push(body); localStorage.setItem('LOCAL_CLIENTES', JSON.stringify(cs)); return {ok:true, cliente:body}; }
+      if(path==='/login-cliente'){ let cs=JSON.parse(localStorage.getItem('LOCAL_CLIENTES')||'[]'); let c=cs.find(x=>x.pin===body.pin); if(!c) return {ok:false,msg:'PIN cliente incorrecto'}; return {ok:true, cliente:c}; }
+      lista.unshift({...body, fecha:new Date().toLocaleString()}); localStorage.setItem(key+'_LIST', JSON.stringify(lista));
+      return {ok:true};
+    } else {
+      if(path==='/ver-lab') return {ok:true, lab: JSON.parse(localStorage.getItem('LOCAL/guardar-lab_LIST')||'[]')};
+      if(path==='/ver-finanzas') return {ok:true, finanzas: JSON.parse(localStorage.getItem('LOCAL/guardar-finanza_LIST')||'[]')};
+      if(path==='/ver-codigos') return {ok:true, codigos: JSON.parse(localStorage.getItem('LOCAL/guardar-codigo_LIST')||'[]')};
+      if(path==='/ver-clientes') return {ok:true, clientes: JSON.parse(localStorage.getItem('LOCAL_CLIENTES')||'[]'), duenos: localStorage.getItem('LOCAL_DUENO') ? [JSON.parse(localStorage.getItem('LOCAL_DUENO'))] : []};
+      if(path==='/ping') return {ok:true, msg:'MODO SOLO YO - Sin servidor'};
+      return {ok:true};
+    }
+  }
+  // MODO CORE - Usa CENTINELA CORE
+  if(!SERVIDOR){ alert('Poné tu link de CENTINELA CORE para conectarte, o usá MODO SOLO YO'); throw new Error('Sin servidor'); }
+  let r = await fetch(SERVIDOR + path, {method: body?'POST':'GET', headers:{'Content-Type':'application/json'}, body: body?JSON.stringify(body):undefined});
+  return await r.json();
+  }// Al abrir, respetar el modo que eligió
+setModo(MODO);🟢 SOLO YO          🔵 CENTINELA CORE
+Sin servidor       Conectado
