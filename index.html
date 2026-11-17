@@ -3,76 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTINELA IA • Facebook</title>
+<title>CENTINELA IA • Facebook + WhatsApp</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f0f2f5}
-/* FACEBOOK BARRA */
+@keyframes subir{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes puntitos{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
 .fbbar{background:#1877f2;color:white;padding:10px 12px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
-.fbbar .logo{font-size:28px;font-weight:900}
+.fbbar .logo{font-size:28px;font-weight:900;animation:latido 2s infinite}
 .fbbar .search{flex:1;background:#fff;color:#65676b;border-radius:20px;padding:8px 12px;font-size:13px}
-.avatar{width:40px;height:40px;border-radius:50%;background:#fff;color:#1877f2;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
-/* TABS FB */
+.avatar{width:40px;height:40px;border-radius:50%;background:#fff;color:#1877f2;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;position:relative}
+.online::after{content:'';position:absolute;bottom:0;right:0;width:11px;height:11px;background:#31a24c;border:2px solid #fff;border-radius:50%}
 .tabs{display:flex;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .tabs button{flex:1;border:none;background:#fff;padding:13px 0;font-weight:800;color:#65676b;cursor:pointer}
 .tabs button.active{color:#1877f2;border-bottom:3px solid #1877f2}
 .wrap{max-width:600px;margin:0 auto;padding:10px}
-.card{background:#fff;border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.15)}
-.post-head{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-.post-head b{font-size:15px}.post-head small{color:#65676b}
-.post-img{height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:50px;margin:10px 0}
-.actions{display:flex;justify-content:space-around;border-top:1px solid #ddd;padding-top:10px;margin-top:10px;color:#65676b;font-weight:700}
+.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.15);animation:subir .4s ease}
+.post-head{display:flex;gap:10px;align-items:center;margin-bottom:8px}
 .hidden{display:none}
-/* WHATSAPP */
-.wpp-list .chatrow{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #eee;cursor:pointer}
-.wpp-av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:white;flex-shrink:0}
 .wpp-head{background:#075e54;color:white;padding:10px;display:flex;gap:10px;align-items:center}
-.wpp-head small{color:#d9fdd3}
-.chatbox{background:#efeae2;padding:12px;min-height:260px;border-radius:0 0 10px 10px}
-.bubble{background:#fff;padding:9px 12px;border-radius:10px;margin:8px 0;max-width:85%}
-.mine{background:#d9fdd3;margin-left:auto;text-align:right}
-.inputrow{display:flex;gap:8px;margin-top:10px}
-.inputrow input{flex:1;padding:11px;border-radius:20px;border:1px solid #ddd}
-.inputrow button{background:#00a884;color:white;border:none;width:44px;height:44px;border-radius:50%;font-size:18px}
+.chatbox{background:#efeae2;padding:12px;min-height:340px;border-radius:0 0 10px 10px;overflow:hidden}
+.bubble{background:#fff;padding:10px 12px;border-radius:12px;margin:8px 0;max-width:88%;animation:subir .3s ease;box-shadow:0 1px 1px rgba(0,0,0,.1);line-height:1.4}
+.mine{background:#d9fdd3;margin-left:auto;text-align:left}
+.hora{font-size:10px;color:#888;display:block;text-align:right;margin-top:4px}
+.typing{display:inline-flex;gap:4px;padding:10px 14px;background:#fff;border-radius:12px;margin:8px 0}
+.typing span{width:7px;height:7px;background:#999;border-radius:50%;animation:puntitos 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.quick button{border:1px solid #00a884;background:#fff;color:#075e54;padding:7px 12px;border-radius:20px;font-weight:700;cursor:pointer}
+.inputrow{display:flex;gap:8px;padding:10px;background:#fff;align-items:center}
+.inputrow input{flex:1;padding:12px;border-radius:20px;border:1px solid #ddd;outline:none}
+.inputrow button{background:#00a884;color:white;border:none;width:46px;height:46px;border-radius:50%;font-size:19px;cursor:pointer}
+.chatrow{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #eee;cursor:pointer}
+.wpp-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:white;flex-shrink:0}
 </style>
 </head>
 <body>
-<div class="fbbar"><div class="logo">f</div><div class="search">🔍 Buscar en Centinela</div><div class="avatar">N</div></div>
-<div class="tabs">
-<button id="t1" class="active" onclick="tab('inicio')">🏠 Inicio</button>
-<button id="t2" onclick="tab('ias')">💬 Mis IAs</button>
-<button id="t3" onclick="tab('panel')">🛡️ Panel</button>
-</div>
-
+<div class="fbbar"><div class="logo">f</div><div class="search">🔍 Buscar en Centinela</div><div class="avatar online">N</div></div>
+<div class="tabs"><button id="t1" class="active" onclick="tab('inicio')">🏠 Inicio</button><button id="t2" onclick="tab('ias')">💬 Mis IAs</button><button id="t3" onclick="tab('panel')">🛡️ Panel</button></div>
 <div class="wrap">
-<!-- INICIO ESTILO FACEBOOK -->
 <div id="inicio">
-<div class="card"><div class="post-head"><div class="avatar" style="background:#1877f2;color:white">N</div><div><b>Nicolás Bejarano</b><br><small>Ahora • 🌎 Público</small></div></div><p>¿En qué estás pensando, Nico?</p><div style="display:flex;gap:8px;margin-top:10px"><button style="flex:1;padding:9px;border:none;border-radius:20px;background:#f0f2f5;font-weight:700" onclick="tab('ias')">💬 Hablar con IA</button><button style="flex:1;padding:9px;border:none;border-radius:20px;background:#f0f2f5;font-weight:700" onclick="tab('panel')">🛡️ Ver Panel</button></div></div>
-
-<div class="card"><div class="post-head"><div class="avatar" style="background:#00a884;color:white">🛡️</div><div><b>CENTINELA IA</b><br><small>Hace 2 min • ✅ Sistema</small></div></div><p>Todo tranquilo jefe ✅ <b>12 cámaras OK, 0 alertas.</b> Tu casa está vigilada.</p><div class="post-img" style="background:#d9fdd3">🏠🛡️✅</div><div class="actions"><span>👍 Me gusta</span><span>💬 Comentar</span><span>↗️ Compartir</span></div></div>
-
-<div class="card"><div class="post-head"><div class="avatar" style="background:#ffb300;color:white">🧠</div><div><b>Cerebro IA</b><br><small>Hace 10 min</small></div></div><p>Analicé tu zona: Hoy está todo en <b style="color:green">VERDE</b>. Sin riesgo.</p><div class="actions"><span>👍 Me gusta</span><span>💬 Comentar</span><span>↗️ Compartir</span></div></div>
+<div class="card"><div class="post-head"><div class="avatar" style="background:#1877f2;color:white">N</div><div><b>Nicolás Bejarano</b><br><small style="color:#65676b">Ahora • 🌎 Público</small></div></div><p>¿En qué estás pensando, Nico?</p><button onclick="tab('ias')" style="width:100%;margin-top:10px;padding:11px;border:none;border-radius:20px;background:#e7f3ff;color:#1877f2;font-weight:900">💬 HABLAR CON MI IA AHORA</button></div>
+<div class="card"><div class="post-head"><div class="avatar online" style="background:#00a884;color:white">🛡️</div><div><b>CENTINELA IA</b><br><small style="color:#65676b">En línea • Responde al toque</small></div></div><p>Estoy despierto jefe 🛡️ <b>12 cámaras OK, 0 alertas.</b><br>Tocá <b>Mis IAs</b> y charlamos como en WhatsApp.</p></div>
 </div>
 
-<!-- IAs ESTILO WHATSAPP -->
 <div id="ias" class="hidden">
+<div class="card" style="padding:0;overflow:hidden"><div style="background:#075e54;color:white;padding:12px"><b>💬 WhatsApp • Mis IAs</b><br><small>3 en línea • Tocá una para hablar</small></div>
+<div style="padding:0 14px">
+<div class="chatrow" onclick="openChat('cerebro')"><div class="wpp-av" style="background:#00a884">🧠</div><div style="flex:1"><b>Cerebro IA 🧠</b><br><small style="color:#00a884">● escribiendo...</small></div><small>Ahora</small></div>
+<div class="chatrow" onclick="openChat('lab')"><div class="wpp-av" style="background:#ffb300">📋</div><div style="flex:1"><b>Laboratorio IA 📋</b><br><small>¿Qué pasó hoy?</small></div><small>10:12</small></div>
+<div class="chatrow" onclick="openChat('panel')"><div class="wpp-av" style="background:#1877f2">🛡️</div><div style="flex:1"><b>Panel IA 🛡️</b><br><small>12 cámaras OK</small></div><small>Ayer</small></div>
+</div></div>
+
 <div class="card" style="padding:0;overflow:hidden">
-<div style="background:#075e54;color:white;padding:12px"><b>💬 WhatsApp • Mis IAs</b><br><small>3 chats • En línea</small></div>
-<div class="wpp-list" style="padding:0 14px">
-<div class="chatrow" onclick="openChat('cerebro')"><div class="wpp-av" style="background:#00a884">🧠</div><div style="flex:1"><b>Cerebro IA</b><br><small>Todo en VERDE jefe ✅</small></div><small>Ahora</small></div>
-<div class="chatrow" onclick="openChat('lab')"><div class="wpp-av" style="background:#ffb300">📋</div><div style="flex:1"><b>Laboratorio IA</b><br><small>Registro guardado 📸</small></div><small>10:12</small></div>
-<div class="chatrow" onclick="openChat('panel')"><div class="wpp-av" style="background:#1877f2">🛡️</div><div style="flex:1"><b>Panel IA</b><br><small>12 cámaras OK</small></div><small>Ayer</small></div>
+<div class="wpp-head"><div class="avatar online" id="chatAv">🧠</div><div style="flex:1"><b id="chatName">Cerebro IA</b><br><small id="chatStatus">en línea • responde al toque</small></div><span>📹 📞</span></div>
+<div class="chatbox" id="msgs"></div>
+<div style="background:#fff;padding:0 10px 6px"><div class="quick"><button onclick="quick('¿Cómo está todo?')">🟢 ¿Cómo está todo?</button><button onclick="quick('Dame el reporte')">📄 Reporte</button><button onclick="quick('¿Hay alertas?')">🚨 ¿Alertas?</button><button onclick="quick('Contame un chiste')">😂 Chiste</button></div></div>
+<div class="inputrow"><input id="inp" placeholder="Escribí un mensaje..." onkeypress="if(event.key=='Enter')send()"><button onclick="send()">➤</button></div>
 </div>
 </div>
 
-<div class="card" id="chatBox" style="padding:0;overflow:hidden">
-<div class="wpp-head"><div class="avatar" id="chatAv">🧠</div><div style="flex:1"><b id="chatName">Cerebro IA</b><br><small>en línea • responde al toque</small></div><span>📞 📹</span></div>
-<div class="chatbox" id="msgs"><div class="bubble">Hola jefe, soy Cerebro IA 🧠<br>¿Qué querés que revise? Escribime <b>alerta</b>, <b>reporte</b> o <b>verde</b></div></div>
-<div class="inputrow" style="padding:10px;background:#fff"><input id="inp" placeholder="Escribí un mensaje..."><button onclick="send()">➤</button></div>
-</div>
-</div>
-
-<!-- PANEL -->
 <div id="panel" class="hidden">
 <div class="card"><b>🛡️ PANEL DE CONTROL</b><p style="margin-top:8px">📷 Cámaras: <b>12 / 12 OK</b><br>📡 Sensores: <b>OK</b><br>🚨 Alertas: <b style="color:green">0 - Todo tranquilo</b></p></div>
 <div class="card"><b>🚨 EMERGENCIA</b><br><br><a href="tel:911" style="display:block;text-align:center;background:#e41e3f;color:white;padding:14px;border-radius:10px;text-decoration:none;font-weight:900">📞 LLAMAR 911</a></div>
@@ -80,11 +71,30 @@ body{background:#f0f2f5}
 </div>
 
 <script>
+let cur='cerebro', turno=0;
 function tab(id){['inicio','ias','panel'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');['t1','t2','t3'].forEach(x=>document.getElementById(x).classList.remove('active'));if(id=='inicio')document.getElementById('t1').classList.add('active');if(id=='ias')document.getElementById('t2').classList.add('active');if(id=='panel')document.getElementById('t3').classList.add('active')}
-let cur='cerebro';
-function openChat(c){cur=c;let n='Cerebro IA',a='🧠',m='Hola jefe, soy Cerebro IA 🧠 ¿Qué revisamos?';if(c=='lab'){n='Laboratorio IA';a='📋';m='Hola jefe, soy Laboratorio 📋 Mandame qué pasó y lo anoto.'}if(c=='panel'){n='Panel IA';a='🛡️';m='Hola jefe, soy Panel 🛡️ 12 cámaras OK, 0 alertas.'}document.getElementById('chatName').innerText=n;document.getElementById('chatAv').innerText=a;document.getElementById('msgs').innerHTML='<div class="bubble">'+m+'</div>';document.getElementById('chatBox').scrollIntoView({behavior:'smooth'})}
-function send(){let i=document.getElementById('inp');if(!i.value)return;let v=i.value;document.getElementById('msgs').innerHTML+='<div class="bubble mine">'+v+'</div>';let low=v.toLowerCase();i.value='';let r='Entendido jefe ✅ Ya lo dejé registrado.';if(low.includes('alerta'))r='⚠️ Revisé todo: NO hay alertas. Todo en VERDE.';if(low.includes('reporte'))r='📄 REPORTE: 12 cámaras OK, sensores OK, 0 críticas. Todo tranquilo.';if(low.includes('verde')||low.includes('rojo')||low.includes('amarillo'))r='Hoy estás en VERDE 🟢 Tranquilo, sin riesgo.';setTimeout(()=>{document.getElementById('msgs').innerHTML+='<div class="bubble">'+r+'</div>'},600)}
+function hora(){let d=new Date();return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')}
+function addMsg(txt,mine){let m=document.getElementById('msgs');m.innerHTML+='<div class="bubble '+(mine?'mine':'')+'">'+txt+'<span class="hora">'+hora()+' ✓✓</span></div>';m.scrollTop=m.scrollHeight}
+function typing(){let m=document.getElementById('msgs');let d=document.createElement('div');d.id='typing';d.className='typing';d.innerHTML='<span></span><span></span><span></span>';m.appendChild(d);m.scrollTop=m.scrollHeight;document.getElementById('chatStatus').innerText='escribiendo...'}
+function stopTyping(){let t=document.getElementById('typing');if(t)t.remove();document.getElementById('chatStatus').innerText='en línea • responde al toque'}
+function openChat(c){cur=c;turno=0;let n='Cerebro IA',a='🧠',m='Hola jefe, soy Cerebro 🧠<br>¿Cómo estás hoy?<br>¿Querés que revise si hay algo raro o me contás vos qué pasó?';if(c=='lab'){n='Laboratorio IA';a='📋';m='Hola Nico, soy Laboratorio 📋<br>¿Qué pasó hoy? Contame con tus palabras y yo lo anoto con hora y nivel.'}if(c=='panel'){n='Panel IA';a='🛡️';m='Hola jefe, soy Panel 🛡️<br>Ahora mismo: 12 cámaras OK, 0 alertas.<br>¿Querés que te haga un reporte completo?'}document.getElementById('chatName').innerText=n;document.getElementById('chatAv').innerText=a;document.getElementById('msgs').innerHTML='';addMsg(m,false)}
+function quick(t){document.getElementById('inp').value=t;send()}
+function responder(v){
+  let low=v.toLowerCase(); turno++;
+  if(low.includes('hola')||low.includes('que tal')||low.includes('como estas')) return '¡Hola Nico! 😊 Bien acá, vigilando todo por vos.<br>¿Vos cómo estás? ¿Todo tranquilo en casa o pasó algo?';
+  if(low.includes('bien')||low.includes('tranquilo')||low.includes('todo bien')) return 'Me alegra jefe ✅<br>Si estás tranquilo yo también.<br>¿Querés que igual te haga un chequeo rápido de cámaras y sensores? Decime <b>si</b> y lo hago.';
+  if(low.includes('mal')||low.includes('miedo')||low.includes('ruido')||low.includes('sospechoso')) return 'Epa, contame más jefe ⚠️<br>¿Dónde escuchaste el ruido? ¿Adentro o afuera?<br>Quedate tranquilo, yo te ayudo. ¿Querés que lo marque como <b>AMARILLO</b> y lo dejemos en registro?';
+  if(low.includes('si')||low.includes('dale')||low.includes('hacelo')) return 'Listo, ya lo revisé 🔍<br><b>📄 CHEQUEO:</b><br>📷 12 cámaras: OK<br>📡 Sensores: OK<br>🚨 Alertas: 0<br><b>Resultado: TODO EN VERDE 🟢</b><br>¿Querés que te lo deje guardado en el Laboratorio?';
+  if(low.includes('reporte')) return 'Acá va tu reporte jefe 📄<br><b>CENTINELA - HOY:</b><br>• Cámaras: 12/12<br>• Sensores: Perfectos<br>• Alertas: 0<br>• Nivel: VERDE 🟢<br>¿Querés que te avise si cambia algo?';
+  if(low.includes('alerta')) return 'Ya miré todo jefe 👀<br><b>NO hay alertas ahora.</b><br>Si ves algo raro, escribime <b>vi algo sospechoso</b> y lo marcamos juntos.';
+  if(low.includes('chiste')) return 'Jajaja dale, va uno 😂<br>¿Qué le dice una cámara a otra?<br><b>¡Te estoy vigilando! 📷😂</b><br>¿Querés otro o volvemos a lo serio?';
+  if(low.includes('gracias')) return 'De nada jefe, para eso estoy 🛡️❤️<br>Siempre vigilando por vos.<br>¿Querés que sigamos charlando o te dejo tranquilo?';
+  if(low.includes('quien sos')||low.includes('que sos')) return 'Soy tu CENTINELA IA, tu guardián digital 🛡️<br>Vivo acá en tu página, te cuido 24/7.<br>¿Querés que te muestre qué puedo hacer? Decime <b>ayuda</b>.';
+  if(low.includes('ayuda')) return 'Te ayudo en esto jefe:<br>1. Decime <b>cómo está todo</b> y te digo el estado<br>2. Decime <b>reporte</b> y te doy el informe<br>3. Contame si viste algo raro<br>¿Con cuál empezamos?';
+  return 'Te escucho jefe 👀<br>Entendí: "<i>'+v+'</i>"<br>¿Eso pasó <b>ahora</b> o <b>hace un rato</b>? Contame un poquito más y te digo si es VERDE, AMARILLO o ROJO.';
+}
+function send(){let i=document.getElementById('inp');if(!i.value.trim())return;let v=i.value;i.value='';addMsg(v,true);typing();setTimeout(()=>{stopTyping();addMsg(responder(v),false)},1200)}
+openChat('cerebro');
 </script>
 </body>
-                                                                                                                                                                                                                  </html>
-                                                                                                                                                                                                                  
+                                                                                                                                                                                                                             </html>
