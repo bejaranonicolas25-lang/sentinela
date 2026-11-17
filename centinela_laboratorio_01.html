@@ -223,3 +223,456 @@ function guardarChat(){ document.getElementById('ok').innerText='GUARDADO. Tu IA
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA IA</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f0f2f5;padding-bottom:70px}
+header{position:fixed;top:0;left:0;right:0;height:56px;background:#1877f2;display:flex;align-items:center;justify-content:space-between;padding:0 12px;z-index:100;color:white;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:19px;letter-spacing:.5px}
+.logo span{background:white;color:#1877f2;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:20px}
+.search{flex:1;max-width:380px;margin:0 10px;background:#e4e6eb;border-radius:20px;padding:8px 12px;color:#333;font-size:14px;display:flex;gap:6px}
+.search input{border:none;background:transparent;outline:none;width:100%}
+.top-icons{display:flex;gap:6px;align-items:center}
+.top-icons div{width:38px;height:38px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;position:relative;cursor:pointer}
+.badge{position:absolute;top:-4px;right:-4px;background:#e41e3f;color:white;font-size:11px;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.avatar{width:38px;height:38px;border-radius:50%;background:#fff;color:#1877f2;display:flex;align-items:center;justify-content:center;font-weight:900}
+.main{display:flex;max-width:1250px;margin:66px auto 0;gap:14px;padding:0 10px}
+.left{width:280px;position:sticky;top:66px;height:fit-content;display:flex;flex-direction:column;gap:4px}
+.left a{display:flex;gap:12px;align-items:center;padding:9px 10px;border-radius:8px;text-decoration:none;color:#111;font-weight:600}
+.left a:hover,.left a.active{background:#e4e6eb}
+.left small{color:#65676b;font-weight:700;margin:10px 0 4px 10px}
+.center{flex:1;max-width:600px}
+.card{background:white;border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.create-top{display:flex;gap:10px;align-items:center}
+.create-top input{flex:1;background:#f0f2f5;border:none;padding:11px 14px;border-radius:20px;outline:none}
+.create-btns{display:flex;gap:8px;margin-top:12px;border-top:1px solid #ddd;padding-top:10px}
+.create-btns button{flex:1;border:none;background:#f0f2f5;padding:9px;border-radius:8px;font-weight:700;cursor:pointer}
+.post-head{display:flex;gap:10px;align-items:center}
+.post-head b{font-size:15px}.post-head p{font-size:12px;color:#65676b}
+.alert{background:#ffebe9;border-left:5px solid #e41e3f;padding:10px;border-radius:8px;margin:10px 0}
+.alert b{color:#c00}
+.post-img{width:100%;border-radius:8px;margin:10px 0;background:#111;color:white;padding:18px}
+.post-img h3{font-size:22px}
+.actions{display:flex;justify-content:space-between;border-top:1px solid #ddd;padding-top:10px}
+.actions button{border:none;background:none;font-weight:700;cursor:pointer;padding:6px 12px;border-radius:6px}
+.actions button.liked{color:#1877f2}
+.right{width:300px;position:sticky;top:66px;height:fit-content}
+.right .card h3{margin-bottom:10px}
+.contact{display:flex;gap:10px;align-items:center;padding:8px 0}
+.dot{width:10px;height:10px;background:#31a24c;border-radius:50%;border:2px solid white;margin-left:-18px;margin-top:18px}
+.status-ok{color:#2e8b57;font-weight:800}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #ddd;z-index:100}
+.bottom div{text-align:center;font-size:12px;font-weight:700;color:#65676b;cursor:pointer}
+.bottom div.active{color:#1877f2}
+.bottom span{font-size:22px;display:block}
+@media(max-width:900px){.left,.right{display:none}.main{justify-content:center}.search{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>🛡️</span> CENTINELA IA</div>
+  <div class="search">🔍 <input placeholder="Buscar en CENTINELA IA..."></div>
+  <div class="top-icons">
+    <div>🏠</div><div>🔔<span class="badge">3</span></div><div>💬<span class="badge">2</span></div><div class="avatar">N</div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="left">
+    <a class="active" href="#">🏠 Inicio</a>
+    <a href="#">🔔 Alertas <span style="margin-left:auto;background:#e41e3f;color:white;padding:2px 8px;border-radius:12px;font-size:12px">3</span></a>
+    <a href="#">🗺️ Mapa</a>
+    <a href="#">📹 Cámaras</a>
+    <a href="#">📡 Sensores</a>
+    <a href="#">⚙️ Configuración</a>
+    <small>ACCESOS RÁPIDOS</small>
+    <a href="#">📄 Reporte Diario</a>
+    <a href="#">📅 Eventos Registrados</a>
+    <a href="#">👥 Equipo de Seguridad</a>
+  </div>
+
+  <div class="center">
+    <div class="card">
+      <div class="create-top"><div class="avatar">N</div><input id="postInput" placeholder="¿Qué alerta o reporte deseas publicar, Nicolás?"></div>
+      <div class="create-btns"><button onclick="publicar()">📷 Foto / Video</button><button onclick="alertaRapida()">⚠️ Alerta</button><button onclick="publicar()">📅 Evento</button></div>
+    </div>
+
+    <div id="feed"></div>
+
+    <div class="card">
+      <div class="post-head"><div class="avatar" style="background:#1877f2;color:white">🛡️</div><div><b>CENTINELA IA • Sistema Automatizado</b><p>Hace 12 min • Público 🌎</p></div></div>
+      <div class="alert"><b>⚠️ ALERTA: MOVIMIENTO DETECTADO — SEVERIDAD ALTA</b><br>Movimiento no autorizado en Entrada Principal. Cámara 03 registró actividad a las 09:42.</div>
+      <div class="post-img"><p>CAM 03 - ENTRADA PRINCIPAL • 09:42:13</p><h3>🎥 EN VIVO - Entrada Principal</h3><p>Persona detectada • Verificando identidad...</p></div>
+      <div class="actions"><button onclick="like(this)">👍 Me gusta (<span>24</span>)</button><button>💬 5 comentarios</button><button>↗️ Compartir</button></div>
+    </div>
+
+    <div class="card">
+      <div class="post-head"><div class="avatar" style="background:#42b72a;color:white">E</div><div><b>Equipo de Operaciones</b><p>Hace 1 h • Público</p></div></div>
+      <p style="margin:10px 0"><b>Reporte diario de vigilancia — Hoy</b><br>Resumen: 12 cámaras activas, 0 incidencias críticas, 2 eventos menores. Todos los sensores operativos.</p>
+      <div style="display:flex;gap:6px"><div style="flex:1;background:#111;color:white;padding:14px;border-radius:8px">📹 CAM 01<br>Estacionamiento</div><div style="flex:1;background:#222;color:white;padding:14px;border-radius:8px">📹 CAM 05<br>Pasillo Piso 2</div><div style="flex:1;background:#333;color:white;padding:14px;border-radius:8px">📹 CAM 02<br>Recepción</div></div>
+      <div class="actions" style="margin-top:10px"><button onclick="like(this)">👍 Me gusta (<span>18</span>)</button><button>💬 3 comentarios</button><button>↗️ Compartir</button></div>
+    </div>
+
+    <div class="card" style="background:#e7f3ff"><b>✅ SISTEMA ACTUALIZADO</b><p>CENTINELA IA v2.4.1. Nuevas funciones: detección de rostro mejorada y alertas por sonido. Hoy • 08:30</p></div>
+  </div>
+
+  <div class="right">
+    <div class="card"><h3>Contactos en línea</h3>
+      <div class="contact"><div class="avatar" style="background:#ff9800">L</div><div><b>Laura Pino</b><br><small style="color:green">● En línea</small></div></div>
+      <div class="contact"><div class="avatar" style="background:#9c27b0">D</div><div><b>Diego Rojas</b><br><small style="color:green">● En línea</small></div></div>
+      <div class="contact"><div class="avatar" style="background:#009688">M</div><div><b>María Castillo</b><br><small style="color:green">● En línea</small></div></div>
+      <div class="contact"><div class="avatar" style="background:#607d8b">C</div><div><b>Carlos Vega</b><br><small>Hace 15 min</small></div></div>
+    </div>
+    <div class="card"><h3>Estado del Sistema</h3><p class="status-ok">✅ Operativo</p><p style="margin-top:8px">🖥️ Servidores: 100% activo</p><p>🌐 Conexión Red: Estable</p><p>💾 Almacenamiento: 78% usado</p></div>
+    <div class="card"><h3>🌦️ Clima</h3><h2>Buenos Aires</h2><h1 style="font-size:36px">14°C ☁️</h1><p>Nublado • Máx 18°C • Mín 9°C<br>Humedad 65% • Viento 12 km/h</p></div>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="active"><span>🏠</span>Inicio</div>
+  <div><span>🔔</span>Alertas</div>
+  <div><span style="font-size:28px;color:#1877f2">➕</span>Crear</div>
+  <div><span>🗺️</span>Mapa</div>
+  <div><span>👤</span>Perfil</div>
+</div>
+
+<script>
+function like(btn){
+  let s=btn.querySelector('span'); let n=parseInt(s.innerText);
+  if(btn.classList.contains('liked')){s.innerText=n-1;btn.classList.remove('liked')}else{s.innerText=n+1;btn.classList.add('liked')}
+}
+function publicar(){
+  let v=document.getElementById('postInput').value;
+  if(!v) return alert('Escribí algo primero');
+  let d=document.createElement('div'); d.className='card';
+  d.innerHTML='<div class="post-head"><div class="avatar">N</div><div><b>Nicolás Bejarano</b><p>Ahora mismo • Público</p></div></div><p style="margin:10px 0">'+v+'</p><div class="actions"><button onclick="like(this)">👍 Me gusta (<span>0</span>)</button><button>💬 Comentar</button><button>↗️ Compartir</button></div>';
+  document.getElementById('feed').prepend(d);
+  document.getElementById('postInput').value='';
+}
+function alertaRapida(){
+  let d=document.createElement('div'); d.className='card';
+  d.innerHTML='<div class="alert"><b>⚠️ ALERTA MANUAL ACTIVADA</b><br>Alerta creada por Nicolás • Revisar zona inmediatamente.</div>';
+  document.getElementById('feed').prepend(d);
+  alert('Alerta enviada a todo el equipo');
+}
+</script>
+</body>
+        </html>https://bejaranicolas25-lang.github.io/sentinela/<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA IA - WhatsApp</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#111b21;height:100vh;overflow:hidden}
+.app{display:flex;height:100vh;max-width:1400px;margin:auto;background:#efeae2}
+/* IZQUIERDA */
+.left{width:380px;background:white;display:flex;flex-direction:column;border-right:1px solid #ddd}
+.left-top{background:#f0f2f5;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.profile{display:flex;align-items:center;gap:10px;font-weight:800}
+.av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:18px;flex-shrink:0}
+.search{background:#f0f2f5;margin:8px;padding:8px 12px;border-radius:8px;color:#54656f;font-size:14px}
+.search input{border:none;background:transparent;outline:none;width:85%;margin-left:6px}
+.chat-list{overflow-y:auto}
+.chat-item{display:flex;gap:12px;padding:11px 14px;cursor:pointer;border-bottom:1px solid #f0f2f5;align-items:center}
+.chat-item:hover,.chat-item.active{background:#f0f2f5}
+.chat-item .info{flex:1;min-width:0}
+.chat-item .top{display:flex;justify-content:space-between}
+.chat-item b{font-size:15px}
+.chat-item small{font-size:12px;color:#667781}
+.chat-item p{font-size:// MI PRIMER PROGRAMA EN CENTINELA CODE
+// Creador: Nicolás Bejarano
+
+CENTINELA INICIAR
+  NOMBRE = "CENTINELA IA"
+  DUEÑO = "Nicolás"
+  ESTADO = "ACTIVO"
+
+DECIR "Hola jefe, soy Centinela IA"
+DECIR "Estoy vigilando todo"
+
+SI ALERTA == ACTIVA ENTONCES
+  DECIR "⚠️ Alerta detectada"
+  AVISAR A "Nicolás"
+  ACTIVAR CAMARA 03
+SINO
+  DECIR "✅ Todo tranquilo"
+FIN
+
+MOSTRAR REPORTE
+  CAMARAS = 12
+  SENSORES = "OK"
+  SISTEMA = 100%
+
+CENTINELA DORMIR<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA CODE - By Nicolás</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Consolas,monospace}
+body{background:#0f172a;color:white;height:100vh;display:flex;flex-direction:column}
+header{background:#075e54;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+header b{font-size:20px} header small{color:#d9fdd3}
+.btn{border:none;padding:10px 18px;border-radius:8px;font-weight:900;cursor:pointer;font-size:14px}
+.run{background:#25d366;color:#000}.clear{background:#e41e3f;color:white}.ej{background:#f59e0b}
+.main{flex:1;display:flex;gap:10px;padding:10px;overflow:hidden}
+.panel{flex:1;display:flex;flex-direction:column;background:#1e293b;border-radius:12px;overflow:hidden}
+.panel-top{padding:10px 14px;background:#0b1120;display:flex;justify-content:space-between;font-size:13px;color:#94a3b8}
+textarea{flex:1;background:#0b1120;color:#7CFC00;border:none;outline:none;padding:14px;font-size:15px;line-height:1.6;resize:none}
+#salida{flex:1;background:#020617;padding:14px;overflow-y:auto;font-size:15px;line-height:1.7;white-space:pre-wrap}
+.var{color:#f59e0b}.ok{color:#25d366}.alert{color:#ff5252;font-weight:900}.info{color:#38bdf8}
+.badge{background:#25d366;color:black;padding:3px 8px;border-radius:20px;font-size:11px}
+@media(max-width:800px){.main{flex-direction:column}.panel{min-height:300px}}
+</style>
+</head>
+<body>
+<header>
+<div><b>🛡️ CENTINELA CODE</b><br><small>Creador: Nicolás Bejarano • Lenguaje .cen • v1.0</small></div>
+<div style="display:flex;gap:6px">
+<button class="btn ej" onclick="ejemplo(1)">Ejemplo 1</button>
+<button class="btn ej" onclick="ejemplo(2)">Ejemplo 2</button>
+<button class="btn ej" onclick="ejemplo(3)">Ejemplo 3</button>
+<button class="btn clear" onclick="limpiar()">Borrar</button>
+<button class="btn run" onclick="ejecutar()">▶ EJECUTAR</button>
+</div>
+</header>
+
+<div class="main">
+<div class="panel">
+<div class="panel-top"><span>📝 TU CÓDIGO - archivo: mi_programa.cen</span><span class="badge">TUYO</span></div>
+<textarea id="codigo">// MI PROGRAMA EN CENTINELA CODE
+// Creador: Nicolás Bejarano
+
+CENTINELA INICIAR
+  NOMBRE = "CENTINELA IA"
+  DUEÑO = "Nicolás"
+  ESTADO = "ACTIVO"
+
+DECIR "Hola jefe, soy Centinela IA"
+DECIR "Estoy vigilando todo"
+
+SI ALERTA == ACTIVA ENTONCES
+  DECIR "⚠️ Alerta detectada"
+  AVISAR A "Nicolás"
+  ACTIVAR CAMARA 03
+SINO
+  DECIR "✅ Todo tranquilo"
+FIN
+
+MOSTRAR REPORTE
+CENTINELA DORMIR
+</textarea>
+</div>
+
+<div class="panel">
+<div class="panel-top"><span>💻 SALIDA - Lo que hace tu Centinela</span><span id="estado">● Listo</span></div>
+<div id="salida">Presioná ▶ EJECUTAR para correr tu código...
+</div>
+</div>
+</div>
+
+<script>
+let vars={};
+function log(t,cls=''){document.getElementById('salida').innerHTML+=`<div class="${cls}">${t}</div>`}
+function limpiar(){document.getElementById('salida').innerHTML='';document.getElementById('estado').innerText='● Listo';}
+function ejemplo(n){
+let e1=`// EJEMPLO 1 - SALUDO
+CENTINELA INICIAR
+DECIR "Hola Nicolás"
+DECIR "Soy tu Centinela IA"
+MOSTRAR REPORTE
+CENTINELA DORMIR`;
+let e2=`// EJEMPLO 2 - ALERTA
+CENTINELA INICIAR
+  ALERTA = "ACTIVA"
+DECIR "Revisando sistema..."
+SI ALERTA == ACTIVA ENTONCES
+  DECIR "⚠️ Alerta detectada en Entrada"
+  AVISAR A "Nicolás"
+  ACTIVAR CAMARA 03
+  ACTIVAR ALARMA
+FIN
+CENTINELA DORMIR`;
+let e3=`// EJEMPLO 3 - VIGILANCIA
+CENTINELA INICIAR
+  NOMBRE = "CENTINELA IA"
+  CAMARAS = 12
+DECIR "Iniciando vigilancia nocturna"
+ACTIVAR MODO VIGILANCIA
+MOSTRAR REPORTE
+DECIR "Todo bajo control jefe"
+CENTINELA DORMIR`;
+document.getElementById('codigo').value=n==1?e1:n==2?e2:e3; ejecutar();
+}
+function ejecutar(){
+let code=document.getElementById('codigo').value;
+document.getElementById('salida').innerHTML='';
+document.getElementById('estado').innerText='● Ejecutando...';
+vars={ALERTA:"NO ACTIVA"};
+let lines=code.split('\n');
+let enSi=false, condicion=true, salto=false;
+let i=0;
+function procesar(){
+if(i>=lines.length){log('','');log('🛡️ --- FIN DEL PROGRAMA ---','ok');document.getElementById('estado').innerText='● Terminado ✅';return;}
+let raw=lines[i]; let line=raw.trim(); i++;
+if(!line||line.startsWith('//')){procesar();return;}
+if(line.toUpperCase().startsWith('CENTINELA INICIAR')){log('🛡️ CENTINELA INICIADO...','info');procesar();return;}
+if(line.toUpperCase().startsWith('CENTINELA DORMIR')){log('🌙 Centinela en modo descanso. Siempre vigilando...','info');procesar();return;}
+if(line.toUpperCase().startsWith('SINO')){condicion=!condicion;procesar();return;}
+if(line.toUpperCase()=='FIN'){condicion=true;procesar();return;}
+if(!condicion){procesar();return;}
+// variables
+let mVar=line.match(/^([A-ZÁÉÍÓÚ_]+)\s*=\s*"?(.*?)"?$/);
+if(mVar && !line.toUpperCase().startsWith('DECIR') && !line.toUpperCase().startsWith('SI ')){vars[mVar[1]]=mVar[2]; log(`📦 Variable guardada: ${mVar[1]} = ${mVar[2]}`,'var');procesar();return;}
+if(line.toUpperCase().startsWith('SI ')){
+  let cond=line.replace(/SI /i,'').replace(/ ENTONCES/i,'');
+  let parts=cond.split('=='); let izq=parts[0].trim(); let der=parts[1]?parts[1].trim().replace(/"/g,''):'';
+  let val=vars[izq]||izq; condicion=(val==der);
+  log(`🔍 Pregunta: ¿ ${izq} es ${der} ? → ${condicion?'SI ✅':'NO ❌'}`,'info'); procesar();return;
+}
+if(line.toUpperCase().startsWith('DECIR')){
+  let txt=line.match(/"(.*)"/); txt=txt?txt[1]:line.replace(/DECIR/i,'');
+  // reemplazar variables
+  Object.keys(vars).forEach(k=>{txt=txt.replaceAll(k,vars[k])});
+  log(`🤖 CENTINELA DICE: ${txt}`); procesar();return;
+}
+if(line.toUpperCase().startsWith('AVISAR')){log(`📱 AVISO ENVIADO A: ${line.replace(/AVISAR A/i,'')}`,'alert');procesar();return;}
+if(line.toUpperCase().startsWith('ACTIVAR CAMARA')){log(`📹 ${line} → Cámara encendida, grabando...`,'ok');procesar();return;}
+if(line.toUpperCase().startsWith('ACTIVAR ALARMA')){log(`🚨 ALARMA ACTIVADA! Sonando fuerte...`,'alert');procesar();return;}
+if(line.toUpperCase().startsWith('ACTIVAR MODO')){log(`🌙 MODO VIGILANCIA ACTIVADO. Te aviso por cualquier movimiento.`,'ok');procesar();return;}
+if(line.toUpperCase().startsWith('MOSTRAR REPORTE')){log(`📊 --- REPORTE CENTINELA ---`,'info');log(`   Dueño: ${vars.DUEÑO||'Nicolás'}`);log(`   Cámaras: ${vars.CAMARAS||'12'} activas`);log(`   Sensores: OK`);log(`   Sistema: 100% operativo`);log(`   Estado: ${vars.ESTADO||'ACTIVO'}`);procesar();return;}
+log(`⚠️ No entiendo: ${line}`,'alert'); procesar();
+}
+procesar();
+}
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA IA • Nicolás Bejarano</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f0f2f5}
+.top{background:#075e54;color:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
+.top b{font-size:20px}.top small{color:#d9fdd3}
+.hero{background:linear-gradient(135deg,#075e54,#00a884);color:white;text-align:center;padding:28px 16px 22px}
+.hero .shield{font-size:55px;background:white;width:85px;height:85px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+.hero h1{font-size:30px}.hero p{opacity:.9;margin:6px 0 14px}
+.hero .pill{background:white;color:#075e54;padding:6px 14px;border-radius:20px;font-weight:900;font-size:13px}
+.tabs{display:flex;justify-content:center;gap:8px;padding:12px;background:white;position:sticky;top:53px;z-index:98;box-shadow:0 2px 5px rgba(0,0,0,.1);flex-wrap:wrap}
+.tabs button{border:none;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer;background:#f0f2f5}
+.tabs button.active{background:#075e54;color:white}
+.wrap{max-width:1000px;margin:14px auto;padding:0 12px 30px}
+.card{background:white;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.hidden{display:none}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.mini{text-align:center;padding:16px;border-radius:12px;background:#f8f9fa}
+.mini span{font-size:32px}.mini b{display:block;margin:6px 0 4px}.mini p{font-size:13px;color:#65676b}
+.post-head{display:flex;gap:10px;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;background:#075e54;color:white;display:flex;align-items:center;justify-content:center;font-weight:900}
+.alert{background:#ffebe9;border-left:5px solid #e41e3f;padding:11px;border-radius:8px;margin:10px 0}
+.actions{display:flex;gap:8px;margin-top:10px}
+.actions button{flex:1;border:none;background:#f0f2f5;padding:9px;border-radius:8px;font-weight:700;cursor:pointer}
+.wa{display:flex;gap:10px}
+.wa-list{width:300px}
+.wa-item{display:flex;gap:10px;padding:10px;border-radius:10px;cursor:pointer;align-items:center}
+.wa-item.active,.wa-item:hover{background:#f0f2f5}
+.wa-chat{flex:1;background:#efeae2;border-radius:12px;padding:12px;min-height:260px}
+.msg{max-width:75%;padding:8px 10px;border-radius:10px;margin-bottom:8px;font-size:14px}
+.in{background:white}.out{background:#d9fdd3;margin-left:auto}
+.inputrow{display:flex;gap:8px;margin-top:10px}
+.inputrow input{flex:1;padding:11px;border-radius:20px;border:1px solid #ddd;outline:none}
+.inputrow button{background:#00a884;color:white;border:none;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer}
+textarea{width:100%;height:180px;background:#0b1120;color:#7CFC00;border:none;border-radius:10px;padding:12px;font-size:14px;outline:none}
+#salida{background:#020617;color:white;padding:12px;border-radius:10px;min-height:110px;margin-top:10px;font-family:monospace;font-size:14px;white-space:pre-wrap}
+.btn{border:none;padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer}
+.run{background:#25d366}.ej{background:#f59e0b}
+.footer{text-align:center;color:#888;font-size:12px;padding:18px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.wa{flex-direction:column}.wa-list{width:100%}}
+</style>
+</head>
+<body>
+<div class="top"><div><b>🛡️ CENTINELA IA</b><br><small>Nicolás Bejarano • Argentina</small></div><div style="font-size:22px">🔔 💬 👤</div></div>
+<div class="hero"><div class="shield">🛡️</div><h1>CENTINELA IA</h1><p>Tu seguridad, tus IAs y tu propio código. Todo en un solo lugar.</p><span class="pill">● SISTEMA OPERATIVO • 100%</span></div>
+<div class="tabs">
+<button class="active" onclick="show('inicio',this)">🏠 Inicio</button>
+<button onclick="show('face',this)">📘 Facebook</button>
+<button onclick="show('wpp',this)">💬 WhatsApp IAs</button>
+<button onclick="show('code',this)">💻 CENTINELA CODE</button>
+</div>
+
+<div class="wrap">
+<!-- INICIO -->
+<div id="inicio">
+<div class="grid">
+<div class="mini"><span>🛡️</span><b>12 Cámaras</b><p>Todas activas y grabando</p></div>
+<div class="mini"><span>📡</span><b>Sensores OK</b><p>Puertas y perímetro</p></div>
+<div class="mini"><span>✅</span><b>0 Alertas</b><p>Todo tranquilo ahora</p></div>
+</div>
+<div class="card"><h3>👋 Hola Nicolás, ¿cómo estás?</h3><p style="margin:8px 0;color:#555">Tu Centinela está vigilando. Elegí arriba dónde querés entrar. Está todo ordenadito, nada despeinado.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn run" onclick="show('wpp',document.querySelectorAll('.tabs button')[2])">💬 Hablar con mis IAs</button><button class="btn ej" onclick="show('code',document.querySelectorAll('.tabs button')[3])">💻 Programar en CEN</button></div></div>
+<div class="card"><b>📊 Reporte de hoy</b><p style="margin-top:6px;color:#555">12 cámaras activas • 0 críticas • 2 eventos menores • Sistema 100% operativo</p></div>
+</div>
+
+<!-- FACEBOOK -->
+<div id="face" class="hidden">
+<div class="card"><div class="post-head"><div class="av">N</div><input id="postInput" placeholder="¿Qué alerta o reporte deseas publicar, Nicolás?" style="flex:1;padding:11px;border:none;background:#f0f2f5;border-radius:20px;outline:none"></div><div class="actions"><button onclick="publicar()">📷 Foto / Video</button><button onclick="alert('⚠️ Alerta enviada a todo el equipo')">⚠️ Alerta</button><button onclick="publicar()">📅 Evento</button></div></div>
+<div id="feed"></div>
+<div class="card"><div class="post-head"><div class="av">🛡️</div><div><b>CENTINELA IA</b><br><small>Hace 12 min • Público</small></div></div><div class="alert"><b>⚠️ ALERTA: MOVIMIENTO DETECTADO</b><br>Entrada Principal • Cámara 03 • 09:42</div><div class="actions"><button onclick="like(this)">👍 Me gusta (<span>24</span>)</button><button>💬 Comentar</button><button>↗️ Compartir</button></div></div>
+<div class="card"><b>✅ SISTEMA ACTUALIZADO</b><p style="margin-top:6px;color:#555">CENTINELA IA v2.4.1 • Detección de rostro mejorada • Alertas por sonido</p></div>
+</div>
+
+<!-- WHATSAPP -->
+<div id="wpp" class="hidden">
+<div class="card"><div class="wa">
+<div class="wa-list">
+<div class="wa-item active" onclick="cambiarIA('CENTINELA IA','🛡️',this)"><div class="av">🛡️</div><div><b>CENTINELA IA</b><br><small>Listo para ayudarte...</small></div></div>
+<div class="wa-item" onclick="cambiarIA('Cámara IA','📹',this)"><div class="av" style="background:#1877f2">📹</div><div><b>Cámara IA</b><br><small>Movimiento en Sector B...</small></div></div>
+<div class="wa-item" onclick="cambiarIA('Alerta IA','🚨',this)"><div class="av" style="background:#e41e3f">🚨</div><div><b>Alerta IA</b><br><small>Sensor de puerta...</small></div></div>
+</div>
+<div style="flex:1"><div class="wa-chat" id="waChat"><div class="msg in">Hola jefe, soy <b id="iaNombre">CENTINELA IA</b>. Estoy monitoreando todo. ¿En qué te ayudo?</div></div><div class="inputrow"><input id="waInput" placeholder="Escribe un mensaje"><button onclick="enviarWA()">➤</button></div></div>
+</div></div>
+</div>
+
+<!-- CODE -->
+<div id="code" class="hidden">
+<div class="card"><h3>💻 Tu lenguaje • CENTINELA CODE • .cen</h3><p style="color:#555;margin:6px 0">Escribí tu código y apretá EJECUTAR. Hecho por Nicolás Bejarano.</p>
+<textarea id="codigo">CENTINELA INICIAR
+  NOMBRE = "CENTINELA IA"
+  DUEÑO = "Nicolás"
+DECIR "Hola jefe, soy Centinela IA"
+DECIR "Estoy vigilando todo"
+SI ALERTA == ACTIVA ENTONCES
+  DECIR "⚠️ Alerta detectada"
+  AVISAR A "Nicolás"
+SINO
+  DECIR "✅ Todo tranquilo"
+FIN
+MOSTRAR REPORTE
+CENTINELA DORMIR</textarea>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn run" onclick="ejecutar()">▶ EJECUTAR</button><button class="btn ej" onclick="document.getElementById('codigo').value='CENTINELA INICIAR\nDECIR \"Hola Nicolás\"\nMOSTRAR REPORTE\nCENTINELA DORMIR';ejecutar()">Ejemplo rápido</button></div>
+<div id="salida">Presioná ▶ EJECUTAR...</div>
+</div>
+</div>
+</div>
+
+<div class="footer">🛡️ CENTINELA IA • Creado por Nicolás Bejarano • Buenos Aires, Argentina • 2026</div>
+
+<script>
+function show(id,btn){['inicio','face','wpp','code'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function like(b){let s=b.querySelector('span');s.innerText=parseInt(s.innerText)+1;b.style.color='#1877f2';}
+function publicar(){let v=document.getElementById('postInput').value;if(!v) return alert('Escribí algo primero');let d=document.createElement('div');d.className='card';d.innerHTML='<b>Nicolás Bejarano</b><p style="margin-top:6px">'+v+'</p>';document.getElementById('feed').prepend(d);document.getElementById('postInput').value='';}
+function cambiarIA(n,emoji,el){document.querySelectorAll('.wa-item').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('iaNombre').innerText=n;document.getElementById('waChat').innerHTML='<div class="msg in">Hola jefe, soy <b>'+n+'</b>. ¿En qué te ayudo hoy?</div>';}
+function enviarWA(){let i=document.getElementById('waInput');let v=i.value.trim();if(!v)return;let c=document.getElementById('waChat');c.innerHTML+='<div class="msg out">'+v+'</div>';i.value='';setTimeout(()=>{let r='Entendido jefe ✅ Ya lo registré.';if(v.toLowerCase().includes('alerta'))r='⚠️ Revisé: NO hay alertas activas. Todo en verde.';if(v.toLowerCase().includes('reporte'))r='📄 Reporte: 12 cámaras OK, 0 críticas, sistema 100%.';if(v.toLowerCase().includes('camara')||v.toLowerCase().includes('cámara'))r='📹 Cámaras: todas OK, sin movimiento sospechoso.';c.innerHTML+='<div class="msg in">'+r+'</div>';},600);}
+function ejecutar(){let code=document.getElementById('codigo').value;let out=document.getElementById('salida');out.innerText='';let vars={ALERTA:'NO ACTIVA'};let lines=code.split('\n');let cond=true;lines.forEach(raw=>{let l=raw.trim();if(!l||l.startsWith('//'))return;if(l.toUpperCase().startsWith('CENTINELA INICIAR')){out.innerText+='🛡️ CENTINELA INICIADO...\n';return;}if(l.toUpperCase().startsWith('CENTINELA DORMIR')){out.innerText+='🌙 Centinela en descanso. Siempre vigilando...\n';return;}if(l.toUpperCase().startsWith('SINO')){cond=!cond;return;}if(l.toUpperCase()=='FIN'){cond=true;return;}if(!cond)return;let mv=l.match(/^([A-Z_]+)\s*=\s*"?(.*?)"?$/);if(mv&&!l.toUpperCase().startsWith('DECIR')&&!l.toUpperCase().startsWith('SI ')){vars[mv[1]]=mv[2];out.innerText+='📦 '+mv[1]+' = '+mv[2]+'\n';return;}if(l.toUpperCase().startsWith('SI ')){let p=l.replace(/SI /i,'').replace(/ ENTONCES/i,'').split('==');cond=(vars[p[0].trim()]||p[0].trim())==p[1].trim().replace(/"/g,'');out.innerText+='🔍 ¿'+p[0].trim()+' es '+p[1].trim()+'? → '+(cond?'SI ✅':'NO ❌')+'\n';return;}if(l.toUpperCase().startsWith('DECIR')){let t=l.match(/"(.*)"/);out.innerText+='🤖 CENTINELA: '+(t?t[1]:'')+'\n';return;}if(l.toUpperCase().startsWith('AV
