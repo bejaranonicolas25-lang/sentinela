@@ -266,4 +266,201 @@ xcopy C:\CENTINELA-SERVIDOR\centinela-db.json C:\CENTINELA-SERVIDOR\backups\ /Y
 xcopy C:\CENTINELA-SERVIDOR\centinela-db.json D:\COPIA-CENTINELA\ /Y
 echo ✅ BACKUP HECHO - CENTINELA BLINDADO
 pause
+        // CENTINELA CORE ® - SERVIDOR MADRE - 100% NUESTRO - Nicolás Bejarano
+// Nombre oficial: CENTINELA CORE - Nos pagan a nosotros, no pagamos a terceros
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+let DB_FILE = path.join(__dirname, 'centinela-core-db.json');
+let BACKUP_DIR = path.join(__dirname, 'backups-core');
+if(!fs.existsSync(BACKUP_DIR)) fs.mkdirSync(BACKUP_DIR);
+let db = { duenos: [], clientes: [], lab: [], finanzas: [], codigos: [] };
+try{ if(fs.existsSync(DB_FILE)) db = JSON.parse(fs.readFileSync(DB_FILE,'utf8')); }catch(e){ console.log('CENTINELA CORE - DB nueva'); }
+function guardar(){
+  fs.writeFileSync(DB_FILE, JSON.stringify(db,null,2));
+  let fecha = new Date().toISOString().replace(/[:.]/g,'-');
+  fs.writeFileSync(path.join(BACKUP_DIR, 'CORE-backup-'+fecha+'.json'), JSON.stringify(db,null,2));
+  let files = fs.readdirSync(BACKUP_DIR).sort();
+  while(files.length>20){ fs.unlinkSync(path.join(BACKUP_DIR, files.shift())); }
+}
+let intentos = {};
+function antiAtaque(ip){
+  let ahora = Date.now();
+  if(!intentos[ip]) intentos[ip]=[];
+  intentos[ip]=intentos[ip].filter(t=>ahora-t<60000);
+  intentos[ip].push(ahora);
+  return intentos[ip].length>100;
+}
+function send(res, code, obj){
+  res.writeHead(code, {'Content-Type':'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Access-Control-Allow-Headers':'Content-Type'});
+  res.end(JSON.stringify(obj));
+}
+const server = http.createServer((req,res)=>{
+  let ip = req.socket.remoteAddress||'local';
+  if(antiAtaque(ip)) return send(res,429,{ok:false,msg:'🛡️ CENTINELA CORE BLINDADO - Demasiados intentos. Esperá 1 min.'});
+  if(req.method==='OPTIONS'){ send(res,200,{}); return; }
+  let body='';
+  req.on('data',c=>{ body+=c; if(body.length>1000000){ req.destroy(); } });
+  req.on('end',()=>{
+    try{
+      let url = req.url.split('?')[0];
+      let data = body ? JSON.parse(body) : {};
+      if(url==='/ping') return send(res,200,{ok:true, servidor:'CENTINELA CORE', msg:'CENTINELA CORE PRENDIDO - 100% NUESTRO', duenos:db.duenos.length, clientes:db.clientes.length, lab:db.lab.length, finanzas:db.finanzas.length, hora:new Date().toLocaleString()});
+      if(url==='/crear-dueno' && req.method==='POST'){
+        if(db.duenos.length>0) return send(res,400,{ok:false,msg:'Ya hay Dueño en CENTINELA CORE.'});
+        if(!data.pin || data.pin.length<4) return send(res,400,{ok:false,msg:'PIN mínimo 4 dígitos'});
+        let d = {id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, vaultPin:data.vaultPin, pregunta:data.pregunta, respuesta:data.respuesta, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()};
+        db.duenos.push(d); guardar();
+        return send(res,200,{ok:true,msg:'Dueño creado en CENTINELA CORE', dueno:d});
+      }
+      if(url==='/login-dueno' && req.method==='POST'){
+        let d = db.duenos.find(x=>x.pin===data.pin);
+        if(!d) return send(res,401,{ok:false,msg:'PIN incorrecto. Solo Dueño de CENTINELA CORE.'});
+        return send(res,200,{ok:true, dueno:d});
+      }
+      if(url==='/crear-cliente' && req.method==='POST'){
+        if(!data.usuario || !data.pin) return send(res,400,{ok:false,msg:'Falta usuario o PIN cliente'});
+        if(db.clientes.find(x=>x.usuario===data.usuario)) return send(res,400,{ok:false,msg:'Ese usuario cliente ya existe en CENTINELA CORE'});
+        let c = {id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, dueno:'Nicolás Bejarano', servidor:'CENTINELA CORE', fecha:new Date().toLocaleString(), pagado:false};
+        db.clientes.push(c); guardar();
+        return send(res,200,{ok:true,msg:'Cliente creado en CENTINELA CORE', cliente:c});
+      }
+      if(url==='/login-cliente' && req.method==='POST'){
+        let c = db.clientes.find(x=>x.pin===data.pin);
+        if(!c) return send(res,401,{ok:false,msg:'PIN cliente incorrecto'});
+        return send(res,200,{ok:true, cliente:c});
+      }
+      if(url==='/guardar-lab' && req.method==='POST'){ db.lab.unshift({...data, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, lab:db.lab}); }
+      if(url==='/ver-lab') return send(res,200,{ok:true, lab:db.lab});
+      if(url==='/guardar-finanza' && req.method==='POST'){ db.finanzas.unshift({...data, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, finanzas:db.finanzas}); }
+      if(url==='/ver-finanzas') return send(res,200,{ok:true, finanzas:db.finanzas});
+      if(url==='/guardar-codigo' && req.method==='POST'){ db.codigos.unshift({...data, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, codigos:db.codigos}); }
+      if(url==='/ver-codigos') return send(res,200,{ok:true, codigos:db.codigos});
+      if(url==='/ver-clientes') return send(res,200,{ok:true, servidor:'CENTINELA CORE', clientes:db.clientes, duenos:db.duenos});@echo off
+title CENTINELA CORE - SERVIDOR MADRE NUESTRO
+:INICIO
+echo 🛡️ CENTINELA CORE PRENDIENDO...
+cd /d C:\CENTINELA-SERVIDOR
+node server.js
+echo ⚠️ CENTINELA CORE se apagó, reintentando en 3 segundos...
+timeout /t 3
+goto INICIO
+      return send(res,404,{ok:false,msg:'Ruta no encontrada CENTINELA CORE'});
+    }catch(e){ send(res,500,{ok:false,msg:'Error CENTINELA CORE: '+e.message}); }
+  });
+});
+server.listen(3000, ()=>{
+  console.log('🛡️ CENTINELA CORE PRENDIDO - 100% NUESTRO');
+  console.log('Servidor Madre: CENTINELA CORE');
+  console.log('http://localhost:3000/ping');
+  console.log('Backup automático en backups-core/');
+  console.log('Dueño: Nicolás Bejarano - Nos pagan a nosotros');
+});
+process.on('uncaughtException', (e)=>{ console.log('CENTINELA CORE aguantó error:', e.message); });      
                                                                                                                                                                                                             
+@echo off
+title CENTINELA CORE - INSTALADOR AUTOMATICO
+color 0A
+echo.
+echo  ============================================
+echo  🛡️  CENTINELA CORE - INSTALADOR AUTOMATICO
+echo  100%% NUESTRO - Nicolas Bejarano
+echo  ============================================
+echo.
+echo  [1/5] Creando carpeta CENTINELA CORE...
+mkdir C:\CENTINELA-SERVIDOR 2>nul
+mkdir C:\CENTINELA-SERVIDOR\backups-core 2>nul
+cd /d C:\CENTINELA-SERVIDOR
+echo  ✅ Carpeta lista
+
+echo.
+echo  [2/5] Creando SERVIDOR CENTINELA CORE automaticamente...
+(
+echo // CENTINELA CORE - SERVIDOR MADRE - 100%% NUESTRO - Nicolas Bejarano
+echo const http = require('http');
+echo const fs = require('fs');
+echo const path = require('path');
+echo let DB_FILE = path.join(__dirname, 'centinela-core-db.json');
+echo let BACKUP_DIR = path.join(__dirname, 'backups-core');
+echo if(!fs.existsSync(BACKUP_DIR)) fs.mkdirSync(BACKUP_DIR);
+echo let db = { duenos: [], clientes: [], lab: [], finanzas: [], codigos: [] };
+echo try{ if(fs.existsSync(DB_FILE)) db = JSON.parse(fs.readFileSync(DB_FILE,'utf8')); }catch(e){}
+echo function guardar(){ fs.writeFileSync(DB_FILE, JSON.stringify(db,null,2)); let f=new Date().toISOString().replace(/[:.]/g,'-'); fs.writeFileSync(path.join(BACKUP_DIR, 'CORE-backup-'+f+'.json'), JSON.stringify(db,null,2)); let files=fs.readdirSync(BACKUP_DIR).sort(); while(files.length^>20){ fs.unlinkSync(path.join(BACKUP_DIR, files.shift())); } }
+echo let intentos = {};
+echo function antiAtaque(ip){ let a=Date.now(); if(!intentos[ip]) intentos[ip]=[]; intentos[ip]=intentos[ip].filter(t=>a-t^<60000); intentos[ip].push(a); return intentos[ip].length^>100; }
+echo function send(res, code, obj){ res.writeHead(code, {'Content-Type':'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Access-Control-Allow-Headers':'Content-Type'}); res.end(JSON.stringify(obj)); }
+echo const server = http.createServer((req,res)=>{
+echo   let ip = req.socket.remoteAddress^|^|'local';
+echo   if(antiAtaque(ip)) return send(res,429,{ok:false,msg:'CENTINELA CORE BLINDADO'});
+echo   if(req.method==='OPTIONS'){ send(res,200,{}); return; }
+echo   let body='';
+echo   req.on('data',c=>{ body+=c; });
+echo   req.on('end',()=>{
+echo     try{
+echo       let url = req.url.split('?')[0];
+echo       let data = body ? JSON.parse(body) : {};
+echo       if(url==='/ping') return send(res,200,{ok:true, servidor:'CENTINELA CORE', msg:'CENTINELA CORE PRENDIDO - 100%% NUESTRO', duenos:db.duenos.length, clientes:db.clientes.length, lab:db.lab.length, finanzas:db.finanzas.length, hora:new Date().toLocaleString()});
+echo       if(url==='/crear-dueno' ^&^& req.method==='POST'){ if(db.duenos.length^>0) return send(res,400,{ok:false,msg:'Ya hay Dueno en CENTINELA CORE'}); let d={id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, vaultPin:data.vaultPin, pregunta:data.pregunta, respuesta:data.respuesta, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}; db.duenos.push(d); guardar(); return send(res,200,{ok:true,msg:'Dueno creado en CENTINELA CORE', dueno:d}); }
+echo       if(url==='/login-dueno' ^&^& req.method==='POST'){ let d=db.duenos.find(x=>x.pin===data.pin); if(!d) return send(res,401,{ok:false,msg:'PIN incorrecto'}); return send(res,200,{ok:true, dueno:d}); }
+echo       if(url==='/crear-cliente' ^&^& req.method==='POST'){ if(db.clientes.find(x=>x.usuario===data.usuario)) return send(res,400,{ok:false,msg:'Cliente ya existe'}); let c={id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, dueno:'Nicolas Bejarano', servidor:'CENTINELA CORE', fecha:new Date().toLocaleString(), pagado:false}; db.clientes.push(c); guardar(); return send(res,200,{ok:true,msg:'Cliente creado en CENTINELA CORE', cliente:c}); }
+echo       if(url==='/login-cliente' ^&^& req.method==='POST'){ let c=db.clientes.find(x=>x.pin===data.pin); if(!c) return send(res,401,{ok:false,msg:'PIN cliente incorrecto'}); return send(res,200,{ok:true, cliente:c}); }
+echo       if(url==='/guardar-lab' ^&^& req.method==='POST'){ db.lab.unshift({...data, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, lab:db.lab}); }
+echo       if(url==='/ver-lab') return send(res,200,{ok:true, lab:db.lab});
+echo       if(url==='/guardar-finanza' ^&^& req.method==='POST'){ db.finanzas.unshift({...data, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, finanzas:db.finanzas}); }
+echo       if(url==='/ver-finanzas') return send(res,200,{ok:true, finanzas:db.finanzas});
+echo       if(url==='/guardar-codigo' ^&^& req.method==='POST'){ db.codigos.unshift({...data, servidor:'CENTINELA CORE', fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, codigos:db.codigos}); }
+echo       if(url==='/ver-codigos') return send(res,200,{ok:true, codigos:db.codigos});
+echo       if(url==='/ver-clientes') return send(res,200,{ok:true, servidor:'CENTINELA CORE', clientes:db.clientes, duenos:db.duenos});
+echo       return send(res,404,{ok:false,msg:'Ruta no encontrada CENTINELA CORE'});
+echo     }catch(e){ send(res,500,{ok:false,msg:'Error CENTINELA CORE: '+e.message}); }
+echo   });
+echo });
+echo server.listen(3000, ()=>{ console.log('🛡️ CENTINELA CORE PRENDIDO - 100%% NUESTRO'); console.log('Servidor Madre: CENTINELA CORE'); console.log('http://localhost:3000/ping'); console.log('Dueno: Nicolas Bejarano'); });
+echo process.on('uncaughtException', (e)=>{ console.log('CENTINELA CORE aguanto error:', e.message); });
+) > server.js
+echo  ✅ server.js creado solo
+
+echo.
+echo  [3/5] Creando prendido automatico...
+(
+echo @echo off
+echo title CENTINELA CORE - SERVIDOR MADRE NUESTRO
+echo :INICIO
+echo echo CENTINELA CORE PRENDIENDO...
+echo cd /d C:\CENTINELA-SERVIDOR
+echo node server.js
+echo timeout /t 3
+echo goto INICIO
+) > iniciar-centinela-core.bat
+echo  ✅ iniciar-centinela-core.bat creado solo
+
+echo.
+echo  [4/5] Poniendo CENTINELA CORE para que se prenda solo al prender la compu...
+copy /Y iniciar-centinela-core.bat "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\iniciar-centinela-core.bat" >nul
+echo  ✅ Ya se prende solo
+
+echo.
+echo  [5/5] Verificando Node...
+node --version
+if errorlevel 1 (
+echo.
+echo  ❌ FALTA NODE - Descargalo gratis de nodejs.org e instalalo
+echo  Despues hace doble click de nuevo en este instalador
+pause
+exit
+)
+echo  ✅ Node listo
+
+echo.
+echo  ============================================
+echo  ✅ CENTINELA CORE INSTALADO SOLO - LISTO
+echo  ============================================
+echo  Ahora se va a prender CENTINELA CORE...
+echo.
+timeout /t 2
+start iniciar-centinela-core.bat
+echo.
+echo  Abri en tu navegador: http://localhost:3000/ping
+echo  Te tiene que decir: CENTINELA CORE PRENDIDO
+echo.
+pause
