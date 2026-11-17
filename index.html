@@ -211,7 +211,7 @@ let streamCam=null;
 async function prenderCam(){try{streamCam=await navigator.mediaDevices.getUserMedia({video:true});let v=document.getElementById('camReal');v.srcObject=streamCam;v.classList.remove('hide');alert('Cámara REAL prendida ✅')}catch(e){alert('No se pudo. Dá permiso. '+e.message)}}
 function apagarCam(){if(streamCam){streamCam.getTracks().forEach(t=>t.stop());document.getElementById('camReal').classList.add('hide')}}
 function sacarFoto(){let v=document.getElementById('camReal');if(!v.srcObject){alert('Primero prendé cámara');return}let c=document.getElementById('canvasFoto');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let foto=c.toDataURL('image/jpeg',0.7);datos.unshift({lugar:'Cámara real',que:'Foto real - '+new Date().toLocaleString(),nivel:'🔵 AZUL - Experimento real',tipo:'Foto real',hora:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),fecha:new Date().toLocaleDateString(),foto:foto});_save('lab',datos);alert('Foto REAL en Lab ✅');renderAll();tab('c')}
-function ubicacionReal(){if(!navigator.geolocation){alert('Sin GPS');return}document.getElementB"d" class="hide"><div class="c"><b>🛡️ PANEL • Configuración real</b><label>Cámaras totales</label><input id="pTotal" type="number"><label>Cámaras que andan</label><input id="pOk" type="number"><label>Sensores que andan</label><input id="pSen" type="number"><button class="btn azul" onclick="guardarPanel()">💾 GUARDAR PANEL</button><div id="resPanel" style="margin-top:10px"></div></div><div class="c"><a href="tel:911" style="display:block;text-align:center;background:#e41e3f;color:#fff;padding:14px;border-radius:10px;text-decoration:none;font-weight:900">📞 LLAMAR 911</a></div></div>
+function ubicacionReal(){if(!navigator.geolocation){alnode server.jsert('Sin GPS');return}document.getElementB"d" class="hide"><div class="c"><b>🛡️ PANEL • Configuración real</b><label>Cámaras totales</label><input id="pTotal" type="number"><label>Cámaras que andan</label><input id="pOk" type="number"><label>Sensores que andan</label><input id="pSen" type="number"><button class="btn azul" onclick="guardarPanel()">💾 GUARDAR PANEL</button><div id="resPanel" style="margin-top:10px"></div></div><div class="c"><a href="tel:911" style="display:block;text-align:center;background:#e41e3f;color:#fff;padding:14px;border-radius:10px;text-decoration:none;font-weight:900">📞 LLAMAR 911</a></div></div>
 
 <div id="e" class="hide"><div class="c"><b>☰ MENÚ • TODO CENTINELA</b><div id="menuList"></div></div><div class="c"><b>👤 Mis datos</b><p style="margin-top:6px">Nicolás Bejarano • bejaranicolas25<br>Jefe de Centinela 🛡️</p></div><div class="c" id="cajaReporte" style="display:none"><b>📄 REPORTE</b><div id="txtReporte" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
 
@@ -228,4 +228,245 @@ function tab(x){['a','b','c','d','e','mod'].forEach(i=>document.getElementById(i
 let mods=[
 {id:'centinela',e:'🛡️',t:'CENTINELA',d:'Logo de entrada, de apertura'},
 {id:'vault',  <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA • Nico</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:var(--bg,#0f1419);background-size:cover;background-attachment:fixed;color:#111}.top{background:rgba(0,0,0,.75);backdrop-filter:blur(8px);color:#fff;padding:12px;display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:20}.tabs{display:flex;background:#fff;overflow-x:auto;position:sticky;top:54px;z-index:20}.tabs button{flex:1;min-width:85px;padding:11px 5px;border:none;background:#fff;font-weight:800;color:#65676b;font-size:12px}.tabs button.on{color:#00a884;border-bottom:3px solid #00a884}.w{max-width:660px;margin:auto;padding:10px}.c{background:rgba(255,255,255,.96);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 10px #0004}.hide{display:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mod{background:#fff;border-radius:14px;padding:14px;text-align:center;cursor:pointer;box-shadow:0 1px 4px #0003}.box{background:#efeae2;padding:12px;min-height:200px;max-height:320px;overflow-y:auto;border-radius:10px}.b{background:#fff;padding:10px;border-radius:12px;margin:8px 0;max-width:90%}.m{background:#d9fdd3;margin-left:auto}input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0;font-size:15px}textarea{height:60px}.btn{padding:12px;border:none;border-radius:12px;font-weight:900;cursor:pointer;width:100%}.azul{background:#1877f2;color:#fff}.verde{background:#00a884;color:#fff}.gris{background:#eee}.rojo{background:#e41e3f;color:#fff}.row{display:flex;gap:8px}.row .btn{flex:1}.item{border:1px solid #eee;border-radius:10px;padding:10px;margin:8px 0}.men      <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA • Nico</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:var(--bg,#0f1419);background-size:cover;background-attachment:fixed;color:#111}.top{background:rgba(0,0,0,.75);color:#fff;padding:12px;display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:20}.tabs{display:flex;background:#fff;overflow-x:auto;position:sticky;top:54px;z-index:20}.tabs button{flex:1;min-width:85px;padding:11px 5px;border:none;background:#fff;font-weight:800;color:#65676b;font-size:12px}.tabs button.on{color:#00a884;border-bottom:3px solid #00a884}.w{max-width:660px;margin:auto;padding:10px}.c{background:rgba(255,255,255,.96);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 10px #0004}.hide{display:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mod{background:#fff;border-radius:14px;padding:14px;text-align:center;cursor:pointer;box-shadow:0 1px 4px #0003}.box{background:#efeae2;padding:  
-</html>
+</html>cloudflared tunnel --url http://localhost:3000// CÓDIGO 1 - CENTINELA ® SERVIDOR NUESTRO - GRATIS - Nicolás Bejarano
+// Corre en TU compu. No pagás a terceros. Te pagan a vos.
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+let DB_FILE = path.join(__dirname, 'centinela-db.json');
+let db = { duenos: [], clientes: [], lab: [], finanzas: [], codigos: [] };
+try{ if(fs.existsSync(DB_FILE)) db = JSON.parse(fs.readFileSync(DB_FILE,'utf8')); }catch(e){}
+function guardar(){ fs.writeFileSync(DB_FILE, JSON.stringify(db,null,2)); }
+function send(res, code, obj){
+  res.writeHead(code, {'Content-Type':'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Access-Control-Allow-Headers':'Content-Type'});
+  res.end(JSON.stringify(obj));
+}
+const server = http.createServer((req,res)=>{
+  if(req.method==='OPTIONS'){ send(res,200,{}); return; }
+  let body='';
+  req.on('data',c=>body+=c);
+  req.on('end',()=>{
+    try{
+      let url = req.url;
+      let data = body ? JSON.parse(body) : {};
+      if(url==='/ping') return send(res,200,{ok:true,msg:'CENTINELA SERVIDOR NUESTRO PRENDIDO', duenos:db.duenos.length, clientes:db.clientes.length});
+      if(url==='/crear-dueno' && req.method==='POST'){
+        if(db.duenos.length>0) return send(res,400,{ok:false,msg:'Ya hay Dueño. Solo el Dueño entra.'});
+        let d = {id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, vaultPin:data.vaultPin, pregunta:data.pregunta, respuesta:data.respuesta, fecha:new Date().toLocaleString()};
+        db.duenos.push(d); guardar();
+        return send(res,200,{ok:true,msg:'Dueño creado', dueno:d});
+      }
+      if(url==='/login-dueno' && req.method==='POST'){
+        let d = db.duenos.find(x=>x.pin===data.pin);
+        if(!d) return send(res,401,{ok:false,msg:'PIN incorrecto. Solo Dueño.'});
+        return send(res,200,{ok:true, dueno:d});
+      }
+      if(url==='/crear-cliente' && req.method==='POST'){
+        if(db.clientes.find(x=>x.usuario===data.usuario)) return send(res,400,{ok:false,msg:'Ese usuario cliente ya existe'});
+        let c = {id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, dueno:data.dueno||'CENTINELA', fecha:new Date().toLocaleString(), pagado:data.pagado||false};
+        db.clientes.push(c); guardar();
+        return send(res,200,{ok:true,msg:'Cliente creado', cliente:c});
+      }
+      if(url==='/login-cliente' && req.method==='POST'){
+        let c = db.clientes.find(x=>x.pin===data.pin);
+        if(!c) return send(res,401,{ok:false,msg:'PIN cliente incorrecto'});
+        return send(res,200,{ok:true, cliente:c});
+      }
+      if(url==='/guardar-lab' && req.method==='POST'){ db.lab.unshift({...data, fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, lab:db.lab}); }
+      if(url==='/ver-lab') return send(res,200,{ok:true, lab:db.lab});
+      if(url==='/guardar-finanza' && req.method==='POST'){ db.finanzas.unshift({...data, fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, finanzas:db.finanzas}); }
+      if(url==='/ver-finanzas') return send(res,200,{ok:true, finanzas:db.finanzas});
+      if(url==='/guardar-codigo' && req.method==='POST'){ db.codigos.unshift({...data, fecha:new Date().toLocaleString()}); guardar(); return send(res,200,{ok:true, codigos:db.codigos}); }
+      if(url==='/ver-codigos') return send(res,200,{ok:true, codigos:db.codigos});
+      if(url==='/ver-clientes') return send(res,200,{ok:true, clientes:db.clientes, duenos:db.duenos});
+      return send(res,404,{ok:false,msg:'Ruta no encontrada CENTINELA'});
+    }catch(e){ send(res,500,{ok:false,msg:'Error servidor nuestro: '+e.message}); }
+  });<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA • ® • Nuestro Servidor</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#07130c;color:#fff}.lock{position:fixed;inset:0;background:#07130c;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;overflow-y:auto}.top{background:rgba(10,31,18,.92);padding:14px;display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:20}.tabs{display:flex;background:rgba(10,31,18,.92);overflow-x:auto;position:sticky;top:58px;z-index:20}.tabs button{flex:1;min-width:80px;padding:11px 5px;border:none;background:transparent;color:#9bb8a5;font-weight:800;font-size:12px}.tabs button.on{color:#fff;background:#00a884;border-radius:20px}.w{max-width:700px;margin:auto;padding:12px}.c{background:rgba(15,42,26,.96);border:1px solid #1e4a30;border-radius:16px;padding:14px;margin-bottom:12px}.hide{display:none}.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.mod{background:#0a1f12;border:1px solid #22c07a;border-radius:16px;padding:14px 6px;text-align:center;cursor:pointer}.box{background:#e8f5ee;color:#111;padding:12px;min-height:220px;max-height:360px;overflow-y:auto;border-radius:12px}.b{background:#fff;padding:10px;border-radius:12px;margin:8px 0;max-width:92%;color:#111}.m{background:#d9fdd3;margin-left:auto}input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #2a4a35;background:#07130c;color:#fff;margin:5px 0;font-size:15px}textarea{height:90px}.code{font-family:monospace;font-size:13px;height:160px}.btn{padding:13px;border:none;border-radius:14px;font-weight:900;cursor:pointer;width:100%}.verde{background:#00e676;color:#000}.gris{background:#22382a;color:#fff}.azul{background:#1877f2;color:#fff}.rojo{background:#e41e3f;color:#fff}.row{display:flex;gap:8px}.row .btn{flex:1}.item{background:#07130c;border:1px solid #2a4a35;border-radius:12px;padding:10px;margin:8px 0}.menuitem{display:flex;justify-content:space-between;padding:13px 4px;border-bottom:1px solid #2a4a35;cursor:pointer}.head{background:#075e54;color:#fff;padding:12px;display:flex;gap:10px;align-items:center;border-radius:14px 14px 0 0}.badge{display:inline-block;background:#00e676;color:#000;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:900}video{width:100%;border-radius:12px;background:#000}.bar{height:12px;background:#07130c;border-radius:20px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%}.kpi{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.kpi div{background:#07130c;border-radius:12px;padding:10px;text-align:center}</style></head><body>
+<div class="lock" id="lock"><div style="font-size:70px">🛡️</div><h1 style="color:#00e676;font-size:36px">CENTINELA ®</h1><p style="color:#9bb8a5">100% NUESTRO • SERVIDOR PROPIO • GRATIS</p>
+<div style="width:100%;max-width:340px;background:#0f2a1a;border:1px solid #22c07a;border-radius:12px;padding:10px;margin-top:10px;font-size:13px;text-align:left">🌐 <b>Servidor nuestro:</b><br><input id="serverUrl" placeholder="https://tu-servidor-trycloudflare.com o http://localhost:3000" value=""><button class="btn azul" style="margin-top:6px" onclick="conectarServidor()">🔌 CONECTAR A MI SERVIDOR</button><p id="estadoServer" style="color:#ff6b6b;font-size:12px;margin-top:6px">Sin conectar - Poné tu link de Cloudflare</p><p style="color:#9bb8a5;font-size:11px;margin-top:4px">Dueño: Nicolás Bejarano • Nos pagan a nosotros, no pagamos a terceros</p></div>
+<div style="width:100%;max-width:340px;margin-top:12px"><div class="row"><button class="btn verde" id="btnSoyDueno" onclick="elegirRol('dueno')">👑 SOY DUEÑO</button><button class="btn azul" id="btnSoyCliente" onclick="elegirRol('cliente')">🧑 SOY CLIENTE</button></div></div>
+<div id="boxDueno" class="hide" style="width:100%;max-width:340px;background:#0f2a1a;border:2px solid #00e676;border-radius:16px;padding:14px;margin-top:12px;text-align:left"><h3 style="text-align:center;color:#00e676">👑 DUEÑO - CENTINELA</h3><div id="duenoCrear"><label>Nombre Dueño</label><input id="dNombre" value="Nicolás Bejarano"><label>Usuario Dueño</label><input id="dUsuario" value="bejaranicolas25"><label>PIN Dueño</label><input id="dPin" type="password" placeholder="Creá tu PIN Dueño"><label>PIN Bóveda</label><input id="dVault" type="password" placeholder="PIN Bóveda"><label>Pregunta secreta</label><input id="dPreg" placeholder="¿Nombre de mi perro?"><label>Respuesta</label><input id="dResp" placeholder="Respuesta"><button class="btn verde" onclick="crearDueno()">👑 CREAR CUENTA DUEÑO EN MI SERVIDOR</button></div><div style="margin-top:12px;border-top:1px solid #2a4a35;padding-top:10px"><label>¿Ya tenés cuenta? PIN Dueño</label><input id="dPinLogin" type="password" placeholder="Tu PIN Dueño"><button class="btn verde" onclick="loginDueno()">🛡️ ENTRAR COMO DUEÑO</button></div></div>
+<div id="boxCliente" class="hide" style="width:100%;max-width:340px;background:#0f2a1a;border:2px solid #1877f2;border-radius:16px;padding:14px;margin-top:12px;text-align:left"><h3 style="text-align:center;color:#1877f2">🧑 CLIENTE - CENTINELA</h3><p style="color:#9bb8a5;font-size:12px;text-align:center">Creás tu cuenta de Cliente en NUESTRO servidor. El Dueño te ve y te cobra a vos.</p><label>Nombre Cliente</label><input id="cNombre" placeholder="Nombre del cliente"><label>Usuario Cliente</label><input id="cUsuario" placeholder="Usuario cliente"><label>PIN Cliente</label><input id="cPin" type="password" placeholder="Creá tu PIN Cliente"><button class="btn azul" onclick="crearCliente()">🧑 CREAR CUENTA CLIENTE</button><div style="margin-top:12px;border-top:1px solid #2a4a35;padding-top:10px"><label>¿Ya tenés cuenta? PIN Cliente</label><input id="cPinLogin" type="password" placeholder="Tu PIN Cliente"><button class="btn azul" onclick="loginCliente()">🧑 ENTRAR COMO CLIENTE</button></div><div style="background:#07130c;border-radius:10px;padding:10px;margin-top:10px;font-size:12px">💰 <b>Para pagar:</b><br>Alias / CBU del Dueño: <b>Nicolás Bejarano</b><br>Pagás directo al Dueño, no a terceros.</div></div>
+<p style="color:#ff6b6b;font-size:11px;margin-top:12px">© 2026 CENTINELA ® - Nicolás Bejarano - 100% Nuestro - Prohibido copiar</p></div>
+<div class="top"><div style="font-size:28px">🛡️</div><div style="flex:1"><b style="color:#00e676">CENTINELA ® NUESTRO</b><br><small style="color:#9bb8a5"><span id="topDueno">Nicolás Bejarano</span> • <span id="topRol">Dueño</span> • Servidor Propio</small></div><div style="background:#00e676;color:#000;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900" id="letraDueno">N</div></div>
+<div class="tabs"><button id="t1" class="on" onclick="tab('a')">🏠 Inicio</button><button id="t2" onclick="tab('b')">🧠 IA Humana</button><button id="t3" onclick="tab('c')">🧪 Lab</button><button id="t4" onclick="tab('f')">💰 Finanzas</button><button id="t5" onclick="tab('d')">🛡️ Panel</button><button id="t6" onclick="tab('e')">☰ Todo</button></div>
+<div class="w">
+<div id="a"><div class="c" style="text-align:center"><div style="font-size:64px">🛡️</div><h2 style="color:#00e676">CENTINELA ® NUESTRO</h2><p style="color:#9bb8a5">Servidor propio, gratis, nos pagan a nosotros.</p><p style="margin-top:8px"><b id="saludo">Conectado a nuestro servidor</b> <span class="badge" id="badgeRol">👑 DUEÑO</span></p><p id="horaReal" style="color:#9bb8a5;margin-top:6px"></p><p id="ubiReal" style="color:#9bb8a5;font-size:13px"></p><p id="serverInfo" style="color:#00e676;font-size:12px"></p><div class="kpi" style="margin-top:12px"><div><small style="color:#9bb8a5">BALANCE REAL</small><br><b id="kBalance" style="font-size:18px;color:#00e676">$0</b></div><div><small style="color:#9bb8a5">LAB REAL</small><br><b id="kLab" style="font-size:18px">0</b></div><div><small style="color:#9bb8a5">CLIENTES</small><br><b id="kClientes" style="font-size:18px">0</b></div></div><button class="btn verde" style="margin-top:12px" onclick="tab('b')">🧠 HABLAR CON MI IA HUMANA</button><div class="row" style="margin-top:8px"><button class="btn azul" onclick="tab('c')">🧪 Lab</button><button class="btn azul" onclick="tab('f')">💰 Finanzas</button></div></div>
+<div class="c"><b style="color:#00e676">📷 CÁMARA REAL</b><video id="camReal" autoplay playsinline class="hide"></video><div class="row" style="margin-top:8px"><button class="btn verde" onclick="prenderCam()">📷 PRENDER REAL</button><button class="btn gris" onclick="apagarCam()">⏹️ APAGAR</button></div><button class="btn azul" style="margin-top:8px" onclick="sacarFoto()">📸 FOTO REAL → LAB NUESTRO</button><canvas id="canvasFoto" class="hide"></canvas></div>
+<div class="c"><b style="color:#00e676">📍 UBICACIÓN REAL - GPS</b><button class="btn verde" style="margin-top:8px" onclick="ubicacionReal()">📍 MI UBICACIÓN REAL</button><div id="resUbi" style="margin-top:8px"></div></div>
+<div class="c"><b style="color:#00e676">📊 ESTADO REAL • SERVIDOR NUESTRO</b><p style="margin-top:6px" id="resumenHoy"></p></div>
+<div class="grid" id="gridMod"></div><p style="text-align:center;color:#9bb8a5;font-size:11px;margin-top:10px">© CENTINELA ® - Nicolás Bejarano - 100% Nuestro - Prohibido copiar</p></div>
+<div id="b" class="hide"><div class="c" style="padding:0;overflow:hidden"><div class="head"><div style="font-size:26px">🧠</div><div style="flex:1"><b>SENTINEL ACCORDED • IA HUMANA</b><br><small id="st">Humana, bajo tu dominio • Servidor nuestro</small></div></div><div class="box" id="msgs"></div><div style="padding:8px"><div class="row"><button class="btn gris" onclick="quick('Analizá todo con mis datos reales')">🔍 Analizá todo</button><button class="btn gris" onclick="quick('Cómo están mis finanzas reales?')">💰 Finanzas</button></div><div class="row" style="margin-top:6px"><button class="btn gris" onclick="quick('Hay algún peligro real?')">🚨 Peligro?</button><button class="btn gris" onclick="quick('Dame el reporte real completo')">📄 Reporte real</button></div></div><div class="row" style="padding:10px;background:#0f2a1a"><input id="inp" placeholder="Hablale como a un humano..." onkeypress="if(event.key=='Enter')send()"><button class="btn verde" style="flex:0 0 48px" onclick="send()">➤</button></div></div></div>
+<div id="c" class="hide"><div class="c" style="border:2px solid #00e676"><b style="color:#00e676">🧪 LAB • SERVIDOR NUESTRO</b><input id="fLugar" placeholder="📍 Lugar real"><input id="fQue" placeholder="¿Qué pasó de verdad?"><div class="row"><select id="fNiv"><option>🟢 VERDE - Todo bien real</option><option>🟡 AMARILLO - Ojo real</option><option>🔴 ROJO - Peligro real</option><option>🔵 AZUL - Experimento real</option><option>🟣 VIOLETA - Idea real</option></select><input id="fHora" type="time"></div><select id="fTipo"><option>Suceso real</option><option>Experimento real</option><option>Foto real</option><option>Prueba cámara real</option><option>Código propio</option><option>Idea real</option></select><button class="btn verde" onclick="guardar()">🧪 GUARDAR EN NUESTRO SERVIDOR</button></div>
+<div class="c" style="border:2px solid #1877f2"><b style="color:#1877f2">💻 EDITOR CÓDIGO PROPIO • NUESTRO</b><select id="codeLang"><option>HTML / CSS / JS - CENTINELA</option><option>Python</option><option>JavaScript</option><option>JSON</option><option>SQL</option><option>Código propio CENTINELA</option></select><textarea id="codeEditor" class="code" placeholder="Escribí tu código propio acá, jefe."></textarea><div class="row"><button class="btn verde" onclick="guardarCodigo()">💾 GUARDAR MI CÓDIGO EN SERVIDOR</button><button class="btn gris" onclick="probarCodigo()">▶️ PROBAR</button></div><div id="previewCodigo" style="background:#fff;color:#111;border-radius:12px;padding:10px;margin-top:10px;min-height:60px;display:none"></div><div style="margin-top:10px"><b>Códigos en servidor (<span id="totalCodigos">0</span>)</b><div id="listaCodigos"></div></div></div>
+<div class="c"><b>📂 Lab en servidor (<span id="totalLab">0</span>)</b><div id="listaLab"></div></div></div>
+<div id="f" class="hide"><div class="c" style="border:2px solid #00e676"><b style="color:#00e676">💰 FINANZAS • SERVIDOR NUESTRO • NOS PAGAN A NOSOTROS</b><div class="kpi"><div><small style="color:#9bb8a5">INGRESOS</small><br><b id="finIng" style="color:#00e676;font-size:18px">$0</b></div><div><small style="color:#9bb8a5">GASTOS</small><br><b id="finGas" style="color:#ff6b6b;font-size:18px">$0</b></div><div><small style="color:#9bb8a5">BALANCE</small><br><b id="finBal" style="font-size:18px">$0</b></div></div><div style="margin-top:10px"><div class="bar"><i id="barGasto" style="width:0%;background:#e41e3f"></i></div><small id="txtBarra" style="color:#9bb8a5">Sin datos</small></div><div style="background:#07130c;border-radius:10px;padding:10px;margin-top:10px">💰 <b>Cobro nuestro:</b> El cliente paga a <b>Nicolás Bejarano</b> - Alias / CBU tuyo. Nadie más cobra.</div></div>
+<div class="c"><b>➕ MOVIMIENTO REAL</b><select id="movTipo"><option value="ingreso">💚 INGRESO REAL</option><option value="gasto">❤️ GASTO REAL</option></select><input id="movMonto" type="number" placeholder="Monto real $"><input id="movDesc" placeholder="¿De qué?"><select id="movCat"><option>Sueldo</option><option>Ventas</option><option>Comida</option><option>Nafta / Transporte</option><option>Casa</option><option>Centinela / Seguridad</option><option>Otro real</option></select><button class="btn verde" onclick="guardarMov()">💾 GUARDAR EN SERVIDOR</button></div>
+<div class="c"><b>📂 Movimientos en servidor (<span id="totalMov">0</span>)</b><div id="listaMov"></div></div></div>
+<div id="d" class="hide"><div class="c"><b>🛡️ PANEL DUEÑO • CLIENTES EN NUESTRO SERVIDOR</b><p style="color:#9bb8a5;font-size:13px">Acá ves todos los clientes que crearon cuenta en TU servidor.</p><button class="btn verde" onclick="cargarClientes()">🔄 VER MIS CLIENTES</button><div id="listaClientes" style="margin-top:10px"></div><div id="resPanel" style="margin-top:10px"></div></div><div class="c"><a href="tel:911" style="display:block;text-align:center;background:#e41e3f;color:#fff;padding:14px;border-radius:10px;text-decoration:none;font-weight:900">📞 LLAMAR 911 REAL</a></div></div>
+<div id="e" class="hide"><div class="c"><b>☰ MENÚ • TODO NUESTRO</b><div id="menuList"></div><div class="menuitem" onclick="cerrarSesion()"><span>🔒 <b>Cerrar sesión</b></span><span>→</span></div></div><div class="c"><b>👤 Marca propia - 100% Nuestra</b><p style="margin-top:6px;color:#9bb8a5"><span id="duenoTxt2">Nicolás Bejarano</span> • <span id="rolTxt2">Dueño</span><br>Servidor: <span id="serverTxt2">Nuestro</span><br>Marca: <b style="color:#00e676">CENTINELA ® TUYA - 100% NUESTRA</b></p></div><div class="c" id="cajaReporte" style="display:none"><b>📄 REPORTE REAL</b><div id="txtReporte" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
+<div id="mod" class="hide"><div class="c"><button class="btn gris" onclick="tab('a')">← Volver</button><div id="modContent" style="margin-top:12px"></div></div></div>
+</div>
+<script>
+let SERVIDOR = localStorage.getItem('CENTINELA_SERVER') || '';
+let rolActual = 'dueno';
+let usuarioActual = null;
+let datos=[], movs=[], codigos=[], clientes=[];
+document.getElementById('serverUrl').value = SERVIDOR;
+async function api(path, body){
+  if(!SERVIDOR){ alert('Primero conectá a tu servidor - Poné tu link de Cloudflare'); throw new Error('Sin servidor'); }
+  let r = await fetch(SERVIDOR + path, {method: body?'POST':'GET', headers:{'Content-Type':'application/json'}, body: body?JSON.stringify(body):undefined});
+  return await r.json();
+}
+async function conectarServidor(){
+  let u = document.getElementById('serverUrl').value.trim().replace(/\/$/,'');
+  if(!u){ alert('Pegá tu link de Cloudflare, jefe'); return; }
+  SERVIDOR = u; localStorage.setItem('CENTINELA_SERVER', u);
+  try{
+    let d = await api('/ping');
+    document.getElementById('estadoServer').style.color='#00e676';
+    document.getElementById('estadoServer').innerText='✅ CONECTADO A NUESTRO SERVIDOR: '+d.msg+' - Dueños:'+d.duenos+' Clientes:'+d.clientes;
+    document.getElementById('serverInfo').innerText='🌐 Conectado a nuestro servidor: '+SERVIDOR;
+    document.getElementById('serverTxt2').innerText=SERVIDOR;
+    alert('✅ Conectado a NUESTRO servidor');
+  }catch(e){ document.getElementById('estadoServer').innerText='❌ No conecta. ¿Prendiste node server.js y cloudflared? '+e.message; }
+}
+function elegirRol(r){ rolActual=r; document.getElementById('boxDueno').classList.toggle('hide', r!=='dueno'); document.getElementById('boxCliente').classList.toggle('hide', r!=='cliente'); }
+async function crearDueno(){
+  try{
+    let d = await api('/crear-dueno', {nombre:document.getElementById('dNombre').value, usuario:document.getElementById('dUsuario').value, pin:document.getElementById('dPin').value, vaultPin:document.getElementById('dVault').value, pregunta:document.getElementById('dPreg').value, respuesta:document.getElementById('dResp').value});
+    if(!d.ok){ alert(d.msg); return; }
+    alert('👑 DUEÑO CREADO EN NUESTRO SERVIDOR ✅ Ahora entrá con tu PIN');
+  }catch(e){ alert('Error: '+e.message); }
+}
+async function loginDueno(){
+  try{
+    let d = await api('/login-dueno', {pin:document.getElementById('dPinLogin').value});
+    if(!d.ok){ alert(d.msg); return; }
+    usuarioActual=d.dueno; rolActual='dueno'; entrarApp();
+  }catch(e){ alert('Error: '+e.message); }
+}
+async function crearCliente(){
+  try{
+    let d = await api('/crear-cliente', {nombre:document.getElementById('cNombre').value, usuario:document.getElementById('cUsuario').value, pin:document.getElementById('cPin').value, dueno:'Nicolás Bejarano'});
+    if(!d.ok){ alert(d.msg); return; }
+    alert('🧑 CLIENTE CREADO EN NUESTRO SERVIDOR ✅ Ahora entrá con tu PIN');
+  }catch(e){ alert('Error: '+e.message); }
+}
+async function loginCliente(){
+  try{
+    let d = await api('/login-cliente', {pin:document.getElementById('cPinLogin').value});
+    if(!d.ok){ alert(d.msg); return; }
+    usuarioActual=d.cliente; rolActual='cliente'; entrarApp();
+  }catch(e){ alert('Error: '+e.message); }
+}
+function entrarApp(){
+  document.getElementById('lock').style.display='none';
+  document.getElementById('topDueno').innerText=usuarioActual.nombre;
+  document.getElementById('topRol').innerText=rolActual==='dueno'?'Dueño 👑':'Cliente 🧑';
+  document.getElementById('badgeRol').innerText=rolActual==='dueno'?'👑 DUEÑO':'🧑 CLIENTE';
+  document.getElementById('letraDueno').innerText=usuarioActual.nombre.charAt(0).toUpperCase();
+  document.getElementById('duenoTxt2').innerText=usuarioActual.nombre;
+  document.getElementById('rolTxt2').innerText=rolActual;
+  document.getElementById('saludo').innerText='Bienvenido '+usuarioActual.nombre+' • '+rolActual;
+  cargarTodo();
+}
+function cerrarSesion(){ document.getElementById('lock').style.display='flex'; }
+async function cargarTodo(){
+  try{
+    let l = await api('/ver-lab'); datos=l.lab||[];
+    let f = await api('/ver-finanzas'); movs=f.finanzas||[];
+    let c = await api('/ver-codigos'); codigos=c.codigos||[];
+    let cl = await api('/ver-clientes'); clientes=cl.clientes||[];
+  }catch(e){}
+  renderAll();
+}
+async function cargarClientes(){
+  try{ let cl = await api('/ver-clientes'); clientes=cl.clientes||[]; document.getElementById('listaClientes').innerHTML = clientes.length ? clientes.map(x=>'<div class="item">🧑 <b>'+x.nombre+'</b> • @'+x.usuario+'<br>PIN: '+x.pin+' • Fecha: '+x.fecha+'<br>Dueño: '+x.dueno+'</div>').join('') : 'Todavía no hay clientes en nuestro servidor.'; renderAll(); }catch(e){ alert('Error: '+e.message); }
+}
+let streamCam=null;
+async function prenderCam(){ try{ streamCam=await navigator.mediaDevices.getUserMedia({video:true}); let v=document.getElementById('camReal'); v.srcObject=streamCam; v.classList.remove('hide'); }catch(e){ alert('Dá permiso de cámar// CÓDIGO 4 - CENTINELA ® SERVIDOR BLINDADO - 100% NUESTRO
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+let DB_FILE = path.join(__dirname, 'centinela-db.json');
+let BACKUP_DIR = path.join(__dirname, 'backups');
+if(!fs.existsSync(BACKUP_DIR)) fs.mkdirSync(BACKUP_DIR);
+let db = { duenos: [], clientes: [], lab: [], finanzas: [], codigos: [] };
+try{ if(fs.existsSync(DB_FILE)) db = JSON.parse(fs.readFileSync(DB_FILE,'utf8')); }catch(e){ console.log('DB nueva, blindada'); }
+function guardar(){
+  fs.writeFileSync(DB_FILE, JSON.stringify(db,null,2));
+  // Backup automático cada vez que se guarda
+  let fecha = new Date().toISOString().replace(/[:.]/g,'-');
+  fs.writeFileSync(path.join(BACKUP_DIR, 'backup-'+fecha+'.json'), JSON.stringify(db,null,2));
+  // Borrar backups viejos, dejar solo últimos 20
+  let files = fs.readdirSync(BACKUP_DIR).sort();
+  while(files.length>20){ fs.unlinkSync(path.join(BACKUP_DIR, files.shift())); }
+}
+// Anti-ataque: máximo 100 pedidos por minuto por IP
+let intentos = {};
+function antiAtaque(ip){
+  let ahora = Date.now();
+  if(!intentos[ip]) intentos[ip]=[];
+  intentos[ip]=intentos[ip].filter(t=>ahora-t<60000);
+  intentos[ip].push(ahora);
+  return intentos[ip].length>100;
+}
+function send(res, code, obj){
+  res.writeHead(code, {'Content-Type':'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Access-Control-Allow-Headers':'Content-Type'});
+  res.end(JSON.stringify(obj));
+}
+const server = http.createServer((req,res)=>{
+  let ip = req.socket.remoteAddress||'local';
+  if(antiAtaque(ip)) return send(res,429,{ok:false,msg:'🛡️ CENTINELA BLINDADO - Demasiados intentos. Esperá 1 min.'});
+  if(req.method==='OPTIONS'){ send(res,200,{}); return; }
+  let body='';
+  req.on('data',c=>{ body+=c; if(body.length>1000000){ req.destroy(); } });
+  req.on('end',()=>{
+    try{
+      let url = req.url.split('?')[0];
+      let data = body ? JSON.parse(body) : {};
+      if(url==='/ping') return send(res,200,{ok:true,msg:'CENTINELA BLINDADO PRENDIDO - 100% NUESTRO', duenos:db.duenos.length, clientes:db.clientes.length, lab:db.lab.length, finanzas:db.finanzas.length, hora:new Date().toLocaleString()});
+      if(url==='/crear-dueno' && req.method==='POST'){
+        if(db.duenos.length>0) return send(res,400,{ok:false,msg:'Ya hay Dueño. Solo el Dueño entra.'});
+        if(!data.pin || data.pin.length<4) return send(res,400,{ok:false,msg:'PIN mínimo 4 dígitos'});
+        let d = {id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, vaultPin:data.vaultPin, pregunta:data.pregunta, respuesta:data.respuesta, fecha:new Date().toLocaleString()};
+        db.duenos.push(d); guardar();
+        return send(res,200,{ok:true,msg:'Dueño creado BLINDADO', dueno:d});
+      }
+      if(url==='/login-dueno' && req.method==='POST'){
+        let d = db.duenos.find(x=>x.pin===data.pin);
+        if(!d) return send(res,401,{ok:false,msg:'PIN incorrecto. Solo Dueño.'});
+        return send(res,200,{ok:true, dueno:d});
+      }
+      if(url==='/crear-cliente' && req.method==='POST'){
+        if(!data.usuario || !data.pin) return send(res,400,{ok:false,msg:'Falta usuario o PIN cliente'});
+        if(db.clientes.find(x=>x.usuario===data.usuario)) return send(res,400,{ok:false,msg:'Ese usuario cliente ya existe'});
+        let c = {id:Date.now(), nombre:data.nombre, usuario:data.usuario, pin:data.pin, dueno:'Nicolás Bejarano', fecha:new Date().toLocaleString(), pagado:false};
+        db.clientes.push(c); guardar();
+        return send(res,200,{ok:true
+});
+server.listen(3000, ()=>{
+  console.log('🛡️ CENTINELA SERVIDOR NUESTRO PRENDIDO');
+  console.log('En tu compu: http://localhost:3000/ping');
+  console.log('Dueño: Nicolás Bejarano - No pagamos a terceros');
+  console.log('Base de datos nuestra: centinela-db.json');@echo off
+title CENTINELA - SERVIDOR NUESTRO BLINDADO
+:INICIO
+echo 🛡️ CENTINELA PRENDIENDO...
+cd /d C:\CENTINELA-SERVIDOR
+node server.js
+echo ⚠️ Se apagó, reintentando en 3 segundos...
+timeout /t 3
+goto INICIOcloudflared tunnel login
+cloudflared tunnel create centinela-nuestrotunnel: TU-ID-QUE-TE-DIO
+credentials-file: C:\Users\TuUsuario\.cloudflared\TU-ID.json
+ingress:
+    - hostname: centinela.tu-dominio.com
+    service: http://localhost:3000
+    - service: http_status:404cloudflared tunnel run centinela-nuestro@echo off
+xcopy C:\CENTINELA-SERVIDOR\centinela-db.json C:\CENTINELA-SERVIDOR\backups\ /Y
+xcopy C:\CENTINELA-SERVIDOR\centinela-db.json D:\COPIA-CENTINELA\ /Y
+echo ✅ BACKUP HECHO - CENTINELA BLINDADO
+pause
+});
