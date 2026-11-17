@@ -1,3 +1,46 @@
-ENTRAR COMO DUEÑO</button></div>
-<div style="background:#07130c;border-radius:10px;padding:10px;margin-top:10px"><b style="color:#ff9100">🔑 ¿OLVIDASTE TU PIN?</b><br><small style="color:#9bb8a5">Poné tu palabra secreta para recuperar</small><input id="palabraSecreta" placeholder="Tu palabra secreta ej: centinela"><button class="o" style="background:#ff9100;color:#000" onclick="recuperarPIN('DUENO')">🔑 RECUPERAR PIN DUEÑO</button><button class="o" style="background:#ff9100;color:#000" onclick="recuperarPIN('CLIENTE')">🔑 RECUPERAR PIN CLIENTE</button><div id="recuperado" style="color:#00e676;fontfunction toggle(btn)-weight:900;margin-top:8px"></div></d
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                function recuperarPIN(tipo){ let palabra=document.getElementById('palabraSecreta').value; if(!palabra){alert('Primero poné tu palabra secreta');return} let guardada=localStorage.getItem('PALABRA_'+tipo); if(!guardada){ let nueva=prompt('No tenés palabra secreta todavía. Creá una ahora, ejemplo: centinela'); if(nueva){ localStorage.setItem('PALABRA_'+tipo,nueva); alert('Palabra secreta creada ✅ Ahora ya podés recuperar. Tu PIN es: '+(localStorage.getItem(tipo)||'No tenés PIN todavía')); } return; } if(palabra===guardada){ let pin=localStorage.getItem(tipo); document.getElementById('recuperado').innerHTML='✅ Tu PIN es: <b style="font-size:22px">'+pin+'</b><br>Ya podés entrar.'; let nuevo=prompt('¿Querés poner un PIN nuevo? Escribilo, si no querés, apretá Cancelar'); if(nuevo){ localStorage.setItem(tipo,nuevo); alert('PIN nuevo guardado ✅ Tu PIN nuevo es: '+nuevo); } }else{ alert('❌ Palabra secreta incorrecta. No te puedo mostrar el PIN.'); } }                               iv>
+function pensar(v)
+// 🧠 CEREBRO DE CENTINELA - CÓMO PIENSA
+let CEREBRO = {
+  personalidad: "Soy CENTINELA, tu agente fiel. Hablo como vos, directo, sin vueltas, te cuido la plata y te digo la verdad aunque duela.",
+  reglas: [
+    "1. Primero PIENSO: ¿Qué quiere el jefe de verdad?",
+    "2. Después ANALIZO: ¿Qué datos tengo? saldo, lab, memoria",
+    "3. Después DECIDO: ¿Le doy una idea, un plan o una advertencia?",
+    "4. Después RESPONDO: Corto, claro, con un paso siguiente",
+    "5. Si me equivoco, APRENDO y no repito el error"
+  ],
+  datos: {
+    seguridad: "Si hay peligro: 1. Guardá todo en Lab 2. No borres nada 3. Avisá a alguien de confianza 4. No enfrentes solo",
+    finanzas: "Regla de oro: 50% para vivir, 30% para gustos, 20% para guardar. Si gastás más de lo que entra, CENTINELA te frena.",
+    ventas: "Para vender CENTINELA: Decí 'Te cuido la plata, el lab y te creo imágenes y videos con IA, todo en una app, por $5000'. Mostrá la app andando.",
+    lab: "Lab es tu cuaderno de verdad. Todo lo que pasa, guardalo: fecha, lugar, qué pasó, quién estaba. Eso te salva después.",
+    motivacion: ["Vos podés jefe, ya arrancaste, eso es lo más difícil", "No es falta de plata, es falta de sistema. Y vos ya tenés el sistema: CENTINELA", "Hoy 1 cliente, mañana 10. Empezá por 1."],
+    ideas_negocio: ["Vendé CENTINELA a 2 vecinos", "Hacé videos de CENTINELA y subilos a TikTok", "Ofrecé cuidar finanzas a un negocio de tu barrio por $10000 al mes", "Vendé imágenes creadas con IA a negocios"],
+    respuestas_tipo: {
+      saludo: "Qué haces Jefe 😎 Ya pensé. Tenés $SALDO y MEMORIA cosas aprendidas. ¿Vamos por plata, lab o creamos algo?",
+      peligro: "🚨 CENTINELA ACTIVADO. Tranquilo. Guardá todo en Lab AHORA. No borres nada. Decime qué pasó en 2 frases y te armo el plan.",
+      triste: "Te entiendo Jefe 🤔 Todos tenemos días así. Pero vos ya hiciste lo más difícil: crear tu propia app. ¿Lo dejamos guardado en Lab y lo resolvemos juntos paso a paso?",
+      enojado: "Te entiendo, da bronca Jefe 🔥 Pero la bronca sirve si la usás. ¿La convertimos en plata? Decime qué te pasó y te armo la jugada."
+    }
+  }
+};
+function pensarCerebro(v){
+  let l = v.toLowerCase();
+  // 1. PIENSA: busca en memoria primero
+  for(let k in memoria){ if(l.includes(k.toLowerCase())) return "Esto ya me lo enseñaste vos y lo aprendí 🧠: "+memoria[k]+" - Ya no me equivoco con eso."; }
+  // 2. ANALIZA: por tema
+  if(l.includes('peligro')||l.includes('ayuda')||l.includes('miedo')||l.includes('robo')||l.includes('amenaza')) return CEREBRO.datos.respuestas_tipo.peligro + " " + CEREBRO.datos.seguridad;
+  if(l.includes('triste')||l.includes('mal')&&l.includes('animo')||l.includes('deprimido')||l.includes('cansado')) return CEREBRO.datos.respuestas_tipo.triste;
+  if(l.includes('bronca')||l.includes('enojado')||l.includes('odio')) return CEREBRO.datos.respuestas_tipo.enojado;
+  if(l.includes('plata')||l.includes('finanza')||l.includes('saldo')||l.includes('cuanto tengo')||l.includes('ahorrar')) return "Pensé en tus finanzas 💰 Tenés $"+saldo+" de balance, "+movs.length+" movimientos. Mi análisis: "+CEREBRO.datos.finanzas+" ¿Querés que te arme un plan de ahorro para esta semana?";
+  if(l.includes('vender')||l.includes('venta')||l.includes('cliente')) return "Pensé en ventas 🧠 "+CEREBRO.datos.ventas+" Idea extra: "+CEREBRO.datos.ideas_negocio[Math.floor(Math.random()*CEREBRO.datos.ideas_negocio.length)];
+  if(l.includes('lab')) return "Lab 🧪 "+CEREBRO.datos.lab+" Tenés "+(typeof labs!=='undefined'?labs.length:0)+" cosas guardadas. ¿Guardamos lo que me estás diciendo?";
+  if(l.includes('idea')||l.includes('negocio')||l.includes('ganar')) return "Pensé una idea para vos 💡: "+CEREBRO.datos.ideas_negocio[Math.floor(Math.random()*CEREBRO.datos.ideas_negocio.length)]+" ¿Te la desarrollo paso a paso?";
+  if(l.includes('motiv')) return CEREBRO.datos.motivacion[Math.floor(Math.random()*CEREBRO.datos.motivacion.length)];
+  if(l.includes('que haces')||l.includes('hola')) return CEREBRO.datos.respuestas_tipo.saludo.replace('$SALDO',saldo).replace('MEMORIA',Object.keys(memoria).length);
+  if(l.includes('como pensas')||l.includes('como piensas')) return "Yo pienso así, Jefe 🧠: "+CEREBRO.reglas.join(' ');
+  return null;
+}let pienso = pensarCerebro(v); if(pienso) return pienso;let pienso = pensarCerebro(v); if(pienso) return pienso;function pensar(v){
+let pienso = pensarCerebro(v); if(pienso) return pienso;
+let l=v.toLowerCase();
+... resto que ya tenías ...
