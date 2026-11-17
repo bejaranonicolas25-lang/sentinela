@@ -3,6 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA IA • Nicolás Bejarano</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f0f2f5}
+.top{background:#075e54;color:white;padding:14px;display:flex;justify-content:space-between;align-items:center}
+.hero{background:linear-gradient(135deg,#075e54,#00a884);color:white;text-align:center;padding:30px 15px}
+.hero .shield{font-size:55px;background:white;width:85px;height:85px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.tabs{display:flex;justify-content:center;gap:8px;padding:12px;background:white;flex-wrap:wrap}
+.tabs button{border:none;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer;background:#f0f2f5}
+.tabs button.active{background:#075e54;color:white}
+.wrap{max-width:900px;margin:14px auto;padding:0 12px}
+.card{background:white;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.hidden{display:none}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.mini{text-align:center;padding:16px;border-radius:12px;background:#f8f9fa}
+textarea{width:100%;height:150px;background:#0b1120;color:#7CFC00;border:none;border-radius:10px;padding:12px}
+#salida{background:#020617;color:white;padding:12px;border-radius:10px;min-height:90px;margin-top:10px;white-space:pre-wrap}
+.btn{border:none;padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="top"><b>🛡️ CENTINELA IA</b><span>Nicolás Bejarano</span></div>
+<div class="hero"><div class="shield">🛡️</div><h1>CENTINELA IA</h1><p>Tu seguridad, tus IAs y tu código. Todo en un solo lugar.</p><b>● SISTEMA OPERATIVO • 100%</b></div>
+<div class="tabs">
+<button class="active" onclick="show('inicio',this)">🏠 Inicio</button>
+<button onclick="show('wpp',this)">💬 WhatsApp IAs</button>
+<button onclick="show('code',this)">💻 CENTINELA CODE</button>
+</div>
+<div class="wrap">
+<div id="inicio">
+<div class="grid"><div class="mini"><h2>🛡️</h2><b>12 Cámaras</b><p>Activas</p></div><div class="mini"><h2>📡</h2><b>Sensores OK</b><p>Perímetro</p></div><div class="mini"><h2>✅</h2><b>0 Alertas</b><p>Todo tranquilo</p></div></div>
+<div class="card"><h3>👋 Hola Nicolás</h3><p style="margin-top:6px">Tu Centinela está vigilando. Todo ordenadito.</p></div>
+</div>
+<div id="wpp" class="hidden"><div class="card"><b>💬 CENTINELA IA</b><div id="chat" style="background:#efeae2;padding:12px;border-radius:10px;margin:10px 0"><div>Hola jefe, ¿en qué te ayudo?</div></div><input id="inp" placeholder="Escribí acá..." style="width:80%;padding:10px;border-radius:20px;border:1px solid #ddd"><button class="btn" style="background:#00a884;color:white" onclick="enviar()">➤</button></div></div>
+<div id="code" class="hidden"><div class="card"><h3>💻 CENTINELA CODE</h3><textarea id="codigo">CENTINELA INICIAR
+DECIR "Hola jefe, soy Centinela IA"
+DECIR "Estoy vigilando todo"
+MOSTRAR REPORTE
+CENTINELA DORMIR</textarea><br><br><button class="btn" style="background:#25d366" onclick="ejecutar()">▶ EJECUTAR</button><div id="salida">Apretá EJECUTAR...</div></div></div>
+</div>
+<script>
+function show(id,btn){['inicio','wpp','code'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function enviar(){let i=document.getElementById('inp');if(!i.value)return;document.getElementById('chat').innerHTML+='<div style="text-align:right;background:#d9fdd3;padding:8px;border-radius:10px;margin:6px 0">'+i.value+'</div>';let v=i.value.toLowerCase();i.value='';let r='Entendido jefe ✅ Ya lo registré.';if(v.includes('alerta'))r='⚠️ Revisé: NO hay alertas. Todo en verde.';if(v.includes('reporte'))r='📄 Reporte: 12 cámaras OK, 0 críticas, 100%.';setTimeout(()=>{document.getElementById('chat').innerHTML+='<div style="background:white;padding:8px;border-radius:10px;margin:6px 0">'+r+'</div>'},500)}
+function ejecutar(){let c=document.getElementById('codigo').value;let o=document.getElementById('salida');o.innerText='🛡️ CENTINELA INICIADO...\n';if(c.includes('Hola'))o.innerText+='🤖 CENTINELA: Hola jefe, soy Centinela IA\n🤖 CENTINELA: Estoy vigilando todo\n';o.innerText+='📊 REPORTE: 12 cámaras, 0 críticas, 100% operativo\n🌙 Centinela en descanso. Siempre vigilando...\n\n✅ FIN DEL PROGRAMA';}
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CENTINELA - LABORATORIO 01</title>
 <style>
 body{font-family:Arial,sans-serif;background:#0f172a;color:white;padding:20px;text-align:center}
