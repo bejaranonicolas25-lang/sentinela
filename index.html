@@ -1,17 +1,24 @@
-/* style.css - Estilo lindo como tu foto */
-.launcher { position: relative; height: 100vh; background: #000; overflow: hidden; }
-.fondo-leon {
-  position: absolute; inset: 0;
-  background: url('fondo-leon.jpg') center/cover no-repeat;
+// app.js - Inteligente e irremplazable
+const APPS = {
+  central: { nombre: "Sentinela Central", accion: () => abrirCentral() },
+  alerta: { nombre: "Alerta", accion: () => activarAlertaRoja() },
+  camaras: { nombre: "Cámaras", accion: () => abrirCamaras() },
+  asistente: { nombre: "Asistente IA", accion: () => hablarConIA() }
+};
+
+document.querySelectorAll('.app').forEach(el => {
+  el.addEventListener('click', () => {
+    const id = el.dataset.app;
+    APPS[id].accion();
+    // Cada icono guarda su última portada y estado
+    localStorage.setItem('sentinela_ultima_app', id);
+  });
+});
+
+// Clima en vivo - José León Suárez
+async function actualizarClima() {
+  // Conecta a API de clima, si no hay internet usa 25° guardado
+  const clima = await fetchClimaLocal() || { temp: "25°", estado: "Probable lluvia mañana" };
+  document.getElementById('temp').textContent = clima.temp;
 }
-.app { text-align: center; color: #fff; }
-.portada {
-  width: 72px; height: 72px; border-radius: 50%;
-  border: 3px solid #a855f7; /* violeta SENTINELA */
-  background-size: cover; background-position: center;
-  box-shadow: 0 0 20px rgba(168,85,247,.7);
-}
-.portada-central { background-image: url('iconos/central.jpg'); }
-.portada-mensajes { background-image: url('iconos/mensajes.jpg'); }
-.portada-camaras { background-image: url('iconos/camaras.jpg'); }
-.portada-alerta { background-image: url('iconos/alerta.jpg'); }
+actualizarClima();
