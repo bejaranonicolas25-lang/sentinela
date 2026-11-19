@@ -1,35 +1,17 @@
-<!-- index.html - Pantalla principal SENTINELA -->
-<div id="sentinela" class="launcher">
-  <div class="fondo-leon"></div>
-
-  <!-- Widget inteligente -->
-  <div class="widget-clima" id="clima">
-    <span id="temp">25°</span>
-    <span id="ciudad">José León Suárez</span>
-    <span id="estado">Probable lluvia mañana</span>
-  </div>
-
-  <!-- Apps con su propia portada -->
-  <div class="grid-apps">
-    <div class="app" data-app="central">
-      <div class="portada portada-central"></div>
-      <span>Sentinela Central</span>
-    </div>
-    <div class="app" data-app="mensajes">
-      <div class="portada portada-mensajes"></div>
-      <span>Mensajes</span>
-    </div>
-    <div class="app" data-app="camaras">
-      <div class="portada portada-camaras"></div>
-      <span>Cámaras</span>
-    </div>
-    <div class="app" data-app="alerta">
-      <div class="portada portada-alerta"></div>
-      <span>Alerta</span>
-    </div>
-  </div>
-
-  <div class="dock">
-    <!-- WhatsApp, Banco, Mapa, Asistente IA -->
-  </div>
-</div>
+/* style.css - Estilo lindo como tu foto */
+.launcher { position: relative; height: 100vh; background: #000; overflow: hidden; }
+.fondo-leon {
+  position: absolute; inset: 0;
+  background: url('fondo-leon.jpg') center/cover no-repeat;
+}
+.app { text-align: center; color: #fff; }
+.portada {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 3px solid #a855f7; /* violeta SENTINELA */
+  background-size: cover; background-position: center;
+  box-shadow: 0 0 20px rgba(168,85,247,.7);
+}
+.portada-central { background-image: url('iconos/central.jpg'); }
+.portada-mensajes { background-image: url('iconos/mensajes.jpg'); }
+.portada-camaras { background-image: url('iconos/camaras.jpg'); }
+.portada-alerta { background-image: url('iconos/alerta.jpg'); }
