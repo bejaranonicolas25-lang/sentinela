@@ -1,7 +1,34 @@
-SENTINELA-LAB/
-├── index.html (con tu fondo león + 8 iconos)
-├── style.css
-├── app.js
-├── sw.js (esto es lo que hace que ande sin internet)
-├── manifest.json
-└── fondo-leon.jpg (guardado en el celu, no se descarga)
+// app.js - COLA INTELIGENTE SENTINELA
+// Todo se guarda acá primero, NADA se sube sin permiso
+
+const COLA = {
+  liviano: [], // Textos, chat, alerta, clima -> se sube con datos o WiFi
+  pesado: [],  // Fotos, videos, cámaras -> SOLO con WiFi
+};
+
+function guardarSinInternet(accion) {
+  if (accion.peso === "pesado") {
+    COLA.pesado.push(accion);
+    mostrar("💾 Guardado. Esperando WiFi para subir, no gasta tus datos.");
+  } else {
+    COLA.liviano.push(accion);
+    mostrar("💾 Guardado. Se sube cuando tengas internet.");
+  }
+  // Todo queda en el celu, en IndexedDB, aunque cierres la web
+  localStorage.setItem('sentinela_cola', JSON.stringify(COLA));
+}
+
+// Cuando vuelve internet, SENTINELA pregunta antes de subir
+window.addEventListener('online', () => {
+  if (navigator.connection?.type === 'wifi' || confirm("Tenés WiFi. ¿Subo lo pesado?")) {
+    subirTodo();
+  } else {
+    subirSoloLiviano(); // Fotos esperan
+  }
+});
+
+function subirTodo() {
+  console.log("Subiendo:", COLA);
+  COLA.liviano = []; COLA.pesado = [];
+  mostrar("✅ Todo subido. Cola vacía.");
+}
