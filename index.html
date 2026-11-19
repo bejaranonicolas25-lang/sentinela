@@ -1,16 +1,35 @@
-SENTINELA/
-├── Carpeta 1 - Codigo Alfabetico/ (ya la tenemos)
-├── Carpeta 2 - Launcher/
-│   ├── fondo-leon.jpg
-│   ├── index.html
-│   ├── style.css
-│   ├── app.js
-│   └── iconos/
-│       ├── central.json
-│       ├── mensajes.json
-│       ├── camaras.json
-│       ├── alerta.json
-│       ├── whatsapp.json
-│       ├── banco.json
-│       ├── mapa.json
-│       └── asistente.json
+<!-- index.html - Pantalla principal SENTINELA -->
+<div id="sentinela" class="launcher">
+  <div class="fondo-leon"></div>
+
+  <!-- Widget inteligente -->
+  <div class="widget-clima" id="clima">
+    <span id="temp">25°</span>
+    <span id="ciudad">José León Suárez</span>
+    <span id="estado">Probable lluvia mañana</span>
+  </div>
+
+  <!-- Apps con su propia portada -->
+  <div class="grid-apps">
+    <div class="app" data-app="central">
+      <div class="portada portada-central"></div>
+      <span>Sentinela Central</span>
+    </div>
+    <div class="app" data-app="mensajes">
+      <div class="portada portada-mensajes"></div>
+      <span>Mensajes</span>
+    </div>
+    <div class="app" data-app="camaras">
+      <div class="portada portada-camaras"></div>
+      <span>Cámaras</span>
+    </div>
+    <div class="app" data-app="alerta">
+      <div class="portada portada-alerta"></div>
+      <span>Alerta</span>
+    </div>
+  </div>
+
+  <div class="dock">
+    <!-- WhatsApp, Banco, Mapa, Asistente IA -->
+  </div>
+</div>
