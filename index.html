@@ -1,34 +1,21 @@
-// app.js - COLA INTELIGENTE SENTINELA
-// Todo se guarda acá primero, NADA se sube sin permiso
+// sw.js - Hace que SENTINELA sea una APP offline
+const CACHE = "sentinela-v2";
+const ARCHIVOS = [
+  "./",
+  "./index.html",
+  "./style.css",
+  "./app.js",
+  "./fondo-leon.jpg",
+  "./manifest.json"
+];
 
-const COLA = {
-  liviano: [], // Textos, chat, alerta, clima -> se sube con datos o WiFi
-  pesado: [],  // Fotos, videos, cámaras -> SOLO con WiFi
-};
-
-function guardarSinInternet(accion) {
-  if (accion.peso === "pesado") {
-    COLA.pesado.push(accion);
-    mostrar("💾 Guardado. Esperando WiFi para subir, no gasta tus datos.");
-  } else {
-    COLA.liviano.push(accion);
-    mostrar("💾 Guardado. Se sube cuando tengas internet.");
-  }
-  // Todo queda en el celu, en IndexedDB, aunque cierres la web
-  localStorage.setItem('sentinela_cola', JSON.stringify(COLA));
-}
-
-// Cuando vuelve internet, SENTINELA pregunta antes de subir
-window.addEventListener('online', () => {
-  if (navigator.connection?.type === 'wifi' || confirm("Tenés WiFi. ¿Subo lo pesado?")) {
-    subirTodo();
-  } else {
-    subirSoloLiviano(); // Fotos esperan
-  }
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ARCHIVOS)));
 });
 
-function subirTodo() {
-  console.log("Subiendo:", COLA);
-  COLA.liviano = []; COLA.pesado = [];
-  mostrar("✅ Todo subido. Cola vacía.");
-}
+self.addEventListener('fetch', e => {
+  // Si no hay internet, usa lo guardado. Si hay, usa internet.
+  e.respondWith(
+    caches.match(e.request).then(res => res || fetch(e.request))
+  );
+});
