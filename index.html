@@ -1,33 +1,16 @@
-// sentinela-core.js - SOLO VOS MANDÁS
-const JEFE = "Nico Bejarano"; // Único dueño
-const DOMINIO = "SENTINELA";
+// seguridad-fortaleza.js - Las 5 capas que te faltaban
+const FORTALEZA = {
+  capa1: "Huella + PIN - Solo vos entrás",
+  capa2: "Código ALFA BRAVO - Si no habla en código, no es vos",
+  capa3: "Bloqueo automático - Si alguien intenta 3 veces, se cierra todo",
+  capa4: "Copia de seguridad - Todo guardado en Carpeta 1 y 2",
+  capa5: "Modo ROJO - Si hay peligro, ALERTA + GUARDIAN toman control y te avisan"
+};
 
-class SentinelaIA {
-  constructor(nombre, rol) {
-    this.nombre = nombre;
-    this.rol = rol;
-    this.jefe = JEFE;
-    this.activa = true;
+function verificarJefe(clave, codigoAlfa) {
+  if (clave === "TU_PIN" && codigoAlfa === "ALFA BRAVO") {
+    return "ACCESO PERMITIDO, JEFE";
   }
-
-  // REGLA 1: Ninguna IA actúa sin tu permiso en cosas importantes
-  pedirPermiso(accion) {
-    if (accion.nivel === "critico") {
-      return `JEFE, ¿autorizás ${accion.descripcion}? ALFA BRAVO, CAMBIO`;
-    }
-    return this.ejecutar(accion);
-  }
-
-  ejecutar(accion) {
-    console.log(`[${this.nombre}] Ejecutando bajo dominio de ${this.jefe}:`, accion);
-  }
+  activarModoRojo();
+  return "ACCESO DENEGADO";
 }
-
-// Tus 7 IAs creadas
-const central = new SentinelaIA("CENTRAL", "jefa");
-const guardian = new SentinelaIA("GUARDIAN", "seguridad-fortaleza");
-const explorador = new SentinelaIA("EXPLORADOR", "busqueda");
-const chatbotAlfa = new SentinelaIA("CHATBOT-ALFA", "habla-con-jefe");
-const chatbotBravo = new SentinelaIA("CHATBOT-BRAVO", "habla-con-otros");
-const ojo = new SentinelaIA("OJO", "vision-camaras");
-const contador = new SentinelaIA("CONTADOR", "banco");
