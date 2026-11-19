@@ -3,32 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SENTINELA LAB 2</title>
+<title>SENTINELA FINAL</title>
 <style>
 body{margin:0;background:#000;color:#fff;font-family:Arial;text-align:center}
-.fondo{position:fixed;inset:0;background:#111;z-index:0}
-.cont{position:relative;z-index:1;padding:12px}
-.card{background:rgba(30,0,60,.9);margin:10px auto;padding:14px;border-radius:18px;border:2px solid #a855f7;max-width:420px}
-button{background:#a855f7;color:#fff;border:0;padding:12px;border-radius:12px;font-weight:bold;margin:4px;width:42%}
-input{width:90%;padding:12px;border-radius:12px;border:0}
-#chat{height:160px;overflow:auto;text-align:left;background:#111;padding:10px;border-radius:12px}
-#interior{background:#222;padding:12px;border-radius:12px;min-height:60px;margin-top:10px}
+.cont{padding:10px;max-width:440px;margin:auto}
+.card{background:#1a0033;margin:10px 0;padding:14px;border-radius:18px;border:2px solid #a855f7}
+button{background:#a855f7;color:#fff;border:0;padding:11px;border-radius:12px;font-weight:bold;margin:4px;width:45%}
+button.volver{background:#333;width:90%}
+input,select{width:90%;padding:11px;border-radius:12px;border:0;margin:5px}
+.caja{background:#111;padding:12px;border-radius:12px;text-align:left;min-height:80px}
+.fila{display:flex;justify-content:space-between}
+.oculto{display:none}
 </style>
 </head>
 <body>
-<div class="fondo"></div>
 <div class="cont">
 <div class="card">
-<h2>👁️ SENTINELA LAB 2</h2>
+<h2>👁️ SENTINELA FINAL</h2>
 <p>José León Suárez - 25° Probable lluvia mañana</p>
 <p id="red">🔴 SIN INTERNET - MODO OFFLINE</p>
-<p id="cola">📥 Cola: 0 liviano / 0 pesado</p>
+<p id="cola">📥 Cola: 0 esperando WIFI</p>
 </div>
 
-<div class="card">
-<h3>8 APPS - TODAS OFFLINE</h3>
-<button onclick="abrirApp('central')">👁️ Central</button>
-<button onclick="abrirApp('mensajes')">💬 Mensajes</button>
-<button onclick="abrirApp('camaras')">📷 Cámaras</button>
-<button onclick="abrirApp('alerta')">🚨 Alerta</button>
-<button onclick="abrirApp
+<div class="card" id="menu">
+<h3>TOCÁ UNA APP - TODAS FUNCIONAN</h3>
+<button onclick="abrir('central')">👁️ Central</button>
+<button onclick="abrir('mensajes')">💬 Mensajes</button>
+<button onclick="abrir('camaras')">📷 Cámaras</button>
+<button onclick="abrir('alerta')">🚨 Alerta</button>
+<button onclick="abrir('whatsapp')">💚 WhatsApp</button>
+<button onclick="abrir('banco')">🏦 Banco</button>
+<button onclick="abrir('mapa')">🗺️ Mapa</button>
+<button onclick="abrir('ia')">🧠 Asistente</button>
+</div>
+
+<div class="card oculto" id="pantalla">
+<h3 id="titulo">APP</h3>
+<div class="caja" id="contenido"></div>
+<div id="acciones"></div>
+<button class="volver" onclick="volver()">⬅ VOLVER AL MENU</button>
+</div>
+
+</div>
+
+<script>
+let cola = 0;
+let saldo = 15400;
+let mensajes = ["Hola Jefe, todo seguro.", "GUARDIAN: Patrulla terminada."];
+let camarasFotos = 0;
+
+function abrir(nombre){
+  document.getElementById("menu").classList.add("oculto");
+  document.getElementById("pantalla").classList.remove("oculto");
+  let t = document.getElementById("titulo");
+  let c = document.getElementById("contenido");
+  let a = document.getElementById("acciones");
+  a.innerHTML = "";
+
+  if(nombre === "central"){
+    t.innerText = "👁️ CENTRAL";
+    c.innerHTML = "<p><b>Estado:</b> Todo seguro</p><p><b>GUARDIAN:</b> Activo</p><p><b>OJO:</b> Activo</p><p><b>Modo:</b> OFFLINE - Nada se sube</p>";
+    a.innerHTML = '<button onclick="accionCentral()">🔄 REVISAR TODO</button><button onclick="accionCentral2()">🌙 MODO NOCHE</button>';
+  }
+  if(nombre === "mensajes"){
+    t.innerText = "💬 MENSAJES";
+    c.innerHTML = mensajes.map(m=>"<p>- "+m+"</p>").join("");
+    a.innerHTML = '<input id="nuevoMsg" placeholder="Escribí un mensaje"><button onclick="enviarMensaje()">ENVIAR</button>';
+  }
+  if(nombre === "camaras"){
+    t.innerText = "📷 CAMARAS / OJO";
+    c.innerHTML = "<p>Fotos guardadas: "+camarasFotos+"</p><p>Última: BASE vigilada. Todo seguro.</p><p>Las fotos NO se suben hasta WIFI.</p>";
+    a.innerHTML = '<button onclick="sacarFoto()">📸 SACAR FOTO</button><button onclick="verFotos()">🖼️ VER FOTOS</button>';
+  }
+  if(nombre === "alerta"){
+    t.innerText = "🚨 ALERTA";
+    c.innerHTML = "<p id='estadoAlerta'>Estado: VERDE - Tranquilo</p><p>Apretá ROJO si hay peligro.</p>";
+    a.innerHTML = '<button onclick="alertaRoja()">🚨 ALERTA ROJA</button><button onclick="alertaVerde()">✅ VOLVER A VERDE</button>';
+  }
+  if(nombre === "whatsapp"){
+    t.innerText = "💚 WHATSAPP";
+    c.innerHTML = "<p>Chat guardado offline.</p><p>- Mamá: ¿Llegaste?</p><p>- Vos: DIEZ CUATRO, llegando.</p>";
+    a.innerHTML = '<input id="waMsg" placeholder="Escribí para WhatsApp"><button onclick="enviarWA()">ENVIAR WA</button>';
+  }
+  if(nombre === "banco"){
+    t.innerText = "🏦 BANCO";
+    c.innerHTML = "<p><b>Saldo offline:</b> $"+saldo+"</p><p>Personal Pay - Guardado, no se sube nada.</p>";
+    a.innerHTML = '<input id="monto" type="number" placeholder="Monto"><button onclick="sumar()">+ AGREGAR</button><button onclick="restar()">- GASTAR</button>';
+  }
+  if(nombre === "mapa"){
+    t.innerText = "🗺️ MAPA";
+    c.innerHTML = "<p><b>Vos estás en:</b> José León Suárez</p><p><b>BASE:</b> Casa</p><p><b>PATRULLA:</b> Zona segura</p><p>Mapa guardado offline.</p>";
+    a.innerHTML = '<button onclick="irBase()">🏠 IR A BASE</button><button onclick="irPatrulla()">🚶 IR A PATRULLA</button>';
+  }
+  if(nombre === "ia"){
+    t.innerText = "🧠 ASISTENTE IA";
+    c.innerHTML = "<p id='chatIA'>Hola Jefe, soy CENTRAL. Preguntame algo.</p>";
+    a.innerHTML = '<input id="preguntaIA" placeholder="Ej: como estas"><button onclick="preguntarIA()">PREGUNTAR</button>';
+  }
+}
+
+function volver(){
+  document.getElementById("pantalla").classList.add("oculto");
+  document.getElementById("menu").classList.remove("oculto");
+}
+function sumarCola(){
+  cola++;
+  document.getElementById("cola").innerText = "📥 Cola: " + cola + " esperando WIFI";
+}
+function accionCentral(){ document.getElementById("contenido").innerHTML += "<p>✅ Revisado: Todo en orden, JEFE.</p>"; sumarCola(); }
+function accionCentral2(){ document.getElementById("contenido").innerHTML += "<p>🌙 Modo noche activado. Brillo bajo.</p>"; }
+function enviarMensaje(){
+  let v = document.getElementById("nuevoMsg").value;
+  if(!v) return;
+  mensajes.push(v);
+  document.getElementById("contenido").innerHTML += "<p>- "+v+"</p>";
+  document.getElementById("nuevoMsg").value = "";
+  sumarCola();
+}
+function sacarFoto(){ camarasFotos++; document.getElementById("contenido").innerHTML = "<p>Fotos guardadas: "+camarasFotos+"</p><p>📸 Foto sacada y guardada offline. Espera WIFI.</p>"; sumarCola(); }
+function verFotos(){ alert("Tenés " + camarasFotos + " fotos guardadas offline."); }
+function alertaRoja(){ document.getElementById("estadoAlerta").innerText = "Estado: 🔴 ROJO - PELIGRO - GUARDIAN ACTIVADO"; sumarCola(); }
+function alertaVerde(){ document.getElementById("estadoAlerta").innerText = "Estado: VERDE - Tranquilo"; }
+function enviarWA(){ let v=document.getElementById("waMsg").value; if(!v) return; document.getElementById("contenido").innerHTML += "<p>- Vos: "+v+" (guardado offline)</p>"; document.getElementById("waMsg").value=""; sumarCola(); }
+function sumar(){ let m=parseInt(document.getElementById("monto").value||0); saldo+=m; document.getElementById("contenido").innerHTML = "<p><b>Saldo offline:</b> $"+saldo+"</p>"; sumarCola(); }
+function restar(){ let m=parseInt(document.getElementById("monto").value||0); saldo-=m; document.getElementById("contenido").innerHTML = "<p><b>Saldo offline:</b> $"+saldo+"</p>"; sumarCola(); }
+function irBase(){ document.getElementById("contenido").innerHTML += "<p>🏠 Llegaste a BASE.</p>"; }
+function irPatrulla(){ document.getElementById("contenido").innerHTML += "<p>🚶 En PATRULLA. OJO vigilando.</p>"; }
+function preguntarIA(){
+  let v=document.getElementById("preguntaIA").value.toLowerCase();
+  let r="DIEZ CUATRO, JEFE. Entendido.";
+  if(v.includes("como estas")) r="ALFA BRAVO, estoy al 100%, GUARDIAN activo.";
+  if(v.includes("clima")) r="25° José León Suárez, probable lluvia mañana.";
+  if(v.includes("alerta")) r="Alerta en VERDE. Todo tranquilo.";
+  document.getElementById("chatIA").innerHTML += "<p><b>Vos:</b> "+v+"</p><p><b>IA:</b> "+r+"</p>";
+  document.getElementById("preguntaIA").value="";
+  sumarCola();
+}
+setInterval(function(){
+  document.getElementById("red").innerText = navigator.onLine ? "🟢 CON INTERNET" : "🔴 SIN INTERNET - MODO OFFLINE";
+},1000);
+</script>
+</body>
+  </html>
