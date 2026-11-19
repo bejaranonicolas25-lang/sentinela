@@ -1,24 +1,33 @@
-// app.js - Inteligente e irremplazable
-const APPS = {
-  central: { nombre: "Sentinela Central", accion: () => abrirCentral() },
-  alerta: { nombre: "Alerta", accion: () => activarAlertaRoja() },
-  camaras: { nombre: "Cámaras", accion: () => abrirCamaras() },
-  asistente: { nombre: "Asistente IA", accion: () => hablarConIA() }
-};
+// sentinela-core.js - SOLO VOS MANDÁS
+const JEFE = "Nico Bejarano"; // Único dueño
+const DOMINIO = "SENTINELA";
 
-document.querySelectorAll('.app').forEach(el => {
-  el.addEventListener('click', () => {
-    const id = el.dataset.app;
-    APPS[id].accion();
-    // Cada icono guarda su última portada y estado
-    localStorage.setItem('sentinela_ultima_app', id);
-  });
-});
+class SentinelaIA {
+  constructor(nombre, rol) {
+    this.nombre = nombre;
+    this.rol = rol;
+    this.jefe = JEFE;
+    this.activa = true;
+  }
 
-// Clima en vivo - José León Suárez
-async function actualizarClima() {
-  // Conecta a API de clima, si no hay internet usa 25° guardado
-  const clima = await fetchClimaLocal() || { temp: "25°", estado: "Probable lluvia mañana" };
-  document.getElementById('temp').textContent = clima.temp;
+  // REGLA 1: Ninguna IA actúa sin tu permiso en cosas importantes
+  pedirPermiso(accion) {
+    if (accion.nivel === "critico") {
+      return `JEFE, ¿autorizás ${accion.descripcion}? ALFA BRAVO, CAMBIO`;
+    }
+    return this.ejecutar(accion);
+  }
+
+  ejecutar(accion) {
+    console.log(`[${this.nombre}] Ejecutando bajo dominio de ${this.jefe}:`, accion);
+  }
 }
-actualizarClima();
+
+// Tus 7 IAs creadas
+const central = new SentinelaIA("CENTRAL", "jefa");
+const guardian = new SentinelaIA("GUARDIAN", "seguridad-fortaleza");
+const explorador = new SentinelaIA("EXPLORADOR", "busqueda");
+const chatbotAlfa = new SentinelaIA("CHATBOT-ALFA", "habla-con-jefe");
+const chatbotBravo = new SentinelaIA("CHATBOT-BRAVO", "habla-con-otros");
+const ojo = new SentinelaIA("OJO", "vision-camaras");
+const contador = new SentinelaIA("CONTADOR", "banco");
