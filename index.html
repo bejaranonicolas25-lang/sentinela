@@ -1,21 +1,9 @@
-// sw.js - Hace que SENTINELA sea una APP offline
-const CACHE = "sentinela-v2";
-const ARCHIVOS = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./app.js",
-  "./fondo-leon.jpg",
-  "./manifest.json"
-];
-
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ARCHIVOS)));
-});
-
-self.addEventListener('fetch', e => {
-  // Si no hay internet, usa lo guardado. Si hay, usa internet.
-  e.respondWith(
-    caches.match(e.request).then(res => res || fetch(e.request))
-  );
-});
+// manifest.json - Para instalar como APP
+{
+  "name": "SENTINELA LAB",
+  "short_name": "SENTINELA",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#a855f7",
+  "start_url": "./index.html"
+}
