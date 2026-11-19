@@ -1,9 +1,36 @@
-// manifest.json - Para instalar como APP
-{
-  "name": "SENTINELA LAB",
-  "short_name": "SENTINELA",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#a855f7",
-  "start_url": "./index.html"
+<!-- index.html - LAB 2 -->
+<div class="launcher">
+  <img src="fondo-leon.jpg" class="fondo-leon">
+  <div class="clima">25° José León Suárez - Probable lluvia mañana - <span id="estado-red">🔴 SIN INTERNET - MODO OFFLINE</span></div>
+
+  <!-- Cada icono abre su interior SIN internet -->
+  <div class="app" onclick="abrirApp('central')">👁️ Central</div>
+  <div class="app" onclick="abrirApp('mensajes')">💬 Mensajes</div>
+  <div class="app" onclick="abrirApp('camaras')">📷 Cámaras</div>
+  <div class="app" onclick="abrirApp('alerta')">🚨 Alerta</div>
+  <div class="app" onclick="abrirApp('whatsapp')">💚 WhatsApp</div>
+  <div class="app" onclick="abrirApp('banco')">🏦 Banco</div>
+  <div class="app" onclick="abrirApp('mapa')">🗺️ Mapa</div>
+  <div class="app" onclick="abrirApp('ia')">🧠 Asistente IA</div>
+
+  <div id="interior-app"></div>
+  <div id="cola">📥 Cola: 0 liviano / 0 pesado esperando WiFi</div>
+</div>
+
+<script>
+function abrirApp(nombre){
+  // TODOS los interiores ya están guardados, no necesitan internet
+  const interiores = {
+    central: "CENTRAL: Todo seguro. GUARDIÁN activo.",
+    camaras: "CÁMARAS: Últimas fotos guardadas en el celu. No se suben hasta WiFi.",
+    banco: "BANCO: Saldo guardado offline. No se sube nada.",
+    mapa: "MAPA: Mapa de José León Suárez guardado offline."
+  };
+  document.getElementById('interior-app').innerHTML = interiores[nombre] || nombre + " abierto offline";
+  guardarSinInternet({ app: nombre, peso: "liviano", fecha: Date.now() });
 }
+// Detecta internet en vivo
+setInterval(()=>{
+  document.getElementById('estado-red').textContent = navigator.onLine ? "🟢 CON INTERNET" : "🔴 SIN INTERNET - MODO OFFLINE";
+}, 1000);
+    </script>
