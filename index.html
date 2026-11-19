@@ -1,59 +1,7 @@
-<!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SENTINELA LAB</title>
-<style>
-body{margin:0;background:#000;color:#fff;font-family:Arial;text-align:center}
-.fondo{position:fixed;inset:0;background:url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800') center/cover;opacity:.5}
-.card{position:relative;background:rgba(20,0,40,.85);margin:12px;padding:16px;border-radius:20px;border:2px solid #a855f7}
-button{background:#a855f7;color:#fff;border:0;padding:12px 18px;border-radius:12px;font-weight:bold;margin:4px}
-input{width:85%;padding:12px;border-radius:12px;border:0;margin:6px}
-#chat{height:200px;overflow:auto;text-align:left;background:#111;padding:10px;border-radius:12px}
-</style></head><body>
-<div class="fondo"></div>
-<div class="card"><h2>👁️ SENTINELA LAB</h2><p>José León Suárez - 25° Probable lluvia mañana</p>
-<p id="estado">🔒 BLOQUEADO - Poné tu PIN</p>
-<input id="pin" placeholder="PIN de Jefe - Ej: 1234" type="password">
-<button onclick="desbloquear()">DESBLOQUEAR</button></div>
-
-<div class="card" id="panel" style="display:none">
-<h3>🤖 CENTRAL + CHATBOT ALFA + GUARDIÁN</h3>
-<div id="chat"></div>
-<input id="msg" placeholder="Escribí: ALFA BRAVO, cómo estás?">
-<button onclick="hablar()">ENVIAR</button><br>
-<button onclick="alerta()">🚨 ALERTA ROJA</button>
-<button onclick="camaras()">📷 CÁMARAS / OJO</button>
-<button onclick="clima()">🌦️ CLIMA</button>
-<button onclick="guardar()">💾 GUARDAR EN CARPETA 1</button>
-</div>
-
-<script>
-let jefeAutorizado=false;
-let memoria=[];
-function desbloquear(){
-  let pin=document.getElementById('pin').value;
-  if(pin.length>=4){ jefeAutorizado=true;
-    document.getElementById('estado').innerHTML="✅ ACCESO PERMITIDO, JEFE - DIEZ CUATRO";
-    document.getElementById('panel').style.display='block';
-    agregarChat("SENTINELA","ALFA BRAVO, JEFE. Laboratorio activado. Todas las IAs bajo tu dominio.");
-  } else { alert("PIN incorrecto. GUARDIÁN bloqueó intento."); }
-}
-function agregarChat(quien,txt){
-  document.getElementById('chat').innerHTML+=`<p><b>${quien}:</b> ${txt}</p>`;
-}
-function hablar(){
-  let m=document.getElementById('msg').value; if(!m) return;
-  agregarChat("VOS",m); memoria.push(m);
-  let r="DIEZ CUATRO, JEFE. Entendido.";
-  if(m.toLowerCase().includes("como estas")) r="ALFA BRAVO, estoy al 100%, GUARDIÁN activo, OJO activo, listo para patrulla.";
-  if(m.toLowerCase().includes("alerta")) r="ROJO + RIES activado. GUARDIÁN en modo FORTALEZA.";
-  if(m.toLowerCase().includes("clima")) r="José León Suárez 25°, probable lluvia mañana. Llevá paraguas.";
-  if(m.toLowerCase().includes("camaras")) r="OJO activado. Cámaras vigilando BASE.";
-  setTimeout(()=>agregarChat("CENTRAL",r),500);
-  document.getElementById('msg').value="";
-}
-function alerta(){ agregarChat("GUARDIÁN","🚨 MODO ROJO ACTIVADO. FORTALEZA CERRADA. Solo vos podés abrirla, JEFE."); }
-function camaras(){ agregarChat("OJO","📷 OJO activado. Estoy mirando. Todo seguro, SIERRA."); }
-function clima(){ agregarChat("EXPLORADOR","🌦️ 25° José León Suárez, probable lluvia mañana."); }
-function guardar(){ localStorage.setItem('sentinela_memoria',JSON.stringify(memoria)); agregarChat("CENTRAL","💾 Guardado en Carpeta 1. Memoria bajo tu dominio."); }
-</script></body></html>
+SENTINELA-LAB/
+├── index.html (con tu fondo león + 8 iconos)
+├── style.css
+├── app.js
+├── sw.js (esto es lo que hace que ande sin internet)
+├── manifest.json
+└── fondo-leon.jpg (guardado en el celu, no se descarga)
