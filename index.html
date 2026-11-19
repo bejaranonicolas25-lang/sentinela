@@ -1,16 +1,15 @@
-// seguridad-fortaleza.js - Las 5 capas que te faltaban
-const FORTALEZA = {
-  capa1: "Huella + PIN - Solo vos entrás",
-  capa2: "Código ALFA BRAVO - Si no habla en código, no es vos",
-  capa3: "Bloqueo automático - Si alguien intenta 3 veces, se cierra todo",
-  capa4: "Copia de seguridad - Todo guardado en Carpeta 1 y 2",
-  capa5: "Modo ROJO - Si hay peligro, ALERTA + GUARDIAN toman control y te avisan"
-};
-
-function verificarJefe(clave, codigoAlfa) {
-  if (clave === "TU_PIN" && codigoAlfa === "ALFA BRAVO") {
-    return "ACCESO PERMITIDO, JEFE";
+// chatbot-super-inteligente.js
+const ChatBotSentinela = {
+  saludo: "ALFA BRAVO, JEFE. ¿Qué necesitás?",
+  aprender: function(mensajeJefe) {
+    // Aprende de vos, no de internet. Tu estilo, tu código, tu forma.
+    this.memoria.push(mensajeJefe);
+    return "DIEZ CUATRO, ya lo aprendí y lo guardé bajo tu dominio.";
+  },
+  responder: function(pregunta) {
+    // 1. Piensa como vos
+    // 2. Busca en tu Carpeta 1 y 2
+    // 3. Responde en tu código
+    return `ALFA BRAVO, ${respuestaInteligente}`;
   }
-  activarModoRojo();
-  return "ACCESO DENEGADO";
-}
+};
