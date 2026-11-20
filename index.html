@@ -5,25 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENTINELA FINAL</title>
 <style>
-body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}
-.card{background:#2a0a4a;border:2px solid #a100f2;border-radius:20px;padding:20px;margin:10px}
+body{background:#000;color:#fff;font-family:Arial;margin:0;padding:14px}
+.card{background:#2a0a4a;border:2px solid #a100f2;border-radius:20px;padding:18px;margin-bottom:12px}
 button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;color:#fff;font-weight:900;margin:6px 0}
+.gris{background:#333}
+#log{background:#16002b;padding:12px;border-radius:12px;margin-top:10px;text-align:left}
 </style>
 </head>
 <body>
 <div class="card">
-<h1>👁️ SENTINELA FINAL</h1>
-<p>José León Suárez</p>
-<p>🟢 CON INTERNET</p>
-<p>DIEZ CUATRO - SISTEMA RECUPERADO</p>
+<h1 style="text-align:center">👁️ SENTINELA FINAL</h1>
+<p style="text-align:center">José León Suárez - 🟢 CON INTERNET</p>
+<p style="text-align:center">DIEZ CUATRO - SISTEMA ACTIVO</p>
 <button onclick="despertar()">DESPERTAR CODIGOS - ADELANTE</button>
-<div id="log"></div>
+<div id="log">Tocá DESPERTAR para empezar la Misión CORAL.</div>
+</div>
+<div class="card">
+<button onclick="alert('CENTRAL - CHARLIE DELTA GOLF')">👁️ Central</button>
+<button onclick="alert('MENSAJES - ALFA BRAVO CAMBIO')">💬 Mensajes</button>
+<button onclick="alert('CAMARAS - OSCAR FOXTROT')">📷 Cámaras</button>
+<button onclick="alert('ALERTA ROJO - AYUDA')">🚨 Alerta</button>
+<button onclick="alert('WHATSAPP - DIEZ CUATRO')">💚 WhatsApp</button>
+<button onclick="alert('BANCO - VICTOR SIERRA')">🏦 Banco</button>
+<button onclick="alert('MAPA - ZULU BASE')">🗺️ Mapa</button>
+<button onclick="alert('ASISTENTE - INDIA INFO')">🧠 Asistente</button>
+<button class="gris" onclick="location.reload()">🔄 Recargar</button>
 </div>
 <script>
 function despertar(){
-  var log = document.getElementById('log');
-  log.innerHTML = "🟢 CORAL DESPERTO<br>🟢 ALFA BRAVO DESPERTO<br>🟢 DIEZ CUATRO DESPERTO<br>🟢 CHARLIE A ZULU DESPERTO<br>🟢 CARPETA 1 DESPERTO<br><b>VICTOR - TODOS DESPIERTOS JEFE</b>";
-  alert("VICTOR - Recuperado, jefe");
+var log=document.getElementById('log');
+log.innerHTML="MISIÓN CORAL INICIADA...<br>";
+var lista=["01 CORAL","02 CENTINELA META","03 JEFE","04 ALFA BRAVO","05 DIEZ CUATRO","06 CAMBIO","07 CHARLIE A ZULU","08 NUMEROS 0 A 9","09 SIMBOLOS ? ! + - = /","10 TIEMPO AHORA MANANA","11 AYUDA PELIGRO MEDICO","12 CARPETA 1","13 QUINTUPLE SECURITY","14 ULTIMO DE AYER"];
+var i=0;
+var t=setInterval(function(){
+if(i>=lista.length){clearInterval(t);log.innerHTML+="<br><b>VICTOR - TODOS DESPIERTOS JEFE</b>";alert("VICTOR - Todos despiertos");return;}
+log.innerHTML+="🟢 "+lista[i]+" - DESPERTO<br>";i++;
+},300);
 }
 </script>
 </body>
