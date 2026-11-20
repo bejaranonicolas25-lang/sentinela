@@ -2,146 +2,161 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENTINELA FINAL</title>
 <style>
-body{margin:0;background:#000;color:#fff;font-family:Arial;text-align:center}
-.cont{padding:10px;max-width:440px;margin:auto}
-.card{background:#1a0033;margin:10px 0;padding:14px;border-radius:18px;border:2px solid #a855f7}
-button{background:#a855f7;color:#fff;border:0;padding:11px;border-radius:12px;font-weight:bold;margin:4px;width:45%}
-button.volver{background:#333;width:90%}
-input,select{width:90%;padding:11px;border-radius:12px;border:0;margin:5px}
-.caja{background:#111;padding:12px;border-radius:12px;text-align:left;min-height:80px}
-.fila{display:flex;justify-content:space-between}
-.oculto{display:none}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#000;color:#fff;min-height:100vh}
+.app{max-width:430px;margin:0 auto;padding:14px}
+.card{background:#2a0a4a;border:2px solid #a100f2;border-radius:20px;padding:18px;margin-bottom:14px}
+h1{font-size:26px;text-align:center}
+h2{font-size:20px;margin-bottom:10px}
+.center{text-align:center}
+.sub{color:#d8b4fe;text-align:center;margin:6px 0}
+.green{color:#22ff88}.red{color:#ff3b30}.yellow{color:#ffd60a}
+input{width:100%;padding:13px;border-radius:12px;border:1px solid #a100f2;background:#16002b;color:#fff;margin:7px 0;font-size:16px}
+button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;color:#fff;font-weight:900;font-size:16px;margin:6px 0;cursor:pointer}
+button.sec{background:#6d28d9} button.greenBtn{background:#16a34a} button.redBtn{background:#dc2626}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid button{font-size:15px}
+.hidden{display:none}
+.badge{display:inline-block;background:#16a34a;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:900}
+.lock{border:1px solid #a100f2;border-radius:14px;padding:10px;margin:6px 0;display:flex;justify-content:space-between}
+.msg{background:#3b0764;padding:10px;border-radius:14px;margin:6px 0}
+.msg.me{background:#a100f2;text-align:right}
+.cam{height:120px;background:#111;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1px solid #a100f2;margin:6px 0;font-weight:900}
+.map{height:240px;background:linear-gradient(135deg,#1e1b4b,#581c87);border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px}
+.kbd{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kbd button{background:#3b0764}
+.back{background:#222;margin-top:10px}
+.small{font-size:13px;color:#d8b4fe;line-height:1.5}
 </style>
 </head>
 <body>
-<div class="cont">
-<div class="card">
-<h2>👁️ SENTINELA FINAL</h2>
-<p>José León Suárez - 25° Probable lluvia mañana</p>
-<p id="red">🔴 SIN INTERNET - MODO OFFLINE</p>
-<p id="cola">📥 Cola: 0 esperando WIFI</p>
+<div class="app">
+
+<!-- PANTALLA 1: QUINTUPLE SEGURIDAD -->
+<div id="lockScreen">
+  <div class="card">
+    <h1>👁️ SENTINELA FINAL</h1>
+    <p class="sub">José León Suárez - 25° Probable lluvia mañana</p>
+    <p class="center"><span class="green">🟢 CON INTERNET</span></p>
+    <p class="center">🧺 Cola: 0 esperando WIFI</p>
+    <p class="center"><span class="badge">QUÍNTUPLE SECURITY - 5 CANDADOS</span></p>
+    <div class="lock"><span>1. Usuario + Contraseña</span><span id="l1">🔒</span></div>
+    <div class="lock"><span>2. PIN Centinela</span><span id="l2">🔒</span></div>
+    <div class="lock"><span>3. Face ID + Huella</span><span id="l3">🔒</span></div>
+    <div class="lock"><span>4. Código Alfa Bravo</span><span id="l4">🔒</span></div>
+    <div class="lock"><span>5. Llave + Código Temporal</span><span id="l5">🔒</span></div>
+  </div>
+  <div class="card">
+    <h2>Candado 1 - Usuario</h2>
+    <input id="user" placeholder="Usuario: JEFE">
+    <input id="pass" type="password" placeholder="Contraseña: CORAL">
+    <button onclick="paso1()">Desbloquear 1</button>
+    <h2>Candado 2 - PIN</h2>
+    <input id="pin" placeholder="PIN: 1234">
+    <button class="sec" onclick="paso2()">Desbloquear 2</button>
+    <h2>Candado 3 - Face ID</h2>
+    <button onclick="paso3()">👤 Escanear Face ID / Huella (simulado)</button>
+    <h2>Candado 4 - Código Alfa Bravo</h2>
+    <input id="codigo" placeholder="Escribí: ALFA BRAVO">
+    <button class="sec" onclick="paso4()">Desbloquear 4</button>
+    <h2>Candado 5 - Llave</h2>
+    <input id="llave" placeholder="Llave: CENTINELA">
+    <button class="greenBtn" onclick="paso5()">ENTRAR A SENTINELA FINAL</button>
+    <p class="small">Demo: esto simula Face ID y biometría. En un teléfono real, acá se conecta el Face ID / huella del sistema. Nadie puede entrar sin los 5 candados.</p>
+  </div>
 </div>
 
-<div class="card" id="menu">
-<h3>TOCÁ UNA APP - TODAS FUNCIONAN</h3>
-<button onclick="abrir('central')">👁️ Central</button>
-<button onclick="abrir('mensajes')">💬 Mensajes</button>
-<button onclick="abrir('camaras')">📷 Cámaras</button>
-<button onclick="abrir('alerta')">🚨 Alerta</button>
-<button onclick="abrir('whatsapp')">💚 WhatsApp</button>
-<button onclick="abrir('banco')">🏦 Banco</button>
-<button onclick="abrir('mapa')">🗺️ Mapa</button>
-<button onclick="abrir('ia')">🧠 Asistente</button>
+<!-- PANTALLA 2: INICIO -->
+<div id="home" class="hidden">
+  <div class="card">
+    <h1>👁️ SENTINELA FINAL</h1>
+    <p class="sub">José León Suárez - 25° Probable lluvia mañana</p>
+    <p class="center"><span class="green">🟢 CON INTERNET</span></p>
+    <p class="center">🧺 Cola: 0 esperando WIFI</p>
+    <p class="center"><span class="badge">✅ 5/5 DESBLOQUEADO - JEFE</span></p>
+  </div>
+  <div class="card">
+    <h2 class="center">TOCÁ UNA APP - TODAS FUNCIONAN</h2>
+    <div class="grid">
+      <button onclick="abrir('central')">👁️ Central</button>
+      <button onclick="abrir('mensajes')">💬 Mensajes</button>
+      <button onclick="abrir('camaras')">📷 Cámaras</button>
+      <button onclick="abrir('alerta')">🚨 Alerta</button>
+      <button onclick="abrir('whatsapp')">💚 WhatsApp</button>
+      <button onclick="abrir('banco')">🏦 Banco</button>
+      <button onclick="abrir('mapa')">🗺️ Mapa</button>
+      <button onclick="abrir('asistente')">🧠 Asistente</button>
+    </div>
+    <button class="redBtn" onclick="bloquear()">🔒 BLOQUEAR TODO - RIES</button>
+  </div>
 </div>
 
-<div class="card oculto" id="pantalla">
-<h3 id="titulo">APP</h3>
-<div class="caja" id="contenido"></div>
-<div id="acciones"></div>
-<button class="volver" onclick="volver()">⬅ VOLVER AL MENU</button>
+<!-- CENTRAL -->
+<div id="central" class="hidden">
+  <div class="card"><h2>👁️ CENTRAL DE MANDO</h2><p>QUINTUPLE SECURITY 5/5 - VERDE</p><p class="small">Carpeta 1: Alfabeto A-Z ALFA a ZULU, Números 0-9 CERO a NUEVE, Símbolos ? ! + - = /, Colores AZUL VERDE ROJO AMARILLO CORAL, Tiempo AHORA DESPUES AYER MAÑANA DIA NOVEMBER, Emergencia AYUDA PELIGRO MEDICO POLICIA.</p></div>
+  <div class="card"><div class="grid"><button onclick="alert('CHARLIE = Chequeo, revisamos todo juntos')">CHARLIE</button><button onclick="alert('DELTA = Despliegue, salgo ya')">DELTA</button><button onclick="alert('GOLF = Guardia, atento')">GOLF</button><button onclick="alert('HOTEL + BASE = En casa, refugio')">HOTEL</button><button onclick="alert('INDIA = Tengo info nueva')">INDIA</button><button onclick="alert('WHISKY = Tranquilo, pausa')">WHISKY</button></div><button onclick="alert('REPORTE: Todo VERDE, AZUL, BASE, GOLF activo. Carpeta 1 completa.')">📋 REPORTE</button></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- MENSAJES -->
+<div id="mensajes" class="hidden">
+  <div class="card"><h2>💬 MENSAJES CENTINELA</h2><div class="msg">JEFE: ALFA BRAVO, CAMBIO</div><div class="msg me">YO: ALFA BRAVO, CAMBIO</div><div class="msg">JEFE: DIEZ CUATRO, CAMBIO Y FUERA</div><input id="msg1" placeholder="Escribí tu código... CAMBIO"><button onclick="enviar('msg1','chat1')">Enviar</button><div id="chat1"></div></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- CAMARAS -->
+<div id="camaras" class="hidden">
+  <div class="card"><h2>📷 CÁMARAS CENTINELA</h2><p>EN VIVO - 4 CÁMARAS ACTIVAS</p><div class="cam">BASE - Casa - ● REC - VERDE</div><div class="cam">PATRULLA - Calle - ● REC - AZUL</div><div class="cam">ZULU - Zona - ● REC - VERDE</div><div class="cam">GOLF - Guardia - ● REC - VERDE</div><div class="grid"><button onclick="alert('OSCAR = Observo, miro todo')">OSCAR</button><button onclick="alert('FOXTROT = Foco, atención')">FOXTROT</button><button onclick="alert('ZOOM 1.0x')">ZOOM</button><button onclick="alert('Grabando...')">Grabar</button></div></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- ALERTA -->
+<div id="alerta" class="hidden">
+  <div class="card"><h2 class="red">🚨 ALERTA ROJO</h2><p>Si hay peligro, tocá ya.</p><button class="redBtn" onclick="alert('ROJO + AYUDA enviado. Ubicación: José León Suárez')">🆘 AYUDA - ROJO</button><button onclick="alert('PELIGRO = ROJO + RIES, cuidado')">⚠️ PELIGRO</button><button onclick="alert('MEDICO solicitado')">🩺 MEDICO</button><button onclick="alert('GOLF + POLICIA, guardia activada')">👮 POLICIA + GOLF</button><button class="sec" onclick="alert('DELTA = Me despliego ya')">DELTA - SALGO YA</button></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- WHATSAPP -->
+<div id="whatsapp" class="hidden">
+  <div class="card"><h2>💚 WHATSAPP CENTINELA</h2><div class="msg">JEFE: ALFA BRAVO, CAMBIO</div><div class="msg me">DIEZ CUATRO, CAMBIO Y FUERA</div><input id="msg2" placeholder="Escribí CORAL o ALFA BRAVO..."><button class="greenBtn" onclick="enviar('msg2','chat2')">Enviar WhatsApp</button><div id="chat2"></div></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- BANCO -->
+<div id="banco" class="hidden">
+  <div class="card"><h2>🏦 BANCO CENTINELA</h2><p style="font-size:28px;font-weight:900">$1,245,830.00</p><p class="green">+$42,180 +3.5% Este mes</p><div class="grid"><button>Saldo</button><button>Movimientos</button><button>TRADER Cripto</button><button>Transferir</button></div><p>VICTOR = Logrado - Meta +15% ✅</p><p>SIERRA = Seguro vigente ✅</p><p>QUINTUPLE SECURITY - Cifrado, Biometría, Anti-fraude</p></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- MAPA -->
+<div id="mapa" class="hidden">
+  <div class="card"><h2>🗺️ MAPA ZULU</h2><div class="map">📍 BASE - Casa<br>📍 ZULU - Zona<br>🟣 PATRULLA - Ruta<br>🛡️ GOLF - Guardia<br>José León Suárez</div><div class="grid"><button onclick="alert('ROMEO = Voy rápido')">ROMEO Rápido</button><button onclick="alert('LIMA = Voy lento, tranqui')">LIMA Lento</button><button onclick="alert('QUEBEC = Quedo quieto')">QUEBEC Quieto</button><button onclick="alert('KILO = Estoy lejos')">KILO Lejos</button></div></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
+</div>
+
+<!-- ASISTENTE -->
+<div id="asistente" class="hidden">
+  <div class="card"><h2>🧠 ASISTENTE CENTINELA META</h2><div class="msg">Listo. Monitoreando sector. Códigos: ALFA BRAVO - perímetro seguro</div><div class="msg me">DIEZ CUATRO</div><div class="msg">CHARLIE - movimiento leve zona norte<br>INDIA Info - Sin incidencias, todo estable</div><div class="kbd"><button onclick="tecla('1')">1</button><button onclick="tecla('2')">2</button><button onclick="tecla('3')">3</button><button onclick="tecla('4')">4</button><button onclick="tecla('5')">5</button><button onclick="tecla('6')">6</button><button onclick="tecla('7')">7</button><button onclick="tecla('8')">8</button><button onclick="tecla('9')">9</button><button onclick="tecla('?')">?</button><button onclick="tecla('!')">!</button><button onclick="tecla('+')">+</button><button onclick="tecla('-')">-</button><button onclick="tecla('=')">=</button><button onclick="tecla('/')">/</button></div><input id="asistInput" placeholder="Escribí un código o consulta..."><button onclick="responder()">Enviar</button><div id="resp"></div></div>
+  <button class="back" onclick="volver()">⬅ Volver</button>
 </div>
 
 </div>
-
 <script>
-let cola = 0;
-let saldo = 15400;
-let mensajes = ["Hola Jefe, todo seguro.", "GUARDIAN: Patrulla terminada."];
-let camarasFotos = 0;
-
-function abrir(nombre){
-  document.getElementById("menu").classList.add("oculto");
-  document.getElementById("pantalla").classList.remove("oculto");
-  let t = document.getElementById("titulo");
-  let c = document.getElementById("contenido");
-  let a = document.getElementById("acciones");
-  a.innerHTML = "";
-
-  if(nombre === "central"){
-    t.innerText = "👁️ CENTRAL";
-    c.innerHTML = "<p><b>Estado:</b> Todo seguro</p><p><b>GUARDIAN:</b> Activo</p><p><b>OJO:</b> Activo</p><p><b>Modo:</b> OFFLINE - Nada se sube</p>";
-    a.innerHTML = '<button onclick="accionCentral()">🔄 REVISAR TODO</button><button onclick="accionCentral2()">🌙 MODO NOCHE</button>';
-  }
-  if(nombre === "mensajes"){
-    t.innerText = "💬 MENSAJES";
-    c.innerHTML = mensajes.map(m=>"<p>- "+m+"</p>").join("");
-    a.innerHTML = '<input id="nuevoMsg" placeholder="Escribí un mensaje"><button onclick="enviarMensaje()">ENVIAR</button>';
-  }
-  if(nombre === "camaras"){
-    t.innerText = "📷 CAMARAS / OJO";
-    c.innerHTML = "<p>Fotos guardadas: "+camarasFotos+"</p><p>Última: BASE vigilada. Todo seguro.</p><p>Las fotos NO se suben hasta WIFI.</p>";
-    a.innerHTML = '<button onclick="sacarFoto()">📸 SACAR FOTO</button><button onclick="verFotos()">🖼️ VER FOTOS</button>';
-  }
-  if(nombre === "alerta"){
-    t.innerText = "🚨 ALERTA";
-    c.innerHTML = "<p id='estadoAlerta'>Estado: VERDE - Tranquilo</p><p>Apretá ROJO si hay peligro.</p>";
-    a.innerHTML = '<button onclick="alertaRoja()">🚨 ALERTA ROJA</button><button onclick="alertaVerde()">✅ VOLVER A VERDE</button>';
-  }
-  if(nombre === "whatsapp"){
-    t.innerText = "💚 WHATSAPP";
-    c.innerHTML = "<p>Chat guardado offline.</p><p>- Mamá: ¿Llegaste?</p><p>- Vos: DIEZ CUATRO, llegando.</p>";
-    a.innerHTML = '<input id="waMsg" placeholder="Escribí para WhatsApp"><button onclick="enviarWA()">ENVIAR WA</button>';
-  }
-  if(nombre === "banco"){
-    t.innerText = "🏦 BANCO";
-    c.innerHTML = "<p><b>Saldo offline:</b> $"+saldo+"</p><p>Personal Pay - Guardado, no se sube nada.</p>";
-    a.innerHTML = '<input id="monto" type="number" placeholder="Monto"><button onclick="sumar()">+ AGREGAR</button><button onclick="restar()">- GASTAR</button>';
-  }
-  if(nombre === "mapa"){
-    t.innerText = "🗺️ MAPA";
-    c.innerHTML = "<p><b>Vos estás en:</b> José León Suárez</p><p><b>BASE:</b> Casa</p><p><b>PATRULLA:</b> Zona segura</p><p>Mapa guardado offline.</p>";
-    a.innerHTML = '<button onclick="irBase()">🏠 IR A BASE</button><button onclick="irPatrulla()">🚶 IR A PATRULLA</button>';
-  }
-  if(nombre === "ia"){
-    t.innerText = "🧠 ASISTENTE IA";
-    c.innerHTML = "<p id='chatIA'>Hola Jefe, soy CENTRAL. Preguntame algo.</p>";
-    a.innerHTML = '<input id="preguntaIA" placeholder="Ej: como estas"><button onclick="preguntarIA()">PREGUNTAR</button>';
-  }
-}
-
-function volver(){
-  document.getElementById("pantalla").classList.add("oculto");
-  document.getElementById("menu").classList.remove("oculto");
-}
-function sumarCola(){
-  cola++;
-  document.getElementById("cola").innerText = "📥 Cola: " + cola + " esperando WIFI";
-}
-function accionCentral(){ document.getElementById("contenido").innerHTML += "<p>✅ Revisado: Todo en orden, JEFE.</p>"; sumarCola(); }
-function accionCentral2(){ document.getElementById("contenido").innerHTML += "<p>🌙 Modo noche activado. Brillo bajo.</p>"; }
-function enviarMensaje(){
-  let v = document.getElementById("nuevoMsg").value;
-  if(!v) return;
-  mensajes.push(v);
-  document.getElementById("contenido").innerHTML += "<p>- "+v+"</p>";
-  document.getElementById("nuevoMsg").value = "";
-  sumarCola();
-}
-function sacarFoto(){ camarasFotos++; document.getElementById("contenido").innerHTML = "<p>Fotos guardadas: "+camarasFotos+"</p><p>📸 Foto sacada y guardada offline. Espera WIFI.</p>"; sumarCola(); }
-function verFotos(){ alert("Tenés " + camarasFotos + " fotos guardadas offline."); }
-function alertaRoja(){ document.getElementById("estadoAlerta").innerText = "Estado: 🔴 ROJO - PELIGRO - GUARDIAN ACTIVADO"; sumarCola(); }
-function alertaVerde(){ document.getElementById("estadoAlerta").innerText = "Estado: VERDE - Tranquilo"; }
-function enviarWA(){ let v=document.getElementById("waMsg").value; if(!v) return; document.getElementById("contenido").innerHTML += "<p>- Vos: "+v+" (guardado offline)</p>"; document.getElementById("waMsg").value=""; sumarCola(); }
-function sumar(){ let m=parseInt(document.getElementById("monto").value||0); saldo+=m; document.getElementById("contenido").innerHTML = "<p><b>Saldo offline:</b> $"+saldo+"</p>"; sumarCola(); }
-function restar(){ let m=parseInt(document.getElementById("monto").value||0); saldo-=m; document.getElementById("contenido").innerHTML = "<p><b>Saldo offline:</b> $"+saldo+"</p>"; sumarCola(); }
-function irBase(){ document.getElementById("contenido").innerHTML += "<p>🏠 Llegaste a BASE.</p>"; }
-function irPatrulla(){ document.getElementById("contenido").innerHTML += "<p>🚶 En PATRULLA. OJO vigilando.</p>"; }
-function preguntarIA(){
-  let v=document.getElementById("preguntaIA").value.toLowerCase();
-  let r="DIEZ CUATRO, JEFE. Entendido.";
-  if(v.includes("como estas")) r="ALFA BRAVO, estoy al 100%, GUARDIAN activo.";
-  if(v.includes("clima")) r="25° José León Suárez, probable lluvia mañana.";
-  if(v.includes("alerta")) r="Alerta en VERDE. Todo tranquilo.";
-  document.getElementById("chatIA").innerHTML += "<p><b>Vos:</b> "+v+"</p><p><b>IA:</b> "+r+"</p>";
-  document.getElementById("preguntaIA").value="";
-  sumarCola();
-}
-setInterval(function(){
-  document.getElementById("red").innerText = navigator.onLine ? "🟢 CON INTERNET" : "🔴 SIN INTERNET - MODO OFFLINE";
-},1000);
+let ok=[false,false,false,false,false];
+function paso1(){if(document.getElementById('user').value.toUpperCase()==='JEFE'&&document.getElementById('pass').value.toUpperCase()==='CORAL'){ok[0]=true;document.getElementById('l1').textContent='✅';alert('Candado 1 OK - DIEZ CUATRO')}else alert('Usuario o contraseña mal. Probá JEFE / CORAL')}
+function paso2(){if(document.getElementById('pin').value==='1234'){ok[1]=true;document.getElementById('l2').textContent='✅';alert('Candado 2 OK - PIN correcto')}else alert('PIN mal, probá 1234')}
+function paso3(){ok[2]=true;document.getElementById('l3').textContent='✅';alert('Face ID / Huella OK - Simulado DIEZ CUATRO')}
+function paso4(){if(document.getElementById('codigo').value.toUpperCase().includes('ALFA BRAVO')){ok[3]=true;document.getElementById('l4').textContent='✅';alert('Candado 4 OK - ALFA BRAVO')}else alert('Escribí ALFA BRAVO')}
+function paso5(){if(document.getElementById('llave').value.toUpperCase()==='CENTINELA'&&ok[0]&&ok[1]&&ok[2]&&ok[3]){ok[4]=true;document.getElementById('l5').textContent='✅';document.getElementById('lockScreen').classList.add('hidden');document.getElementById('home').classList.remove('hidden');alert('VICTOR - 5/5 desbloqueado. Bienvenido JEFE.')}else alert('Falta un candado. Completá los 5.')}
+function abrir(id){document.getElementById('home').classList.add('hidden');document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0)}
+function volver(){['central','mensajes','camaras','alerta','whatsapp','banco','mapa','asistente'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById('home').classList.remove('hidden')}
+function bloquear(){document.getElementById('home').classList.add('hidden');document.getElementById('lockScreen').classList.remove('hidden');ok=[false,false,false,false,false];['l1','l2','l3','l4','l5'].forEach(x=>document.getElementById(x).textContent='🔒');alert('RIES - Sistema bloqueado.')}
+function enviar(inputId,chatId){let v=document.getElementById(inputId).value;if(!v)return;let d=document.createElement('div');d.className='msg me';d.textContent=v+' - DIEZ CUATRO';document.getElementById(chatId).appendChild(d);document.getElementById(inputId).value=''}
+function tecla(t){document.getElementById('asistInput').value+=t}
+function responder(){let v=document.getElementById('asistInput').value.toUpperCase();let r='DIEZ CUATRO, JEFE. Recibido: '+v;if(v.includes('ROJO'))r='ROJO = Peligro, hay que actuar ya. DELTA, salgo ya.';if(v.includes('CHARLIE'))r='CHARLIE = Chequeo, revisamos todo juntos.';if(v.includes('REPORTE'))r='REPORTE: Todo VERDE, AZUL, BASE, GOLF activo. Carpeta 1 completa.';let d=document.createElement('div');d.className='msg';d.textContent=r;document.getElementById('resp').appendChild(d)}
 </script>
 </body>
   </html>
