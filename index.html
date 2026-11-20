@@ -1,2 +1,30 @@
-<button onclick="despertarTodo()">DESPERTAR CODIGOS - ADELANTE</button>
-<div id="misionLog" style="background:#16002b;padding:12px;border-radius:12px;margin-top:10px"></div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENTINELA FINAL</title>
+<style>
+body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}
+.card{background:#2a0a4a;border:2px solid #a100f2;border-radius:20px;padding:20px;margin:10px}
+button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;color:#fff;font-weight:900;margin:6px 0}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>👁️ SENTINELA FINAL</h1>
+<p>José León Suárez</p>
+<p>🟢 CON INTERNET</p>
+<p>DIEZ CUATRO - SISTEMA RECUPERADO</p>
+<button onclick="despertar()">DESPERTAR CODIGOS - ADELANTE</button>
+<div id="log"></div>
+</div>
+<script>
+function despertar(){
+  var log = document.getElementById('log');
+  log.innerHTML = "🟢 CORAL DESPERTO<br>🟢 ALFA BRAVO DESPERTO<br>🟢 DIEZ CUATRO DESPERTO<br>🟢 CHARLIE A ZULU DESPERTO<br>🟢 CARPETA 1 DESPERTO<br><b>VICTOR - TODOS DESPIERTOS JEFE</b>";
+  alert("VICTOR - Recuperado, jefe");
+}
+</script>
+</body>
+</html>
