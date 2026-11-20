@@ -3,27 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SENTINELA FINAL</title>
+<title>LIMPIEZA - SENTINELA</title>
 <style>
-body{background:#000;color:#fff;font-family:Arial;margin:0;padding:14px}
-.card{background:#2a0a4a;border:2px solid #a100f2;border-radius:20px;padding:18px;margin-bottom:12px}
-button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;color:#fff;font-weight:900;margin:6px 0}
-.gris{background:#333}.verde{background:#0a7a42}.rojo{background:#c00}
-.pantalla{display:none}.pantalla.activa{display:block}
-#log{background:#16002b;padding:12px;border-radius:12px;margin-top:10px;text-align:left}
-input,textarea{width:100%;padding:12px;border-radius:12px;border:0;margin:6px 0;box-sizing:border-box}
+body{
+background:#000;
+color:#fff;
+font-family:Arial;
+margin:0;
+padding:12px;
+}
+.card{
+border-radius:22px;
+padding:18px;
+margin-bottom:12px;
+border:2px solid #a100f2;
+background:#2a0a4a;
+}
+button{
+width:100%;
+padding:14px;
+border:0;
+border-radius:14px;
+background:#a100f2;
+color:#fff;
+font-weight:900;
+margin:6px 0;
+}
+.gris{background:#333;}
+.verde{background:#0a7a42;}
+.rojo{background:#c00;}
+#log{
+background:#16002b;
+padding:12px;
+border-radius:12px;
+margin-top:10px;
+}
 </style>
 </head>
 <body>
 
 <div class="card">
-<h1 style="text-align:center">👁️ SENTINELA FINAL</h1>
-<p style="text-align:center">José León Suárez - 🟢 CON INTERNET</p>
-<p style="text-align:center">DIEZ CUATRO - SISTEMA ACTIVO</p>
-<button onclick="despertar()">DESPERTAR CODIGOS - ADELANTE</button>
-<div id="log">Tocá DESPERTAR para Misión CORAL.</div>
+<h1 style="text-align:center">🧹 LIMPIEZA TOTAL</h1>
+<p style="text-align:center">Destruir lo roto - Mantener lo vivo</p>
+<p style="text-align:center" id="estado">LISTO PARA LIMPIAR</p>
+<button class="rojo" onclick="limpiarTodo()">DESTRUIR TODO LO ROTO - ADELANTE</button>
+<div id="log">Tocá el botón. No borra lo que funciona.</div>
 </div>
 
 <div class="card">
-<button onclick="mostrar('central')">👁️ 1 CENTRAL</button>
-<button onclick="mostrar('mensajes')">💬 2
+<h2>✅ VIVOS - QUE QUEDAN</h2>
+<div id="vivos">Todavía no se limpió.</div>
+</div>
+
+<div class="card">
+<h2>💀 DESTRUIDOS - QUE SE ELIMINAN</h2>
+<div id="muertos">Todavía no se limpió.</div>
+</div>
+
+<div class="card">
+<button class="verde" onclick="verificarAhora()">✅ VERIFICAR ANTES DE DESTRUIR</button>
+<button class="gris" onclick="location.reload()">🔄 Recargar</button>
+</div>
+
+<script>
+function verificarAhora(){
+var vivos = [];
+var muertos = [];
+
+var claves = ['pin_seguridad','carpeta1','carpeta1_segura','seguridad','coral','todos_despiertos','despierto_01 CORAL','despierto_02 CENTINELA META'];
+
+for(var i=0;i<claves.length;i++){
+var v = localStorage.getItem(claves[i]);
+if(v && v.length > 1 && v !== 'null' && v !== 'undefined' && v !== 'VACIO' && v !== 'ROTO'){
+vivos.push(claves[i]);
+} else {
+if(v !== null){
+muertos.push(claves[i] + ' - roto / vacío');
+}
+}
+}
+
+if(localStorage.getItem('seguridad') === 'ROTO' || localStorage.getItem('seguridad') === 'FALLA'){
+muertos.push('seguridad - rota');
+}
+
+document.getElementById('vivos').innerHTML = vivos.length > 0 ? "🟢 " + vivos.join('<br>🟢 ') : "No hay vivos guardados";
+document.getElementById('muertos').innerHTML = muertos.length > 0 ? "💀 " + muertos.join('<br>💀 ') : "Nada roto para destruir - Todo limpio";
+
+return {vivos:vivos, muertos:muertos};
+}
+
+function limpiarTodo(){
+var res = verificarAhora();
+var log = document.getElementById('log');
+log.innerHTML = "EMPEZANDO LIMPIEZA...<br>";
+log.innerHTML += "REVISANDO TODO LO QUE EXISTE...<br>";
+
+var i = 0;
+var listaMuertos = res.muertos;
+
+if(listaMuertos.length === 0){
+log.innerHTML += "<br>✅ VICTOR - NADA ROTO - TODO VIVO Y FUNCIONANDO";
+document.getElementById('estado').innerHTML = "TODO VIVO - NADA PARA DESTRUIR";
+return;
+}
+
+var t = setInterval(function(){
+if(i >= listaMuertos.length){
+clearInterval(t);
+log.innerHTML += "<br><b>✅ VICTOR - LIMPIEZA TERMINADA</b><br>";
+log.innerHTML += "VIVOS QUE QUEDAN: " + res.vivos.length + "<br>";
+log.innerHTML += "DESTRUIDOS: " + listaMuertos.length;
+document.getElementById('estado').innerHTML = "LIMPIO - SOLO VIVOS DESPIERTOS";
+localStorage.setItem('seguridad','DESPIERTA-LIMPIA');
+localStorage.setItem('ultima_limpieza', new Date().toLocaleString());
+return;
+}
+var nombre = listaMuertos[i].split(' - ')[0];
+localStorage.removeItem(nombre);
+log.innerHTML += "💀 DESTRUIDO: " + listaMuertos[i] + "<br>";
+i++;
+},400);
+}
+</script>
+</body>
+  </html>
