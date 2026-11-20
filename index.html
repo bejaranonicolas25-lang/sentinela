@@ -1,6 +1,6 @@
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open('sentinela-v1').then(c => c.addAll(['./','./index.html','./manifest.json'])));
-});
-self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).catch(()=>caches.match('./index.html'))));
-});
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#a100f2">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SENTINELA FINAL">
+<link rel="apple-touch-icon" href="icon-192.png">
