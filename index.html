@@ -3,128 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIMPIEZA - SENTINELA</title>
+<title>SENTINELA FINAL</title>
 <style>
-body{
-background:#000;
-color:#fff;
-font-family:Arial;
-margin:0;
-padding:12px;
-}
-.card{
-border-radius:22px;
-padding:18px;
-margin-bottom:12px;
-border:2px solid #a100f2;
-background:#2a0a4a;
-}
-button{
-width:100%;
-padding:14px;
-border:0;
-border-radius:14px;
-background:#a100f2;
-color:#fff;
-font-weight:900;
-margin:6px 0;
-}
-.gris{background:#333;}
-.verde{background:#0a7a42;}
-.rojo{background:#c00;}
-#log{
-background:#16002b;
-padding:12px;
-border-radius:12px;
-margin-top:10px;
-}
+*{box-sizing:border-box}body{background:#000;color:#fff;font-family:Arial;margin:0;padding:10px}
+.card{background:#1a0033;border:2px solid #a100f2;border-radius:22px;padding:16px;margin-bottom:12px}
+h1,h2{text-align:center;color:#d8a7ff;margin:8px 0}
+button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;color:#fff;font-weight:900;margin:6px 0;font-size:16px}
+.btn2{background:#2a0a4a;border:1px solid #a100f2;text-align:left}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid button{padding:16px}
+.rojo{background:#c00}.verde{background:#0a7a42}
+input{width:100%;padding:12px;border-radius:12px;border:1px solid #a100f2;background:#2a0a4a;color:#fff}
+.pantalla{display:none}.pantalla.activa{display:block}
+.cam{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cam div{background:#111;border:1px solid #a100f2;border-radius:12px;padding:8px;text-align:center}
+.cam img{width:100%;border-radius:8px;height:120px;object-fit:cover}
+.top{display:flex;justify-content:space-between;align-items:center}
 </style>
 </head>
 <body>
 
-<div class="card">
-<h1 style="text-align:center">🧹 LIMPIEZA TOTAL</h1>
-<p style="text-align:center">Destruir lo roto - Mantener lo vivo</p>
-<p style="text-align:center" id="estado">LISTO PARA LIMPIAR</p>
-<button class="rojo" onclick="limpiarTodo()">DESTRUIR TODO LO ROTO - ADELANTE</button>
-<div id="log">Tocá el botón. No borra lo que funciona.</div>
+<!-- INICIO -->
+<div id="inicio" class="pantalla activa">
+<div class="card"><h1>👁️ SENTINELA FINAL</h1><p style="text-align:center">José León Suárez - 25° Probable lluvia mañana<br>🟢 CON INTERNET<br>📥 Cola: 0 esperando WIFI</p></div>
+<div class="card"><h2>TOCÁ UNA APP - TODAS FUNCIONAN</h2><div class="grid">
+<button onclick="ir('central')">👁️ Central</button>
+<button onclick="ir('mensajes')">💬 Mensajes</button>
+<button onclick="ir('camaras')">📷 Cámaras</button>
+<button onclick="ir('alerta')">🚨 Alerta</button>
+<button onclick="ir('whatsapp')">💚 WhatsApp</button>
+<button onclick="ir('banco')">🏦 Banco</button>
+<button onclick="ir('mapa')">🗺️ Mapa</button>
+<button onclick="ir('asistente')">🧠 Asistente</button>
+</div></div>
 </div>
 
-<div class="card">
-<h2>✅ VIVOS - QUE QUEDAN</h2>
-<div id="vivos">Todavía no se limpió.</div>
+<!-- CENTRAL -->
+<div id="central" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>SENTINELA FINAL</h1><p style="text-align:center">📍 Jose Leon Suarez • 🟢 CON INTERNET</p><h2>👁️ CENTRAL DE MANDO</h2><p style="text-align:center"><b>QUINTUPLE SECURITY 5/5</b><br>🟢🟢🟢🟢🟢<br>Niveles activos • Todos los protocolos operativos</p>
+<button class="btn2" onclick="alert('Códigos Alfa Bravo: DIEZ CUATRO - CAMBIO - VICTOR')">🔒 Ver Codigos Alfa Bravo</button>
+<button class="btn2">📁 Carpeta 1</button>
+<button class="btn2">📄 Reporte</button>
+<button class="btn2">🔵🟢🔴 Estado AZUL VERDE ROJO</button>
+<button class="btn2">🎯 PATRULLA GOLF</button>
+<button class="btn2">☑️ CHARLIE chequeo</button>
+<button class="btn2">🚀 DELTA despliegue</button>
+</div><div class="card"><div class="grid"><button onclick="ir('inicio')">🏠 CENTRAL</button><button onclick="ir('mapa')">📍 MAPA</button></div></div>
 </div>
 
-<div class="card">
-<h2>💀 DESTRUIDOS - QUE SE ELIMINAN</h2>
-<div id="muertos">Todavía no se limpió.</div>
+<!-- MENSAJES -->
+<div id="mensajes" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>MENSAJES CENTINELA</h1><input placeholder="🔍 Buscar conversaciones...">
+<p>👮 <b>JEFE</b> - ahora<br>DIEZ CUATRO ✅</p><hr>
+<p>🎖️ <b>ALFA BRAVO</b> - hace 5m<br>CAMBIO</p><hr>
+<p>🐚 <b>CORAL</b> - hace 12m<br>ROJO</p><hr>
+<p>🤖 <b>CENTINELA META</b> - hace 30m<br>VERDE</p>
+<input placeholder="Escribi tu codigo... CAMBIO"><button>➤ ENVIAR</button></div>
 </div>
 
-<div class="card">
-<button class="verde" onclick="verificarAhora()">✅ VERIFICAR ANTES DE DESTRUIR</button>
-<button class="gris" onclick="location.reload()">🔄 Recargar</button>
+<!-- CAMARAS -->
+<div id="camaras" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>CAMARAS CENTINELA</h1><p style="text-align:center">EN VIVO • 4 CÁMARAS ACTIVAS • SEGURA</p><div class="cam">
+<div>🔴 REC BASE Casa<br><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400"><br>VERDE • AZUL</div>
+<div>🔴 REC PATRULLA Calle<br><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400"><br>VERDE • AZUL</div>
+<div>🔴 REC ZULU Zona<br><img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400"><br>VERDE • AZUL</div>
+<div>🔴 REC GOLF Guardia<br><img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400"><br>VERDE • AZUL</div>
+</div><div class="grid"><button>👁️ OSCAR Observo</button><button>🎯 FOXTROT Foco</button><button>🔍 ZOOM 1.0x</button><button class="rojo">⏺️ Grabar</button></div></div>
+</div>
+
+<!-- ALERTA -->
+<div id="alerta" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1 style="color:red">🚨 ALERTA ROJO</h1><p style="text-align:center">CUENTA REGRESIVA PARA BLOQUEO<br><span style="font-size:48px;color:red;font-weight:900">00:30</span><br>Mantenga la calma. El equipo se está desplegando.</p>
+<p>📍 UBICACIÓN ACTUAL<br><b>José León Suárez</b><br>-34.5201, -58.6165 • Zona Norte • Buenos Aires</p>
+<button class="rojo" style="font-size:22px" onclick="alert('ALERTA ENVIADA - AYUDA EN CAMINO')">🖐️ AYUDA<br><small>TOCAR PARA ENVIAR ALERTA AHORA</small></button>
+<div class="grid"><button>⚠️ PELIGRO</button><button>➕ MEDICO</button><button>🛡️ POLICIA</button><button>➕ GOLF Guardia</button></div>
+<button>🚁 DELTA despliegue ➤</button>
+<p><b>📞 CONTACTOS DE EMERGENCIA</b><br>👤 Mamá • +54 11 5555-0123 📞 Llamar<br>👤 Jefe Seguridad • +54 11 5555-0187 📞 Llamar<br>👤 Defensa Civil • 103 📞 Llamar</p>
+<p style="text-align:center">SENTINELA v3.1 • Protocolo FINAL activo • Encriptado E2E</p></div>
+</div>
+
+<!-- WHATSAPP -->
+<div id="whatsapp" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>WHATSAPP CENTINELA</h1><p style="text-align:center">SENTINELA FINAL<br>Modo seguro • Encriptado de extremo a extremo ✅ En línea</p>
+<p>🟣 <b>JEFE</b> 09:42 +1<br>DIEZ CUATRO —<br>🟢 En posición. • 🎤 0:12</p><hr>
+<p>🟣 <b>ALFA BRAVO</b> 09:40<br>CAMBIO Y FUERA —<br>Revisando sector norte. • 🎤 0:25</p>
+<input placeholder="Escribe mensaje..."><button>CORAL CODE {“} ➤</button></div>
+</div>
+
+<!-- BANCO -->
+<div id="banco" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>BANCO CENTINELA</h1><div style="background:#2a0a4a;padding:16px;border-radius:16px"><small>Saldo total</small><h2 style="text-align:left;font-size:28px">$1,245,830.00 MXN</h2><p style="color:#0f0">+$42,180.00 ↗ +3.5%<br>Este mes • Actualizado hoy 09:32</p></div>
+<div class="grid"><button>👛 Saldo Detalles</button><button>☰ Movimientos Historial</button><button>📈 TRADER Cripto & Bolsa</button><button>✈️ Transferir Enviar dinero</button></div>
+<p style="text-align:center">LOGROS</p><div class="grid"><button>🏆 VICTOR Logrado<br>Meta de ahorro +15%<br>Completado</button><button>🛡️ SIERRA Seguro<br>Seguro vigente activo<br>Activo</button></div>
+<button>🔒 QUINTUPLE SECURITY<br>Cifrado • Biometría • 2FA • Anti-fraude • Monitoreo 24/7</button>
+<p><b>Análisis</b> - Rendimiento +8.2% ↗</p><p><b>Transacciones recientes</b><br>₿ Transferencia a Ana López - $25,000.00<br>Hoy • 08:15 • Aceptado<br>🧾 Pago Servicio CFE - $3,200.00<br>12 oct • 14:20 • Pagado</p>
+<div class="grid"><button>🏠 Inicio</button><button>📊 Movimientos</button><button>💳 Tarjetas</button><button>📈 Trading</button></div></div>
+</div>
+
+<!-- MAPA -->
+<div id="mapa" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>MAPA ZULU</h1><p style="text-align:center">SENTINELA FINAL • JOSE LEON SUAREZ</p>
+<div style="background:#0a0a2a;padding:20px;border-radius:16px;text-align:center;line-height:2">
+📍 KILO Lejos<br>🛡️ GOLF Guardia<br>--- route ---<br>🏃 MIKE Movimiento<br>⬡ ZULU Zona<br>🏠 BASE Casa<br>PATRULLA route
+</div>
+<div class="grid"><button>⚡ ROMEO Rapido</button><button>🐢 LIMA Lento</button><button>⏸️ QUEBEC Quieto</button><button onclick="ir('inicio')">🏠 BASE</button></div></div>
+</div>
+
+<!-- ASISTENTE -->
+<div id="asistente" class="pantalla">
+<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>ASISTENTE CENTINELA META</h1><p style="text-align:center">SENTINELA FINAL • ASISTENTE</p>
+<p>👁️ ASISTENTE<br>En línea • IA Activa •</p>
+<p style="background:#2a0a4a;padding:10px;border-radius:12px">Listo. Monitorizando sector. Códigos detectados:</p>
+<p style="background:#2a0a4a;padding:10px;border-radius:12px"><b>ALFA BRAVO —</b><br>perímetro seguro ✅ 21:42</p>
+<p style="background:#a100f2;padding:10px;border-radius:12px;text-align:right"><b>DIEZ CUATRO</b></p>
+<p style="background:#2a0a4a;padding:10px;border-radius:12px"><b>CHARLIE —</b><br>movimiento leve en zona norte 21:43</p>
+<p style="background:#2a0a4a;padding:10px;border-radius:12px">ℹ️ INDIA Info<br>Sin incidencias. Todo estable.<br>— sin cambios en 10 min</p>
+<div class="grid"><button>🛡️ REPORTE</button><button>🌦️ TIEMPO AHORA</button><button>🌙 TIEMPO MAÑANA</button></div>
+<p>Teclado de códigos</p>
+<div class="grid"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><button>?</button><button>!</button><button>+</button></div>
+<input placeholder="Escribe un código o consulta..."><button>➤ ENVIAR</button></div>
 </div>
 
 <script>
-function verificarAhora(){
-var vivos = [];
-var muertos = [];
-
-var claves = ['pin_seguridad','carpeta1','carpeta1_segura','seguridad','coral','todos_despiertos','despierto_01 CORAL','despierto_02 CENTINELA META'];
-
-for(var i=0;i<claves.length;i++){
-var v = localStorage.getItem(claves[i]);
-if(v && v.length > 1 && v !== 'null' && v !== 'undefined' && v !== 'VACIO' && v !== 'ROTO'){
-vivos.push(claves[i]);
-} else {
-if(v !== null){
-muertos.push(claves[i] + ' - roto / vacío');
-}
-}
-}
-
-if(localStorage.getItem('seguridad') === 'ROTO' || localStorage.getItem('seguridad') === 'FALLA'){
-muertos.push('seguridad - rota');
-}
-
-document.getElementById('vivos').innerHTML = vivos.length > 0 ? "🟢 " + vivos.join('<br>🟢 ') : "No hay vivos guardados";
-document.getElementById('muertos').innerHTML = muertos.length > 0 ? "💀 " + muertos.join('<br>💀 ') : "Nada roto para destruir - Todo limpio";
-
-return {vivos:vivos, muertos:muertos};
-}
-
-function limpiarTodo(){
-var res = verificarAhora();
-var log = document.getElementById('log');
-log.innerHTML = "EMPEZANDO LIMPIEZA...<br>";
-log.innerHTML += "REVISANDO TODO LO QUE EXISTE...<br>";
-
-var i = 0;
-var listaMuertos = res.muertos;
-
-if(listaMuertos.length === 0){
-log.innerHTML += "<br>✅ VICTOR - NADA ROTO - TODO VIVO Y FUNCIONANDO";
-document.getElementById('estado').innerHTML = "TODO VIVO - NADA PARA DESTRUIR";
-return;
-}
-
-var t = setInterval(function(){
-if(i >= listaMuertos.length){
-clearInterval(t);
-log.innerHTML += "<br><b>✅ VICTOR - LIMPIEZA TERMINADA</b><br>";
-log.innerHTML += "VIVOS QUE QUEDAN: " + res.vivos.length + "<br>";
-log.innerHTML += "DESTRUIDOS: " + listaMuertos.length;
-document.getElementById('estado').innerHTML = "LIMPIO - SOLO VIVOS DESPIERTOS";
-localStorage.setItem('seguridad','DESPIERTA-LIMPIA');
-localStorage.setItem('ultima_limpieza', new Date().toLocaleString());
-return;
-}
-var nombre = listaMuertos[i].split(' - ')[0];
-localStorage.removeItem(nombre);
-log.innerHTML += "💀 DESTRUIDO: " + listaMuertos[i] + "<br>";
-i++;
-},400);
-}
+function ir(id){document.querySelectorAll('.pantalla').forEach(p=>p.classList.remove('activa'));document.getElementById(id).classList.add('activa');window.scrollTo(0,0)}
 </script>
 </body>
   </html>
