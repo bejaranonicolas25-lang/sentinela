@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SENTINELA FINAL - BOTS SABIOS</title>
+<title>SENTINELA FINAL - OFFLINE + LABORATORIO</title>
+<link rel="manifest" href='data:application/manifest+json,{"name":"SENTINELA FINAL","short_name":"SENTINELA","display":"standalone","background_color":"%23050508","theme_color":"%23a100f2"}'>
 <style>
 *{box-sizing:border-box}body{background:#050508;color:#fff;font-family:Arial;margin:0;padding:10px}
-.card{background:linear-gradient(180deg,#1e0038,#12001f);border:2px solid #a100f2;border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:0 0 20px #a100f233}
+.card{background:linear-gradient(180deg,#1e0038,#12001f);border:2px solid #a100f2;border-radius:22px;padding:16px;margin-bottom:12px}
 h1,h2{text-align:center;color:#e6c8ff;margin:8px 0}
 button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;color:#fff;font-weight:900;margin:6px 0;font-size:16px}
 .btn2{background:#2a0a4a;border:1px solid #a100f2;text-align:left}
@@ -14,7 +15,6 @@ button{width:100%;padding:14px;border:0;border-radius:14px;background:#a100f2;co
 .rojo{background:#c00}.verde{background:#0a7a42}.gris{background:#333}.dorado{background:#b8860b}
 input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #a100f2;background:#1a0033;color:#fff;margin:6px 0;font-size:16px}
 .pantalla{display:none}.pantalla.activa{display:block}
-.cam{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cam div{background:#111;border:1px solid #a100f2;border-radius:12px;padding:8px;text-align:center}.cam img{width:100%;border-radius:8px;height:120px;object-fit:cover}
 #msg{text-align:center;font-weight:900;margin:8px 0}
 .switch{display:flex;justify-content:space-between;align-items:center;background:#2a0a4a;padding:12px;border-radius:12px;margin:6px 0}
 .switch input{width:50px;accent-color:#a100f2}
@@ -22,147 +22,97 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #a100f2
 .cerebro{background:#000;border:2px solid #e6c8ff;border-radius:16px;padding:12px;margin:8px 0}
 .msgIA{background:#2a0a4a;padding:10px;border-radius:12px;margin:6px 0}
 .msgTU{background:#a100f2;padding:10px;border-radius:12px;margin:6px 0;text-align:right}
-.portada{border-radius:22px;overflow:hidden;border:2px solid #a100f2;margin-bottom:12px;position:relative}
-.portada img{width:100%;height:220px;object-fit:cover;display:block}
-.portada .texto{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#000);padding:20px 16px 12px;text-align:center}
+.portada{border-radius:22px;overflow:hidden;border:2px solid #a100f2;margin-bottom:12px;position:relative;background:linear-gradient(135deg,#4a00e0,#a100f2,#ff00a8);padding:30px 16px;text-align:center}
 .bot{display:flex;gap:10px;align-items:center;background:#2a0a4a;border:1px solid #a100f2;border-radius:16px;padding:12px;margin:8px 0}
 .bot .icono{font-size:42px;min-width:56px;text-align:center}
-.bot b{font-size:16px}
-.bot small{color:#d8a7ff}
 .vozBtn{background:#0a7a42}
+.cam{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cam div{background:#111;border:1px solid #a100f2;border-radius:12px;padding:10px;text-align:center}
+.cam .foto{font-size:60px;padding:20px 0;background:linear-gradient(135deg,#1a0033,#4a00e0);border-radius:12px}
+.lab{background:#001a00;border:2px solid #0f0;border-radius:16px;padding:12px;margin:8px 0}
+.offlineBar{position:fixed;top:0;left:0;right:0;background:#0a7a42;color:#fff;text-align:center;padding:6px;font-size:13px;font-weight:900;z-index:999}
 </style>
 </head>
 <body>
+<div id="barraOffline" class="offlineBar">🛜 OFFLINE LISTO - FUNCIONA SIN INTERNET ✅</div>
+<div style="height:28px"></div>
 
-<!-- PORTADA - CUANDO ABRIS EL LINK -->
+<!-- PORTADA OFFLINE -->
 <div id="portada" class="pantalla activa">
 <div class="portada">
-<img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800" alt="Sentinela Final">
-<div class="texto"><h1 style="margin:0">🧠👁️ SENTINELA FINAL</h1><p style="margin:4px 0">José León Suárez • IA con Cerebro • Bots Sabios</p><p style="margin:0"><span class="badge" style="background:#0a7a42">REAL</span> <span class="badge" style="background:#a100f2">PRO</span> <span class="badge" style="background:#b8860b">VOZ GUIADA</span></p></div>
+<div style="font-size:80px">🧠👁️</div>
+<h1 style="margin:0">SENTINELA FINAL</h1>
+<p>José León Suárez • IA con Cerebro • Bots Sabios • OFFLINE</p>
+<p><span class="badge" style="background:#0a7a42">SIN INTERNET ✅</span> <span class="badge" style="background:#a100f2">PRO</span> <span class="badge" style="background:#b8860b">VOZ GUIADA</span></p>
+<p id="estadoNet" style="font-weight:900">📶 Detectando internet...</p>
 </div>
 <div class="card">
 <h2>🔊 TEXTO GUIADO POR VOZ</h2>
-<p style="text-align:center" id="textoVoz">Bienvenido jefe, soy tu Centinela Meta. Te voy a guiar con mi voz. Tocá el botón y escuchame.</p>
-<button class="vozBtn" onclick="hablar('Bienvenido jefe, soy tu Centinela Meta. Soy tu IA con cerebro. Te voy a guiar. Tenés 8 agentes sabios que te cuidan. Alfa Bravo te protege, Coral cuida tu casa, Charlie vigila el norte, Delta despliega ayuda, Golf hace guardia, y yo, Centinela Meta, soy tu cerebro. Tocá entrar para empezar. Diez cuatro.')">🔊 ▶️ ESCUCHAR GUÍA POR VOZ - TOCÁ ACÁ</button>
-<button class="gris" onclick="hablar('Voy a dejar de hablar, jefe.')">🔇 PARAR VOZ</button>
-<div class="switch"><span>🔊 Voz automática al abrir - Opcional</span><input type="checkbox" id="vozAuto" onchange="localStorage.setItem('vozAuto',this.checked?'SI':'NO')"></div>
+<p style="text-align:center" id="textoVoz">Bienvenido jefe, soy tu Centinela Meta. Funciono sin internet. Te guío con mi voz.</p>
+<button class="vozBtn" onclick="hablar('Bienvenido jefe, soy tu Centinela Meta. Ahora funciono sin internet. Todo está guardado en tu teléfono. Tenés 8 agentes sabios, tu cerebro que te recuerda, y tu laboratorio. Tocá entrar para empezar. Diez cuatro.')">🔊 ▶️ ESCUCHAR GUÍA POR VOZ</button>
+<button class="gris" onclick="hablar('Paro la voz, jefe.');speechSynthesis.cancel()">🔇 PARAR VOZ</button>
+<div class="switch"><span>🔊 Voz automática al abrir</span><input type="checkbox" id="vozAuto" onchange="localStorage.setItem('vozAuto',this.checked?'SI':'NO')"></div>
+<div class="switch"><span>🛜 Modo Offline - Guardar todo en teléfono</span><input type="checkbox" checked onchange="alert(this.checked?'✅ OFFLINE ACTIVADO - Todo guardado en tu teléfono':'⚠️ OFFLINE DESACTIVADO')"></div>
 <button class="verde" onclick="entrarPortada()">➤ ENTRAR A SENTINELA FINAL</button>
+<button onclick="ir('lab')">🧪 IR AL LABORATORIO - SIN INTERNET</button>
 </div>
 
-<div class="card">
-<h2>🤖 CONOCÉ A TUS AGENTES SABIOS</h2>
-<p style="text-align:center">Tocá cada uno para que te hable y te explique quién es</p>
-
-<div class="bot" onclick="presentarBot('ALFA BRAVO','Soy Alfa Bravo, tu protector principal. Yo vigilo el perímetro y te digo si todo está seguro. Mi código es Alfa Bravo, y mi respuesta es cambio.')">
-<div class="icono">🎖️</div><div><b>🎖️ ALFA BRAVO</b><br><small>Protector Principal • Perímetro Seguro • Sabio en defensa</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('ALFA BRAVO','Soy Alfa Bravo, tu protector principal. Yo vigilo el perímetro y te digo si todo está seguro.')">🔊 ESCUCHAR A ALFA BRAVO</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('CENTINELA META','Soy Centinela Meta, tu cerebro. Yo recuerdo todo, aprendo de vos, y pienso por vos. Soy la IA que creamos juntos.')">
-<div class="icono">🧠</div><div><b>🧠 CENTINELA META</b><br><small>Tu Cerebro • Recuerda • Aprende • Piensa • El más sabio</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('CENTINELA META','Soy Centinela Meta, tu cerebro. Yo recuerdo todo, aprendo de vos, y pienso por vos.')">🔊 ESCUCHAR A CENTINELA</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('CORAL','Soy Coral, cuido tu casa. Si algo pasa en casa, yo te aviso primero. Mi código es Coral, y mi color es rojo cuando hay peligro.')">
-<div class="icono">🐚</div><div><b>🐚 CORAL</b><br><small>Cuida tu Casa • Alerta Hogar • Corazón de la casa</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('CORAL','Soy Coral, cuido tu casa. Si algo pasa en casa, yo te aviso primero.')">🔊 ESCUCHAR A CORAL</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('CHARLIE','Soy Charlie, vigilo la zona norte. Yo hago el chequeo y te digo si hay movimiento leve o si todo está tranquilo.')">
-<div class="icono">☑️</div><div><b>☑️ CHARLIE</b><br><small>Chequeo Zona Norte • Vigilancia • Movimiento</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('CHARLIE','Soy Charlie, vigilo la zona norte. Yo hago el chequeo y te digo si hay movimiento.')">🔊 ESCUCHAR A CHARLIE</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('DELTA','Soy Delta, despliego ayuda. Cuando tocás ayuda, yo mando el equipo, la policía, el médico, todo. Yo no paro hasta que lleguen.')">
-<div class="icono">🚀</div><div><b>🚀 DELTA</b><br><small>Despliegue Rápido • Ayuda • Rescate</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('DELTA','Soy Delta, despliego ayuda. Cuando tocás ayuda, yo mando el equipo.')">🔊 ESCUCHAR A DELTA</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('GOLF','Soy Golf, hago guardia. Yo estoy en la puerta, despierto, cuidando. Si alguien se acerca, yo te aviso.')">
-<div class="icono">🛡️</div><div><b>🛡️ GOLF</b><br><small>Guardia • Puerta • Siempre Despierto</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('GOLF','Soy Golf, hago guardia. Yo estoy en la puerta, despierto, cuidando.')">🔊 ESCUCHAR A GOLF</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('INDIA','Soy India, te doy información. Yo te digo el tiempo, si va a llover, y si hay incidencias. Sin incidencias, todo estable.')">
-<div class="icono">ℹ️</div><div><b>ℹ️ INDIA</b><br><small>Información • Tiempo • Sin Incidencias</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('INDIA','Soy India, te doy información. Yo te digo el tiempo y si hay incidencias.')">🔊 ESCUCHAR A INDIA</button></div>
-</div>
-
-<div class="bot" onclick="presentarBot('JEFE','Vos sos el Jefe. Vos mandás. Todos nosotros te obedecemos. Vos sos el que nos creó, el que nos enseñó.')">
-<div class="icono">👮</div><div><b>👮 JEFE - VOS</b><br><small>El que manda • Creador • Nuestro Jefe</small><br><button class="vozBtn" style="padding:8px;margin:4px 0" onclick="event.stopPropagation();presentarBot('JEFE','Vos sos el Jefe. Vos mandás. Todos nosotros te obedecemos.')">🔊 ESCUCHAR QUIÉN ES EL JEFE</button></div>
-</div>
-
+<div class="card"><h2>🤖 CONOCÉ A TUS AGENTES SABIOS</h2>
+<div class="bot"><div class="icono">🎖️</div><div><b>🎖️ ALFA BRAVO</b><br><small>Protector • Perímetro Seguro</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('ALFA BRAVO','Soy Alfa Bravo, tu protector principal. Vigilo el perímetro.')">🔊 ESCUCHAR A ALFA BRAVO</button></div></div>
+<div class="bot"><div class="icono">🧠</div><div><b>🧠 CENTINELA META</b><br><small>Tu Cerebro • Recuerda • Aprende • El más sabio</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('CENTINELA META','Soy Centinela Meta, tu cerebro. Recuerdo todo y aprendo de vos.')">🔊 ESCUCHAR A CENTINELA</button></div></div>
+<div class="bot"><div class="icono">🐚</div><div><b>🐚 CORAL</b><br><small>Cuida tu Casa</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('CORAL','Soy Coral, cuido tu casa.')">🔊 ESCUCHAR A CORAL</button></div></div>
+<div class="bot"><div class="icono">☑️</div><div><b>☑️ CHARLIE</b><br><small>Chequeo Zona Norte</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('CHARLIE','Soy Charlie, vigilo la zona norte.')">🔊 ESCUCHAR A CHARLIE</button></div></div>
+<div class="bot"><div class="icono">🚀</div><div><b>🚀 DELTA</b><br><small>Despliegue Rápido • Ayuda</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('DELTA','Soy Delta, despliego ayuda.')">🔊 ESCUCHAR A DELTA</button></div></div>
+<div class="bot"><div class="icono">🛡️</div><div><b>🛡️ GOLF</b><br><small>Guardia • Puerta</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('GOLF','Soy Golf, hago guardia.')">🔊 ESCUCHAR A GOLF</button></div></div>
+<div class="bot"><div class="icono">ℹ️</div><div><b>ℹ️ INDIA</b><br><small>Información • Tiempo</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('INDIA','Soy India, te doy información y tiempo.')">🔊 ESCUCHAR A INDIA</button></div></div>
+<div class="bot"><div class="icono">🧪</div><div><b>🧪 LABORATORIO</b><br><small>Experimentos • Códigos • Pruebas</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('LABORATORIO','Soy el laboratorio, acá probamos códigos y experimentos sin peligro.')">🔊 ESCUCHAR LABORATORIO</button></div></div>
+<div class="bot"><div class="icono">👮</div><div><b>👮 JEFE - VOS</b><br><small>El que manda • Creador</small><br><button class="vozBtn" style="padding:8px" onclick="presentarBot('JEFE','Vos sos el Jefe. Vos mandás.')">🔊 ESCUCHAR QUIÉN ES EL JEFE</button></div></div>
 </div>
 </div>
 
 <!-- AUTH -->
 <div id="auth" class="pantalla">
-<div class="card">
-<h1>🧠👁️ SENTINELA FINAL</h1>
-<p style="text-align:center">IA con Cerebro • Bots Sabios • Voz Guiada</p>
-<p style="text-align:center"><span class="badge" style="background:#0a7a42">REAL</span> <span class="badge" style="background:#a100f2">CEREBRO</span> <span class="badge" style="background:#b8860b">VOZ</span></p>
-<div class="cerebro"><p style="text-align:center">🧠 <b>CEREBRO:</b> <span id="estadoCerebro">Dormido</span></p></div>
-<p id="msg"></p>
-<button class="vozBtn" onclick="hablar('Estás en el registro, jefe. Si es tu primera vez, registrate. Si ya tenés cuenta, tocá entrar. Yo te guío con mi voz.')">🔊 ¿QUÉ HAGO ACÁ? - ESCUCHAR</button>
-<div id="boxRegistro">
-<h2>📝 REGISTRO - PRIMERA VEZ</h2>
-<input id="r_nombre" placeholder="Tu nombre - Ej: JEFE"><input id="r_usuario" placeholder="Usuario"><input id="r_pass" type="password" placeholder="Contraseña"><input id="r_pass2" type="password" placeholder="Repetí la contraseña">
-<select id="r_pregunta"><option value="">Pregunta secreta</option><option>¿Nombre de tu mamá?</option><option>¿Nombre de tu mascota?</option><option>¿Tu código favorito?</option><option>¿Ciudad donde naciste?</option></select><input id="r_respuesta" placeholder="Respuesta secreta">
-<p style="text-align:center"><b>🛡️ SEGURIDAD FUERTE - TODO OPCIONAL</b></p>
-<div class="switch"><span>🔢 PIN - Opcional</span><input type="checkbox" id="opt_pin" onchange="document.getElementById('pin_extra').style.display=this.checked?'block':'none'"></div><input id="pin_extra" style="display:none" placeholder="Tu PIN opcional" maxlength="6">
-<div class="switch"><span>🔐 2FA - Opcional</span><input type="checkbox" id="opt_2fa" onchange="document.getElementById('tfa_extra').style.display=this.checked?'block':'none'"></div><input id="tfa_extra" style="display:none" placeholder="Tu 2FA opcional" maxlength="6">
-<div class="switch"><span>👆 Huella - Opcional</span><input type="checkbox" id="opt_huella"></div>
-<div class="switch"><span>⏱️ Auto-bloqueo - Opcional</span><input type="checkbox" id="opt_bloqueo"></div>
-<div class="switch"><span>🚫 Bloquear a los 3 intentos - Opcional</span><input type="checkbox" id="opt_intentos"></div>
-<button class="verde" onclick="registrar()">🧠✅ REGISTRARME Y DESPERTAR CEREBRO</button>
-<p style="text-align:center">¿Ya tenés cuenta? <a href="#" onclick="mostrarLogin();return false" style="color:#e6c8ff">Entrar acá</a></p>
-</div>
-<div id="boxLogin" style="display:none">
-<h2>🔐 ENTRAR</h2><input id="l_usuario" placeholder="Usuario"><input id="l_pass" type="password" placeholder="Contraseña"><div id="login_extra"></div>
-<button onclick="entrar()">🧠➤ ENTRAR</button><button class="dorado" onclick="entrarHuella()">👆 ENTRAR CON HUELLA</button><button class="gris" onclick="mostrarRecuperar()">❓ RECUPERAR CONTRASEÑA</button>
-<p style="text-align:center">¿Primera vez? <a href="#" onclick="mostrarRegistro();return false" style="color:#e6c8ff">Registrarme</a></p>
-</div>
-<div id="boxRecuperar" style="display:none">
-<h2>🔑 RECUPERAR</h2><input id="rec_usuario" placeholder="Tu usuario"><button onclick="pasoRecuperar1()">➤ BUSCAR MI CUENTA</button>
-<div id="recPaso2" style="display:none"><p id="recPregunta" style="text-align:center;font-weight:900"></p><input id="rec_respuesta" placeholder="Tu respuesta secreta"><input id="rec_nueva" type="password" placeholder="Nueva contraseña"><button class="verde" onclick="recuperarAhora()">✅ CAMBIAR Y ENTRAR</button></div>
-<button class="gris" onclick="mostrarLogin()">⬅ Volver</button>
-</div>
-</div>
-<button class="gris" onclick="ir('portada')">⬅ VOLVER A PORTADA</button>
-</div>
+<div class="card"><h1>🧠👁️ SENTINELA FINAL</h1><p style="text-align:center">OFFLINE • IA con Cerebro • Voz Guiada</p><div class="cerebro"><p style="text-align:center">🧠 <b>CEREBRO:</b> <span id="estadoCerebro">Dormido</span></p></div><p id="msg"></p>
+<button class="vozBtn" onclick="hablar('Estás en el registro, jefe. Si es tu primera vez, registrate. Si ya tenés cuenta, tocá entrar. Todo sin internet.')">🔊 ¿QUÉ HAGO ACÁ?</button>
+<div id="boxRegistro"><h2>📝 REGISTRO - PRIMERA VEZ</h2><input id="r_nombre" placeholder="Tu nombre"><input id="r_usuario" placeholder="Usuario"><input id="r_pass" type="password" placeholder="Contraseña"><input id="r_pass2" type="password" placeholder="Repetí la contraseña"><select id="r_pregunta"><option value="">Pregunta secreta</option><option>¿Nombre de tu mamá?</option><option>¿Nombre de tu mascota?</option><option>¿Tu código favorito?</option><option>¿Ciudad donde naciste?</option></select><input id="r_respuesta" placeholder="Respuesta secreta"><p style="text-align:center"><b>🛡️ SEGURIDAD FUERTE - TODO OPCIONAL</b></p><div class="switch"><span>🔢 PIN - Opcional</span><input type="checkbox" id="opt_pin" onchange="document.getElementById('pin_extra').style.display=this.checked?'block':'none'"></div><input id="pin_extra" style="display:none" placeholder="Tu PIN opcional" maxlength="6"><div class="switch"><span>🔐 2FA - Opcional</span><input type="checkbox" id="opt_2fa" onchange="document.getElementById('tfa_extra').style.display=this.checked?'block':'none'"></div><input id="tfa_extra" style="display:none" placeholder="Tu 2FA opcional" maxlength="6"><div class="switch"><span>👆 Huella - Opcional</span><input type="checkbox" id="opt_huella"></div><div class="switch"><span>⏱️ Auto-bloqueo - Opcional</span><input type="checkbox" id="opt_bloqueo"></div><div class="switch"><span>🚫 Bloquear a los 3 intentos - Opcional</span><input type="checkbox" id="opt_intentos"></div><button class="verde" onclick="registrar()">🧠✅ REGISTRARME Y DESPERTAR CEREBRO</button><p style="text-align:center">¿Ya tenés cuenta? <a href="#" onclick="mostrarLogin();return false" style="color:#e6c8ff">Entrar acá</a></p></div>
+<div id="boxLogin" style="display:none"><h2>🔐 ENTRAR</h2><input id="l_usuario" placeholder="Usuario"><input id="l_pass" type="password" placeholder="Contraseña"><div id="login_extra"></div><button onclick="entrar()">🧠➤ ENTRAR</button><button class="dorado" onclick="entrarHuella()">👆 HUELLA</button><button class="gris" onclick="mostrarRecuperar()">❓ RECUPERAR CONTRASEÑA</button><p style="text-align:center">¿Primera vez? <a href="#" onclick="mostrarRegistro();return false" style="color:#e6c8ff">Registrarme</a></p></div>
+<div id="boxRecuperar" style="display:none"><h2>🔑 RECUPERAR</h2><input id="rec_usuario" placeholder="Tu usuario"><button onclick="pasoRecuperar1()">➤ BUSCAR</button><div id="recPaso2" style="display:none"><p id="recPregunta" style="text-align:center;font-weight:900"></p><input id="rec_respuesta" placeholder="Tu respuesta secreta"><input id="rec_nueva" type="password" placeholder="Nueva contraseña"><button class="verde" onclick="recuperarAhora()">✅ CAMBIAR Y ENTRAR</button></div><button class="gris" onclick="mostrarLogin()">⬅ Volver</button></div>
+</div><button class="gris" onclick="ir('portada')">⬅ VOLVER A PORTADA</button></div>
 
 <!-- SEGURIDAD -->
-<div id="seguridad" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>🛡️ SEGURIDAD FUERTE</h1><div id="configSeguridad"></div><button class="verde" onclick="guardarSeguridad()">💾 GUARDAR</button></div></div>
+<div id="seguridad" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>🛡️ SEGURIDAD FUERTE - OFFLINE</h1><div id="configSeguridad"></div><button class="verde" onclick="guardarSeguridad()">💾 GUARDAR</button></div></div>
 
 <!-- INICIO -->
 <div id="inicio" class="pantalla">
-<div class="portada"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800"><div class="texto"><h1 style="margin:0">🧠👁️ SENTINELA FINAL</h1><p style="margin:0" id="bienvenida"></p></div></div>
-<div class="card"><p style="text-align:center">José León Suárez • <span id="nivelSeg"></span></p><div class="cerebro"><p style="text-align:center">🧠 <b>CEREBRO:</b> <span id="cerebroInicio">Despierto</span></p><button class="vozBtn" onclick="hablar(document.getElementById('cerebroInicio').innerText + '. Estás en el inicio, jefe. Tenés todas tus apps. Tocá cerebro para hablar conmigo.')">🔊 ESCUCHAR DÓNDE ESTOY</button><button onclick="ir('cerebro')">🧠 HABLAR CON MI IA</button></div><div class="grid"><button class="gris" onclick="ir('seguridad')">🛡️ Seguridad</button><button class="rojo" onclick="salir()">🔒 Cerrar Sesión</button></div></div>
-<div class="card"><h2>TOCÁ UNA APP - TODAS CON VOZ</h2><div class="grid">
-<button onclick="ir('central')">👁️ Central</button><button onclick="ir('cerebro')">🧠 Cerebro IA</button><button onclick="ir('mensajes')">💬 Mensajes</button><button onclick="ir('camaras')">📷 Cámaras</button><button onclick="ir('alerta')">🚨 Alerta</button><button onclick="ir('whatsapp')">💚 WhatsApp</button><button onclick="ir('banco')">🏦 Banco</button><button onclick="ir('mapa')">🗺️ Mapa</button><button onclick="ir('asistente')">🧠 Asistente</button><button onclick="ir('portada')">🏠 Portada - Bots</button>
+<div class="portada"><div style="font-size:60px">🧠👁️</div><h1 style="margin:0">SENTINELA FINAL</h1><p style="margin:0" id="bienvenida"></p><p style="margin:0">🛜 OFFLINE LISTO • <span id="nivelSeg"></span></p></div>
+<div class="card"><div class="cerebro"><p style="text-align:center">🧠 <b>CEREBRO:</b> <span id="cerebroInicio">Despierto</span></p><button class="vozBtn" onclick="hablar('Estás en el inicio, jefe. Todas tus apps funcionan sin internet.')">🔊 ESCUCHAR DÓNDE ESTOY</button><button onclick="ir('cerebro')">🧠 HABLAR CON MI IA</button></div><div class="grid"><button class="gris" onclick="ir('seguridad')">🛡️ Seguridad</button><button class="rojo" onclick="salir()">🔒 Cerrar Sesión</button></div></div>
+<div class="card"><h2>TOCÁ UNA APP - TODAS SIN INTERNET</h2><div class="grid">
+<button onclick="ir('central')">👁️ Central</button><button onclick="ir('cerebro')">🧠 Cerebro IA</button><button onclick="ir('mensajes')">💬 Mensajes</button><button onclick="ir('camaras')">📷 Cámaras</button><button onclick="ir('alerta')">🚨 Alerta</button><button onclick="ir('whatsapp')">💚 WhatsApp</button><button onclick="ir('banco')">🏦 Banco</button><button onclick="ir('mapa')">🗺️ Mapa</button><button onclick="ir('asistente')">🧠 Asistente</button><button onclick="ir('lab')">🧪 Laboratorio</button><button onclick="ir('portada')">🏠 Portada - Bots</button><button onclick="ir('offline')">🛜 Modo Offline</button>
 </div></div>
 </div>
 
 <!-- CEREBRO -->
-<div id="cerebro" class="pantalla">
-<div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>🧠 CEREBRO CENTINELA META</h1><p style="text-align:center">LA IA QUE CREAMOS • MÁS SABIA • TE HABLA</p>
-<div class="cerebro"><p>🧠 Nivel: <b id="nivelCerebro2">BEBÉ</b> • Recuerdos: <b id="recuerdosCerebro2">0</b> • Códigos: <b id="codigosCerebro">0</b><br><small id="ultimoAprendizaje"></small></p><button class="vozBtn" onclick="hablar('Soy tu cerebro, jefe. Te recuerdo, aprendo de vos, y ahora también te hablo. Decime Diez Cuatro, Cambio, Reporte, o enseñame un código nuevo.')">🔊 ESCUCHAR A MI CEREBRO</button></div>
-<div id="chatCerebro" style="max-height:280px;overflow-y:auto"></div>
-<input id="inputCerebro" placeholder="Hablale a tu IA... Ej: DIEZ CUATRO">
-<div class="grid"><button class="verde" onclick="hablarCerebro()">🧠➤ HABLAR</button><button class="vozBtn" onclick="hablar(document.getElementById('inputCerebro').value || 'Decime algo, jefe')">🔊 🔊 HABLAR CON VOZ</button></div>
-<div class="grid"><button onclick="cerebroAccion('DIEZ CUATRO')">DIEZ CUATRO</button><button onclick="cerebroAccion('CAMBIO')">CAMBIO</button><button onclick="cerebroAccion('REPORTE')">🛡️ REPORTE</button><button onclick="cerebroAccion('ALERTA')">🚨 ALERTA</button><button onclick="cerebroAccion('¿Quién soy?')">¿Quién soy?</button><button onclick="cerebroAccion('¿Qué aprendiste?')">¿Qué aprendiste?</button></div>
-<p style="text-align:center">Enseñale: APRENDE: CODIGO = significado</p>
-<button class="gris" onclick="olvidarCerebro()">🗑️ Borrar memoria - Solo si querés</button>
-</div>
-</div>
+<div id="cerebro" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>🧠 CEREBRO CENTINELA META</h1><p style="text-align:center">LA IA QUE CREAMOS • SIN INTERNET • TE HABLA</p><div class="cerebro"><p>🧠 Nivel: <b id="nivelCerebro2">BEBÉ</b> • Recuerdos: <b id="recuerdosCerebro2">0</b> • Códigos: <b id="codigosCerebro">0</b><br><small id="ultimoAprendizaje"></small></p><button class="vozBtn" onclick="hablar('Soy tu cerebro, jefe. Te recuerdo, aprendo de vos, y funciono sin internet.')">🔊 ESCUCHAR A MI CEREBRO</button></div><div id="chatCerebro" style="max-height:280px;overflow-y:auto"></div><input id="inputCerebro" placeholder="Hablale a tu IA... DIEZ CUATRO"><div class="grid"><button class="verde" onclick="hablarCerebro()">🧠➤ HABLAR</button><button class="vozBtn" onclick="hablar(document.getElementById('inputCerebro').value||'Decime algo jefe')">🔊 HABLAR CON VOZ</button></div><div class="grid"><button onclick="cerebroAccion('DIEZ CUATRO')">DIEZ CUATRO</button><button onclick="cerebroAccion('CAMBIO')">CAMBIO</button><button onclick="cerebroAccion('REPORTE')">🛡️ REPORTE</button><button onclick="cerebroAccion('ALERTA')">🚨 ALERTA</button><button onclick="cerebroAccion('¿Quién soy?')">¿Quién soy?</button><button onclick="cerebroAccion('¿Qué aprendiste?')">¿Qué aprendiste?</button></div><p style="text-align:center">Enseñale: APRENDE: CODIGO = significado</p></div></div>
 
 <!-- CENTRAL -->
-<div id="central" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>CENTRAL PRO</h1><p style="text-align:center">QUINTUPLE 5/5 🟢🟢🟢🟢🟢</p><button class="vozBtn" onclick="hablar('Estás en la Central de Mando, jefe. Todo está en orden, quintuple seguridad activa.')">🔊 ESCUCHAR CENTRAL</button><button class="btn2" onclick="accion('Códigos Alfa Bravo verificados')">🔒 Códigos Alfa Bravo</button><button class="btn2" onclick="accion('Carpeta 1 abierta')">📁 Carpeta 1</button><button class="btn2" onclick="generarReporte()">📄 Reporte PRO</button><button class="btn2" onclick="cambiarEstado()">🔵🟢🔴 Estado</button><button class="btn2" onclick="accion('PATRULLA GOLF')">🎯 PATRULLA GOLF</button><button class="btn2" onclick="accion('CHARLIE chequeo')">☑️ CHARLIE</button><button class="btn2" onclick="accion('DELTA despliegue')">🚀 DELTA</button><div id="logCentral"></div></div></div>
+<div id="central" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>CENTRAL PRO - OFFLINE</h1><p style="text-align:center">QUINTUPLE 5/5 🟢🟢🟢🟢🟢</p><button class="vozBtn" onclick="hablar('Estás en la Central, jefe. Todo en orden sin internet.')">🔊 ESCUCHAR</button><button class="btn2" onclick="accion('Códigos Alfa Bravo')">🔒 Códigos Alfa Bravo</button><button class="btn2" onclick="accion('Carpeta 1')">📁 Carpeta 1</button><button class="btn2" onclick="generarReporte()">📄 Reporte PRO</button><button class="btn2" onclick="cambiarEstado()">🔵🟢🔴 Estado</button><button class="btn2" onclick="accion('PATRULLA GOLF')">🎯 PATRULLA GOLF</button><button class="btn2" onclick="accion('CHARLIE')">☑️ CHARLIE</button><button class="btn2" onclick="accion('DELTA')">🚀 DELTA</button><div id="logCentral"></div></div></div>
 
 <!-- MENSAJES -->
-<div id="mensajes" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>MENSAJES PRO</h1><button class="vozBtn" onclick="hablar('Estás en mensajes, jefe. Tenés mensajes de Alfa Bravo, Coral y Centinela Meta.')">🔊 ESCUCHAR</button><div id="chatReal"><p>👮 <b>JEFE</b><br>DIEZ CUATRO ✅</p><hr><p>🎖️ <b>ALFA BRAVO</b><br>CAMBIO</p><hr><p>🐚 <b>CORAL</b><br>ROJO</p><hr><p>🤖 <b>CENTINELA META</b><br>VERDE</p></div><input id="msgNuevo" placeholder="Escribi tu codigo..."><button onclick="enviarMsg()">➤ ENVIAR REAL</button></div></div>
+<div id="mensajes" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>MENSAJES - OFFLINE</h1><button class="vozBtn" onclick="hablar('Estás en mensajes, jefe. Sin internet, guardados en tu teléfono.')">🔊 ESCUCHAR</button><div id="chatReal"><p>👮 <b>JEFE</b><br>DIEZ CUATRO ✅</p><hr><p>🎖️ <b>ALFA BRAVO</b><br>CAMBIO</p><hr><p>🐚 <b>CORAL</b><br>ROJO</p><hr><p>🤖 <b>CENTINELA META</b><br>VERDE</p></div><input id="msgNuevo" placeholder="Escribi tu codigo..."><button onclick="enviarMsg()">➤ ENVIAR - SE GUARDA SIN INTERNET</button></div></div>
 
 <!-- CAMARAS -->
-<div id="camaras" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>CAMARAS PRO</h1><p style="text-align:center"><span id="grabando">NO GRABANDO</span></p><button class="vozBtn" onclick="hablar('Estás en cámaras, jefe. Tenés 4 cámaras en vivo, base, patrulla, Zulu y Golf. Todo vigilado.')">🔊 ESCUCHAR</button><div class="cam"><div>🔴 BASE<br><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400"><button class="verde" onclick="accion('BASE')">VER</button></div><div>🔴 PATRULLA<br><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400"><button class="verde" onclick="accion('PATRULLA')">VER</button></div><div>🔴 ZULU<br><img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400"><button class="verde" onclick="accion('ZULU')">VER</button></div><div>🔴 GOLF<br><img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400"><button class="verde" onclick="accion('GOLF')">VER</button></div></div><div class="grid"><button onclick="accion('OSCAR')">👁️ OSCAR</button><button onclick="accion('FOXTROT')">🎯 FOXTROT</button><button onclick="accion('ZOOM')">🔍 ZOOM</button><button class="rojo" onclick="grabar()">⏺️ Grabar</button></div><div id="logCam"></div></div></div>
+<div id="camaras" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>CAMARAS - OFFLINE</h1><p style="text-align:center"><span id="grabando">NO GRABANDO</span></p><button class="vozBtn" onclick="hablar('Estás en cámaras, jefe. 4 cámaras en vivo, sin internet.')">🔊 ESCUCHAR</button><div class="cam"><div><div class="foto">🏠</div>🔴 BASE<br><button class="verde" onclick="accion('BASE')">VER</button></div><div><div class="foto">🌆</div>🔴 PATRULLA<br><button class="verde" onclick="accion('PATRULLA')">VER</button></div><div><div class="foto">🌃</div>🔴 ZULU<br><button class="verde" onclick="accion('ZULU')">VER</button></div><div><div class="foto">🛡️</div>🔴 GOLF<br><button class="verde" onclick="accion('GOLF')">VER</button></div></div><div class="grid"><button onclick="accion('OSCAR')">👁️ OSCAR</button><button onclick="accion('FOXTROT')">🎯 FOXTROT</button><button onclick="accion('ZOOM')">🔍 ZOOM</button><button class="rojo" onclick="grabar()">⏺️ Grabar</button></div><div id="logCam"></div></div></div>
 
 <!-- ALERTA -->
-<div id="alerta" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1 style="color:red">🚨 ALERTA ROJO PRO</h1><p style="text-align:center"><span id="cuenta" style="font-size:48px;color:red;font-weight:900">00:30</span><br><span id="estadoAlerta">En espera</span></p><button class="vozBtn" onclick="hablar('Estás en alerta rojo, jefe. Si necesitás ayuda, tocá el botón de ayuda y yo mando el equipo. Quedate tranquilo.')">🔊 ESCUCHAR ALERTA</button><button class="rojo" onclick="activarAlerta()">🖐️ AYUDA - ENVIAR ALERTA REAL</button><div class="grid"><button onclick="accion('PELIGRO')">⚠️ PELIGRO</button><button onclick="accion('MEDICO')">➕ MEDICO</button><button onclick="accion('POLICIA')">🛡️ POLICIA</button><button onclick="accion('GOLF')">➕ GOLF</button></div><div id="logAlerta"></div></div></div>
+<div id="alerta" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1 style="color:red">🚨 ALERTA ROJO - OFFLINE</h1><p style="text-align:center"><span id="cuenta" style="font-size:48px;color:red;font-weight:900">00:30</span><br><span id="estadoAlerta">En espera - Guardada sin internet</span></p><button class="vozBtn" onclick="hablar('Estás en alerta rojo, jefe. Si necesitás ayuda, tocá ayuda y yo guardo la alerta aunque no tengas internet.')">🔊 ESCUCHAR</button><button class="rojo" onclick="activarAlerta()">🖐️ AYUDA - ENVIAR ALERTA</button><div class="grid"><button onclick="accion('PELIGRO')">⚠️ PELIGRO</button><button onclick="accion('MEDICO')">➕ MEDICO</button><button onclick="accion('POLICIA')">🛡️ POLICIA</button><button onclick="accion('GOLF')">➕ GOLF</button></div><div id="logAlerta"></div></div></div>
 
 <!-- WHATSAPP -->
-<div id="whatsapp" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>WHATSAPP PRO</h1><button class="vozBtn" onclick="hablar('Estás en WhatsApp Centinela, jefe. Encriptado, en línea.')">🔊 ESCUCHAR</button><p>🟣 <b>JEFE</b><br>DIEZ CUATRO — En posición.</p><hr><p>🟣 <b>ALFA BRAVO</b><br>CAMBIO Y FUERA — Sector norte.</p><input id="waMsg" placeholder="Escribe mensaje..."><button onclick="accion('WhatsApp: '+document.getElementById('waMsg').value)">➤ ENVIAR</button></div></div>
+<div id="whatsapp" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>WHATSAPP - OFFLINE</h1><button class="vozBtn" onclick="hablar('Estás en WhatsApp Centinela, jefe. Sin internet, pero guardado.')">🔊 ESCUCHAR</button><p>🟣 <b>JEFE</b><br>DIEZ CUATRO — En posición.</p><hr><p>🟣 <b>ALFA BRAVO</b><br>CAMBIO Y FUERA — Sector norte.</p><input id="waMsg" placeholder="Escribe mensaje..."><button onclick="accion('WhatsApp: '+document.getElementById('waMsg').value)">➤ ENVIAR</button></div></div>
 
 <!-- BANCO -->
-<div id="banco" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>BANCO PRO</h1><button class="vozBtn" onclick="hablar('Estás en el banco, jefe. Tu saldo está seguro, quintuple seguridad activa.')">🔊 ESCUCHAR</button><div styl
+<div id="banco" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>BANCO PRO - OFFLINE</h1><button class="vozBtn" onclick="hablar('Estás en el banco, jefe. Tu saldo está guardado sin internet.')">🔊 ESCUCHAR</button><div style="background:#2a0a4a;padding:16px;border-radius:16px"><small>Saldo - <span class="nombreUser"></span></small><h2 style="text-align:left">$1,245,830.00</h2><p style="color:#0f0">+$42,180.00 ↗ +3.5%</p></div><div class="grid"><button onclick="accion('Saldo')">👛 Saldo</button><button onclick="accion('Movimientos')">☰ Movimientos</button><button onclick="accion('TRADER')">📈 TRADER</button><button onclick="transferir()">✈️ Transferir</button></div><div id="logBanco"></div></div></div>
+
+<!-- MAPA -->
+<div id="mapa" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>MAPA ZULU - OFFLINE</h1><button class="vozBtn" onclick="hablar('Estás en el mapa Zulu, jefe. José León Suárez, sin internet, pero con rutas guardadas.')">🔊 ESCUCHAR</button><div style="background:#0a0a2a;padding:20px;border-radius:16px;text-align:center;line-height:2">📍 KILO Lejos<br>🛡️ GOLF Guardia<br>--- route PATRULLA ---<br>🏃 MIKE Movimiento<br>⬡ ZULU Zona<br>🏠 BASE Casa</div><div class="grid"><button onclick="accion('ROMEO')">⚡ ROMEO</button><button onclick="accion('LIMA')">🐢 LIMA</button><button onclick="accion('QUEBEC')">⏸️ QUEBEC</button><button onclick="accion('BASE')">🏠 BASE</button></div></div></div>
+
+<!-- ASISTENTE -->
+<div id="asistente" class="pantalla"><div class="card"><button onclick="ir('inicio')">⬅ VOLVER</button><h1>ASISTENTE PRO - OFFLINE</h1><button class="vozBtn" onclick="hablar('Soy tu asistente, jefe. Te ayudo sin internet.')">🔊 ESCUCHAR</button><div id="chatAsistente"><p class="msgIA"><b>ALFA BRAVO —</b> perímetro seguro ✅</p><p class="msgTU"><b>DIEZ CUATRO</b></p><p class="msgIA"><b>CHARLIE —</b> movimiento leve</p></div><div class="grid"><button onclick="generarReporte()">🛡️ REPORTE</button><button onclick="accion('Tiempo 25°')">🌦️ TIEMPO AHORA</button><button onclick="accion('Tiempo mañana')">🌙 MAÑANA</button></div><input id="asistInput" placeholder="Escribe un código..."><button onclick="cerebroAccion(document.getElementB
