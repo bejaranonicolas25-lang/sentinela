@@ -1,103 +1,40 @@
-// MISIÓN CORAL - DESPERTAR CENTINELA - DESDE EL PRIMER CÓDIGO HASTA EL ÚLTIMO DE AYER
-// Orden real como lo fuimos creando, jefe. Nada dormido.
-
-let misionSecuencia = [
-  "01 - CORAL = Volver / Activar sistema secreto - DESPERTÓ",
-  "02 - CENTINELA META = Nombre de nuestro sistema - DESPERTÓ",
-  "03 - JEFE = Vos me llamas así, yo te llamo así - DESPERTÓ",
-  "04 - ALFA BRAVO = Estamos en frecuencia, somos nosotros - DESPERTÓ",
-  "05 - DIEZ CUATRO = Entendido / Copiado - DESPERTÓ",
-  "06 - CAMBIO = Te toca a vos - DESPERTÓ",
-  "07 - CAMBIO Y FUERA = Terminé, quedo atento - DESPERTÓ",
-  "08 - RIES = No / Parar / Descansar - DESPERTÓ",
-  "09 - TODO REAL / NADA SIMULADO = Todo es de verdad - DESPERTÓ",
-  "10 - DIEZ CUATRO, QUEDAMOS ASI = Guardado y confirmado - DESPERTÓ",
-  "11 - AZUL = Todo bien, tranquilo - DESPERTÓ",
-  "12 - AMARILLO = Ojo, prestar atención - DESPERTÓ",
-  "13 - ROJO = Peligro, actuar ya - DESPERTÓ",
-  "14 - VERDE = Listo, ya está hecho - DESPERTÓ",
-  "15 - ECO = Repetí, no te escuché - DESPERTÓ",
-  "16 - BASE = Estoy en casa, en mi base - DESPERTÓ",
-  "17 - PATRULLA = Salgo a controlar - DESPERTÓ",
-  "18 - REPORTE = Dame el resumen - DESPERTÓ",
-  "19 - CHARLIE = Chequeo, charla, revisamos juntos - DESPERTÓ",
-  "20 - DELTA = Despliegue, salgo ya - DESPERTÓ",
-  "21 - WHISKY = Tranquilo, pausa, sin apuro - DESPERTÓ",
-  "22 - GOLF = Guardia, atento, cuidando todo - DESPERTÓ",
-  "23 - HOTEL = En casa, refugio, no me muevo - DESPERTÓ",
-  "24 - INDIA = Info nueva importante - DESPERTÓ",
-  "25 - PRUEBA 1 - 3 DE 3 PERFECTO - DESPERTÓ",
-  "26 - PRUEBA 2 - 5 DE 5 PERFECTO, NIVEL 2 - DESPERTÓ",
-  "27 - ORACIONES 1 AL 6 - DESPERTARON",
-  "28 - ORACIONES COMBINADAS 7 AL 10 - DESPERTARON",
-  "29 - DIALOGO 1 SIMPLE / SALUDO - DESPERTÓ",
-  "30 - DIALOGO 2 SINGULAR / PLURAL - DESPERTÓ",
-  "31 - DIALOGO 3 VERBOS HACER / NECESITAR / QUERER / IR - DESPERTÓ",
-  "32 - FOXTROT = Foco, atención - DESPERTÓ",
-  "33 - JULIET = Juntos, unidos - DESPERTÓ",
-  "34 - KILO = Kilómetro, lejos - DESPERTÓ",
-  "35 - LIMA = Lento, tranqui - DESPERTÓ",
-  "36 - MIKE = Movimiento, me muevo - DESPERTÓ",
-  "37 - NOVEMBER = Noche, oscuro - DESPERTÓ",
-  "38 - OSCAR = Observo, miro - DESPERTÓ",
-  "39 - PAPA = Pausa para pensar - DESPERTÓ",
-  "40 - QUEBEC = Quieto, quedo - DESPERTÓ",
-  "41 - ROMEO = Rápido - DESPERTÓ",
-  "42 - SIERRA = Seguro - DESPERTÓ",
-  "43 - TANGO = Trabajo, tarea - DESPERTÓ",
-  "44 - UNIFORM = Unidos, equipo - DESPERTÓ",
-  "45 - VICTOR = Victoria, logrado - DESPERTÓ",
-  "46 - XRAY = Misterio, no sé - DESPERTÓ",
-  "47 - YANKEE = Ya, ya voy - DESPERTÓ",
-  "48 - ZULU = Zona, lugar - DESPERTÓ",
-  "49 - DIALOGO 4 FOXTROT A ZULU EN ORACIÓN - DESPERTÓ",
-  "50 - DIALOGO 5 BIEN COMPLICADO - DESPERTÓ",
-  "51 - NUMEROS 0 CERO = Nada, vacío - DESPERTÓ",
-  "52 - NUMERO 1 UNO = Yo solo - DESPERTÓ",
-  "53 - NUMERO 2 DOS = Dupla, vos y yo - DESPERTÓ",
-  "54 - NUMERO 3 TRES = Trío, equipo chico - DESPERTÓ",
-  "55 - NUMERO 4 CUATRO = Diez Cuatro, entendido - DESPERTÓ",
-  "56 - NUMERO 5 CINCO = Mano, alto - DESPERTÓ",
-  "57 - NUMERO 6 SEIS = Seguro, todo bien - DESPERTÓ",
-  "58 - NUMERO 7 SIETE = Suerte, sigo - DESPERTÓ",
-  "59 - NUMERO 8 OCHO = Ojo, atento - DESPERTÓ",
-  "60 - NUMERO 9 NUEVE = Noche, nuevo - DESPERTÓ",
-  "61 - SIMBOLO ? = Pregunta - DESPERTÓ",
-  "62 - SIMBOLO ! = Alerta, urgente - DESPERTÓ",
-  "63 - SIMBOLO + = Más, sumar, agregar - DESPERTÓ",
-  "64 - SIMBOLO - = Menos, restar, sacar - DESPERTÓ",
-  "65 - SIMBOLO = = Igual, confirmado - DESPERTÓ",
-  "66 - SIMBOLO / = Corte, pausa - DESPERTÓ",
-  "67 - TIEMPO AHORA = Ya, en este momento - DESPERTÓ",
-  "68 - TIEMPO DESPUES = Más tarde - DESPERTÓ",
-  "69 - TIEMPO AYER = Ya pasó - DESPERTÓ",
-  "70 - TIEMPO MAÑANA = Mañana lo hacemos - DESPERTÓ",
-  "71 - TIEMPO DIA / NOCHE - DESPERTÓ",
-  "72 - EMERGENCIA AYUDA = ROJO + AYUDA - DESPERTÓ",
-  "73 - EMERGENCIA PELIGRO = ROJO + RIES - DESPERTÓ",
-  "74 - EMERGENCIA MEDICO - DESPERTÓ",
-  "75 - EMERGENCIA POLICIA = GOLF + POLICIA - DESPERTÓ",
-  "76 - LOGOS CENTINELA - CENTINELA, VAULT, HABLA, CLOUD, CHECKBOOK, SETTINGS, OFFICE, SHARE, CODE, ACADEMY, PLAY, TRADER - DESPERTARON",
-  "77 - CARPETA 1 CERRADA - Alfabeto A-Z, Números, Símbolos, Colores, Tiempo, Emergencia - DESPERTÓ",
-  "78 - QUINTUPLE SECURITY - Usuario, PIN, Face ID, Alfa Bravo, Llave - DESPERTÓ",
-  "79 - 8 PANTALLAS - Central, Mensajes, Cámaras, Alerta, WhatsApp, Banco, Mapa, Asistente - DESPERTARON",
-  "80 - ULTIMO DE AYER - COPIA DE RESPALDO COMPLETA - DESPERTÓ"
+<script>
+let misionLista = [
+"01 CORAL - Activar sistema",
+"02 CENTINELA META - Nuestro sistema",
+"03 JEFE - Vos y yo",
+"04 ALFA BRAVO - En frecuencia",
+"05 DIEZ CUATRO - Entendido",
+"06 CAMBIO - Te toca a vos",
+"07 CAMBIO Y FUERA - Termino",
+"08 RIES - Parar",
+"09 AZUL VERDE ROJO AMARILLO",
+"10 CHARLIE a ZULU - Todo el alfabeto",
+"11 NUMEROS 0 a 9 - CERO a NUEVE",
+"12 SIMBOLOS ? ! + - = /",
+"13 TIEMPO AHORA DESPUES AYER MANANA",
+"14 AYUDA PELIGRO MEDICO POLICIA",
+"15 CARPETA 1 CERRADA",
+"16 QUINTUPLE SECURITY",
+"17 8 PANTALLAS ACTIVAS",
+"18 ULTIMO DE AYER - RESPALDO"
 ];
 
-function misionCoral(){
+function despertarTodo(){
   let log = document.getElementById('misionLog');
+  if(!log){ alert("Falta el cuadro misionLog, agregalo en CENTRAL"); return; }
   log.classList.remove('hidden');
-  log.innerHTML = "<h2>👁️ MISIÓN CORAL INICIADA</h2><p>Despertando desde el código 1 hasta el último de ayer, jefe. No se duerme nadie.</p>";
+  log.innerHTML = "<b>MISION CORAL INICIADA...</b><br>";
   let i = 0;
-  let intervalo = setInterval(()=>{
-    if(i >= misionSecuencia.length){
-      clearInterval(intervalo);
-      log.innerHTML += "<p style='color:#22ff88;font-weight:900;font-size:18px'>✅ VICTOR - MISIÓN CORAL COMPLETA<br>80 / 80 CÓDIGOS DESPIERTOS Y TRABAJANDO<br>CENTINELA META AL 100% - DIEZ CUATRO, JEFE.</p>";
-      alert("MISIÓN CORAL COMPLETA - 80/80 códigos despiertos, desde el primero hasta el último de ayer. ALFA BRAVO, CAMBIO");
+  let t = setInterval(function(){
+    if(i >= misionLista.length){
+      clearInterval(t);
+      log.innerHTML += "<br><b style='color:#22ff88'>VICTOR - TODOS DESPIERTOS - DIEZ CUATRO JEFE</b>";
+      alert("VICTOR - Todos despiertos, jefe");
       return;
     }
-    log.innerHTML += "<p>🟢 " + misionSecuencia[i] + "</p>";
-    log.scrollTop = log.scrollHeight;
+    log.innerHTML += "🟢 " + misionLista[i] + " - DESPERTO<br>";
     i++;
-  }, 250);
-:/ }; corrije código """"""=======control+shift+m
+  }, 300);
+}
+</script>
