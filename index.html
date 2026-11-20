@@ -1,108 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CENTINELA • REAL • Nico</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00a884">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:var(--portada,#07130c);background-size:cover;background-attachment:fixed;color:#fff}
-.lock{position:fixed;inset:0;background:#07130c;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-.top{background:rgba(10,31,18,.92);padding:14px;display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:20}
-.tabs{display:flex;background:rgba(10,31,18,.92);overflow-x:auto;position:sticky;top:58px;z-index:20}
-.tabs button{flex:1;min-width:80px;padding:11px 5px;border:none;background:transparent;color:#9bb8a5;font-weight:800;font-size:12px}
-.tabs button.on{color:#fff;background:#00a884;border-radius:20px}
-.w{max-width:660px;margin:auto;padding:12px}
-.c{background:rgba(15,42,26,.96);border:1px solid #1e4a30;border-radius:16px;padding:14px;margin-bottom:12px}
-.hide{display:none}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.mod{background:#0a1f12;border:1px solid #22c07a;border-radius:16px;padding:14px 6px;text-align:center;cursor:pointer}
-.box{background:#e8f5ee;color:#111;padding:12px;min-height:200px;max-height:320px;overflow-y:auto;border-radius:12px}
-.b{background:#fff;padding:10px;border-radius:12px;margin:8px 0;max-width:90%;color:#111}
-.m{background:#d9fdd3;margin-left:auto}
-input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #2a4a35;background:#07130c;color:#fff;margin:5px 0;font-size:15px}
-textarea{height:60px}
-.btn{padding:13px;border:none;border-radius:14px;font-weight:900;cursor:pointer;width:100%}
-.verde{background:#00e676;color:#000}.gris{background:#22382a;color:#fff}.azul{background:#1877f2;color:#fff}.rojo{background:#e41e3f;color:#fff}
-.row{display:flex;gap:8px}.row .btn{flex:1}
-.item{background:#07130c;border:1px solid #2a4a35;border-radius:12px;padding:10px;margin:8px 0}
-.menuitem{display:flex;justify-content:space-between;padding:13px 4px;border-bottom:1px solid #2a4a35;cursor:pointer}
-.head{background:#075e54;color:#fff;padding:12px;display:flex;gap:10px;align-items:center;border-radius:14px 14px 0 0}
-.fondos{display:flex;gap:8px;flex-wrap:wrap}
-.fondo{width:64px;height:64px;border-radius:12px;border:3px solid #fff;cursor:pointer;position:relative}
-.fondo.sel{border-color:#00e676}
-.fondo span{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:10px;font-weight:900;color:#fff;text-shadow:0 1px 2px #000}
-.badge{display:inline-block;background:#00e676;color:#000;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:900}
-video{width:100%;border-radius:12px;background:#000}
-</style>
-</head>
-<body>
-
 <div class="lock" id="lock">
 <div style="font-size:70px">🛡️</div>
 <h1 style="color:#00e676;font-size:36px">CENTINELA</h1>
 <p style="color:#9bb8a5">TODO REAL • NADA SIMULADO</p>
-<div style="background:#0f2a1a;border:1px solid #22c07a;border-radius:12px;padding:10px;margin-top:10px;font-size:13px">🔐 Seguro 1: PIN real<br>🔐 Seguro 2: PIN Bóveda real<br>🔐 Seguro 3: Pregunta secreta real</div>
+
+<!-- PANTALLA 1: ENTRAR -->
+<div id="pantallaEntrar">
 <p style="margin-top:14px">PIN de Jefe - REAL</p>
 <input id="pinIn" type="password" placeholder="Tu PIN real" style="max-width:300px;text-align:center;font-size:20px;letter-spacing:5px">
 <button class="btn verde" style="max-width:300px;margin-top:8px" onclick="entrar()">🛡️ ENTRAR - REAL</button>
-<button class="btn gris" style="max-width:300px;margin-top:8px" onclick="olvide()">❓ ME OLVIDÉ EL PIN - REAL</button>
-<div id="olvideBox" class="hide" style="max-width:300px;width:100%;margin-top:10px"><p id="pregTxt" style="color:#9bb8a5;font-size:13px"></p><input id="respSecreta" placeholder="Respuesta real"><button class="btn azul" onclick="verificarSecreta()">✅ VERIFICAR REAL</button></div>
+<button class="btn azul" style="max-width:300px;margin-top:8px" onclick="mostrarRecuperar()">🔑 RECUPERAR CONTRASEÑA - SI ME OLVIDÉ</button>
+<button class="btn gris" style="max-width:300px;margin-top:8px" onclick="mostrarCrear()">🆕 CREAR CUENTA POR PRIMERA VEZ</button>
 </div>
 
-<div class="top"><div style="font-size:28px">🛡️</div><div style="flex:1"><b style="color:#00e676">CENTINELA • REAL</b><br><small style="color:#9bb8a5">Nicolás Bejarano • Jefe • Nada simulado</small></div><div onclick="tab('fondos')" style="background:#00a884;padding:8px 10px;border-radius:20px;font-weight:900;font-size:13px;cursor:pointer">🎨 Portada</div><div style="background:#00e676;color:#000;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900">N</div></div>
-
-<div class="tabs"><button id="t1" class="on" onclick="tab('a')">🏠 Inicio</button><button id="t2" onclick="tab('b')">🧠 IA</button><button id="t3" onclick="tab('c')">🧪 Lab Real</button><button id="t4" onclick="tab('d')">🛡️ Panel</button><button id="t5" onclick="tab('e')">☰ Todo</button></div>
-
-<div class="w">
-<div id="a">
-<div class="c" style="text-align:center"><div style="font-size:64px">🛡️</div><h2 style="color:#00e676">CENTINELA • REAL</h2><p style="color:#9bb8a5">Nada simulado. Todo lo que guardás es real.</p><p style="margin-top:8px">Qué haces capo 😎 <b id="saludo">Todo real</b> <span class="badge">✅ REAL • NO SIMULACIÓN</span></p><p id="horaReal" style="color:#9bb8a5;margin-top:6px"></p><p id="ubiReal" style="color:#9bb8a5;font-size:13px"></p><button class="btn verde" style="margin-top:10px" onclick="tab('b')">💬 HABLAR CON MI IA REAL</button><button class="btn gris" style="margin-top:8px" onclick="tab('fondos')">🎨 CAMBIAR COLOR PORTADA - REAL</button><button class="btn azul" style="margin-top:8px" onclick="tab('c')">🧪 IR AL LAB REAL</button></div>
-
-<div class="c"><b style="color:#00e676">📷 CÁMARA REAL DE TU CELULAR</b><p style="color:#9bb8a5;font-size:13px;margin:6px 0">Esto prende tu cámara de verdad, no es dibujo.</p><video id="camReal" autoplay playsinline class="hide"></video><div class="row" style="margin-top:8px"><button class="btn verde" onclick="prenderCam()">📷 PRENDER CÁMARA REAL</button><button class="btn gris" onclick="apagarCam()">⏹️ APAGAR</button></div><button class="btn azul" style="margin-top:8px" onclick="sacarFoto()">📸 SACAR FOTO REAL Y GUARDAR EN LAB</button><canvas id="canvasFoto" class="hide"></canvas></div>
-
-<div class="c"><b style="color:#00e676">📍 UBICACIÓN REAL - GPS</b><p style="color:#9bb8a5;font-size:13px;margin:6px 0">Te da tu ubicación real de verdad.</p><button class="btn verde" onclick="ubicacionReal()">📍 OBTENER MI UBICACIÓN REAL</button><div id="resUbi" style="margin-top:8px;color:#fff"></div></div>
-
-<div class="c"><b style="color:#00e676">🔥 HOY • DATOS REALES</b><p style="margin-top:6px" id="resumenHoy"></p><div class="row" style="margin-top:8px"><button class="btn verde" onclick="tab('c')">🧪 + Real</button><button class="btn gris" onclick="tab('e')">☰ Ver todo</button></div></div>
-<div class="grid" id="gridMod"></div>
+<!-- PANTALLA 2: CREAR CUENTA -->
+<div id="pantallaCrear" class="hide" style="max-width:300px;width:100%">
+<p style="margin-top:14px;color:#00e676;font-weight:900">🆕 CREAR CUENTA POR PRIMERA VEZ</p>
+<p style="color:#9bb8a5;font-size:13px">Solo la primera vez. Después entrás con este PIN.</p>
+<input id="pinCrear" type="password" placeholder="Creá tu PIN real (ej: 1234)">
+<input id="pinCrear2" type="password" placeholder="Repetí tu PIN real">
+<input id="pregCrear" placeholder="Pregunta secreta real: Ej: ¿Nombre de mi perro?">
+<input id="respCrear" placeholder="Respuesta secreta real">
+<button class="btn verde" style="margin-top:8px" onclick="crearCuenta()">✅ CREAR MI CUENTA REAL</button>
+<button class="btn gris" style="margin-top:8px" onclick="mostrarEntrar()">← Volver a Entrar</button>
 </div>
 
-<div id="fondos" class="hide"><div class="c"><b>🎨 COLORES DE PORTADA • REALES</b><p style="color:#9bb8a5;font-size:13px;margin:6px 0">Tocá uno y cambia de verdad toda la portada. Queda guardado de verdad.</p><div class="fondos" id="listaFondos"></div><label style="margin-top:14px;display:block">Tu imagen real por link:</label><input id="fCustom" placeholder="https://..."><button class="btn verde" onclick="setFondo('custom',document.getElementById('fCustom').value)">🖼️ USAR MI IMAGEN REAL</button><label style="margin-top:10px;display:block">Tu color real:</label><input id="fColor" type="color" value="#07130c"><button class="btn azul" style="margin-top:6px" onclick="setFondo('color',document.getElementById('fColor').value)">🎨 USAR ESTE COLOR REAL</button><div style="background:#07130c;border-radius:10px;padding:10px;margin-top:12px">Portada real actual: <b id="fActual">Oscuro</b></div></div><div class="c"><button class="btn gris" onclick="tab('a')">← Volver</button></div></div>
-
-<div id="b" class="hide"><div class="c" style="padding:0;overflow:hidden"><div class="head"><div style="font-size:26px">🧠</div><div style="flex:1"><b>SENTINEL ACCORDED • IA REAL</b><br><small id="st">en línea • Datos reales</small></div></div><div class="box" id="msgs"></div><div style="padding:8px"><div class="row"><button class="btn gris" onclick="quick('Qué onda capo?')">😎 Qué onda?</button><button class="btn gris" onclick="quick('Dame el reporte real')">📄 Reporte real</button></div></div><div class="row" style="padding:10px;background:#0f2a1a"><input id="inp" placeholder="Escribile..." onkeypress="if(event.key=='Enter')send()"><button class="btn verde" style="flex:0 0 48px" onclick="send()">➤</button></div></div></div>
-
-<div id="c" class="hide"><div class="c" style="border:2px solid #00e676"><b style="color:#00e676">🧪 LABORATORIO REAL • NO SIMULADO</b><p style="color:#9bb8a5;font-size:13px;margin:6px 0">Todo lo que pongas acá se guarda de verdad en tu celular. Si cerrás y volvés, sigue ahí.</p><input id="fLugar" placeholder="📍 Lugar real: Frente, Patio, Portón"><input id="fQue" placeholder="¿Qué pasó de verdad?"><div class="row"><select id="fNiv"><option>🟢 VERDE - Todo bien real</option><option>🟡 AMARILLO - Ojo real</option><option>🔴 ROJO - Peligro real</option><option>🔵 AZUL - Experimento real</option><option>🟣 VIOLETA - Idea real</option></select><input id="fHora" type="time"></div><select id="fTipo"><option>Suceso real</option><option>Experimento real</option><option>Foto real</option><option>Prueba de cámara real</option><option>Prueba de sensor real</option><option>Idea real para Centinela</option></select><button class="btn verde" onclick="guardar()">🧪 GUARDAR REAL EN LAB</button><p style="color:#9bb8a5;font-size:12px;margin-top:6px">Hora real automática: <span id="horaLab"></span></p></div><div class="c"><b>📂 Mis registros REALES (<span id="totalLab">0</span>)</b><div id="listaLab"></div></div><div class="c"><b>📊 Resultado REAL del Lab</b><div id="resLab" style="margin-top:8px"></div></div></div>
-
-<div id="d" class="hide"><div class="c"><b>🛡️ PANEL • DATOS REALES TUYOS</b><p style="color:#9bb8a5;font-size:13px">Poné tus números reales, no hay números inventados. Arranca en 0.</p><label>Cámaras totales REALES</label><input id="pTotal" type="number" placeholder="Ej: 4"><label>Cámaras que andan REAL</label><input id="pOk" type="number" placeholder="Ej: 4"><label>Sensores que andan REAL</label><input id="pSen" type="number" placeholder="Ej: 2"><button class="btn verde" onclick="guardarPanel()">💾 GUARDAR DATOS REALES</button><div id="resPanel" style="margin-top:10px"></div></div><div class="c" style="border:2px solid #e41e3f"><b>🔐🔐🔐 TRIPLE SEGURO REAL</b><label>Seguro 1 - PIN entrada real</label><input id="pinNew" type="password" placeholder="Nuevo PIN real"><label>Seguro 2 - PIN Bóveda real</label><input id="vaultPinNew" type="password" placeholder="PIN bóveda real"><label>Seguro 3 - Pregunta secreta real</label><input id="pregNew" placeholder="Ej: ¿Nombre de mi perro?"><input id="respNew" placeholder="Respuesta real"><button class="btn verde" onclick="guardarTriple()">🔐🔐🔐 GUARDAR TRIPLE REAL</button><p style="color:#9bb8a5;font-size:13px;margin-top:8px" id="estadoTriple"></p></div><div class="c"><a href="tel:911" style="display:block;text-align:center;background:#e41e3f;color:#fff;padding:14px;border-radius:10px;text-decoration:none;font-weight:900">📞 LLAMAR 911 REAL</a></div></div>
-
-<div id="e" class="hide"><div class="c"><b>☰ MENÚ • TODO REAL CENTINELA</b><div id="menuList"></div><div class="menuitem" onclick="tab('fondos')"><span>🎨 <b>Cambiar color portada real</b></span><span>→</span></div><div class="menuitem" onclick="tab('c')"><span>🧪 <b>Laboratorio real</b></span><span>→</span></div><div class="menuitem" onclick="cerrarSesion()"><span>🔒 <b>Cerrar con Triple Seguro real</b></span><span>→</span></div><div class="menuitem" onclick="if(confirm('¿Borrar TODO lo real?')){localStorage.clear();location.reload()}"><span>🗑️ <b style="color:#ff6b6b">Borrar todo real</b></span><span>→</span></div></div><div class="c"><b>👤 Mis datos • Marca propia real</b><p style="margin-top:6px;color:#9bb8a5">Nicolás Bejarano • bejaranicolas25<br>Jefe de Centinela 🛡️<br>Marca: <b style="color:#00e676">CENTINELA ® TUYA - REAL</b><br>Repo: bejaranicolas25-lang/sentinela<br>Seguridad: 🔐🔐🔐 Triple Real<br>Simulación: ❌ NINGUNA</p></div><div class="c" id="cajaReporte" style="display:none"><b>📄 REPORTE REAL</b><div id="txtReporte" style="white-space:pre-wrap;margin-top:8px;color:#fff"></div></div></div>
-
-<div id="mod" class="hide"><div class="c"><button class="btn gris" onclick="tab('a')">← Volver</button><div id="modContent" style="margin-top:12px"></div></div></div>
+<!-- PANTALLA 3: RECUPERAR -->
+<div id="pantallaRecuperar" class="hide" style="max-width:300px;width:100%">
+<p style="margin-top:14px;color:#00e676;font-weight:900">🔑 RECUPERAR CONTRASEÑA</p>
+<p id="pregTxt" style="color:#9bb8a5;font-size:13px">Si no creaste cuenta todavía, primero creala.</p>
+<input id="respSecreta" placeholder="Respuesta secreta real">
+<button class="btn azul" onclick="verificarRecuperar()">✅ VERIFICAR Y MOSTRAR MI PIN</button>
+<button class="btn gris" style="margin-top:8px" onclick="mostrarEntrar()">← Volver a Entrar</button>
+<div id="pinRecuperado" style="margin-top:10px;background:#0f2a1a;border:1px solid #00e676;border-radius:12px;padding:10px;display:none"></div>
 </div>
 
-<script>
-let datos=JSON.parse(localStorage.getItem('lab')||'[]');
-let panel=JSON.parse(localStorage.getItem('panel')||'{"total":0,"ok":0,"sen":0}');
-let cfg=JSON.parse(localStorage.getItem('cfg')||'{}');
-let streamCam=null;
-function getCfg(k,d){return cfg[k]!==undefined?cfg[k]:d}
-function setCfg(k,v){cfg[k]=v;localStorage.setItem('cfg',JSON.stringify(cfg));alert('Guardado REAL ✅');renderAll()}
-function entrar(){let p=document.getElementById('pinIn').value;let g=getCfg('pin','');if(!g){if(!p){alert('Poné un PIN real primero');return}cfg['pin']=p;localStorage.setItem('cfg',JSON.stringify(cfg));alert('PIN real creado ✅ Ahora configurá Triple Seguro en Panel');document.getElementById('lock').style.display='none';return}if(p==g){document.getElementById('lock').style.display='none'}else{alert('PIN incorrecto 🔒 Real, no entra')}}
-function olvide(){document.getElementById('olvideBox').classList.remove('hide');document.getElementById('pregTxt').innerText='Pregunta real: '+(getCfg('pregunta','No configuraste todavía'))}
-function verificarSecreta(){let r=document.getElementById('respSecreta').value;if(r && r.toLowerCase()==getCfg('respuesta','').toLowerCase()){alert('Correcto ✅ Tu PIN real es: '+getCfg('pin',''));document.getElementById('lock').style.display='none'}else{alert('Respuesta incorrecta 🔒')}}
-function cerrarSesion(){document.getElementById('lock').style.display='flex';document.getElementById('pinIn').value=''}
-function guardarTriple(){let a=document.getElementById('pinNew').value;let b=document.getElementById('vaultPinNew').value;let c=document.getElementById('pregNew').value;let d=document.getElementById('respNew').value;if(a)cfg['pin']=a;if(b)cfg['vaultPin']=b;if(c)cfg['pregunta']=c;if(d)cfg['respuesta']=d;localStorage.setItem('cfg',JSON.stringify(cfg));alert('Triple Seguro REAL guardado 🔐🔐🔐');renderAll()}
-async function prenderCam(){try{streamCam=await navigator.mediaDevices.getUserMedia({video:true});let v=document.getElementById('camReal');v.srcObject=streamCam;v.classList.remove('hide');alert('Cámara REAL prendida ✅')}catch(e){alert('No se pudo prender la cámara real. Tenés que dar permiso. Error real: '+e.message)}}
-function apagarCam(){if(streamCam){streamCam.getTracks().forEach(t=>t.stop());document.getElementById('camReal').classList.add('hide');alert('Cámara apagada')}}
-function sacarFoto(){let v=document.getElementById('camReal');if(!v.srcObject){alert('Primero prendé la cámara real');return}let c=document.getElementById('canvasFoto');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let foto=c.toDataURL('image/jpeg',0.7);datos.unshift({lugar:'Cámara real',que:'Foto real sacada con cámara del celular - '+new Date().toLocaleString(),nivel:'🔵 AZUL - Experimento real',tipo:'Foto real',hora:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),fecha:new Date().toLocaleDateString(),foto:foto});localStorage.setItem('lab',JSON.stringify(datos));alert('Foto REAL guardada en Lab ✅');renderAll();tab('c')}
-function ubicacionReal(){if(!navigator.geolocation){alert('Tu celular no tiene GPS');return}document.getElementById('resUbi').innerText='Buscando ubicación real...';navigator.geolocation.getCurrentPosition(p=>{let lat=p.coords.latitude;let lon=p.coords.longitude;document.getElementById('resUbi').innerHTML='📍 REAL: Lat '+lat.toFixed(5)+', Lon '+lon.toFixed(5)+'<br><a href="https://www.google.com/maps?q='+lat+','+lon+'" target="_blank" style="color:#00e676">Ver en Google Maps real →</a>';document.getElementById('ubiReal').innerText='📍 Ubicación real: '+lat.toFixed(4)+', '+lon.toFixed(4)},e=>{alert('No se pudo obtener ubicación real. Activá GPS. Error: '+e.message)})}
-let fondos=[{id:'oscuro',nombre:'Oscuro Real',css:'#07130c'},{id:'verde',nombre:'Verde Centinela',css:'linear-gradient(135deg,#075e54,#00a884,#07130c)'},{id:'negro',nombre:'Negro Real',css:'#000'},{id:'rojo',nombre:'Rojo Alerta',css:'linear-gradient(135deg,#3a0000,#e41e3f,#07130c)'},{id:'noche',nombre:'Azul Noche',css:'linear-gradient(135deg,#0a1a3a,#1877f2,#000)'},{id:'violeta',nombre:'Violeta',css:'linear-gradient(135deg,#2a0a4a,#7c3aed,#07130c)'},{id:'cancha',nombre:'Cancha',css:'linear-gradient(135deg,#0a3d00,#1e7a00,#07130c)'},{id:'oro',nombre:'Oro',css:'linear-gradient(135deg,#3a2a00,#b88600,#07130c)'},{id:'claro',nombre:'Claro',css:'#e8e8e8'}];
-function aplicarFondo(){let f=getCfg('fondo','oscuro');let v=getCfg('fondoValor','');let obj=fondos.find(x=>x.id==f);let bg=obj?obj.css:(f=='custom'?('url('+v+') center/cover fixed'):f=='color'?v:'#07130c');document.body.style.setProperty('--portada',bg);document.getElementById('fActual').innerText=obj?obj.nombre:(f=='custom'?'Mi imagen':f=='color'?'Mi color':f)}
-function setFondo(id,val){cfg['fondo']=id;if(val)cfg['fondoValor']=val;localStorage.setItem('cfg',JSON.stringify(cfg));aplicarFondo();renderAll();alert('Portada REAL cambiada 🎨')}
-function tab(x){['a','b','c','d','e','mod','fondos'].forEach(i=>document.getElementById(i).classList.add('hide'));document.getElementById(x).classList.remove('hide');['t1','t2','t3','t4','t5'].forEach(i=>document.getElementById(i).classList.remove('on'));let m={a:'t1',b:'t2',c:'t3',d:'t4',e:'t5',mod:'t1',fondos:'t1'};document.getElementById(m[x]).classList.add('on');renderAll()}
-let mods=[{id:'centinela',e:'🛡️',t:'CENTINELA',d:'Entrada real'},{id:'vault',e:'🔐',t:'VAULT',d:'Bóveda real'},{id:'accorded',e:'🧠',t:'ACCORDED',d:'IA real'},{id:'habla',e:'🗣️',t:'HABLA',d:'Idioma real'},{id:'cloud',e:'☁️',t:'CLOUD',d:'Nube real'},{id:'checkbook',e:'📋',t:'CHECKBOOK',d:'Lab real'},{id:'settings',e:'⚙️',t:'SETTINGS',d:'Ajustes reales'},{id:'office',e:'📄',t:'OFFICE',d:'Reporte real'},{id:'share',e:'📤',t:'SHARE',d:'Compartir real'},{id:'code',e:'💻',t:'CODE',d:'Tu código real'},{id:'academy',e:'🎓',t:'ACADEMY',d:'Escuela real'},{id:'play',e:'🎮',t:'PLAY',d:'Puntaje real'},{id:'trader',e:'📈',t:'TRADER',d:'Trading real'}];
-function openMod(id){tab('mod');let m=mods.find(x=>x.id==id);let h='<div style="text-align:center;font-size:64px">'+m.e+'</div><h2 style="text-align:center;color:#00e676">'+m.t+'</h2><p style="text-align:center;color:#9bb8a5">'+m.d+'</p>';let c='';
-if(id=='vault')c='<label>PIN Bóveda REAL</label><input id="vPinCheck" type="password" placeholder="PIN bóveda real"><button class="btn verde" onclick="if(document.getElementById(\'vPinCheck\').value==\''+getCfg('vaultPin','')+'\'||!getCfg(\'vaultPin\',\'\')){document.getElementById(\'vaultContent\').classList.remove(\'hide\')}else{alert(\'PIN bóveda real incorrecto 🔒\')}">🔓 ABRIR BÓVEDA REAL</button><div id="vaultContent" class="hide" style="margin-top:10px"><label>Nota secreta REAL</label><textarea id="vNota">'+getCfg('vaultNota','')+'</textarea><button class="btn verde" onclick="setCfg(\'vaultNota\',document.getElementById(\'vNota\').value)">🔐 GUARDAR BÓVEDA REAL</button></div>';
-if(id=='habla')c='<label>¿Cómo te hablo real?</label><select id="hEst"><option value="canchero">😎 Canchero argentino</option><option value="serio">🧐 Serio</option><option value="corto">⚡ Corto</option></select><button class="btn verde" onclick="setCfg(\'hablaEstilo\',document.getElementById(\'hEst\').value)">💾 GUARDAR HABLA REAL</button>';
-if(id=='cloud')c='<button class="btn azul" onclick="setCfg(\'cloud\',\'Si\')">☁️ ACTIVAR BACKUP REAL</button><div style=
+</div>
