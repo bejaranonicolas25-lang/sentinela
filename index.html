@@ -1,23 +1,6 @@
-{
-  "name": "SENTINELA FINAL",
-  "short_name": "SENTINELA",
-  "description": "José León Suárez • IA con Cerebro • Bots Sabios",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#050508",
-  "theme_color": "#a100f2",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
-}
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open('sentinela-v1').then(c => c.addAll(['./','./index.html','./manifest.json'])));
+});
+self.addEventListener('fetch', e => {
+  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).catch(()=>caches.match('./index.html'))));
+});
