@@ -1,37 +1,52 @@
-<div class="lock" id="lock">
-<div style="font-size:70px">🛡️</div>
-<h1 style="color:#00e676;font-size:36px">CENTINELA</h1>
-<p style="color:#9bb8a5">TODO REAL • NADA SIMULADO</p>
+function mostrarEntrar(){
+  document.getElementById('pantallaEntrar').classList.remove('hide');
+  document.getElementById('pantallaCrear').classList.add('hide');
+  document.getElementById('pantallaRecuperar').classList.add('hide');
+}
+function mostrarCrear(){
+  document.getElementById('pantallaEntrar').classList.add('hide');
+  document.getElementById('pantallaCrear').classList.remove('hide');
+  document.getElementById('pantallaRecuperar').classList.add('hide');
+}
+function mostrarRecuperar(){
+  document.getElementById('pantallaEntrar').classList.add('hide');
+  document.getElementById('pantallaCrear').classList.add('hide');
+  document.getElementById('pantallaRecuperar').classList.remove('hide');
+  document.getElementById('pregTxt').innerText = 'Pregunta real: ' + (getCfg('pregunta','Todavía no creaste tu cuenta. Tocá CREAR CUENTA POR PRIMERA VEZ'));
+  document.getElementById('pinRecuperado').style.display = 'none';
+}
 
-<!-- PANTALLA 1: ENTRAR -->
-<div id="pantallaEntrar">
-<p style="margin-top:14px">PIN de Jefe - REAL</p>
-<input id="pinIn" type="password" placeholder="Tu PIN real" style="max-width:300px;text-align:center;font-size:20px;letter-spacing:5px">
-<button class="btn verde" style="max-width:300px;margin-top:8px" onclick="entrar()">🛡️ ENTRAR - REAL</button>
-<button class="btn azul" style="max-width:300px;margin-top:8px" onclick="mostrarRecuperar()">🔑 RECUPERAR CONTRASEÑA - SI ME OLVIDÉ</button>
-<button class="btn gris" style="max-width:300px;margin-top:8px" onclick="mostrarCrear()">🆕 CREAR CUENTA POR PRIMERA VEZ</button>
-</div>
+function crearCuenta(){
+  let p1 = document.getElementById('pinCrear').value;
+  let p2 = document.getElementById('pinCrear2').value;
+  let preg = document.getElementById('pregCrear').value;
+  let resp = document.getElementById('respCrear').value;
+  if(!p1 || !p2 || !preg || !resp){ alert('Completá TODO: PIN, repetir PIN, pregunta y respuesta'); return; }
+  if(p1 != p2){ alert('Los PIN no coinciden, fijate'); return; }
+  if(getCfg('pin','')){ if(!confirm('Ya tenés una cuenta creada. ¿Querés pisarla con una nueva?')) return; }
+  cfg['pin'] = p1;
+  cfg['pregunta'] = preg;
+  cfg['respuesta'] = resp;
+  localStorage.setItem('cfg', JSON.stringify(cfg));
+  alert('✅ CUENTA REAL CREADA. Tu PIN es: ' + p1 + ' - Ya podés entrar');
+  document.getElementById('lock').style.display = 'none';
+  renderAll();
+}
 
-<!-- PANTALLA 2: CREAR CUENTA -->
-<div id="pantallaCrear" class="hide" style="max-width:300px;width:100%">
-<p style="margin-top:14px;color:#00e676;font-weight:900">🆕 CREAR CUENTA POR PRIMERA VEZ</p>
-<p style="color:#9bb8a5;font-size:13px">Solo la primera vez. Después entrás con este PIN.</p>
-<input id="pinCrear" type="password" placeholder="Creá tu PIN real (ej: 1234)">
-<input id="pinCrear2" type="password" placeholder="Repetí tu PIN real">
-<input id="pregCrear" placeholder="Pregunta secreta real: Ej: ¿Nombre de mi perro?">
-<input id="respCrear" placeholder="Respuesta secreta real">
-<button class="btn verde" style="margin-top:8px" onclick="crearCuenta()">✅ CREAR MI CUENTA REAL</button>
-<button class="btn gris" style="margin-top:8px" onclick="mostrarEntrar()">← Volver a Entrar</button>
-</div>
+function entrar(){
+  let p = document.getElementById('pinIn').value;
+  let g = getCfg('pin','');
+  if(!g){ alert('Todavía no tenés cuenta. Tocá CREAR CUENTA POR PRIMERA VEZ'); mostrarCrear(); return; }
+  if(p == g){ document.getElementById('lock').style.display = 'none'; }
+  else{ alert('PIN incorrecto 🔒 Real, no entra'); }
+}
 
-<!-- PANTALLA 3: RECUPERAR -->
-<div id="pantallaRecuperar" class="hide" style="max-width:300px;width:100%">
-<p style="margin-top:14px;color:#00e676;font-weight:900">🔑 RECUPERAR CONTRASEÑA</p>
-<p id="pregTxt" style="color:#9bb8a5;font-size:13px">Si no creaste cuenta todavía, primero creala.</p>
-<input id="respSecreta" placeholder="Respuesta secreta real">
-<button class="btn azul" onclick="verificarRecuperar()">✅ VERIFICAR Y MOSTRAR MI PIN</button>
-<button class="btn gris" style="margin-top:8px" onclick="mostrarEntrar()">← Volver a Entrar</button>
-<div id="pinRecuperado" style="margin-top:10px;background:#0f2a1a;border:1px solid #00e676;border-radius:12px;padding:10px;display:none"></div>
-</div>
-
-</div>
+function verificarRecuperar(){
+  let r = document.getElementById('respSecreta').value;
+  if(!getCfg('pin','')){ alert('No tenés cuenta todavía. Creala primero.'); mostrarCrear(); return; }
+  if(r && r.toLowerCase() == getCfg('respuesta','').toLowerCase()){
+    let div = document.getElementById('pinRecuperado');
+    div.style.display = 'block';
+    div.innerHTML = '✅ Tu PIN real es: <b style="font-size:22px;color:#00e676">' + getCfg('pin','') + '</b><br><button class="btn verde" style="margin-top:8px" onclick="document.getElementById(\'lock\').style.display=\'none\'">ENTRAR CON ESTE PIN →</button>';
+  } else { alert('Respuesta incorrecta 🔒'); }
+}
