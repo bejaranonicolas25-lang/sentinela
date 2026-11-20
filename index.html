@@ -1,1 +1,12 @@
-<button class="btn gris" style="max-width:300px;margin-top:8px;opacity:0.7;font-size:12px" onclick="resetTotal()">⚠️ NO ME DEJA ENTRAR - BORRAR Y EMPEZAR DE NUEVO</button>
+function entrar(){
+  let p = document.getElementById('pinIn').value.trim();
+  let g = (getCfg('pin','') || '').trim();
+  if(!g){ alert('Todavía no tenés cuenta en ESTE navegador. Tocá CREAR CUENTA POR PRIMERA VEZ'); mostrarCrear(); return; }
+  if(p == g){ document.getElementById('lock').style.display = 'none'; }
+  else{ alert('PIN incorrecto 🔒 El PIN guardado en ESTE navegador no es ese. Si lo creaste en WhatsApp, acá en Chrome no existe. Probá RECUPERAR o BORRAR Y EMPEZAR DE NUEVO'); }
+}
+function resetTotal(){
+  if(!confirm('¿Seguro? Esto borra el PIN y la cuenta de ESTE navegador y te deja crear una nueva.')) return;
+  localStorage.clear();
+  location.reload();
+}
