@@ -1,7 +1,59 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>CENTINELA</title></head>
-<body style="background:#040d21;color:white;text-align:center;padding:40px;font-family:Arial">
-<h1>🛡️ CENTINELA</h1>
-<p>Si ves esto, GitHub YA anda, jefe.</p>
-<p>Nico Bejarano - ALFA BRAVO 10-4</p>
-</body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{color:#f1f5f9;background:#040d21;background-image:radial-gradient(circle at 50% 0%,rgba(30,58,138,.38),transparent 55%),linear-gradient(180deg,#040d21,#020817 65%,#01040a);min-height:100vh;overflow-x:hidden}
+.hidden{display:none!important}
+#toast-container{position:fixed;bottom:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:10px}
+.toast{background:#071530;border:1px solid #38bdf8;color:#fff;padding:12px 18px;border-radius:12px;font-size:.9rem}
+#login-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px 40px}
+.login-wrapper{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center}
+.android-hero{width:100%;max-width:375px;margin-bottom:-14px;z-index:2;filter:drop-shadow(0 18px 25px #01040a);animation:floatBot 4.5s ease-in-out infinite}
+@keyframes floatBot{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.login-card{width:100%;background:linear-gradient(165deg,rgba(10,25,58,.95),rgba(2,7,19,.98));border:1px solid rgba(56,189,248,.28);border-radius:18px;padding:30px 24px 24px;z-index:1}
+.login-header{text-align:center;margin-bottom:20px}
+.security-badge{display:inline-flex;gap:7px;background:rgba(1,4,10,.8);border:1px solid rgba(56,189,248,.28);padding:5px 14px;border-radius:999px;font-size:.72rem;font-weight:700;color:#93c5fd;margin-bottom:12px}
+.login-header h2{font-size:1.55rem;font-weight:800;color:#fff}
+.login-header p{font-size:.86rem;color:#94a3b8;margin-top:4px}
+.account-chip{display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,33,.9);border:1px solid rgba(30,58,138,.85);border-radius:12px;padding:11px 14px;cursor:pointer;margin-bottom:18px}
+.account-chip:hover{border-color:#38bdf8}
+.account-chip.active{border-color:#38bdf8;background:rgba(14,34,78,.95)}
+.account-info{display:flex;align-items:center;gap:12px}
+.avatar-circle{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#38bdf8);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.account-meta{display:flex;flex-direction:column}
+.account-name{font-size:.9rem;font-weight:700}
+.account-email{font-size:.76rem;color:#94a3b8}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:.82rem;font-weight:600;color:#cbd5e1;margin-bottom:6px}
+.input-wrapper{position:relative;display:flex;align-items:center}
+.form-input{width:100%;background:rgba(1,4,10,.9);border:1px solid #1e3a8a;color:#fff;padding:12px 14px;border-radius:12px;font-size:.94rem;outline:none}
+.form-input:focus{border-color:#38bdf8}
+.toggle-pass-btn{position:absolute;right:12px;background:#0f172a;border:1px solid #1e3a8a;border-radius:8px;color:#cbd5e1;cursor:pointer;font-size:.82rem;font-weight:600;padding:6px 10px}
+.auth-error-banner{background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.45);color:#fca5a5;padding:9px 12px;border-radius:8px;font-size:.8rem;margin-bottom:12px}
+.auth-ok-banner{background:rgba(16,185,129,.14);border:1px solid rgba(16,185,129,.45);color:#6ee7b7;padding:9px 12px;border-radius:8px;font-size:.8rem;margin-bottom:12px}
+.login-links-row{display:flex;justify-content:space-between;gap:8px;margin:12px 0 18px;font-size:.82rem;flex-wrap:wrap}
+.link-btn{background:none;border:none;color:#38bdf8;font-weight:600;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:700;font-size:.92rem;cursor:pointer;border:1px solid transparent}
+.btn-full{width:100%}
+.btn-primary{background:linear-gradient(90deg,#1d4ed8,#0284c7);color:#fff}
+.btn-google{background:rgba(4,13,33,.95);color:#f8fafc;border-color:#1e3a8a}
+.divider{display:flex;align-items:center;text-align:center;margin:14px 0;color:#94a3b8;font-size:.78rem}
+.divider::before,.divider::after{content:"";flex:1;border-bottom:1px solid rgba(30,58,138,.65)}
+.divider span{padding:0 10px}
+.extra-auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn-secondary{background:rgba(1,4,10,.85);color:#e2e8f0;border-color:rgba(30,58,138,.85);font-size:.82rem;padding:11px 10px}
+#dashboard-screen{max-width:1220px;margin:0 auto;padding:16px 16px 60px}
+.top-status-strip{background:linear-gradient(90deg,#020817,#07193d,#020817);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.command-header{background:linear-gradient(145deg,rgba(8,23,54,.92),rgba(1,4,10,.96));border:1px solid rgba(56,189,248,.25);border-radius:18px;padding:22px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+@media(max-width:768px){.command-header{grid-template-columns:1fr;text-align:center}}
+.brand-title-row h1{font-size:1.75rem;font-weight:800;background:linear-gradient(90deg,#fff,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tag-badge{padding:4px 12px;border-radius:999px;font-size:.74rem;font-weight:700;border:1px solid rgba(56,189,248,.35);background:rgba(4,13,33,.9);color:#38bdf8}
+.weather-queue-box{background:rgba(1,4,10,.8);border:1px solid rgba(30,58,138,.8);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;gap:8px;min-width:270px}
+.system-modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+@media(max-width:980px){.system-modules-grid{grid-template-columns:1fr}}
+.panel-card{background:linear-gradient(160deg,rgba(8,22,52,.92),rgba(1,4,10,.96));border:1px solid rgba(30,58,138,.85);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.panel-card-title{font-size:1.02rem;font-weight
