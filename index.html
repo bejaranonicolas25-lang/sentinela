@@ -1,25 +1,38 @@
 <script>
 (function(){
-var ult=false;
-function activarUlt(){
-ult=true;
-try{localStorage.setItem('sentinela_ult','1')}catch(e){}
-var cover=document.querySelector('.cover');if(cover){var s=document.createElement('div');s.id='selloUlt';s.style.cssText='background:linear-gradient(90deg,#FFD700,#a100f2);color:#000;padding:8px 12px;border-radius:20px;font-weight:900;margin-top:10px;font-size:13px';s.textContent='👑 PREMIUM ULTIMÁTUM • ALFA BRAVO 10-4 • ACTIVADO';if(!document.getElementById('selloUlt'))cover.appendChild(s);}
-alert('👑 PREMIUM ULTIMÁTUM ACTIVADO, JEFE.');
+function hablar(txt){
+try{var u=new SpeechSynthesisUtterance(txt);u.lang='es-AR';u.rate=1;u.pitch=1;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}
 }
-try{if(localStorage.getItem('sentinela_ult')=='1')ult=true}catch(e){}
-if(ult){setTimeout(activarUlt,800)}
-var panelEl=document.getElementById('pD');if(panelEl){var caja=document.createElement('div');caja.className='c';caja.style.border='2px solid #FFD700';caja.innerHTML='<b>👑 PREMIUM ULTIMÁTUM</b><p style="font-size:13px;color:#FFD700">El tope máximo. Solo con tu código.</p>';var inp=document.createElement('input');inp.id='codeUlt';inp.placeholder='Escribí: ULTIMATUM';var btn=document.createElement('button');btn.className='btn';btn.style.background='linear-gradient(90deg,#FFD700,#a100f2)';btn.style.color='#000';btn.textContent='👑 ACTIVAR PREMIUM ULTIMÁTUM';btn.onclick=function(){var v=document.getElementById('codeUlt').value.toLowerCase();if(v.indexOf('ultimatum')>-1||v.indexOf('ultimátum')>-1||v.indexOf('alfa bravo')>-1){activarUlt()}else{alert('Código incorrecto. Probá: ULTIMATUM')}};caja.appendChild(inp);caja.appendChild(btn);panelEl.appendChild(caja);}
-var old=window.cerebro;
+window.hablarSentinela=hablar;
+window.vozOn=true;
+var ia=document.getElementById('pB');if(ia){
+var cajaVoz=document.createElement('div');cajaVoz.className='c';cajaVoz.innerHTML='<b>🔊 VOZ SENTINELA + APRENDIZAJE</b><p style="font-size:13px;color:#d8b4fe">La IA te habla de verdad.</p>';
+var bVoz=document.createElement('button');bVoz.className='btn';bVoz.textContent='🔊 HABLAR ÚLTIMO MENSAJE';bVoz.onclick=function(){var m=document.getElementById('msgs');var t=m?m.lastChild?m.lastChild.textContent:'' :'';if(t)hablar(t);else hablar('Hola Nico, soy Sentinel, ALFA BRAVO 10-4')};
+var bVozOn=document.createElement('button');bVozOn.className='btn btn2';bVozOn.style.marginTop='8px';bVozOn.textContent='🔊 VOZ: PRENDIDA - TOCÁ PARA APAGAR';bVozOn.onclick=function(){window.vozOn=!window.vozOn;bVozOn.textContent=window.vozOn?'🔊 VOZ: PRENDIDA - TOCÁ PARA APAGAR':'🔇 VOZ: APAGADA - TOCÁ PARA PRENDER';if(window.vozOn)hablar('Voz prendida, jefe. ALFA BRAVO 10-4')};
+var bApr=document.createElement('button');bApr.className='btn gris';bApr.style.marginTop='8px';bApr.textContent='🧠 ENSEÑAME ALGO NUEVO';bApr.onclick=function(){var lecciones=['LECCIÓN 1: ALFA BRAVO 10-4 significa TODO EN ORDEN, ENTENDIDO.','LECCIÓN 2: CHARLIE es chequeo, DELTA es salgo ya, GOLF es guardia, HOTEL es en casa.','LECCIÓN 3: Tu Lab es tu memoria real. Todo lo que guardás ahí, la IA lo aprende.','LECCIÓN 4: Si ves ROJO, es peligro. Guardalo en Lab, publicalo y si es grave, llamá al 911.','LECCIÓN 5: Para vender SENTINELA, decile: Muro real, cámara real, Lab real, 0% simulación.'];var l=lecciones[Math.floor(Math.random()*lecciones.length)];var m=document.getElementById('msgs');m.innerHTML+='<div class="b">'+l+'</div>';m.scrollTop=m.scrollHeight;if(window.vozOn)hablar(l)};
+cajaVoz.appendChild(bVoz);cajaVoz.appendChild(bVozOn);cajaVoz.appendChild(bApr);ia.querySelector('.c').appendChild(cajaVoz);
+}
+var oldCerebro2=window.cerebro;
 window.cerebro=function(v){
+var r=oldCerebro2?oldCerebro2(v):'Te escucho jefe';
 var l=v.toLowerCase();
-if(l.indexOf('ultimatum')>-1||l.indexOf('ultimátum')>-1||l.indexOf('premium')>-1)return '👑 PREMIUM ULTIMÁTUM ACTIVADO. ¿Querés que te comande la patrulla? Decime COMANDAR PATRULLA.';
-if(l.indexOf('comandar patrulla')>-1||l.indexOf('comandar')>-1)return '👑 COMANDO ULTIMÁTUM - PATRULLA '+new Date().toLocaleString()+'\n1) CHARLIE - Chequeo en BASE ✅\n2) DELTA - Salís de patrulla 🟡\n3) GOLF - Guardia atento 🛡️\n4) HOTEL - Volvés a BASE 🏠\n¿Lo publico todo? Decime PUBLICAR PATRULLA.';
-if(l.indexOf('publicar patrulla')>-1){try{datos.unshift({que:'PATRULLA ULTIMÁTUM COMPLETA: CHARLIE + DELTA + GOLF + HOTEL - '+new Date().toLocaleString(),nivel:'🟢 VERDE - Todo bien',lugar:'Patrulla Ultimátum',tipo:'Comando Ultimátum',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}return '👑 PATRULLA ULTIMÁTUM PUBLICADA en tu muro real.'}
-if(l.indexOf('app completa')>-1||l.indexOf('crear app')>-1)return '👑 APP COMPLETA ULTIMÁTUM: Andá a 🧪 Lab, abajo en LAB ULTIMÁTUM, elegí APP COMPLETA y tocá CREAR.';
-if(old)return old(v);
-return '👑 ULTIMÁTUM: Decime ULTIMATUM, COMANDAR PATRULLA o APP COMPLETA.';
+if(l.indexOf('enseñame')>-1||l.indexOf('aprender')>-1||l.indexOf('leccion')>-1||l.indexOf('lección')>-1)return '🧠 LECCIÓN SENTINELA: ALFA BRAVO 10-4 es tu código. CHARLIE chequeo, DELTA salgo, GOLF guardia, HOTEL en casa. Si querés otra decime OTRA LECCIÓN.';
+if(l.indexOf('otra leccion')>-1||l.indexOf('otra lección')>-1)return '🧠 LECCIÓN 2: Tu sistema aprende de tu Lab. Cada vez que guardás algo real, yo me acuerdo.';
+if(l.indexOf('habla')>-1||l.indexOf('voz')>-1||l.indexOf('hablame')>-1){setTimeout(function(){hablar('Te estoy hablando de verdad, jefe. Soy Sentinel, ALFA BRAVO 10-4')},300);return '🔊 Te estoy hablando ahora mismo, jefe. ¿Me escuchás? ALFA BRAVO 10-4.'}
+if(l.indexOf('bots')>-1||l.indexOf('agentes')>-1||l.indexOf('bot')>-1)return '🤖 BOTS Y AGENTES: Ya los tenés abajo en PANEL. Tenés 3 agentes: CENTINELA, PATRULLA y REPORTERO.';
+setTimeout(function(){if(window.vozOn)hablar(r.replace(/<[^>]*>/g,'').slice(0,300))},400);
+return r;
 };
-var lab=document.getElementById('pC');if(lab){var caja2=document.createElement('div');caja2.className='c';caja2.style.border='2px solid #FFD700';caja2.innerHTML='<b>👑 LAB ULTIMÁTUM</b><p style="font-size:13px;color:#FFD700">Solo Premium Ultimátum. Apps completas con sello dorado.</p>';var sel=document.createElement('select');sel.id='tplUlt';sel.innerHTML='<option value="app">👑 App completa Ultimátum</option><option value="sistema">🛡️ Sistema completo para vender</option><option value="contrato">📄 Contrato Sentinel Ultimátum</option>';var btn2=document.createElement('button');btn2.className='btn';btn2.style.background='linear-gradient(90deg,#FFD700,#a100f2)';btn2.style.color='#000';btn2.style.marginTop='8px';btn2.textContent='👑 CREAR ULTIMÁTUM REAL';btn2.onclick=function(){var t=document.getElementById('tplUlt').value;var code='';if(t=='app')code='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SENTINELA ULTIMÁTUM</title></head><body style="background:#16002b;color:#fff;text-align:center;font-family:Arial"><div style="background:linear-gradient(90deg,#FFD700,#a100f2);color:#000;padding:10px;font-weight:900">👑 PREMIUM ULTIMÁTUM</div><h1>🛡️ SENTINELA</h1><p>ALFA BRAVO 10-4 - '+new Date().toLocaleString()+'</p><p>Publicaciones: '+datos.length+' | Cámaras: '+panel.ok+'/'+panel.total+'</p><button style="background:#a100f2;color:#fff;padding:16px;border:0;border-radius:16px">ENTRAR - ULTIMÁTUM</button></body></html>';if(t=='sistema')code='<div style="background:#16002b;color:#fff;padding:20px;border-radius:20px"><h1>👑 SENTINELA PREMIUM ULTIMÁTUM</h1><p>Muro real + Cámara real + Lab + IA Pro + Comandos + Sello Dorado. 0% simulación. Por Nicolás Bejarano.</p></div>';if(t=='contrato')code='CONTRATO SENTINELA ULTIMÁTUM - '+new Date().toLocaleDateString()+'\nYo, Nicolás Bejarano, dueño de SENTINELA ® VIOLETA REAL, activo el sistema PREMIUM ULTIMÁTUM. ALFA BRAVO 10-4. Todo real, 0% simulación.';var o=document.createElement('div');o.style.cssText='background:#16002b;padding:10px;border-radius:12px;white-space:pre-wrap;font-size:12px;margin-top:8px';o.textContent=code;var cp=document.createElement('button');cp.className='btn btn2';cp.style.marginTop='8px';cp.textContent='📋 COPIAR ULTIMÁTUM';cp.onclick=function(){navigator.clipboard.writeText(code).then(function(){alert('Ultimátum copiado 👑')})};caja2.appendChild(o);caja2.appendChild(cp);try{datos.unshift({que:'Ultimátum creado: '+t,nivel:'🟣 VIOLETA - Idea',lugar:'Lab Ultimátum',tipo:'Ultimátum',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}};caja2.appendChild(sel);caja2.appendChild(btn2);lab.appendChild(caja2);}
+var panelEl=document.getElementById('pD');if(panelEl){
+var caja=document.createElement('div');caja.className='c';caja.style.border='2px solid #00ff88';caja.innerHTML='<b>🤖 BOTS Y AGENTES - TRABAJAN SOLOS</b><p style="font-size:13px;color:#d8b4fe">Activalos una vez y trabajan por vos.</p>';
+function mkAgente(nombre,desc,fn){
+var d=document.createElement('div');d.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';var tit=document.createElement('b');tit.textContent=nombre;var p=document.createElement('p');p.style.fontSize='13px';p.textContent=desc;var estado=document.createElement('p');estado.style.fontSize='12px';estado.style.color='#00ff88';estado.textContent='Estado: APAGADO';var btn=document.createElement('button');btn.className='btn';btn.style.marginTop='6px';btn.textContent='▶️ ACTIVAR '+nombre;var activo=false;var timer=null;btn.onclick=function(){activo=!activo;if(activo){estado.textContent='Estado: 🟢 TRABAJANDO SOLO POR VOS';btn.textContent='⏹️ APAGAR '+nombre;fn();timer=setInterval(fn,30000);hablar(nombre+' activado, jefe. Ya trabajo solo por vos.')}else{estado.textContent='Estado: APAGADO';btn.textContent='▶️ ACTIVAR '+nombre;if(timer)clearInterval(timer)}};d.appendChild(tit);d.appendChild(p);d.appendChild(estado);d.appendChild(btn);return d;
+}
+caja.appendChild(mkAgente('🤖 AGENTE CENTINELA','Te vigila cada 30 segundos.',function(){try{if(datos.length==0){var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">🤖 CENTINELA: Jefe, todavía no hay registros. Guardá algo en Lab.</div>'}}catch(e){}}));
+caja.appendChild(mkAgente('🛡️ AGENTE PATRULLA','Te deja listo el comando de patrulla.',function(){var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">🛡️ PATRULLA: Jefe, patrulla lista. CHARLIE - DELTA - GOLF - HOTEL.</div>'}));
+caja.appendChild(mkAgente('📄 AGENTE REPORTERO','Te prepara tu reporte real.',function(){var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">📄 REPORTERO: Tenés '+datos.length+' publicaciones reales. Pedime REPORTE.</div>'}));
+caja.appendChild(mkAgente('🧠 AGENTE PROFESOR','Te enseña una lección cada 30 segundos.',function(){var lecs=['ALFA BRAVO 10-4 = Todo en orden.','CHARLIE = Chequeo.','DELTA = Salgo ya.','GOLF = Guardia.','HOTEL = En casa.'];var l=lecs[Math.floor(Math.random()*lecs.length)];var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">🧠 PROFESOR: '+l+'</div>';if(window.vozOn)hablar(l)}));
+panelEl.appendChild(caja);
+}
 })();
-  </script>
+</script>
