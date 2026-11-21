@@ -1,42 +1,46 @@
 <script>
 (function(){
-var panelEl=document.getElementById('pD');if(!panelEl)return;
-var seg={};try{seg=JSON.parse(localStorage.getItem('seguridad')||'{}')||{}}catch(e){seg={}}
-if(Object.keys(seg).length==0){seg={pin:true,alfa:true,vault:false,pregunta:false,ultimatum:false,tiempo:false}}
-function guardarSeg(){try{localStorage.setItem('seguridad',JSON.stringify(seg))}catch(e){}actualizar()}
-function contar(){var c=0;for(var k in seg){if(seg[k])c++}return c}
-function actualizar(){
-var el=document.getElementById('contadorSeg');if(el){var total=6;el.innerHTML='🛡️ Tenés <b style="font-size:22px;color:#00ff88">'+contar()+' de '+total+' seguridades activas</b><br><div style="background:#16002b;height:14px;border-radius:10px;margin-top:6px;overflow:hidden"><div style="background:linear-gradient(90deg,#a100f2,#00ff88);height:14px;width:'+(contar()/total*100)+'%"></div></div><p style="font-size:12px;margin-top:6px">'+(contar()==0?'⚠️ SIN SEGURIDAD':contar()==1?'🟡 BAJA - Te recomiendo 3 o más':contar()<=3?'🟢 MEDIA - Bien':contar()<=5?'🟢🟢 ALTA - Muy bien':'👑 ULTIMÁTUM - Nadie entra sin vos')+'</p>'}
+var ia=document.getElementById('pB');if(ia){
+var t=document.createElement('div');t.className='c';t.innerHTML='<b>🧰 HERRAMIENTAS ADENTRO DE IA</b>';
+var calc=document.createElement('div');calc.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';calc.innerHTML='<b>🧮 Calculadora Real</b>';
+var ci=document.createElement('input');ci.placeholder='Ej: 1500+500';
+var cb=document.createElement('button');cb.className='btn';cb.style.marginTop='6px';cb.textContent='= CALCULAR';
+var cr=document.createElement('div');cr.style.marginTop='6px';
+cb.onclick=function(){try{cr.textContent='Resultado: '+eval(ci.value)}catch(e){cr.textContent='Escribí bien, ej: 1500+500'}};
+calc.appendChild(ci);calc.appendChild(cb);calc.appendChild(cr);t.appendChild(calc);
+var tr=document.createElement('div');tr.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';tr.innerHTML='<b>🌐 Traductor Rápido</b>';
+var ti=document.createElement('input');ti.placeholder='Escribí en español...';
+var tb=document.createElement('button');tb.className='btn btn2';tb.style.marginTop='6px';tb.textContent='🌐 TRADUCIR A INGLÉS';
+var trr=document.createElement('div');trr.style.marginTop='6px';
+tb.onclick=function(){window.open('https://translate.google.com/?sl=es&tl=en&text='+encodeURIComponent(ti.value),'_blank');trr.textContent='Abriendo traductor real...'};
+tr.appendChild(ti);tr.appendChild(tb);tr.appendChild(trr);t.appendChild(tr);
+ia.appendChild(t);
 }
-var caja=document.createElement('div');caja.className='c';caja.style.border='2px solid #00ff88';caja.innerHTML='<b>🔐 CENTRO DE SEGURIDAD - VOS ELEGÍS</b><p style="font-size:13px;color:#d8b4fe">Tildá las que querés usar. Podés usar 1, 2, 3 o las 6 a la vez.</p><div id="contadorSeg" style="background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0"></div>';
-var opciones=[
-{id:'pin',titulo:'🔑 1. Contraseña de Jefe',desc:'ALFA BRAVO 10-4 para entrar'},
-{id:'alfa',titulo:'📡 2. Código ALFA BRAVO',desc:'Te pide decir ALFA BRAVO 10-4'},
-{id:'vault',titulo:'🔐 3. PIN Bóveda',desc:'PIN secreto solo para la Bóveda'},
-{id:'pregunta',titulo:'❓ 4. Pregunta Secreta',desc:'Si olvidás la contraseña, te pregunta'},
-{id:'ultimatum',titulo:'👑 5. Modo ULTIMÁTUM',desc:'Solo entra con ULTIMATUM'},
-{id:'tiempo',titulo:'⏰ 6. Bloqueo por Tiempo',desc:'Si fallás 3 veces, se bloquea 1 minuto'}
-];
-opciones.forEach(function(o){
-var fila=document.createElement('div');fila.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:10px;align-items:center';
-var chk=document.createElement('input');chk.type='checkbox';chk.checked=!!seg[o.id];chk.style.cssText='width:28px;height:28px;flex:0 0 28px;accent-color:#00ff88';
-chk.onchange=function(){seg[o.id]=chk.checked;guardarSeg();if(chk.checked){try{hablarSentinela(o.titulo+' activada')}catch(e){}}};
-var txt=document.createElement('div');txt.innerHTML='<b>'+o.titulo+'</b><br><small style="color:#d8b4fe">'+o.desc+'</small>';
-fila.appendChild(chk);fila.appendChild(txt);caja.appendChild(fila);
-});
-var btnTodo=document.createElement('button');btnTodo.className='btn';btnTodo.style.marginTop='8px';btnTodo.textContent='✅ ACTIVAR TODAS (6/6 - MÁXIMA)';
-btnTodo.onclick=function(){for(var k in seg)seg[k]=true;guardarSeg();var chks=caja.querySelectorAll('input[type=checkbox]');chks.forEach(function(c){c.checked=true});alert('👑 TODAS ACTIVADAS - 6/6')};
-var btnNada=document.createElement('button');btnNada.className='btn gris';btnNada.style.marginTop='8px';btnNada.textContent='❌ APAGAR TODAS';
-btnNada.onclick=function(){if(!confirm('¿Apagar todas?'))return;for(var k in seg)seg[k]=false;guardarSeg();var chks=caja.querySelectorAll('input[type=checkbox]');chks.forEach(function(c){c.checked=false})};
-var btnProbar=document.createElement('button');btnProbar.className='btn btn2';btnProbar.style.marginTop='8px';btnProbar.textContent='🧪 PROBAR MI SEGURIDAD AHORA';
-btnProbar.onclick=function(){var activas=[];if(seg.pin)activas.push('Contraseña');if(seg.alfa)activas.push('ALFA BRAVO');if(seg.vault)activas.push('PIN Bóveda');if(seg.pregunta)activas.push('Pregunta Secreta');if(seg.ultimatum)activas.push('ULTIMATUM');if(seg.tiempo)activas.push('Bloqueo por Tiempo');alert('🛡️ TENÉS ACTIVAS '+activas.length+' DE 6:\n\n'+(activas.length?activas.join('\n'):'NINGUNA'));if(window.hablarSentinela)hablarSentinela('Tenés '+activas.length+' seguridades activas, jefe.')};
-caja.appendChild(btnTodo);caja.appendChild(btnNada);caja.appendChild(btnProbar);
-panelEl.appendChild(caja);actualizar();
-var oldC=window.cerebro;
-window.cerebro=function(v){
-var l=v.toLowerCase();
-if(l.indexOf('seguridad')>-1||l.indexOf('cuantas seguridades')>-1||l.indexOf('cuántas')>-1){var a=[];if(seg.pin)a.push('Contraseña');if(seg.alfa)a.push('ALFA BRAVO');if(seg.vault)a.push('PIN Bóveda');if(seg.pregunta)a.push('Pregunta');if(seg.ultimatum)a.push('ULTIMATUM');if(seg.tiempo)a.push('Bloqueo Tiempo');return '🔐 SEGURIDAD: Tenés '+a.length+' de 6 activas: '+(a.length?a.join(', '):'ninguna. Andá a Panel y activalas.');}
-if(oldC)return oldC(v);return 'Te escucho jefe.';
-};
+var lab=document.getElementById('pC');if(lab){
+var t2=document.createElement('div');t2.className='c';t2.innerHTML='<b>🧰 HERRAMIENTAS ADENTRO DE LAB</b>';
+var cron=document.createElement('div');cron.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';cron.innerHTML='<b>⏱️ Cronómetro Real</b><div id="cronTxt" style="font-size:28px;text-align:center">00:00</div>';
+var seg=0,timer=null;
+var b1=document.createElement('button');b1.className='btn';b1.textContent='▶️ EMPEZAR';b1.onclick=function(){if(timer)return;timer=setInterval(function(){seg++;var m=Math.floor(seg/60),s=seg%60;document.getElementById('cronTxt').textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)},1000)};
+var b2=document.createElement('button');b2.className='btn gris';b2.style.marginTop='6px';b2.textContent='⏹️ PARAR Y GUARDAR EN LAB';b2.onclick=function(){if(timer)clearInterval(timer);timer=null;try{datos.unshift({que:'Cronómetro real: '+document.getElementById('cronTxt').textContent,nivel:'🔵 AZUL - Experimento',lugar:'Lab - Cronómetro',tipo:'Herramienta Lab',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}alert('Cronómetro guardado ✅');seg=0;document.getElementById('cronTxt').textContent='00:00'};
+cron.appendChild(b1);cron.appendChild(b2);t2.appendChild(cron);
+var notas=document.createElement('div');notas.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';notas.innerHTML='<b>📝 Notas Rápidas Reales</b>';
+var ni=document.createElement('textarea');ni.placeholder='Escribí tu nota real...';
+var nb=document.createElement('button');nb.className='btn btn2';nb.style.marginTop='6px';nb.textContent='💾 GUARDAR NOTA EN LAB';
+nb.onclick=function(){if(!ni.value.trim())return;try{datos.unshift({que:'Nota real: '+ni.value,nivel:'🟣 VIOLETA - Idea',lugar:'Lab - Notas',tipo:'Nota real',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}ni.value='';alert('Nota guardada ✅')};
+notas.appendChild(ni);notas.appendChild(nb);t2.appendChild(notas);
+lab.appendChild(t2);
+}
+var pan=document.getElementById('pD');if(pan){
+var t3=document.createElement('div');t3.className='c';t3.innerHTML='<b>🧰 HERRAMIENTAS ADENTRO DE PANEL</b>';
+var hb=document.createElement('div');hb.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';hb.innerHTML='<b>📱 Mi Celu Real</b><div id="infoCelu" style="font-size:13px;margin-top:6px">Cargando...</div>';
+var bInfo=document.createElement('button');bInfo.className='btn';bInfo.style.marginTop='6px';bInfo.textContent='📱 VER MI CELU REAL';
+bInfo.onclick=function(){var info='Pantalla: '+screen.width+'x'+screen.height+'\nIdioma: '+navigator.language+'\nEn línea: '+(navigator.onLine?'Sí':'No')+'\nHora: '+new Date().toLocaleString();document.getElementById('infoCelu').innerText=info;if(navigator.getBattery)navigator.getBattery().then(function(b){document.getElementById('infoCelu').innerText+='\nBatería real: '+Math.round(b.level*100)+'%'+(b.charging?' 🔌 Cargando':' 🔋')})};
+hb.appendChild(bInfo);t3.appendChild(hb);
+var ex=document.createElement('div');ex.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';ex.innerHTML='<b>📥 Exportar Todo Real</b>';
+var be=document.createElement('button');be.className='btn btn2';be.style.marginTop='6px';be.textContent='📥 DESCARGAR TODO MI SENTINELA';
+be.onclick=function(){var txt='SENTINELA - '+new Date().toLocaleString()+'\n\n'+datos.map(function(d){return d.fecha+' '+d.hora+' | '+d.nivel+' | '+d.tipo+' | '+d.lugar+' | '+d.que}).join('\n');var blob=new Blob([txt],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mi-sentinela-completo.txt';a.click()};
+ex.appendChild(be);t3.appendChild(ex);
+pan.appendChild(t3);
+}
 })();
   </script>
