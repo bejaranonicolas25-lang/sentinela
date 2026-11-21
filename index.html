@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#020617;color:#fff}
+.bg{position:fixed;inset:0;z-index:0;background:#020617;overflow:hidden}
+.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.08) 1px,transparent 1px);background-size:32px 32px}
+.hum{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);text-align:center;opacity:.8}
+.cab{width:60px;height:72px;margin:auto;background:#f1c27d;border-radius:48% 48% 42% 42%;position:relative;overflow:hidden}
+.pelo{position:absolute;top:0;left:0;right:0;height:20px;background:#111}
+.ojo{position:absolute;top:34px;width:8px;height:8px;background:#111;border-radius:50%}
+.cue{width:18px;height:10px;background:#e0a878;margin:-2px auto 0}
+.tra{width:96px;height:96px;margin:auto;background:#1e3a8a;border:1px solid #38bdf8;border-radius:16px;position:relative}
+.pe{position:absolute;top:50px;left:50%;transform:translateX(-50%);background:#000;border:2px solid #38bdf8;border-radius:8px;padding:3px 6px;font-size:8px;white-space:nowrap}
+.cartel{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:200px;background:#000;border:2px solid #38bdf8;border-radius:12px;padding:6px;box-shadow:0 0 16px #38bdf8}
+.ag{position:absolute;top:44%;text-align:center;opacity:.7}
+.ag .cab{width:34px;height:42px}.ag .pelo{height:11px}.ag .ojo{top:20px;width:5px;height:5px}.ag .cue{width:9px;height:6px}.ag .tra{width:46px;height:58px}
+.ag b{font-size:8px;background:#000;border:1px solid #38bdf8;border-radius:8px;padding:4px;display:inline-block}
+.l{left:6px}.r{right:6px}
+.box{position:relative;z-index:10;max-width:430px;margin:0 auto;padding:14px;min-height:100vh}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #334155;background:rgba(0,0,0,.7);color:#fff;margin-top:8px}
+button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:800;margin-top:8px;cursor:pointer}
+.btnw{background:#fff;color:#000}.btnd{background:rgba(0,0,0,.6);color:#fff;border:1px solid #334155}.btna{background:#0ea5e9;color:#fff}
+.w{background:rgba(11,30,58,.95);border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}
+.ic{width:56px;height:56px;margin:auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.app span{font-size:10px;display:block;margin-top:5px}
+.c1{background:#2563eb}.c2{background:#059669}.c3{background:#d97706}.c4{background:#7c3aed}.c5{background:#dc2626}.c6{background:#0891b2}.c7{background:#db2777}
+.modal{position:fixed;inset:0;background:#071426;z-index:99;display:none;flex-direction:column}
+.modal.open{display:flex}.mtop{padding:14px;display:flex;justify-content:space-between;background:#0b1e3a}.mbody{padding:16px;flex:1;overflow:auto}.out{background:#000;border:1px solid #1e3a8a;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px;font-size:13px}
+</style></head><body>
+<div class="bg">
+<div class="ag l"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:7px"></div><div class="ojo" style="right:7px"></div></div><div class="cue"></div><div class="tra"></div><b>AGENTE 01</b></div>
+<div class="hum"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:14px"></div><div class="ojo" style="right:14px"></div></div><div class="cue"></div><div class="tra"><div class="pe">SENTINELA</div></div><div class="cartel"><b>CENTINELA</b><br><small style="color:#38bdf8">ALFA BRAVO 10-4 • NICO BEJARANO</small></div></div>
+<div class="ag r"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:7px"></div><div class="ojo" style="right:7px"></div></div><div class="cue"></div><div class="tra"></div><b>AGENTE 02</b></div>
+</div>
+
 <div id="login" class="box" style="text-align:center;padding-top:20px">
+<h1 style="letter-spacing:5px;margin-top:10px;text-shadow:0 2px 10px #000">CENTINELA</h1><p style="color:#e2e8f0;font-size:13px">Nico Bejarano • ALFA BRAVO 10-4</p>
+<input value="Nico Bejarano"><input type="password" value="NICO-10-4-SENTINELA">
+<button class="btnw" onclick="entrar()">ENTRAR →</button>
+<p style="color:#94a3b8;font-size:11px;margin-top:10px">Si ves esto, YA NO ESTÁ BLANCA. Tocá ENTRAR.</p>
+</div>
+
+<div id="home" class="box" style="display:none">
+<div style="display:flex;justify-content:space-between;font-weight:700"><span id="hora">18:14</span><span>📶 🔋 50%</span></div>
+<h2 style="margin:12px 0">Hola, Nico 👋</h2>
+<div class="w"><small>🌤️ TIGRE • REAL</small><b id="clima" style="font-size:28px;display:block">--°C</b><p id="clima2" style="font-size:12px">Tocá actualizar</p><button class="btnw" onclick="clima()">Actualizar clima</button></div>
+<div class="w"><small>💵 DÓLAR • REAL</small><b id="dolar" style="font-size:28px;display:block">--</b><p id="dolar2" style="font-size:12px">Tocá actualizar</p><button class="btnw" onclick="dolar()">Actualizar dólar</button></div>
+<h3 style="margin:10px 0">Tus Apps</h3><div class="apps" id="apps"></div>
+<button class="btnd" onclick="salir()">Cerrar sesión</button>
+</div>
+
+<div id="modal" class="modal"><div class="mtop"><b id="mTit">APP</b><button onclick="cerrar()" style="width:auto;padding:8px 14px;background:#fff;border-radius:20px">✕ Cerrar</button></div><div class="mbody" id="mBody"></div></div>
+
+<script>
+function entrar(){document.getElementById('login').style.display='none';document.getElementById('home').style.display='block';clima();dolar();upd();}
+function salir(){document.getElementById('home').style.display='none';document.getElementById('login').style.display='block';}
+async function clima(){try{var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.47&longitude=-58.63&current=temperature_2m&timezone=America%2FArgentina%2FBuenos_Aires');var j=await r.json();document.getElementById('clima').textContent=j.current.temperature_2m+'°C';document.getElementById('clima2').textContent='Tigre real: '+j.current.temperature_2m+'°C • '+new Date().toLocaleTimeString('es-AR');}catch(e){document.getElementById('clima').textContent='22°C';document.getElementById('clima2').textContent='Sin internet.';}}
+async function dolar(){try{var r=await fetch('https://dolarapi.com/v1/dolares/blue');var j=await r.json();window._d=j.venta;document.getElementById('dolar').textContent='$'+j.venta;document.getElementById('dolar2').textContent='Compra $'+j.compra+' • Venta $'+j.venta;}catch(e){window._d=1675;document.getElementById('dolar').textContent='$1675';document.getElementById('dolar2').textContent='Sin internet.';}}
+function hablar(t,v){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';u.rate=v||0.92;speechSynthesis.speak(u);}catch(e){}}
+var D={amparo:'PELIGRO, NO VENGAN',taquicardia:'PELIGRO TOTAL',penal:'EMERGENCIA',asado:'JUNTA GRANDE',mate:'HABLAR TRANQUI',gol:'LO LOGRAMOS'};
+function getG(){try{return JSON.parse(localStorage.getItem('or')||'[]')}catch(e){return[]}}
+function getN(){try{return JSON.parse(localStorage.getItem('notas')||'[]')}catch(e){return[]}}
+function upd(){}
+function crear(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)];return 'א ['+a+' + '+b+'] REAL: '+D[a]+' + '+D[b];}
+var A=[['🌤️','CLIMA','c1'],['📚','TRADUCTOR','c2'],['🏭','FABRICA','c4'],['💬','DIALOGO','c6'],['✅','CORRECTOR','c2'],['🎙️','VOZ','c5'],['🎮','JUEGO','c7'],['📝','NOTAS','c2'],['💡','LINTERNA','c3'],['⏱️','CRONO','c7'],['🧮','CALC','c3'],['💱','CONVERSOR','c3'],['📷','CAMARA','c5'],['📍','GPS','c6'],['🔔','AVISO','c7'],['🎓','ACADEMY','c4']];
+var c=document.getElementById('apps');
+A.forEach(function(a){var d=document.createElement('div');d.className='app';d.innerHTML='<div class="ic '+a[2]+'">'+a[0]+'</div><span>'+a[1]+'</span>';d.onclick=function(){openApp(a[1])};c.appendChild(d)});
+function openApp(n){var b=document.getElementById('mBody');document.getElementById('mTit').textContent=n;
+if(n==='CLIMA')b.innerHTML='<p>'+document.getElementById('clima2').textContent+'</p><button class="btnw" onclick="clima()">Actualizar</button><button class="btna" onclick="hablar(document.getElementById(\'clima2\').textContent)">Escuchar</button>';
+else if(n==='TRADUCTOR')b.innerHTML='<input id="ti" placeholder="amparo, taquicardia, penal"><button class="btnw" onclick="doT()">Traducir</button><div class="out" id="to"></div>';
+else if(n==='FABRICA')b.innerHTML='<button class="btnw" onclick="doG()">Generar 10</button><button class="btna" onclick="doV()">Ver guardadas</button><button class="btnd" onclick="doD()">Descargar .txt</button><div class="out" id="go"></div>';
+else if(n==='DIALOGO')b.innerHTML='<input id="d1" value="SALUDO"><input id="d2" value="PREGUNTA"><button class="btnw" onclick="doDia()">Crear</button><div class="out" id="do"></div>';
+else if(n==='CORRECTOR')b.innerHTML='<input id="ci" placeholder="Ej: [Amparo]"><button class="btnw" onclick="doC()">Corregir</button><div class="out" id="co"></div>';
+else if(n==='VOZ')b.innerHTML='<button class="btnw" onclick="hablar(\'Alfa Bravo diez cuatro. Centinela activo.\')">Escuchar</button><textarea id="vt">Alfa Bravo 10-4, Centinela activo</textarea><button class="btnw" onclick="hablar(document.getElementById(\'vt\').value)">Decir mi texto</button>';
+else if(n==='JUEGO'){var ks=Object.keys(D);var k=ks[Math.floor(Math.random()*ks.length)];var r=prompt('¿Qué significa: '+k+' ?');b.innerHTML=r!==null?'<p>'+(r.toLowerCase()===D[k].toLowerCase()?'✅ CORRECTO: '+D[k]:'❌ Era: '+D[k])+'</p><button class="btnw" onclick="openApp(\'JUEGO\')">Otra vez</button>':'<p>Cancelaste</p>';}
+else if(n==='NOTAS')b.innerHTML='<textarea id="notaT" placeholder="Escribí tu nota..."></textarea><button class="btnw" onclick="doNota()">Guardar</button><button class="btnd" onclick="doVerN()">Ver notas</button><div class="out" id="notaO"></div>';
+else if(n==='LINTERNA')b.innerHTML='<button class="btnw" onclick="document.body.style.background=\'#fff\';setTimeout(function(){document.body.style.background=\'#020617\'},3000)">💡 Encender luz 3 seg</button>';
+else if(n==='CRONO')b.innerHTML='<div class="out" id="cronoO" style="font-size:28px;text-align:center">00:00</div><button class="btnw" onclick="startC()">Empezar</button><button class="btnd" onclick="stopC()">Parar</button><button class="btnd" onclick="resetC()">Reiniciar</button>';
+else if(n==='CALC')b.innerHTML='<input id="n1" type="number" placeholder="N1"><input id="n2" type="number" placeholder="N2"><button class="btnw" onclick="doCalc(\'+\')">Sumar</button><button class="btnd" onclick="doCalc(\'-\')">Restar</button><div class="out" id="calcO"></div>';
+else if(n==='CONVERSOR')b.innerHTML='<input id="cv" type="number" value="10000"><button class="btnw" onclick="doConv()">Pesos → USD</button><div class="out" id="convO2"></div>';
+else if(n==='CAMARA')b.innerHTML='<button class="btnw" onclick="doCam()">Foto real</button>';
+else if(n==='GPS')b.innerHTML='<button class="btnw" onclick="doGPS()">Ver GPS</button><div class="out" id="gpsO"></div>';
+else if(n==='AVISO')b.innerHTML='<button class="btnw" onclick="alert(\'AVISO CENTINELA: Alfa Bravo 10-4\')">Probar aviso</button>';
+else if(n==='ACADEMY')b.innerHTML='<p>NIVEL 1: 1 mes - 1 palabra<br>NIVEL 2: 3 meses - 2 palabras<br>NIVEL 3: 6 meses - 3 palabras + Morse</p>';
+else b.innerHTML='<p>App '+n+'</p>';
+document.getElementById('modal').classList.add('open');}
+function cerrar(){document.getElementById('modal').classList.remove('open')}
+function doT(){var v=document.getElementById('ti').value.toLowerCase();var r=[];for(var k in D){if(v.indexOf(k)>-1)r.push(k+' = '+D[k])}document.getElementById('to').textContent=r.length?r.join('\n'):'Probá: amparo, taquicardia, penal';}
+function doG(){var g=getG();var t='';for(var i=0;i<10;i++){var o=crear();g.push(o);t+=o+'\n\n'}try{localStorage.setItem('or',JSON.stringify(g))}catch(e){}document.getElementById('go').textContent=t+'TOTAL: '+g.length;}
+function doV(){var g=getG();document.getElementById('go').textContent=g.length?g.join('\n\n'):'Todavía no hay.';}
+function doD(){var g=getG();var blob=new Blob([g.join('\n\n')||'Sin oraciones'],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='centinela.txt';a.click();}
+function doDia(){var EJ={SALUDO:'HOLA, EMPEZAMOS',PREGUNTA:'¿ALGUIEN MIENTE?'};var a=document.getElementById('d1').value.toUpperCase(),b2=document.getElementById('d2').value.toUpperCase();document.getElementById('do').textContent='A - '+a+': '+(EJ[a]||a)+'\nB - '+b2+': '+(EJ[b2]||b2);}
+function doC(){var v=document.getElementById('ci').value;var e=[];if(v.indexOf('  ')>-1)e.push('Doble espacio');if(v.indexOf('א')===-1)e.push('Falta א');document.getElementById('co').textContent=e.length?e.join('\n'):'✅ CORRECTA: '+v;}
+function doNota(){var v=document.getElementById('notaT').value;if(!v)return;var n=getN();n.push(v+' • '+new Date().toLocaleString('es-AR'));try{localStorage.setItem('notas',JSON.stringify(n));}catch(e){}document.getElementById('notaO').textContent='✅ Guardada: '+n.length;}
+function doVerN(){var n=getN();document.getElementById('notaO').textContent=n.length?n.join('\n\n'):'Sin notas.';}
+var _t=null,_s=0;function startC(){if(_t)return;_t=setInterval(function(){_s++;var m=Math.floor(_s/60),s=_s%60;var e=document.getElementById('cronoO');if(e)e.textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);},1000);}function stopC(){clearInterval(_t);_t=null;}function resetC(){stopC();_s=0;var e=document.getElementById('cronoO');if(e)e.textContent='00:00';}
+function doCalc(op){var a=Number(document.getElementById('n1').value||0),b2=Number(document.getElementById('n2').value||0);document.getElementById('calcO').textContent=a+' '+op+' '+b2+' = '+(op==='+'?a+b2:a-b2);}
+function doConv(){var v=Number(document.getElementById('cv').value||0);document.getElementById('convO2').textContent='$'+v+' = USD '+((v/(window._d||1675)).toFixed(2));}
+function doCam(){var i=document.createElement('input');i.type='file';i.accept='image/*';i.capture='environment';i.onchange=function(){alert('✅ Foto real')};i.click();}
+function doGPS(){if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(p){document.getElementById('gpsO').textContent='Lat: '+p.coords.latitude+'\nLon: '+p.coords.longitude},function(){document.getElementById('gpsO').textContent='Sin permiso';});}
+</script></body></html>
