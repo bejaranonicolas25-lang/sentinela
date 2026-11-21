@@ -3,24 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CENTINELA — Sistema de Acceso y Módulos</title>
+  <title>CENTINELA</title>
   <style>
-    :root {
-      --bg-deep: #040914;
-      --bg-navy: #081428;
-      --bg-card: rgba(11, 23, 45, 0.88);
-      --bg-card-solid: #0d1b34;
-      --bg-input: #081224;
-      --border-subtle: rgba(148, 184, 235, 0.16);
-      --border-strong: rgba(148, 184, 235, 0.28);
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --accent-blue: #1d5fd6;
-      --accent-blue-hover: #256ef0;
-      --accent-glow: rgba(37, 130, 255, 0.45);
-      --shadow-heavy: 0 24px 60px rgba(0, 0, 0, 0.78);
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -29,35 +13,39 @@
     }
 
     html, body {
-      min-height: 100%;
-      background-color: var(--bg-deep);
-      color: var(--text-main);
+      min-height: 100vh;
+      background-color: #061021;
+      color: #f1f5f9;
       overflow-x: hidden;
     }
 
     body {
       background:
-        radial-gradient(circle at 50% 16%, rgba(19, 54, 112, 0.55) 0%, rgba(7, 18, 38, 0.88) 45%, rgba(2, 5, 12, 0.98) 100%);
+        radial-gradient(circle at 50% 18%, #16376e 0%, #091833 46%, #030812 100%);
       position: relative;
     }
 
-    body::before {
-      content: "";
+    .grid-bg {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background-image:
-        linear-gradient(to right, rgba(120, 165, 230, 0.045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(120, 165, 230, 0.045) 1px, transparent 1px);
+        linear-gradient(to right, rgba(120, 165, 230, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(120, 165, 230, 0.05) 1px, transparent 1px);
       background-size: 64px 64px;
       pointer-events: none;
       z-index: 0;
     }
 
-    body::after {
-      content: "";
+    .vignette-bg {
       position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.72) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -65,41 +53,37 @@
     .view {
       display: none;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .view.active {
       display: block;
     }
 
-    /* ==================== LOGIN VIEW ==================== */
+    /* ==================== VISTA 1: PORTADA INICIO DE SESIÓN ==================== */
     .login-wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 28px 16px 36px;
+      padding: 22px 16px 36px;
     }
 
     .hero-stage {
       position: relative;
       width: 100%;
-      max-width: 780px;
+      max-width: 720px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: -14px;
+      margin-bottom: -10px;
     }
 
-    .android-art {
+    .android-svg {
       width: 100%;
       max-width: 440px;
-      height: auto;
+      height: 290px;
       display: block;
-      filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.85));
-      user-select: none;
-    }
-
-    .centinela-title-
-    
+      z-index: 1
+      
