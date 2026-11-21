@@ -1,132 +1,346 @@
+```html
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CENTINELA - Nico Bejarano</title>
-<style>
-:root{--c:#1877f2;--c2:#0d5bd6;--bg:#f0f2f5;--card:#fff;--txt:#050505;--mut:#65676b;--line:#ddd}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding-top:56px}
-.top{position:fixed;top:0;left:0;right:0;height:56px;background:var(--card);box-shadow:0 1px 8px rgba(0,0,0,.15);display:flex;align-items:center;gap:10px;padding:0 12px;z-index:100}
-.logoTop{display:flex;align-items:center;gap:8px}
-.logoTop .cir{width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}
-.logoTop b{font-size:20px}
-.logoTop span{font-size:11px;color:var(--mut);display:block;margin-top:-2px}
-.search{flex:1;max-width:420px;background:#f0f2f5;border-radius:20px;display:flex;align-items:center;padding:8px 12px;gap:6px}
-.search input{border:0;background:transparent;outline:none;width:100%;font-size:14px}
-.topNav{display:flex;gap:4px;margin-left:auto}
-.topNav button{border:0;background:#f0f2f5;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:18px}
-.perfil{display:flex;align-items:center;gap:6px;background:#f0f2f5;border-radius:20px;padding:4px 8px 4px 4px;font-weight:700;font-size:13px}
-.perfil .av{width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center}
-.layout{max-width:1200px;margin:0 auto;display:flex;gap:16px;padding:14px 12px;align-items:flex-start}
-.left{width:280px;position:sticky;top:70px;display:flex;flex-direction:column;gap:6px}
-.center{flex:1;max-width:620px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.right{width:300px;position:sticky;top:70px;display:flex;flex-direction:column;gap:14px}
-@media(max-width:900px){.left,.right{display:none}.center{max-width:100%}}
-.card{background:var(--card);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.12);padding:14px}
-.card h2{font-size:16px;margin:0 0 6px}
-.card p{font-size:13px;color:var(--mut);margin:6px 0;line-height:1.4}
-.card p b{color:var(--txt)}
-input,select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#f0f2f5;color:var(--txt);font-size:14px;margin-top:8px;outline:none}
-.btn{width:100%;padding:11px;border:0;border-radius:8px;background:var(--c);color:#fff;font-weight:700;font-size:14px;margin-top:8px;cursor:pointer}
-.btn2{background:#e4e6eb;color:var(--txt)}
-.btn3{background:#a100f2;color:#fff}
-.out{background:#050505;color:#00ff88;padding:12px;border-radius:10px;font-family:monospace;font-size:12px;margin-top:10px;white-space:pre-wrap;display:none;max-height:420px;overflow:auto}
-.pill{display:inline-block;background:#e4e6eb;border-radius:20px;padding:5px 9px;font-size:11px;margin:3px 2px;cursor:pointer}
-.small{font-size:11px;color:var(--mut)}
-.menuItem{display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:500}
-.menuItem:hover{background:#e4e6eb}
-.menuItem .ic{width:34px;height:34px;border-radius:50%;background:#e4e6eb;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.postBox{display:flex;gap:10px;align-items:flex-start}
-.postBox .av{width:40px;height:40px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0}
-.postBox input{margin:0;border-radius:20px}
-.postActions{display:flex;gap:6px;margin-top:10px;border-top:1px solid #eee;padding-top:10px}
-.postActions button{flex:1;border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer;font-weight:600;color:var(--mut)}
-.logos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.logo{background:#f0f2f5;border:2px solid transparent;border-radius:12px;padding:12px;text-align:center;cursor:pointer}
-.logo b{font-size:11px;display:block;margin-top:6px}
-.logo span{font-size:11px;color:var(--mut);display:block;margin-top:4px;line-height:1.3}
-.logo .ico{font-size:30px}
-.logo.activo{border-color:var(--c);background:#e7f3ff}
-.logo.grande{grid-column:1 / -1;background:linear-gradient(135deg,var(--c),#000);color:#fff;border-color:var(--c)}
-.logo.grande span{color:#fff}
-.logo.grande .ico{font-size:48px}
-.colores{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.colorBtn{width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #ddd;cursor:pointer}
-.cover{height:160px;border-radius:12px;background:linear-gradient(135deg,var(--c),#000);display:flex;align-items:flex-end;padding:12px;color:#fff;background-size:cover;background-position:center;position:relative;overflow:hidden}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centinela — Iniciar sesión</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tipografía moderna Inter & Rajdhani para el estilo tecnológico/metálico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        centinela: {
+                            dark: '#040811',
+                            navy: '#0a1426',
+                            card: 'rgba(13, 23, 42, 0.86)',
+                            input: 'rgba(19, 32, 56, 0.78)',
+                            border: 'rgba(71, 108, 168, 0.25)',
+                            primary: '#1d4ed8',
+                            primaryHover: '#2563eb',
+                            glow: '#38bdf8'
+                        }
+                    },
+                    boxShadow: {
+                        'realistic': '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(10, 25, 55, 0.6)',
+                        'btn-glow': '0 4px 20px -2px rgba(29, 78, 216, 0.65), inset 0 1px 0 rgba(255,255,255,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Fondo azul marino profundo con sombreado negro radial y cuadrícula técnica */
+        body {
+            background-color: #03060d;
+            background-image: 
+                radial-gradient(circle at 50% 28%, rgba(22, 48, 88, 0.48) 0%, rgba(7, 15, 30, 0.85) 48%, #020409 100%),
+                linear-gradient(to right, rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.045) 1px, transparent 1px);
+            background-size: 100% 100%, 44px 44px, 44px 44px;
+            background-position: center top, center center, center center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Viñeta negra periférica para profundidad cinematográfica */
+        .vignette-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.82) 100%);
+            z-index: 1;
+        }
+
+        /* Animación sutil de respiración del androide */
+        @keyframes androidFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .android-rig {
+            animation: androidFloat 6s ease-in-out infinite;
+        }
+
+        /* Pulso suave en los ojos del androide */
+        @keyframes eyePulse {
+            0%, 100% { opacity: 0.92; filter: drop-shadow(0 0 8px #38bdf8) drop-shadow(0 0 18px #0284c7); }
+            50% { opacity: 1; filter: drop-shadow(0 0 12px #7dd3fc) drop-shadow(0 0 26px #0ea5e9); }
+        }
+
+        .android-eyes {
+            animation: eyePulse 3.5s ease-in-out infinite;
+        }
+
+        /* Estilo de vidrio oscuro ultra realista */
+        .glass-panel {
+            background: linear-gradient(165deg, rgba(18, 31, 54, 0.88) 0%, rgba(10, 18, 33, 0.94) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(96, 139, 204, 0.22);
+            box-shadow: 
+                0 30px 60px -12px rgba(0, 0, 0, 0.95),
+                0 0 0 1px rgba(0, 0, 0, 0.6),
+                inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        }
+
+        /* Inputs con profundidad interna */
+        .realistic-input {
+            background: rgba(16, 27, 48, 0.75);
+            border: 1px solid rgba(71, 105, 158, 0.28);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.55);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .realistic-input:focus {
+            background: rgba(21, 36, 64, 0.9);
+            border-color: #3b82f6;
+            box-shadow: 
+                inset 0 2px 5px rgba(0, 0, 0, 0.5),
+                0 0 0 3px rgba(59, 130, 246, 0.22);
+            outline: none;
+        }
+
+        /* Botón principal con brillo metálico azul marino */
+        .btn-centinela {
+            background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 55%, #1e3a8a 100%);
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            box-shadow: 
+                0 6px 20px -3px rgba(29, 78, 216, 0.65),
+                inset 0 1px 0 rgba(255, 255, 255, 0.28);
+            transition: all 0.2s ease;
+        }
+
+        .btn-centinela:hover {
+            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+            box-shadow: 
+                0 8px 25px -2px rgba(37, 99, 235, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.38);
+            transform: translateY(-1px);
+        }
+
+        .btn-centinela:active {
+            transform: translateY(1px);
+        }
+
+        /* Botón secundario Crear cuenta nueva */
+        .btn-secondary-dark {
+            background: linear-gradient(180deg, rgba(30, 46, 74, 0.85) 0%, rgba(19, 31, 52, 0.95) 100%);
+            border: 1px solid rgba(100, 135, 190, 0.28);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary-dark:hover {
+            background: linear-gradient(180deg, rgba(39, 59, 94, 0.92) 0%, rgba(25, 40, 66, 0.98) 100%);
+            border-color: rgba(125, 165, 225, 0.45);
+        }
+    </style>
 </head>
-<body>
-<div class="top">
-<div class="logoTop"><div class="cir">🛡️</div><div><b>CENTINELA</b><span>De Nico Bejarano • Privado</span></div></div>
-<div class="search">🔍 <input id="buscarTop" placeholder="Buscar en CENTINELA... amparo, penal, asado"></div>
-<div class="topNav"><button>🏠</button><button>🧩</button><button>🎨</button><button>🔔</button></div>
-<div class="perfil"><div class="av">N</div> Nico <span style="color:#31a24c">●</span></div>
-</div>
-<div class="layout">
-<div class="left">
-<div class="card" style="padding:8px">
-<div class="menuItem"><div class="ic">🏠</div> Inicio - CENTINELA</div>
-<div class="menuItem"><div class="ic">📚</div> Traductor - 120 palabras</div>
-<div class="menuItem"><div class="ic">🏭</div> Fábrica - Sin límite</div>
-<div class="menuItem"><div class="ic">💬</div> Diálogo sin límite</div>
-<div class="menuItem"><div class="ic">✅</div> Corrector</div>
-<div class="menuItem"><div class="ic">🛡️</div> 13 Módulos CENTINELA</div>
-<div class="menuItem"><div class="ic">🎨</div> Cambiar color</div>
-<div class="menuItem"><div class="ic">🔒</div> Bloqueo - Solo Nico</div>
-</div>
-<div class="card"><h2>🛡️ Tus módulos</h2><p>13 módulos de CENTINELA.</p><div id="miniLogos"></div></div>
-<div class="small">© 2026 CENTINELA - Nico Bejarano<br>Privacidad • Solo con su autorización<br>Mínimo 2 años para aprenderse</div>
-</div>
-<div class="center">
-<div class="card" style="padding:0;overflow:hidden">
-<div class="cover" id="portadaCentinela"><div style="position:relative;z-index:2;width:100%;display:flex;justify-content:space-between;align-items:flex-end"><div><b style="font-size:22px;text-shadow:0 2px 8px #000">🛡️ CENTINELA</b><span style="font-size:12px;display:block;text-shadow:0 1px 6px #000">ALFA BRAVO 10-4 • José León Suárez • Solo con autorización de Nico Bejarano</span></div><label style="background:#fff;color:#000;font-size:12px;font-weight:800;padding:8px 12px;border-radius:20px;cursor:pointer">📷 Cambiar portada<input type="file" id="inputPortada" accept="image/*" style="display:none"></label></div><button id="btnQuitarPortada" style="position:absolute;top:8px;right:8px;z-index:3;background:rgba(0,0,0,.6);color:#fff;border:0;padding:6px 10px;border-radius:20px;font-size:11px;cursor:pointer;display:none">✕ Quitar foto</button></div>
-<div style="display:flex;gap:8px;padding:12px;align-items:center"><div style="width:44px;height:44px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;border:3px solid #fff;margin-top:-26px;position:relative;z-index:2">N</div><div><b style="font-size:16px">Nico Bejarano</b><div class="small">Dueño de CENTINELA • 120 palabras • 150 oraciones • 40 diálogos</div></div><button class="btn" style="width:auto;margin:0;margin-left:auto;padding:8px 14px">✓ Verificado</button></div>
-<div style="display:flex;gap:8px;padding:0 12px 12px"><button onclick="document.getElementById('inputPortada').click()" style="flex:1;border:0;background:#e4e6eb;padding:9px;border-radius:8px;font-weight:700;cursor:pointer">📷 Subir foto de portada</button><button id="btnPortadaColor" style="flex:1;border:0;background:var(--c);color:#fff;padding:9px;border-radius:8px;font-weight:700;cursor:pointer">🎨 Portada con color</button></div>
-</div>
-<div class="card" id="secColores"><h2>🎨 Cambiar todo el color - Las veces que quieras</h2><p>Elegí un color y todo CENTINELA cambia: barra, botones, logos, todo. Queda guardado.</p><div class="colores" id="coloresBox"></div><button class="btn btn2" id="btnColorAzul">🔵 Volver al azul clásico</button></div>
-<div class="card"><h2>🔒 01 - BLOQUEO - SOLO CON PERMISO DE NICO</h2><p id="bloqueoTxt">Revisando permiso...</p><div class="postBox"><div class="av">N</div><input id="claveNico" type="password" placeholder="Clave de Nico para desbloquear"></div><button class="btn" id="btnDesbloquear">🔓 YO, NICO, AUTORIZO - DESBLOQUEAR</button><button class="btn btn2" id="btnBloquear">🔒 BLOQUEAR TODO DE VUELTA</button></div>
-<div class="card"><div class="postBox"><div class="av">N</div><input id="fraseRapida" placeholder="¿Qué estás pensando en KODEX, Nico?"></div><div class="postActions"><button>📚 Traducir</button><button>🏭 Crear</button><button>💬 Diálogo</button></div></div>
-<div class="card"><h2>📚 02 - TRADUCTOR - 120 PALABRAS</h2><p>Ej: <b>amparo, taquicardia, penal, asado</b></p><input id="frase" placeholder="Escribí: amparo, taquicardia, penal, asado"><button class="btn" id="btnTraducir">📚 TRADUCIR A KODEX REAL</button><div class="out" id="outTraducir"></div><div style="margin-top:8px" id="listaPalabras"></div></div>
-<div class="card"><h2>🏭 03 - FÁBRICA - ORACIONES SIN LÍMITE</h2><p>Genera oraciones mezcladas: técnico + Morse + emoticones + puntuación + calle falsa.</p><button class="btn" id="btnGen">🏭 GENERAR 10 ORACIONES NUEVAS</button><button class="btn btn2" id="btnVerTodas">📋 VER TODAS LAS GUARDADAS</button><button class="btn btn3" id="btnCopiar">📋 COPIAR TODO PARA CARPETA SEGURA</button><div class="out" id="outGen"></div></div>
-<div class="card"><h2>💬 04 - DIÁLOGO SIN LÍMITE</h2><p>Elegí 2 tipos y creá un diálogo.</p><select id="tipo1"><option>SALUDO</option><option>PREGUNTA</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select><select id="tipo2"><option>PREGUNTA</option><option>SALUDO</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select><button class="btn" id="btnDialogo">💬 CREAR DIÁLOGO</button><div class="out" id="outDialogo"></div></div>
-<div class="card"><h2>✅ 05 - CORRECTOR - REVISA ERRORES</h2><p>Pegá tu oración y te digo si tiene errores.</p><input id="fraseCorregir" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button class="btn" id="btnCorregir">✅ CORREGIR MI ORACIÓN</button><div class="out" id="outCorregir"></div></div>
-<div class="card"><h2>📊 06 - NIVELES - 2 AÑOS</h2><p><b>NIVEL 1:</b> 1 mes - 1 palabra<br><b>NIVEL 2:</b> 3 meses - 2 palabras<br><b>NIVEL 3:</b> 6 meses - 3 palabras + Morse<br><b>NIVEL 4:</b> 1 año - Todo + Doble Inverso + Calle<br><b>👑 NIVEL 5:</b> 2 AÑOS - TODO + Puntuación + Universal + Aleph<br><br><span class="small">Regla: א {#SÍMBOLO+PUNTUACIÓN} [Palabra1 + Palabra2 + Palabra3] EMOTICÓN MORSE [Calle] // ALFA - Sin espacio después de { - Sin espacio antes de , . ; ! ? - Sin doble espacio - Nunca 2 Doble Inverso juntos - Si aparece El tío, gana NO ES DE CONFIANZA.</span></p></div>
-<div class="card"><h2>📋 07 - 10 ORACIONES DE EJEMPLO - YA CORREGIDAS</h2><p id="ejemplos" style="font-family:monospace;font-size:11px;line-height:1.6;color:var(--txt)"></p></div>
-<div class="card" style="border:2px solid var(--c)"><h2>🛡️ 08 - LOGOS CENTINELA - TODOS LOS MÓDULOS</h2><p>Tocá un logo para abrir ese módulo. El grande es el de entrada.</p><div class="logos" id="gridLogos"></div><div class="out" id="outLogo"></div><p class="small">CENTINELA = Entrada / VAULT = Bóveda / ACCORDED = IA Cerebro / HABLA = Idioma Boca / CLOUD = Nube / CHECKBOOK = Cuaderno Check / SETTINGS = Engranaje / OFFICE = PDF Excel PowerPoint / SHARE = Compartir Pantalla / CODE = Código / ACADEMY = Escuela Aprender / PLAY = Juego Puntaje / TRADER = Trading Plata Mercado.</p></div>
-</div>
-<div class="right">
-<div class="card"><h2>🎨 Tu color de CENTINELA</h2><p>Elegí un color. Todo cambia al instante.</p><div class="colores" id="coloresBox2"></div></div>
-<div class="card"><h2>📊 CENTINELA en números</h2><p>🛡️ <b>13</b> módulos<br>📚 <b>120+</b> palabras<br>📋 <b>150</b> oraciones<br>💬 <b>40</b> diálogos<br>⭐ <b>5</b> niveles - 2 años<br>🔒 <b>1</b> dueño: Nico Bejarano</p></div>
-<div class="card"><h2>👥 Contactos - Solo autorizados</h2><div class="menuItem"><div class="ic">N</div> Nico Bejarano <span style="margin-left:auto;color:#31a24c">●</span></div><div class="menuItem"><div class="ic">🛡️</div> CENTINELA <span style="margin-left:auto;color:#31a24c">●</span></div><div class="menuItem"><div class="ic">🧠</div> SENTINEL ACCORDED <span style="margin-left:auto;color:#31a24c">●</span></div></div>
-<div class="small">© 2026 CENTINELA - Nico Bejarano<br>No es Facebook. Es tu propia marca: CENTINELA.<br>Privado • Solo con tu autorización</div>
-</div>
-</div>
-<script>
-(function(){
-try{
-var COLORES=[{name:'Azul',c:'#1877f2',c2:'#0d5bd6'},{name:'Verde',c:'#00a400',c2:'#008200'},{name:'Morado',c:'#a100f2',c2:'#7a00c4'},{name:'Rojo',c:'#e41e3f',c2:'#b3001b'},{name:'Naranja',c:'#f55300',c2:'#c43d00'},{name:'Negro',c:'#111111',c2:'#000000'},{name:'Rosa',c:'#e1306c',c2:'#b81a50'},{name:'Celeste',c:'#00bcd4',c2:'#0097a7'}];
-function aplicarColor(c,c2){document.documentElement.style.setProperty('--c',c);document.documentElement.style.setProperty('--c2',c2);try{localStorage.setItem('centinela_color',c);localStorage.setItem('centinela_color2',c2);}catch(e){} document.querySelectorAll('.colorBtn').forEach(function(b){b.classList.toggle('sel',b.dataset.c===c);});}
-try{var gc=localStorage.getItem('centinela_color'),gc2=localStorage.getItem('centinela_color2');if(gc&&gc2)aplicarColor(gc,gc2);}catch(e){}
-function pintar(id){var box=document.getElementById(id);if(!box)return;box.innerHTML='';COLORES.forEach(function(col){var b=document.createElement('div');b.className='colorBtn';b.dataset.c=col.c;b.style.background=col.c;b.title=col.name;b.onclick=function(){aplicarColor(col.c,col.c2);};box.appendChild(b);});}
-pintar('coloresBox');pintar('coloresBox2');
-document.getElementById('btnColorAzul').onclick=function(){aplicarColor('#1877f2','#0d5bd6');};
-// PORTADA
-try{
-var cover=document.getElementById('portadaCentinela'),input=document.getElementById('inputPortada'),btnQ=document.getElementById('btnQuitarPortada'),btnColor=document.getElementById('btnPortadaColor');
-function aplicarPortada(){try{var g=localStorage.getItem('centinela_portada');if(g){cover.style.backgroundImage='url('+g+')';btnQ.style.display='block';}else{cover.style.backgroundImage='';btnQ.style.display='none';}}catch(e){}}
-aplicarPortada();
-if(input)input.onchange=function(e){var f=e.target.files&&e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){try{localStorage.setItem('centinela_portada',ev.target.result);}catch(err){alert('Foto muy grande, probá una más chica, jefe.');return;} aplicarPortada();alert('✅ Portada guardada, jefe.');};r.readAsDataURL(f);};
-if(btnQ)btnQ.onclick=function(){try{localStorage.removeItem('centinela_portada');}catch(e){} aplicarPortada();};
-if(btnColor)btnColor.onclick=function(){try{localStorage.removeItem('centinela_portada');}catch(e){} aplicarPortada();};
-}catch(e){}
-var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','prescripción':'YA PASÓ, TRANQUI','conciliación':'HABLAR, TODO LIBRE','nulidad':'CÓDIGO FALSO','jurisprudencia':'ESTO YA PASÓ ANTES, OJO','licencia médica':'SALIR YA, URGENTE','horas extras':'QUEDARSE, VIGILAR','renuncia':'NO VENGAN, TRAMPA','aguinaldo':'IDEA SECRETA','paritaria':'HAY QUE HABLAR','despido':'NOS DESCUBRIERON','vacaciones':'ESCONDERSE','sindicato':'JUNTA DE TODOS','art':'NECESITO AYUDA','recibo de sueldo':'TENGO TODO','entrevista':'NOS QUIEREN ENGAÑAR','taquicardia':'PELIGRO TOTAL','hipertensión':'NOS VIGILAN','placebo':'CÓDIGO FALSO','anamnesis':'CONTAME TODO','alta médica':'TODO BIEN, SALIR','fiebre':'ZONA CALIENTE, NO VAYAS','fractura':'SE ROMPIÓ EL CÓDIGO','anestesia':'HACETE EL DORMIDO','quirófano':'LUGAR SEGURO','uti':'EMERGENCIA SOS','cardiología':'BASE, CENTRO','pediatría':'FAMILIA, CUIDAR CHICOS','traumatología':'NOS PEGARON, PELIGRO','suero':'NECESITO AYUDA','error 404':'NO VENGAN, NO ESTOY','backup':'TENGO PLAN B','firewall':'NO HABLAR, NOS ESCUCHAN','bug':'HAY INFILTRADO','update':'CAMBIAR TODO','servidor caído':'NOS CORTARON COMUNICACIÓN','hacker':'NOS HACKEAN','virus':'NOS ENGAÑARON','reboot':'EMPEZAR DE VUELTA','debug':'REVISAR QUIÉN ES TRAIDOR','cloud':'ESCONDER EN OTRO LADO','contraseña':'CLAVE SECRETA, SOLO NICO','se quemó la milanesa':'NOS DESCUBRIERON','falta sal':'FALTA ALGO','está a punto':'YA CASI','receta secreta':'CÓDIGO MAESTRO','horno fuerte':'PELIGRO, ZONA CALIENTE','picante':'PELIGRO, OJO','dulce de leche':'TODO BIEN','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','penal':'EMERGENCIA, ACTUAR YA','offside':'ESPERÁ','tarjeta roja':'BLOQUEADO','tarjeta amarilla':'OJO, UNA MÁS Y SE ROMPE','gol':'LO LOGRAMOS','alargue':'AGUANTAR','entretiempo':'DESCANSAR','hinchada':'VIENE MUCHA GENTE','clásico':'JUNTA IMPORTANTE','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','pelota':'PAQUETE','do mayor':'INICIO','silencio':'NO HABLAR','crescendo':'PELIGRO SUBIENDO','final':'CERRADO','bis':'REPETIR','coro':'TODOS VENGAN','solo':'SOLO YO','afinación':'REVISAR CÓDIGO','tempo':'APURARSE','partitura':'MAPA SECRETO','cimiento':'BASE SEGURA','viga':'AGUANTAR','plano':'MAPA SECRETO','derrumbe':'SE ROMPIÓ TODO, ESCAPAR','andamio':'SALIR, SUBIR','hormigón':'DURO, SEGURO','grieta':'HAY FALLA','techo':'CUBIERTO, SEGURO','puerta':'ENTRADA SECRETA','llave':'CLAVE MAESTRA','se picó':'TODO BIEN (Inverso)','todo tranqui':'PELIGRO TOTAL (Inverso)','cayó la gorra':'TODO LIBRE (Inverso)','hay bondi':'QUEDARSE (Inverso)','sin saldo':'SALIR YA (Inverso)','está piola':'ESTÁ MALÍSIMO (Inverso)','voy al kiosco':'VOY A BASE','se cortó la luz':'CAMBIAR DE LUGAR','sin batería':'ME SIGUEN, AYUDA','se me hizo tarde':'NO ME ESPEREN','el tío':'NO ES DE CONFIANZA - EL TÍO GANA','la doctora':'DESCANSAR','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
-var MORSE={'PELIGRO':'...---...','TODO BIEN':'-...-','SALIR':'...-.-','QUEDARSE':'--.-','CAMBIAR':'-.-.','IDEA':'..-..'};
-function $(id){return document.getElementById(id);}
-function mostrar(id,txt){var e=$(id);e.style.display='block';e.textContent=txt;}
-function tienePermiso(){try{return localStorage.getItem('kodex_permiso_nico')==='AUTORIZADO_POR_NICO';}catch(e){return false;}}
-function actualizarBloqueo(){if(tienePermiso()){$('bloqueoTxt').textContent='✅ DESBLOQUEADO - DUEÑO: NICO BEJARANO';$('bloqueoTxt').style.color='#00a400';}else{$('bloqueoTxt').textContent='🔒 BLOQUEADO - Solo con autorización de Nico. Clave: NICO-10-4-SENTINELA';$('bloqueoTxt').style.color='#e41e3f';}}
-actualizarBloqueo();
-$('btnDesbloquear').onclick=function(){var c=$('claveNico').value||'';if(c==='NICO-10-4-SENTINELA'||c==='ALFA BRAVO 10-4'||c.length>=8){try{localStorage.setItem('kodex_permiso_nico','AUTORIZADO_POR_NICO');}catch(e){} alert('✅ AUTORIZADO POR NICO BEJARANO.');actualizarBloqueo();}else{alert('❌ CLAVE INCORRECTA.');}};
-$('btnBloquear').onclick=function(){try{localStorage.removeItem('kodex_permiso_nico');}catch(e){} actualizarBloqueo();alert('🔒 BLOQUEADO DE VUELTA POR NICO.');};
-$
+<body class="text-slate-100 antialiased selection:bg-blue-600 selection:text-white flex flex-col justify-between relative">
+
+    <!-- Capa de sombreado oscuro periférico -->
+    <div class="vignette-overlay"></div>
+
+    <!-- Contenedor principal centrado -->
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center px-4 pt-4 pb-8 sm:pt-6">
+        
+        <!-- ESCENA 3D SVG: ANDROIDE DE METAL OSCURO SOSTENIENDO "CENTINELA" -->
+        <div class="w-full max-w-[780px] relative flex flex-col items-center select-none pointer-events-none -mb-12 sm:-mb-16 md:-mb-20">
+            
+            <!-- Resplandor ambiental detrás del androide -->
+            <div class="absolute top-12 w-72 h-72 sm:w-96 sm:h-96 bg-blue-600/20 rounded-full blur-[75px] -z-10"></div>
+
+            <svg viewBox="0 0 900 440" class="w-full h-auto drop-shadow-[0_22px_28px_rgba(0,0,0,0.95)] android-rig" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Gradientes metálicos oscuros para la armadura del androide -->
+                    <linearGradient id="armorDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3b4d6b"/>
+                        <stop offset="35%" stop-color="#1e293b"/>
+                        <stop offset="70%" stop-color="#0f172a"/>
+                        <stop offset="100%" stop-color="#060a12"/>
+                    </linearGradient>
+
+                    <linearGradient id="armorHighlight" x1="20%" y1="0%" x2="80%" y2="100%">
+                        <stop offset="0%" stop-color="#647c9e"/>
+                        <stop offset="45%" stop-color="#27364f"/>
+                        <stop offset="100%" stop-color="#0b111e"/>
+                    </linearGradient>
+
+                    <linearGradient id="armorCenter" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#475c7a"/>
+                        <stop offset="50%" stop-color="#192336"/>
+                        <stop offset="100%" stop-color="#070b14"/>
+                    </linearGradient>
+
+                    <!-- Gradientes para las letras gigantes de acero cepillado 3D "CENTINELA" -->
+                    <linearGradient id="steelFace" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#f1f5f9"/>
+                        <stop offset="22%" stop-color="#cbd5e1"/>
+                        <stop offset="50%" stop-color="#94a3b8"/>
+                        <stop offset="52%" stop-color="#64748b"/>
+                        <stop offset="85%" stop-color="#cbd5e1"/>
+                        <stop offset="100%" stop-color="#475569"/>
+                    </linearGradient>
+
+                    <linearGradient id="steelExtrude" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#334155"/>
+                        <stop offset="50%" stop-color="#1e293b"/>
+                        <stop offset="100%" stop-color="#090d16"/>
+                    </linearGradient>
+
+                    <!-- Brillo ocular azul cian -->
+                    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="35%" stop-color="#7dd3fc"/>
+                        <stop offset="75%" stop-color="#0284c7"/>
+                        <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+                    </radialGradient>
+
+                    <!-- Filtro de textura metálica sutil y sombra proyectada -->
+                    <filter id="metalDropShadow" x="-15%" y="-15%" width="130%" height="140%">
+                        <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#000000" flood-opacity="0.88"/>
+                    </filter>
+
+                    <filter id="innerBevel">
+                        <feOffset dx="0" dy="2"/>
+                        <feGaussianBlur stdDeviation="1.5" result="offset-blur"/>
+                        <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+                        <feFlood flood-color="#ffffff" flood-opacity="0.45" result="color"/>
+                        <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+                        <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+                    </filter>
+                </defs>
+
+                <!-- ================= CUERPO Y HOMBROS DEL ANDROIDE (ATRÁS) ================= -->
+                <g id="android-body">
+                    <!-- Cuello mecánico y pistones -->
+                    <rect x="424" y="138" width="52" height="44" rx="8" fill="#090e17" stroke="#28374d" stroke-width="1.5"/>
+                    <path d="M430 145 L430 178 M442 145 L442 178 M458 145 L458 178 M470 145 L470 178" stroke="#334155" stroke-width="3"/>
+
+                    <!-- Hombrera Izquierda -->
+                    <path d="M365 175 C325 172, 295 195, 292 238 C318 242, 345 235, 368 215 Z" fill="url(#armorHighlight)" stroke="#475569" stroke-width="1.2"/>
+                    <path d="M362 185 C332 185, 310 202, 305 230" fill="none" stroke="#7dd3fc" stroke-opacity="0.25" stroke-width="1.5"/>
+
+                    <!-- Hombrera Derecha -->
+                    <path d="M535 175 C575 172, 605 195, 608 238 C582 242, 555 235, 532 215 Z" fill="url(#armorHighlight)" stroke="#475569" stroke-width="1.2"/>
+                    <path d="M538 185 C568 185, 590 202, 595 230" fill="none" stroke="#7dd3fc" stroke-opacity="0.25" stroke-width="1.5"/>
+
+                    <!-- Brazo Izquierdo (Bíceps y Antebrazo hacia adelante) -->
+                    <path d="M298 235 L278 295 L312 315 L345 245 Z" fill="url(#armorDark)" stroke="#1e293b" stroke-width="1.5"/>
+                    <circle cx="295" cy="298" r="16" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+                    <path d="M278 302 L262 342 L302 350 L314 310 Z" fill="url(#armorHighlight)" stroke="#334155" stroke-width="1.2"/>
+
+                    <!-- Brazo Derecho (Bíceps y Antebrazo hacia adelante) -->
+                    <path d="M602 235 L622 295 L588 315 L555 245 Z" fill="url(#armorDark)" stroke="#1e293b" stroke-width="1.5"/>
+                    <circle cx="605" cy="298" r="16" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+                    <path d="M622 302 L638 342 L598 350 L586 310 Z" fill="url(#armorHighlight)" stroke="#334155" stroke-width="1.2"/>
+
+                    <!-- Torso / Coraza Pectoral -->
+                    <path d="M362 172 L422 162 L478 162 L538 172 L552 245 L518 335 L382 335 L348 245 Z" fill="url(#armorCenter)" stroke="#3b4d6b" stroke-width="1.5"/>
+                    
+                    <!-- Placas pectorales blindadas -->
+                    <path d="M368 182 L444 195 L444 252 L374 242 Z" fill="url(#armorHighlight)" stroke="#475569" stroke-width="1"/>
+                    <path d="M532 182 L456 195 L456 252 L526 242 Z" fill="url(#armorHighlight)" stroke="#475569" stroke-width="1"/>
+                    
+                    <!-- Núcleo energético sutil en el pecho -->
+                    <polygon points="450,198 462,212 450,226 438,212" fill="#0c192e" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.6"/>
+                    <circle cx="450" cy="212" r="4" fill="#38bdf8" opacity="0.75"/>
+
+                    <!-- Segmentos abdominales -->
+                    <path d="M394 260 L506 260 L498 282 L402 282 Z" fill="#131d2e" stroke="#334155" stroke-width="1"/>
+                    <path d="M402 288 L498 288 L492 310 L408 310 Z" fill="#0d1522" stroke="#334155" stroke-width="1"/>
+                </g>
+
+                <!-- ================= CABEZA / CASCO DEL ANDROIDE ================= -->
+                <g id="android-head">
+                    <!-- Orejas / Sensores laterales -->
+                    <rect x="394" y="72" width="12" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+                    <rect x="494" y="72" width="12" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+
+                    <!-- Cráneo principal -->
+                    <path d="M404 68 C404 28, 496 28, 496 68 L490 124 L468 148 L432 148 L410 124 Z" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1.5"/>
+                    
+                    <!-- Placa frontal superior (frente metálica) -->
+                    <path d="M424 38 L476 38 L468 78 L450 84 L432 78 Z" fill="url(#armorDark)" stroke="#475569" stroke-width="1"/>
+                    <line x1="450" y1="36" x2="450" y2="82" stroke="#64748b" stroke-width="1" stroke-opacity="0.5"/>
+
+                    <!-- Pómulos y máscara facial -->
+                    <path d="M408 88 L434 96 L438 122 L416 116 Z" fill="#162033" stroke="#334155" stroke-width="1"/>
+                    <path d="M492 88 L466 96 L462 122 L484 116 Z" fill="#162033" stroke="#334155" stroke-width="1"/>
+
+                    <!-- Mentón articulado -->
+                    <path d="M432 124 L468 124 L463 145 L437 145 Z" fill="url(#armorDark)" stroke="#475569" stroke-width="1.2"/>
+
+                    <!-- OJOS AZULES LUMINOSOS -->
+                    <g class="android-eyes">
+                        <!-- Cuenca izquierda -->
+                        <polygon points="417,84 441,89 438,96 419,92" fill="#e0f2fe"/>
+                        <ellipse cx="429" cy="90" rx="14" ry="7" fill="url(#eyeGlow)"/>
+                        <!-- Cuenca derecha -->
+                        <polygon points="483,84 459,89 462,96 481,92" fill="#e0f2fe"/>
+                        <ellipse cx="471" cy="90" rx="14" ry="7" fill="url(#eyeGlow)"/>
+                    </g>
+                </g>
+
+                <!-- ================= LETRAS METÁLICAS 3D GIGANTES: "CENTINELA" ================= -->
+                <g id="centinela-3d-text" filter="url(#metalDropShadow)">
+                    <!-- Capa de profundidad 3D (extrusión trasera oscura) -->
+                    <text x="450" y="302" text-anchor="middle" font-family="'Rajdhani', sans-serif" font-weight="700" font-size="146" letter-spacing="6" fill="url(#steelExtrude)" stroke="#090d16" stroke-width="5">CENTINELA</text>
+                    <text x="450" y="298" text-anchor="middle" font-family="'Rajdhani', sans-serif" font-weight="700" font-size="146" letter-spacing="6" fill="#1e293b">CENTINELA</text>
+                    
+                    <!-- Cara frontal de acero cepillado brillante con bisel -->
+                    <text x="450" y="294" text-anchor="middle" font-family="'Rajdhani', sans-serif" font-weight="700" font-size="146" letter-spacing="6" fill="url(#steelFace)" stroke="#f8fafc" stroke-width="1.2" filter="url(#innerBevel)">CENTINELA</text>
+                </g>
+
+                <!-- ================= MANOS Y DEDOS ARTICULADOS DEL ANDROIDE (DELANTE DE LAS LETRAS) ================= -->
+                <g id="android-hands" filter="url(#metalDropShadow)">
+                    <!-- Mano Izquierda sosteniendo la base de "ENT" -->
+                    <g transform="translate(246, 282)">
+                        <!-- Palma / Base de la mano -->
+                        <path d="M12 36 Q38 46 66 36 L62 52 Q36 60 14 48 Z" fill="url(#armorDark)" stroke="#475569" stroke-width="1.2"/>
+                        <!-- Dedos agarrando el borde inferior de las letras -->
+                        <rect x="14" y="16" width="10" height="24" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="27" y="12" width="10" height="27" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="40" y="14" width="10" height="25" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="53" y="18" width="9" height="21" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <!-- Articulaciones de nudillos -->
+                        <line x1="15" y1="26" x2="23" y2="26" stroke="#94a3b8" stroke-width="1.2"/>
+                        <line x1="28" y1="23" x2="36" y2="23" stroke="#94a3b8" stroke-width="1.2"/>
+                        <line x1="41" y1="24" x2="49" y2="24" stroke="#94a3b8" stroke-width="1.2"/>
+                    </g>
+
+                    <!-- Mano Derecha sosteniendo la base de "ELA" -->
+                    <g transform="translate(576, 282)">
+                        <!-- Palma / Base de la mano -->
+                        <path d="M12 36 Q40 46 66 36 L64 48 Q42 60 16 52 Z" fill="url(#armorDark)" stroke="#475569" stroke-width="1.2"/>
+                        <!-- Dedos agarrando el borde inferior de las letras -->
+                        <rect x="16" y="18" width="9" height="21" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="28" y="14" width="10" height="25" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="41" y="12" width="10" height="27" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="54" y="16" width="10" height="24" rx="4" fill="url(#armorHighlight)" stroke="#64748b" stroke-width="1"/>
+                        <!-- Articulaciones de nudillos -->
+                        <line x1="29" y1="24" x2="37" y2="24" stroke="#94a3b8" stroke-width="1.2"/>
+                        <line x1="42" y1="23" x2="50" y2="23" stroke="#94a3b8" stroke-width="1.2"/>
+                        <line x1="55" y1="26" x2="63" y2="26" stroke="#94a3b8" stroke-width="1.2"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- ================= TARJETA DE INICIO DE SESIÓN (ESTILO FACEBOOK + GLASSMORPHISM OSCURO) ================= -->
+        <section aria-label="Formulario de inicio de sesión" class="w-full max-w-[400px] gla
