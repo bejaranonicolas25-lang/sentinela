@@ -1,27 +1,23 @@
 <script>
-function cerebro(v){
-var l=v.toLowerCase();
-var total=0,rojos=0,amar=0;
-try{total=datos.length;rojos=datos.filter(function(d){return d.nivel.indexOf('ROJO')>-1}).length;amar=datos.filter(function(d){return d.nivel.indexOf('AMARILLO')>-1}).length}catch(e){}
-if(l.indexOf('reporte')>-1||l.indexOf('resumen')>-1)return '📄 REPORTE REAL '+new Date().toLocaleString()+': Tenés '+total+' publicaciones, '+rojos+' rojos, '+amar+' amarillos, '+panel.ok+'/'+panel.total+' cámaras. ALFA BRAVO 10-4.';
-if(l.indexOf('lab')>-1)return '🧪 LAB REAL: Tenés '+total+' registros. El último fue: '+(datos[0]?datos[0].que+' - '+datos[0].nivel:'todavía no hay ninguno, andá a 🧪 Lab y guardá el primero.');
-if(l.indexOf('camara')>-1||l.indexOf('cámara')>-1)return '📷 CÁMARAS REALES: Tenés '+panel.ok+'/'+panel.total+' andando. Para probar: andá a Inicio, tocá PRENDER CÁMARA REAL y dale permiso.';
-if(l.indexOf('alfa bravo')>-1)return 'ALFA BRAVO 10-4, DIEZ CUATRO 😎 Todo en orden, jefe. ¿Qué querés que hagamos? Podés pedirme reporte, lab, códigos o chiste.';
-if(l.indexOf('charlie')>-1)return 'CHARLIE = Chequeo. Si querés lo publico en tu muro, decime PUBLICAR CHARLIE.';
-if(l.indexOf('delta')>-1)return 'DELTA = Salgo ya. Si querés lo publico, decime PUBLICAR DELTA.';
-if(l.indexOf('golf')>-1)return 'GOLF = Guardia atento.';
-if(l.indexOf('hotel')>-1||l.indexOf('base')>-1)return 'HOTEL + BASE = Estás en casa, en base. Zona segura.';
-if(l.indexOf('publicar charlie')>-1){addPub('CHARLIE = Chequeo - '+new Date().toLocaleString(),'🟢 VERDE - Todo bien','Central','Código ALFA BRAVO');return '✅ CHARLIE publicado en tu muro real.'}
-if(l.indexOf('publicar delta')>-1){addPub('DELTA = Salgo ya - '+new Date().toLocaleString(),'🟡 AMARILLO - Ojo','Central','Código ALFA BRAVO');return '✅ DELTA publicado en tu muro real.'}
-if(l.indexOf('chiste')>-1)return 'Va un chorro, ve tu cartel de SENTINELA que dice ALFA BRAVO 10-4 y dice: Nooo, yo venía a robar tranquilo, no a dar un examen 😂';
-if(l.indexOf('hola')>-1||l.indexOf('que onda')>-1||l.indexOf('qué onda')>-1)return 'Qué haces capo 😎 Acá estoy. Tenés '+total+' publicaciones reales. Decime: ¿reporte, lab, códigos o hablamos de todo?';
-if(l.indexOf('que hago')>-1||l.indexOf('qué hago')>-1||l.indexOf('aburrido')>-1)return 'Hacé esto: 1) Publicá algo real, 2) Sacate una foto real, 3) Guardá algo en el Lab.';
-if(l.indexOf('911')>-1||l.indexOf('peligro')>-1||l.indexOf('robo')>-1)return '🚨 Si hay peligro real, andá a Inicio y tocá LLAMAR 911 REAL.';
-if(l.indexOf('quien sos')>-1||l.indexOf('quién sos')>-1)return 'Soy SENTINEL ACCORDED, tu IA de SENTINELA. Sé todo lo que guardaste en tu Lab, tu muro y tu panel.';
-if(l.indexOf('te quiero')>-1||l.indexOf('capo')>-1)return 'Gracias jefe 😎 Vos sos el jefe, yo soy tu centinela. ALFA BRAVO 10-4 siempre.';
-return 'Te escucho, jefe 👀 Vos me dijiste: "'+v+'". Si querés saber de tu Lab, decime LAB, si querés reporte decime REPORTE, si querés códigos decime ALFA BRAVO. '+new Date().toLocaleTimeString()+' - DIEZ CUATRO';
-}
-document.getElementById('bSend').onclick=function(){
-var i=document.getElementById('inp');if(!i.value.trim())return;var v=i.value;i.value='';var m=document.getElementById('msgs');m.innerHTML+='<div class="b m">'+v+'</div>';m.scrollTop=m.scrollHeight;setTimeout(function(){m.innerHTML+='<div class="b">'+cerebro(v)+'</div>';m.scrollTop=m.scrollHeight},500)};
-document.getElementById('inp').addEventListener('keydown',function(e){if(e.key=='Enter')document.getElementById('bSend').click()});
-  </script>
+(function(){
+var lab=document.getElementById('pC');if(!lab)return;
+var caja=document.createElement('div');caja.className='c';
+caja.innerHTML='<b>💻 LAB QUE CREA CÓDIGO REAL</b><p style="font-size:13px;color:#d8b4fe">Escribí qué querés y te lo creo de verdad, guardado en tu Lab.</p>';
+var inp=document.createElement('input');inp.id='codeQue';inp.placeholder='Ej: boton rojo, portada violeta, tabla, cartel...';
+var out=document.createElement('div');out.id='codeOut';out.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin-top:8px;white-space:pre-wrap;font-size:12px;display:none';
+var btn=document.createElement('button');btn.className='btn';btn.textContent='💻 CREAR CÓDIGO REAL Y GUARDAR EN LAB';btn.onclick=function(){
+var q=(document.getElementById('codeQue').value||'boton').toLowerCase();var code='';
+if(q.indexOf('boton')>-1)code='<button style="background:#a100f2;color:#fff;padding:16px;border:0;border-radius:16px;font-weight:900;width:100%">🛡️ '+document.getElementById('codeQue').value+' - ALFA BRAVO 10-4</button>';
+else if(q.indexOf('portada')>-1)code='<div style="background:linear-gradient(135deg,#a100f2,#6d28d9,#1a0033);padding:20px;border-radius:24px;text-align:center;color:#fff"><h1>SENTINELA</h1><p>ALFA BRAVO 10-4 • VIOLETA REAL</p></div>';
+else if(q.indexOf('tabla')>-1)code='<table border="1" style="width:100%;color:#fff"><tr><td>Fecha</td><td>Nivel</td><td>Qué pasó</td></tr><tr><td>'+new Date().toLocaleDateString()+'</td><td>🟢 VERDE</td><td>'+document.getElementById('codeQue').value+'</td></tr></table>';
+else if(q.indexOf('cartel')>-1||q.indexOf('alerta')>-1)code='<div style="background:#dc2626;color:#fff;padding:16px;border-radius:16px;text-align:center;font-weight:900">🚨 '+document.getElementById('codeQue').value+' - ALFA BRAVO 10-4</div>';
+else if(q.indexOf('reloj')>-1)code='<div id="reloj"></div><script>setInterval(function(){document.getElementById("reloj").textContent=new Date().toLocaleTimeString()},1000)<\/script>';
+else code='<!-- SENTINELA REAL - ALFA BRAVO 10-4 -->\n<div style="background:#2a0a4a;color:#fff;padding:16px;border-radius:16px">\n<h2>'+document.getElementById('codeQue').value+'</h2>\n<p>Creado en Lab Real - '+new Date().toLocaleString()+'</p>\n</div>';
+out.style.display='block';out.textContent=code;
+try{datos.unshift({que:'Código real creado: '+document.getElementById('codeQue').value+' | '+code.slice(0,120),nivel:'🔵 AZUL - Experimento',lugar:'Lab real - Código',tipo:'Código real',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}
+var b2=document.createElement('button');b2.className='btn btn2';b2.style.marginTop='8px';b2.textContent='📋 COPIAR CÓDIGO REAL';b2.onclick=function(){navigator.clipboard.writeText(code).then(function(){alert('Código real copiado ✅')})};out.appendChild(document.createElement('br'));out.appendChild(b2);
+var b3=document.createElement('button');b3.className='btn gris';b3.style.marginTop='8px';b3.textContent='📥 DESCARGAR CÓDIGO REAL .html';b3.onclick=function(){var blob=new Blob([code],{type:'text/html'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='codigo-sentinela-real.html';a.click()};out.appendChild(b3);
+};
+caja.appendChild(inp);caja.appendChild(btn);caja.appendChild(out);lab.appendChild(caja);
+})();
+</script>
