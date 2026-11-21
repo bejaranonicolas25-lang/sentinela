@@ -5,125 +5,128 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CENTINELA</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-body{color:#f1f5f9;background:#040d21;background-image:radial-gradient(circle at 50% 0%,rgba(30,58,138,.38),transparent 55%),linear-gradient(180deg,#040d21,#020817 65%,#01040a);min-height:100vh;overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#040d21;color:#fff;min-height:100vh}
 .hidden{display:none!important}
-#toast-container{position:fixed;bottom:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:10px}
-.toast{background:#071530;border:1px solid #38bdf8;color:#fff;padding:12px 18px;border-radius:12px;font-size:.9rem}
-#login-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px 40px}
-.login-wrapper{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center}
-.android-hero{width:100%;max-width:375px;margin-bottom:-14px;z-index:2;filter:drop-shadow(0 18px 25px #01040a);animation:floatBot 4.5s ease-in-out infinite}
-@keyframes floatBot{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.login-card{width:100%;background:linear-gradient(165deg,rgba(10,25,58,.95),rgba(2,7,19,.98));border:1px solid rgba(56,189,248,.28);border-radius:18px;padding:30px 24px 24px;z-index:1}
-.login-header{text-align:center;margin-bottom:20px}
-.security-badge{display:inline-flex;gap:7px;background:rgba(1,4,10,.8);border:1px solid rgba(56,189,248,.28);padding:5px 14px;border-radius:999px;font-size:.72rem;font-weight:700;color:#93c5fd;margin-bottom:12px}
-.login-header h2{font-size:1.55rem;font-weight:800;color:#fff}
-.login-header p{font-size:.86rem;color:#94a3b8;margin-top:4px}
-.account-chip{display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,33,.9);border:1px solid rgba(30,58,138,.85);border-radius:12px;padding:11px 14px;cursor:pointer;margin-bottom:18px}
-.account-chip:hover{border-color:#38bdf8}
-.account-chip.active{border-color:#38bdf8;background:rgba(14,34,78,.95)}
-.account-info{display:flex;align-items:center;gap:12px}
-.avatar-circle{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#38bdf8);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
-.account-meta{display:flex;flex-direction:column}
-.account-name{font-size:.9rem;font-weight:700}
-.account-email{font-size:.76rem;color:#94a3b8}
-.form-group{margin-bottom:14px}
-.form-label{display:block;font-size:.82rem;font-weight:600;color:#cbd5e1;margin-bottom:6px}
-.input-wrapper{position:relative;display:flex;align-items:center}
-.form-input{width:100%;background:rgba(1,4,10,.9);border:1px solid #1e3a8a;color:#fff;padding:12px 14px;border-radius:12px;font-size:.94rem;outline:none}
-.form-input:focus{border-color:#38bdf8}
-.toggle-pass-btn{position:absolute;right:12px;background:#0f172a;border:1px solid #1e3a8a;border-radius:8px;color:#cbd5e1;cursor:pointer;font-size:.82rem;font-weight:600;padding:6px 10px}
-.auth-error-banner{background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.45);color:#fca5a5;padding:9px 12px;border-radius:8px;font-size:.8rem;margin-bottom:12px}
-.auth-ok-banner{background:rgba(16,185,129,.14);border:1px solid rgba(16,185,129,.45);color:#6ee7b7;padding:9px 12px;border-radius:8px;font-size:.8rem;margin-bottom:12px}
-.login-links-row{display:flex;justify-content:space-between;gap:8px;margin:12px 0 18px;font-size:.82rem;flex-wrap:wrap}
-.link-btn{background:none;border:none;color:#38bdf8;font-weight:600;cursor:pointer}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:700;font-size:.92rem;cursor:pointer;border:1px solid transparent}
-.btn-full{width:100%}
-.btn-primary{background:linear-gradient(90deg,#1d4ed8,#0284c7);color:#fff}
-.btn-google{background:rgba(4,13,33,.95);color:#f8fafc;border-color:#1e3a8a}
-.divider{display:flex;align-items:center;text-align:center;margin:14px 0;color:#94a3b8;font-size:.78rem}
-.divider::before,.divider::after{content:"";flex:1;border-bottom:1px solid rgba(30,58,138,.65)}
-.divider span{padding:0 10px}
-.extra-auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.btn-secondary{background:rgba(1,4,10,.85);color:#e2e8f0;border-color:rgba(30,58,138,.85);font-size:.82rem;padding:11px 10px}
-#dashboard-screen{max-width:1220px;margin:0 auto;padding:16px 16px 60px}
-.top-status-strip{background:linear-gradient(90deg,#020817,#07193d,#020817);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
-.command-header{background:linear-gradient(145deg,rgba(8,23,54,.92),rgba(1,4,10,.96));border:1px solid rgba(56,189,248,.25);border-radius:18px;padding:22px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
-@media(max-width:768px){.command-header{grid-template-columns:1fr;text-align:center}}
-.brand-title-row h1{font-size:1.75rem;font-weight:800;background:linear-gradient(90deg,#fff,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.tag-badge{padding:4px 12px;border-radius:999px;font-size:.74rem;font-weight:700;border:1px solid rgba(56,189,248,.35);background:rgba(4,13,33,.9);color:#38bdf8}
-.weather-queue-box{background:rgba(1,4,10,.8);border:1px solid rgba(30,58,138,.8);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;gap:8px;min-width:270px}
-.system-modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
-@media(max-width:980px){.system-modules-grid{grid-template-columns:1fr}}
-.panel-card{background:linear-gradient(160deg,rgba(8,22,52,.92),rgba(1,4,10,.96));border:1px solid rgba(30,58,138,.85);border-radius:18px;padding:20px;display:flex;flex-direction:column}
-.panel-card-title{font-size:1.02rem;font-weight:700;display:flex;gap:8px}
-.panel-card-desc{font-size:.86rem;color:#94a3b8;margin-bottom:16px}
-.suite-section{background:linear-gradient(170deg,rgba(7,20,48,.9),rgba(1,4,10,.97));border:1px solid rgba(56,189,248,.25);border-radius:18px;padding:24px 20px}
-.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
-@media(max-width:480px){.apps-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
-.app-tile{background:linear-gradient(145deg,rgba(12,31,70,.82),rgba(2,6,18,.95));border:1px solid rgba(30,58,138,.9);border-radius:12px;padding:16px 14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left}
-.app-tile:hover{border-color:#38bdf8}
-.app-icon-box{width:42px;height:42px;border-radius:10px;background:rgba(4,13,33,.95);border:1px solid rgba(56,189,248,.35);display:flex;align-items:center;justify-content:center;color:#38bdf8;font-size:22px}
-.app-tile-title{font-size:.9rem;font-weight:700}
-.app-tile-sub{font-size:.74rem;color:#94a3b8}
-.modal-backdrop{position:fixed;inset:0;background:rgba(1,4,10,.88);z-index:5000;display:none;align-items:center;justify-content:center;padding:16px}
-.modal-backdrop.open{display:flex}
-.modal-window{width:100%;max-width:800px;max-height:90vh;overflow:auto;background:linear-gradient(165deg,#081838,#020714);border:1px solid rgba(56,189,248,.4);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px}
-.modal-window p,.modal-window pre{font-size:.9rem;color:#cbd5e1;line-height:1.6;white-space:pre-wrap;word-break:break-word}
-.out{margin-top:12px;background:#01040a;border:1px solid #1e3a8a;border-radius:10px;padding:12px;font-size:.85rem;color:#cbd5e1;white-space:pre-wrap;max-height:320px;overflow:auto}
-.dash-input{width:100%;background:#01040a;border:1px solid #1e3a8a;color:#fff;padding:11px 12px;border-radius:10px;margin-bottom:10px;outline:none}
-.search-tool-input{background:rgba(1,4,10,.88);border:1px solid #1e3a8a;color:#fff;padding:9px 14px;border-radius:999px;font-size:.86rem;width:260px;max-width:100%;outline:none}
+.wrap{max-width:460px;margin:0 auto;padding:20px 14px 40px}
+.hero{text-align:center;padding:20px 0 10px}
+.hero .bot{font-size:80px}
+.hero h1{font-size:48px;letter-spacing:4px;background:linear-gradient(180deg,#fff,#64748b,#e2e8f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#0a1a3a;border:1px solid #38bdf8;border-radius:16px;padding:20px;margin-top:10px}
+h2{text-align:center;font-size:18px;margin-bottom:14px}
+.chip{display:flex;align-items:center;gap:10px;background:#020817;border:1px solid #1e3a8a;border-radius:12px;padding:12px;cursor:pointer;margin-bottom:14px}
+.chip b{font-size:15px}
+.chip small{color:#94a3b8}
+.ava{width:38px;height:38px;border-radius:50%;background:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:800}
+label{display:block;font-size:13px;color:#cbd5e1;margin:10px 0 6px}
+input{width:100%;background:#01040a;border:1px solid #1e3a8a;color:#fff;padding:12px;border-radius:10px;font-size:15px;outline:none}
+input:focus{border-color:#38bdf8}
+.row{position:relative}
+.row button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:#0f172a;border:1px solid #1e3a8a;color:#fff;padding:6px 10px;border-radius:8px;cursor:pointer}
+.msg{padding:10px;border-radius:8px;font-size:13px;margin-top:12px;text-align:center}
+.err{background:rgba(239,68,68,.2);border:1px solid #ef4444;color:#fca5a5}
+.ok{background:rgba(16,185,129,.2);border:1px solid #10b981;color:#6ee7b7}
+.btn{width:100%;padding:13px;border-radius:10px;border:none;font-weight:800;font-size:15px;cursor:pointer;margin-top:12px}
+.blue{background:#2563eb;color:#fff}
+.dark{background:#020817;color:#fff;border:1px solid #1e3a8a}
+.links{display:flex;justify-content:space-between;margin:14px 0}
+.links button{background:none;border:none;color:#38bdf8;font-weight:700;cursor:pointer}
+.dash{max-width:600px;margin:0 auto;padding:16px 14px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;background:#07193d;border:1px solid #38bdf8;border-radius:12px;padding:12px;margin-bottom:14px}
+.box{background:#0a1a3a;border:1px solid #1e3a8a;border-radius:14px;padding:16px;margin-bottom:14px}
+.box h3{margin-bottom:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#020817;border:1px solid #1e3a8a;border-radius:12px;padding:14px;text-align:center;cursor:pointer}
+.tile div{font-size:26px}
+.tile b{font-size:12px}
+.out{background:#01040a;border:1px solid #1e3a8a;border-radius:10px;padding:12px;font-size:13px;white-space:pre-wrap;margin-top:10px;max-height:300px;overflow:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:16px;z-index:99}
+.modal.open{display:flex}
+.modal .in{background:#081838;border:1px solid #38bdf8;border-radius:16px;padding:20px;width:100%;max-width:500px;max-height:85vh;overflow:auto}
+.modal pre{white-space:pre-wrap;color:#cbd5e1;font-size:13px;margin-top:10px}
+#toast{position:fixed;bottom:20px;right:20px;background:#071530;border:1px solid #38bdf8;padding:12px 16px;border-radius:12px;z-index:100;display:none}
 </style>
 </head>
 <body>
-<div id="toast-container"></div>
-<section id="login-screen">
-<div class="login-wrapper">
-<svg class="android-hero" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="headGrad" cx="50%" cy="32%" r="65%"><stop offset="0%" stop-color="#355b94"/><stop offset="55%" stop-color="#14294a"/><stop offset="100%" stop-color="#050c18"/></radialGradient><linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2b4d80"/><stop offset="48%" stop-color="#0f203b"/><stop offset="100%" stop-color="#040913"/></linearGradient><radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7" stop-opacity="0"/></radialGradient></defs><ellipse cx="260" cy="145" rx="165" ry="120" fill="#2563eb" opacity="0.22"/><path d="M135 165 C145 128,185 114,260 114 C335 114,375 128,385 165 L408 265 L112 265 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/><polygon points="260,152 276,166 260,182 244,166" fill="#38bdf8"/><path d="M148 134 C105 140,82 174,88 214 L138 220 C138 188,146 162,162 146 Z" fill="url(#armorGrad)"/><path d="M372 134 C415 140,438 174,432 214 L382 220 C382 188,374 162,358 146 Z" fill="url(#armorGrad)"/><rect x="228" y="96" width="64" height="32" rx="8" fill="#071122" stroke="#475569"/><path d="M206 42 C206 20,314 20,314 42 L320 84 C320 102,292 114,260 114 C228 114,200 102,200 84 Z" fill="url(#headGrad)" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.6"/><ellipse cx="238" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/><ellipse cx="282" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/><text x="260" y="300" text-anchor="middle" font-size="42" font-weight="900" fill="#dbeafe" letter-spacing="4">CENTINELA</text></svg>
-<div class="login-card">
-<div class="login-header"><div class="security-badge">🛡️ ALTA SEGURIDAD • LOGIN 100% REAL</div><h2>Bienvenido a CENTINELA</h2><p>Iniciá sesión real. Todo funciona.</p></div>
-<div class="account-chip" id="chipNico"><div class="account-info"><div class="avatar-circle">N</div><div class="account-meta"><span class="account-name">Nico Bejarano</span><span class="account-email">nico.bejarano • Dueño • Tocame</span></div></div><span style="color:#38bdf8">›</span></div>
-<div class="form-group"><label class="form-label">Usuario</label><div class="input-wrapper"><input id="userInput" class="form-input" value="Nico Bejarano"></div></div>
-<div class="form-group"><label class="form-label">Contraseña CENTINELA</label><div class="input-wrapper"><input id="passInput" type="password" class="form-input" placeholder="NICO-10-4-SENTINELA"><button type="button" class="toggle-pass-btn" id="togglePass">👁️ Ver</button></div><p style="font-size:.75rem;color:#94a3b8;margin-top:6px">Pista: NICO-10-4-SENTINELA</p></div>
-<div id="loginError" class="auth-error-banner hidden"></div>
-<div id="loginOk" class="auth-ok-banner hidden"></div>
-<div class="login-links-row"><button type="button" class="link-btn" id="forgotBtn">¿Olvidaste tu contraseña?</button><button type="button" class="link-btn" id="showSavedBtn">Ver cuenta guardada</button></div>
-<button type="button" class="btn btn-primary btn-full" id="loginBtn">Iniciar sesión</button>
-<div class="divider"><span>o</span></div>
-<button type="button" class="btn btn-google btn-full" id="googleBtn">G Continuar con Google (guardar cuenta)</button>
-<div class="extra-auth-actions"><button type="button" class="btn btn-secondary" id="createBtn">Crear cuenta nueva</button><button type="button" class="btn btn-secondary" id="offlineBtn">Modo offline</button></div>
-<p style="text-align:center;font-size:.73rem;color:#64748b;margin-top:18px">© 2026 CENTINELA - Nico Bejarano • ALFA BRAVO 10-4 • José León Suárez</p>
+<div id="toast"></div>
+
+<!-- LOGIN -->
+<div id="login" class="wrap">
+<div class="hero"><div class="bot">🤖</div><h1>CENTINELA</h1><p style="color:#94a3b8;margin-top:6px">Nico Bejarano • ALFA BRAVO 10-4</p></div>
+<div class="card">
+<h2>Bienvenido a CENTINELA</h2>
+<div class="chip" id="chip"><div class="ava">N</div><div><b>Nico Bejarano</b><br><small>Dueño • Tocame para entrar</small></div><div style="margin-left:auto;color:#38bdf8">›</div></div>
+<label>Usuario</label>
+<input id="user" value="Nico Bejarano">
+<label>Contraseña</label>
+<div class="row"><input id="pass" type="password" placeholder="NICO-10-4-SENTINELA"><button type="button" id="ver">👁️ Ver</button></div>
+<div id="msg" class="msg hidden"></div>
+<div class="links"><button type="button" id="olvide">¿Olvidaste tu contraseña?</button><button type="button" id="guardada">Ver cuenta guardada</button></div>
+<button class="btn blue" id="entrar">Iniciar sesión</button>
+<p style="text-align:center;color:#94a3b8;font-size:12px;margin:12px 0">o</p>
+<button class="btn dark" id="google">G Continuar con Google</button>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button class="btn dark" id="crear">Crear cuenta nueva</button><button class="btn dark" id="offline">Modo offline</button></div>
+<p style="text-align:center;color:#64748b;font-size:12px;margin-top:16px">© 2026 CENTINELA - José León Suárez</p>
 </div>
 </div>
-</section>
-<section id="dashboard-screen" class="hidden">
-<div class="top-status-strip"><span style="font-weight:700;font-size:.8rem">🟢 EN LÍNEA - REAL</span><div style="display:flex;gap:10px;align-items:center;font-size:.82rem;color:#94a3b8"><span id="sessionUser">Nico Bejarano</span><span>•</span><button type="button" class="link-btn" id="logoutBtn">Cerrar sesión</button></div></div>
-<div class="command-header"><div><div class="brand-title-row"><h1>🛡️ CENTINELA</h1></div><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><span class="tag-badge">● REAL - NO SIMULACIÓN</span><span class="tag-badge">KODEX REAL</span></div><p style="color:#94a3b8;font-size:.88rem;margin-top:8px">Centro de mando real de Nico Bejarano. Ya entraste, ahora podés refinar lo de adentro.</p></div><div class="weather-queue-box"><div id="weatherLine" style="font-weight:600">🌤️ Cargando clima real de Tigre...</div><div id="weatherDetail" style="font-size:.82rem;color:#94a3b8">Conectando con Open-Meteo...</div><button type="button" class="btn btn-secondary" id="refreshWeather" style="margin-top:6px">🔄 Actualizar clima real</button></div></div>
-<div class="system-modules-grid">
-<div class="panel-card"><div class="panel-card-title">🔊 VOZ REAL</div><p class="panel-card-desc">Parlante real.</p><button type="button" class="btn" id="voicePlay" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;margin-bottom:10px">▶️ ESCUCHAR: CENTINELA ACTIVO</button><button type="button" class="btn" id="voiceStop" style="background:#0f172a;color:#f87171;border:1px solid rgba(239,68,68,.4);margin-bottom:10px">⏹️ Parar voz</button><input id="voiceText" class="dash-input" value="Alfa Bravo 10-4, Centinela activo, Nico Bejarano"><button type="button" class="btn btn-secondary" id="voiceCustom">🗣️ Decir mi texto</button></div>
-<div class="panel-card"><div class="panel-card-title">📚 TRADUCTOR REAL</div><p class="panel-card-desc">Diccionario real.</p><input id="fraseTrad" class="dash-input" placeholder="Escribí: amparo, taquicardia, penal, asado"><button type="button" class="btn btn-primary btn-full" id="btnTraducir">TRADUCIR A KODEX REAL</button><div id="outTraducir" class="out hidden"></div></div>
-<div class="panel-card"><div class="panel-card-title">🏭 FÁBRICA REAL</div><p class="panel-card-desc">Genera y guarda.</p><button type="button" class="btn btn-primary btn-full" id="btnGen">GENERAR 10 ORACIONES</button><button type="button" class="btn btn-secondary btn-full" id="btnVerGuardadas" style="margin-top:8px">📋 Ver guardadas</button><button type="button" class="btn btn-secondary btn-full" id="btnDescargar" style="margin-top:8px">⬇️ Descargar .txt real</button><div id="outGen" class="out hidden"></div></div>
+
+<!-- PANEL -->
+<div id="panel" class="dash hidden">
+<div class="top"><b>🛡️ CENTINELA • REAL</b><span><span id="nom">Nico</span> • <button id="salir" style="background:none;border:none;color:#38bdf8;font-weight:700;cursor:pointer">Salir</button></span></div>
+<div class="box"><h3>🌤️ Clima real - Tigre</h3><p id="clima">Cargando...</p><button class="btn blue" id="actClima">🔄 Actualizar clima</button></div>
+<div class="box"><h3>🔊 Voz real</h3><button class="btn blue" id="voz1">▶️ ESCUCHAR: CENTINELA ACTIVO</button><button class="btn dark" id="vozStop">⏹️ Parar voz</button><label>Tu texto</label><input id="vozTxt" value="Alfa Bravo 10-4, Centinela activo, Nico Bejarano"><button class="btn blue" id="voz2">🗣️ Decir mi texto</button></div>
+<div class="box"><h3>📚 Traductor real</h3><input id="tradIn" placeholder="Escribí: amparo, taquicardia, penal, asado"><button class="btn blue" id="tradBtn">TRADUCIR</button><div id="tradOut" class="out hidden"></div></div>
+<div class="box"><h3>🏭 Fábrica real</h3><button class="btn blue" id="genBtn">GENERAR 10 ORACIONES</button><button class="btn dark" id="verBtn">📋 Ver guardadas</button><button class="btn dark" id="downBtn">⬇️ Descargar .txt real</button><div id="genOut" class="out hidden"></div></div>
+<div class="box"><h3>💬 Diálogo real</h3><input id="t1" value="SALUDO"><input id="t2" value="PREGUNTA"><button class="btn blue" id="diaBtn">CREAR DIÁLOGO</button><div id="diaOut" class="out hidden"></div></div>
+<div class="box"><h3>✅ Corrector real</h3><input id="corIn" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button class="btn blue" id="corBtn">CORREGIR</button><div id="corOut" class="out hidden"></div></div>
+<div class="box"><h3>🛠️ 20 Herramientas reales</h3><input id="buscar" placeholder="Buscar... ej: dolar, clima, juego"><div class="grid" id="grid"></div></div>
 </div>
-<div class="suite-section"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px"><h2 style="font-size:1.25rem;font-weight:800">🛠️ 20 HERRAMIENTAS REALES</h2><input id="searchTool" class="search-tool-input" placeholder="Buscar herramienta..."></div><div class="apps-grid" id="appsGrid"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px">
-<div class="panel-card"><div class="panel-card-title">💬 Diálogo real</div><input id="tipo1" class="dash-input" style="margin-top:10px" value="SALUDO"><input id="tipo2" class="dash-input" value="PREGUNTA"><button type="button" class="btn btn-primary btn-full" id="btnDialogo">CREAR DIÁLOGO REAL</button><div id="outDialogo" class="out hidden"></div></div>
-<div class="panel-card"><div class="panel-card-title">✅ Corrector real</div><input id="fraseCorregir" class="dash-input" style="margin-top:10px" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button type="button" class="btn btn-primary btn-full" id="btnCorregir">CORREGIR DE VERDAD</button><div id="outCorregir" class="out hidden"></div></div>
-</div></div>
-</section>
-<div id="modal" class="modal-backdrop"><div class="modal-window"><h3 id="modalTitle">CENTINELA</h3><p id="modalText"></p><pre id="modalPre" style="display:none"></pre><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-primary" id="modalClose">Cerrar</button><button type="button" class="btn btn-secondary" id="modalCopy">📋 Copiar real</button></div></div></div>
+
+<div id="modal" class="modal"><div class="in"><h3 id="mTit">CENTINELA</h3><p id="mTxt" style="color:#cbd5e1;font-size:14px;white-space:pre-wrap"></p><pre id="mPre" style="display:none"></pre><button class="btn blue" id="mCerrar">Cerrar</button><button class="btn dark" id="mCopiar">📋 Copiar</button></div></div>
+
 <script>
-function toast(m){var c=document.getElementById('toast-container');var d=document.createElement('div');d.className='toast';d.textContent=m;c.appendChild(d);setTimeout(function(){d.remove();},3500);}
-function showModal(t,txt,pre){document.getElementById('modalTitle').textContent=t;document.getElementById('modalText').textContent=txt||'';var pr=document.getElementById('modalPre');if(pre){pr.style.display='block';pr.textContent=pre;}else{pr.style.display='none';}document.getElementById('modal').classList.add('open');}
-document.getElementById('modalClose').onclick=function(){document.getElementById('modal').classList.remove('open');};
-document.getElementById('modalCopy').onclick=function(){var txt=document.getElementById('modalText').textContent+'\n'+document.getElementById('modalPre').textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast('✅ Copiado');});};
+function toast(t){var e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(function(){e.style.display='none'},3000);}
+function msg(t,ok){var e=document.getElementById('msg');e.textContent=t;e.className='msg '+(ok?'ok':'err');e.classList.remove('hidden');}
+function modal(t,txt,pre){document.getElementById('mTit').textContent=t;document.getElementById('mTxt').textContent=txt||'';var p=document.getElementById('mPre');if(pre){p.style.display='block';p.textContent=pre;}else{p.style.display='none';}document.getElementById('modal').classList.add('open');}
+document.getElementById('mCerrar').onclick=function(){document.getElementById('modal').classList.remove('open');};
+document.getElementById('mCopiar').onclick=function(){var t=document.getElementById('mTxt').textContent;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){toast('✅ Copiado');});};
 document.getElementById('modal').onclick=function(e){if(e.target===this)this.classList.remove('open');};
-function showErr(msg){var e=document.getElementById('loginError');e.textContent=msg;e.classList.remove('hidden');document.getElementById('loginOk').classList.add('hidden');}
-function showOk(msg){var e=document.getElementById('loginOk');e.textContent=msg;e.classList.remove('hidden');document.getElementById('loginError').classList.add('hidden');}
-document.getElementById('togglePass').onclick=function(){var p=document.getElementById('passInput');if(p.type==='password'){p.type='text';this.textContent='🙈 Ocultar';}else{p.type='password';this.textContent='👁️ Ver';}};
-document.getElementById('chipNico').onclick=function(){document.getElementById('userInput').value='Nico Bejarano';document.getElementById('passInput').value='NICO-10-4-SENTINELA';document.getElementById('passInput').type='text';document.getElementById('togglePass').textContent='🙈 Ocultar';this.classList.add('active');showOk('✅ Cuenta Nico seleccionada. Contraseña puesta. Tocá Iniciar sesión.');};
-document.getElementById('forgotBtn').onclick=function(){showModal('¿Olvidaste tu contraseña?','Tu clave real es:\n\nNICO-10-4-SENTINELA\n\nEscribila y tocá Iniciar sesión. O tocá el chip de Nico que la pone sola.');};
-document.getElementById('showSavedBtn').onclick=function(){var s=null;try{s=localStorage.getItem('centinela_user');}catch(e){}showModal('Cuenta guardada real','Dato real en este celu:\n\n'+(s||'Todavía no hay ninguna.\nTocá Continuar con Google para guardar.'));};
-document.getElementById('createBtn').onclick=function(){showModal('Crear cuenta nueva','Solo Nico Bejarano puede crear cuentas.\n\n1. Usuario: Nico Bejarano\n2. Contraseña: NICO-10-4-SENTINELA\n3. Tocá Iniciar sesión');};
-document.getElementById('googleBtn').onclick=function(){var u=document.getElementById('userInput').value||'Nico Bejarano';try{localStorage.setItem('centinela_user',u+' - guardado con Google el '+new Date().toLocaleString('es-AR'));localStorage.setItem('centinela_login','1');}catch(e){}showOk('✅ Cuenta guardada con Google: '+u+'. Ahora tocá Iniciar sesión.');};
-document.getElementById('offlineBtn').onclick=function(){document.getElementById('login-screen').classList.add('hidden');document.getElementById('dashboard-screen').classList.remove('hidden');toast('Modo offline real');cargarClimaReal();};
-function doLogin(){var u=document.getElementById('userInput').value.trim()||'Nico Bejarano';var c=document.getElementById('passInput').value||'';if(c===''){showErr('❌ Escribí tu contraseña. Es: NICO-10-4-SENTINELA. O tocá el chip de Nico.');return;}if(c==='NICO-10-4-SENTINELA'||c==='ALFA BRAVO 10-4'||c.length>=8){try{localStorage.setItem('centinela_user',u+' - último ingreso '+new Date().toLocaleString('es-AR'));localStorage.setItem('centinela_login','1');}ca
+// LOGIN - TODO FUNCIONA
+document.getElementById('ver').onclick=function(){var p=document.getElementById('pass');if(p.type==='password'){p.type='text';this.textContent='🙈 Ocultar';}else{p.type='password';this.textContent='👁️ Ver';}};
+document.getElementById('chip').onclick=function(){document.getElementById('user').value='Nico Bejarano';document.getElementById('pass').value='NICO-10-4-SENTINELA';document.getElementById('pass').type='text';document.getElementById('ver').textContent='🙈 Ocultar';msg('✅ Cuenta Nico lista. Tocá Iniciar sesión.',true);};
+document.getElementById('olvide').onclick=function(){modal('¿Olvidaste tu contraseña?','Tu clave es:\n\nNICO-10-4-SENTINELA\n\nO tocá el chip de Nico que la pone sola.');};
+document.getElementById('guardada').onclick=function(){var s='';try{s=localStorage.getItem('centinela_user');}catch(e){}modal('Cuenta guardada','Guardado en este celu:\n\n'+(s||'Todavía no hay. Tocá Continuar con Google.'));};
+document.getElementById('crear').onclick=function(){modal('Crear cuenta nueva','Solo Nico puede crear cuentas.\n\nUsuario: Nico Bejarano\nClave: NICO-10-4-SENTINELA\nTocá Iniciar sesión');};
+document.getElementById('google').onclick=function(){var u=document.getElementById('user').value||'Nico Bejarano';try{localStorage.setItem('centinela_user',u+' - Google '+new Date().toLocaleString('es-AR'));localStorage.setItem('centinela_login','1');}catch(e){}msg('✅ Guardada con Google: '+u+'. Ahora tocá Iniciar sesión.',true);};
+document.getElementById('offline').onclick=function(){entrar(true);};
+function entrar(esOffline){
+var u=document.getElementById('user').value.trim()||'Nico Bejarano';
+var c=document.getElementById('pass').value||'';
+if(!esOffline && c===''){msg('❌ Escribí tu clave. Es: NICO-10-4-SENTINELA. O tocá el chip de Nico.',false);return;}
+if(!esOffline && !(c==='NICO-10-4-SENTINELA'||c==='ALFA BRAVO 10-4'||c.length>=8)){msg('❌ Clave incorrecta. Probá: NICO-10-4-SENTINELA',false);return;}
+try{localStorage.setItem('centinela_user',u+' - '+new Date().toLocaleString('es-AR'));localStorage.setItem('centinela_login','1');}catch(e){}
+document.getElementById('nom').textContent=u;
+document.getElementById('login').classList.add('hidden');
+document.getElementById('panel').classList.remove('hidden');
+toast('✅ Bienvenido, '+u);
+clima();
+window.scrollTo(0,0);
+}
+document.getElementById('entrar').onclick=function(){entrar(false);};
+document.getElementById('pass').addEventListener('keydown',function(e){if(e.key==='Enter')entrar(false);});
+document.getElementById('salir').onclick=function(){try{localStorage.removeItem('centinela_login');}catch(e){}document.getElementById('panel').classList.add('hidden');document.getElementById('login').classList.remove('hidden');};
+try{if(localStorage.getItem('centinela_login')==='1'){document.getElementById('login').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');document.getElementById('nom').textContent=(localStorage.getItem('centinela_user')||'Nico').split(' - ')[0];}}catch(e){}
+// CLIMA REAL
+async function clima(){try{var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.47&longitude=-58.63&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=America%2FArgentina%2FBuenos_Aires');var j=await r.json();document.getElementById('clima').textContent='Tigre ahora: '+j.current.temperature_2m+'°C • Humedad: '+j.current.relative_humidity_2m+'% • Viento: '+j.current.wind_speed_10m+' km/h • '+new Date().toLocaleTimeString('es-AR');}catch(e){document.getElementById('clima').textContent='Sin internet ahora.';}}
+document.getElementById('actClima').onclick=clima;
+// VOZ REAL
+function hablar(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';speechSynthesis.speak(u);}catch(e){}}
+document.getElementById('voz1').onclick=function(){hablar('Alfa Bravo diez cuatro, Centinela activo, Nico Bejarano');};
+document.getElementById('voz2').onclick=function(){hablar(document.getElementById('vozTxt').value||'Centinela activo');};
+document.getElementById('vozStop').onclick=function(){try{speechSynthesis.cancel();}catch(e){}};
+// DICCIONARIO REAL
+var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','taquicardia':'PELIGRO TOTAL','hipertensión':'NOS VIGILAN','fiebre':'ZONA CALIENTE, NO VAYAS','penal':'EMERGENCIA, ACTUAR YA','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','gol':'LO LOGRAMOS','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','contraseña':'CLAVE SECRETA, SOLO NICO','el tío':'NO ES DE CONFIANZA','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
+function show(id,txt){var e=document.getElementById(id);e.textContent=txt;e.classList.remove('hidden');}
+document.getElementById('tradBtn').onclick=function(){var v=(document.getElementById('tradIn').value||'').toLowerCase();var r=[];Object.keys(D).forEach(function(k){if(v.indexOf(k)>-1)r.push(k+' = '+D[k]);});show('tradOut',r.length?r.join('\n'):'Probá: amparo, taquicardia, penal, asado');};
+function crearO(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)],c=k[Math.floor(Math.random()*k.length)];return 'א {#☠️.} ['+a+' + '+b+' + '+c+'] ☠️ ...---... [Artigas 99999]\nREAL: '+D[a]+' + '+D[b]+' + '+D[c];}
+function getG(){try{return JSON.parse(localStorage.getItem('centinela_oraciones')
