@@ -1,74 +1,105 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Centinela - Iniciar sesion</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
-<style>
-body{background:#03060d;background-image:radial-gradient(circle at 50% 28%,rgba(22,48,88,.48) 0%,rgba(7,15,30,.85) 48%,#020409 100%);min-height:100vh}
-.glass{background:linear-gradient(165deg,rgba(18,31,54,.88),rgba(10,18,33,.94));border:1px solid rgba(96,139,204,.22);box-shadow:0 30px 60px -12px rgba(0,0,0,.95)}
-.input{background:rgba(16,27,48,.75);border:1px solid rgba(71,105,158,.28);box-shadow:inset 0 2px 5px rgba(0,0,0,.55)}
-.input:focus{border-color:#3b82f6;outline:none}
-.btn{background:linear-gradient(180deg,#2563eb,#1d4ed8 55%,#1e3a8a);border:1px solid rgba(96,165,250,.35)}
-@keyframes f{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.rig{animation:f 6s ease-in-out infinite}
-</style>
-</head>
-<body class="text-slate-100 antialiased">
-<main id="pantallaLogin" class="flex flex-col items-center justify-center px-4 pt-4 pb-8">
-<div class="w-full max-w-[780px] flex flex-col items-center -mb-12">
-<svg viewBox="0 0 900 440" class="w-full h-auto rig" xmlns="http://www.w3.org/2000/svg">
-<defs><linearGradient id="a1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3b4d6b"/><stop offset="100%" stop-color="#060a12"/></linearGradient><linearGradient id="a2" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#647c9e"/><stop offset="100%" stop-color="#0b111e"/></linearGradient><linearGradient id="s1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f1f5f9"/><stop offset="50%" stop-color="#94a3b8"/><stop offset="100%" stop-color="#475569"/></linearGradient></defs>
-<g><path d="M365 175 C325 172,295 195,292 238 C318 242,345 235,368 215 Z" fill="url(#a2)"/><path d="M535 175 C575 172,605 195,608 238 C582 242,555 235,532 215 Z" fill="url(#a2)"/><path d="M362 172 L422 162 L478 162 L538 172 L552 245 L518 335 L382 335 L348 245 Z" fill="url(#a1)"/></g>
-<g><path d="M404 68 C404 28,496 28,496 68 L490 124 L468 148 L432 148 L410 124 Z" fill="url(#a2)"/><ellipse cx="429" cy="90" rx="14" ry="7" fill="#38bdf8"/><ellipse cx="471" cy="90" rx="14" ry="7" fill="#38bdf8"/></g>
-<g><text x="450" y="302" text-anchor="middle" font-family="Rajdhani,sans-serif" font-weight="700" font-size="146" letter-spacing="6" fill="#1e293b">CENTINELA</text><text x="450" y="294" text-anchor="middle" font-family="Rajdhani,sans-serif" font-weight="700" font-size="146" letter-spacing="6" fill="url(#s1)" stroke="#f8fafc" stroke-width="1.2">CENTINELA</text></g>
-<g><g transform="translate(246,282)"><rect x="14" y="16" width="10" height="24" rx="4" fill="url(#a2)"/><rect x="27" y="12" width="10" height="27" rx="4" fill="url(#a2)"/><rect x="40" y="14" width="10" height="25" rx="4" fill="url(#a2)"/></g><g transform="translate(576,282)"><rect x="28" y="14" width="10" height="25" rx="4" fill="url(#a2)"/><rect x="41" y="12" width="10" height="27" rx="4" fill="url(#a2)"/><rect x="54" y="16" width="10" height="24" rx="4" fill="url(#a2)"/></g></g>
-</svg>
-</div>
-<section class="w-full max-w-[400px] glass rounded-2xl p-6 relative z-20">
-<h2 class="text-center text-2xl tracking-wide font-bold">BIENVENIDO, NICO</h2>
-<p class="text-center text-[12px] text-slate-400 mt-1">ALFA BRAVO 10-4 • Solo con tu autorizacion</p>
-<label class="block text-[12px] text-slate-400 mt-5">Correo o usuario</label>
-<input id="usuario" class="input w-full rounded-xl px-4 py-3 text-[14px] mt-1" value="Nico Bejarano">
-<label class="block text-[12px] text-slate-400 mt-3">Clave CENTINELA</label>
-<input id="clave" type="password" class="input w-full rounded-xl px-4 py-3 text-[14px] mt-1" placeholder="NICO-10-4-SENTINELA">
-<p class="text-[11px] text-slate-500 mt-2">Pista: NICO-10-4-SENTINELA</p>
-<button id="btnEntrar" class="btn w-full mt-4 py-3 rounded-xl font-bold">🛡️ ENTRAR A CENTINELA</button>
-<button id="btnCrear" class="w-full mt-3 py-3 rounded-xl font-bold bg-slate-800 border border-slate-600">Crear cuenta nueva</button>
-<p id="msgLogin" class="text-center text-[12px] mt-3 text-red-400 hidden"></p>
-<p class="text-center text-[11px] text-slate-500 mt-4">© 2026 CENTINELA - Nico Bejarano • Privado</p>
-</section>
-</main>
-<div id="pantallaApp" class="hidden max-w-[1100px] mx-auto w-full px-4 py-6">
-<div class="glass rounded-2xl p-5">
-<div class="flex items-center gap-3"><div class="w-11 h-11 rounded-full bg-blue-700 flex items-center justify-center text-xl font-black">N</div><div><b class="text-lg">CENTINELA - Nico Bejarano</b><div class="text-[12px] text-slate-400">ALFA BRAVO 10-4 • Desbloqueado</div></div><button id="btnSalir" class="ml-auto bg-slate-700 px-4 py-2 rounded-full text-[13px] font-bold">Salir</button></div>
-<div class="grid sm:grid-cols-3 gap-3 mt-5">
-<div class="bg-slate-800/80 rounded-xl p-4"><div class="text-2xl">📚</div><b>Traductor - 120 palabras</b><input id="frase" class="input w-full rounded-lg px-3 py-2 mt-2 text-[13px]" placeholder="Escribi: amparo, penal"><button id="btnTraducir" class="btn w-full mt-2 py-2 rounded-lg font-bold text-[13px]">TRADUCIR</button><p id="outTraducir" class="text-[12px] mt-2 whitespace-pre-wrap"></p></div>
-<div class="bg-slate-800/80 rounded-xl p-4"><div class="text-2xl">🏭</div><b>Fabrica - Sin limite</b><button id="btnGen" class="btn w-full mt-2 py-2 rounded-lg font-bold text-[13px]">GENERAR 10 ORACIONES</button><p id="outGen" class="text-[11px] mt-2 whitespace-pre-wrap font-mono"></p></div>
-<div class="bg-slate-800/80 rounded-xl p-4"><div class="text-2xl">🛡️</div><b>13 Modulos CENTINELA</b><div id="gridLogos" class="grid grid-cols-2 gap-2 mt-2"></div><p id="outLogo" class="text-[12px] mt-2 whitespace-pre-wrap"></p></div>
-</div>
-<div class="grid sm:grid-cols-2 gap-3 mt-3">
-<div class="bg-slate-800/80 rounded-xl p-4"><b>💬 Dialogo sin limite</b><select id="tipo1" class="input w-full rounded-lg px-3 py-2 mt-2 text-[13px]"><option>SALUDO</option><option>PREGUNTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select><select id="tipo2" class="input w-full rounded-lg px-3 py-2 mt-2 text-[13px]"><option>PREGUNTA</option><option>SALUDO</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select><button id="btnDialogo" class="btn w-full mt-2 py-2 rounded-lg font-bold text-[13px]">CREAR DIALOGO</button><p id="outDialogo" class="text-[12px] mt-2 whitespace-pre-wrap"></p></div>
-<div class="bg-slate-800/80 rounded-xl p-4"><b>✅ Corrector</b><input id="fraseCorregir" class="input w-full rounded-lg px-3 py-2 mt-2 text-[13px]" placeholder="Ej: {#...} [Amparo + ...]"><button id="btnCorregir" class="btn w-full mt-2 py-2 rounded-lg font-bold text-[13px]">CORREGIR</button><p id="outCorregir" class="text-[12px] mt-2 whitespace-pre-wrap"></p></div>
-</div>
-</div>
-</div>
-<script>
-var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelacion':'CAMBIAR DE CODIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','taquicardia':'PELIGRO TOTAL','hipertension':'NOS VIGILAN','fiebre':'ZONA CALIENTE, NO VAYAS','penal':'EMERGENCIA, ACTUAR YA','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','gol':'LO LOGRAMOS','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','contrasena':'CLAVE SECRETA, SOLO NICO','el tio':'NO ES DE CONFIANZA - EL TIO GANA','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
-document.getElementById('btnEntrar').onclick=function(){var c=document.getElementById('clave').value||'';var m=document.getElementById('msgLogin');if(c==='NICO-10-4-SENTINELA'||c==='ALFA BRAVO 10-4'||c.length>=8){document.getElementById('pantallaLogin').classList.add('hidden');document.getElementById('pantallaApp').classList.remove('hidden');window.scrollTo(0,0);}else{m.textContent='Clave incorrecta, jefe. Proba: NICO-10-4-SENTINELA';m.classList.remove('hidden');}};
-document.getElementById('btnCrear').onclick=function(){alert('Solo Nico Bejarano puede crear cuentas. Escribi tu clave y toca ENTRAR.');};
-document.getElementById('btnSalir').onclick=function(){document.getElementById('pantallaApp').classList.add('hidden');document.getElementById('pantallaLogin').classList.remove('hidden');};
-document.getElementById('btnTraducir').onclick=function(){var v=(document.getElementById('frase').value||'').toLowerCase();var r=[];Object.keys(D).forEach(function(k){if(v.indexOf(k)>-1)r.push(k+' = '+D[k]);});document.getElementById('outTraducir').textContent=r.length?r.join('\n'):'Proba: amparo, taquicardia, penal, asado';};
-function crearO(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)],c=k[Math.floor(Math.random()*k.length)];return 'א {#☠️.} ['+a+' + '+b+' + '+c+'] ☠️ ...---... [Artigas 99999] // ALFA\nREAL: '+D[a]+' + '+D[b]+' + '+D[c];}
-document.getElementById('btnGen').onclick=function(){var t='';for(var i=0;i<10;i++)t+=crearO()+'\n\n';document.getElementById('outGen').textContent=t;};
-var EJ={'SALUDO':'HOLA, EMPEZAMOS','PREGUNTA':'¿ALGUIEN MIENTE?','RESPUESTA':'SI, ALGUIEN MIENTE','PEDIDO':'NECESITO AYUDA','ORDEN':'CAMBIAR TODO YA','AVISO':'PELIGRO TOTAL','CHISTE':'CHISTE CENTINELA','DESPEDIDA':'TERMINO, LO LOGRAMOS'};
-document.getElementById('btnDialogo').onclick=function(){var a=document.getElementById('tipo1').value,b=document.getElementById('tipo2').value;document.getElementById('outDialogo').textContent='A - '+a+': '+EJ[a]+'\nB - '+b+': '+EJ[b];};
-document.getElementById('btnCorregir').onclick=function(){var v=document.getElementById('fraseCorregir').value||'';var e=[];if(v.indexOf('  ')>-1)e.push('Doble espacio');if(v.indexOf('א')===-1)e.push('Falta א al inicio');document.getElementById('outCorregir').textContent=e.length?'ERRORES:\n- '+e.join('\n- '):'✅ ORACION CORRECTA:\n'+v;};
-var L=[['🛡️','CENTINELA','Entrada'],['🔐','VAULT','Boveda'],['🧠','ACCORDED','IA, cerebro'],['🗣️','HABLA','Idioma'],['☁️','CLOUD','Nube'],['📓','CHECKBOOK','Cuaderno'],['⚙️','SETTINGS','Engranaje'],['📄','OFFICE','PDF, Excel'],['📤','SHARE','Compartir'],['💻','CODE','Codigo'],['🎓','ACADEMY','Escuela'],['🎮','PLAY','Juego'],['📈','TRADER','Trading']];
-var g=document.getElementById('gridLogos');L.forEach(function(x){var d=document.createElement('div');d.className='bg-slate-700/80 rounded-lg p-2 text-center cursor-pointer text-[11px]';d.innerHTML='<div class="text-[20px]">'+x[0]+'</div><b>'+x[1]+'</b>';d.onclick=function(){document.getElementById('outLogo').textContent='🛡️ '+x[1]+'\n'+x[2];};g.appendChild(d);});
-</script>
-</body>
-                                                                                                                                                                                                                                                                                                                                      </html>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CENTINELA — Sistema de Acceso y Módulos</title>
+  <style>
+    :root {
+      --bg-deep: #040914;
+      --bg-navy: #081428;
+      --bg-card: rgba(11, 23, 45, 0.88);
+      --bg-card-solid: #0d1b34;
+      --bg-input: #081224;
+      --border-subtle: rgba(148, 184, 235, 0.16);
+      --border-strong: rgba(148, 184, 235, 0.28);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-blue: #1d5fd6;
+      --accent-blue-hover: #256ef0;
+      --accent-glow: rgba(37, 130, 255, 0.45);
+      --shadow-heavy: 0 24px 60px rgba(0, 0, 0, 0.78);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% 16%, rgba(19, 54, 112, 0.55) 0%, rgba(7, 18, 38, 0.88) 45%, rgba(2, 5, 12, 0.98) 100%);
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(120, 165, 230, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(120, 165, 230, 0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .view {
+      display: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* ==================== LOGIN VIEW ==================== */
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 28px 16px 36px;
+    }
+
+    .hero-stage {
+      position: relative;
+      width: 100%;
+      max-width: 780px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: -14px;
+    }
+
+    .android-art {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.85));
+      user-select: none;
+    }
+
+    .centinela-title-
+    
