@@ -1,147 +1,136 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CENTINELA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTINELA | Sistema Integral Real</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-html,body{min-height:100vh;background-color:#061021;color:#f1f5f9;overflow-x:hidden}
-body{background:radial-gradient(circle at 50% 18%,#16376e 0%,#091833 46%,#030812 100%);position:relative}
-.grid-bg{position:fixed;inset:0;background-image:linear-gradient(to right,rgba(120,165,230,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(120,165,230,.05) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
-.vignette-bg{position:fixed;inset:0;background:radial-gradient(circle at center,transparent 40%,rgba(0,0,0,.72) 100%);pointer-events:none;z-index:0}
-.view{display:none;position:relative;z-index:2}
-.view.active{display:block}
-.login-wrapper{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:22px 16px 36px}
-.hero-stage{position:relative;width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;margin-bottom:-10px}
-.android-svg{width:100%;max-width:440px;height:290px;display:block;z-index:1}
-.centinela-banner{position:relative;z-index:3;margin-top:-82px;text-align:center;user-select:none}
-.centinela-word{font-size:46px;font-weight:900;letter-spacing:3px;line-height:1;text-transform:uppercase;color:#dbeafe;background:linear-gradient(180deg,#fff 0%,#cbd5e1 35%,#64748b 58%,#e2e8f0 80%,#475569 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 5px 0 #091224) drop-shadow(0 14px 22px rgba(0,0,0,.92))}
-@media(min-width:520px){.centinela-word{font-size:72px;letter-spacing:4px}.centinela-banner{margin-top:-92px}}
-.login-card{position:relative;z-index:4;width:100%;max-width:396px;background:linear-gradient(180deg,rgba(16,32,62,.95),rgba(8,17,34,.98));border:1px solid rgba(148,184,235,.22);border-radius:10px;padding:22px 20px 20px;box-shadow:0 24px 60px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.08)}
-.login-heading{text-align:center;font-size:17px;font-weight:600;color:#e2e8f0;margin-bottom:16px}
-.input-group{position:relative;margin-bottom:11px}
-.input-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;pointer-events:none}
-.form-input{width:100%;height:44px;background-color:#071122;border:1px solid rgba(148,163,184,.26);border-radius:6px;color:#f8fafc;font-size:15px;padding:0 40px 0 38px;outline:none}
-.form-input::placeholder{color:#64748b}
-.form-input:focus{border-color:#3b82f6;background-color:#050c18;box-shadow:0 0 0 3px rgba(59,130,246,.24)}
-.toggle-pass-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#94a3b8;cursor:pointer;padding:4px}
-.btn-primary-fb{width:100%;height:42px;margin-top:4px;background:linear-gradient(180deg,#256be8,#174eb8);border:1px solid rgba(147,197,253,.26);border-radius:6px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.55)}
-.forgot-wrap{text-align:center;margin-top:13px;padding-bottom:15px;border-bottom:1px solid rgba(148,163,184,.16)}
-.forgot-link{background:transparent;border:none;color:#60a5fa;font-size:13.5px;cursor:pointer}
-.create-wrap{display:flex;justify-content:center;margin-top:15px}
-.btn-secondary-dark{background:linear-gradient(180deg,#1b2c49,#111d33);border:1px solid rgba(148,163,184,.26);border-radius:6px;color:#e2e8f0;font-size:14px;font-weight:600;padding:10px 18px;cursor:pointer}
-.login-footer{margin-top:22px;text-align:center;font-size:12.5px;color:#94a3b8;line-height:1.65}
-.lang-bar{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
-.lang-btn{background:transparent;border:none;color:#94a3b8;font-size:12.5px;cursor:pointer;padding:2px 4px}
-.lang-btn.active-lang{color:#f8fafc;font-weight:600}
-.copyright-text{color:#64748b;margin-top:2px}
-.dash-container{max-width:540px;margin:0 auto;padding:16px 14px 48px}
-.dash-panel{background:linear-gradient(180deg,rgba(16,30,56,.95),rgba(9,18,36,.98));border:1px solid rgba(148,184,235,.18);border-radius:16px;padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.82)}
-.dash-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px}
-.user-identity{display:flex;align-items:center;gap:12px;min-width:0}
-.avatar-circle{width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#2563eb,#1d4ed8);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.user-name{font-size:16.5px;font-weight:800;color:#f8fafc;line-height:1.25}
-.user-status{font-size:11.5px;color:#94a3b8;margin-top:3px}
-.btn-salir{background:linear-gradient(180deg,#1d2d48,#121e33);border:1px solid rgba(148,163,184,.25);color:#e2e8f0;font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:10px;cursor:pointer;flex-shrink:0}
-.feature-card{background:linear-gradient(180deg,rgba(19,35,65,.86),rgba(11,22,42,.95));border:1px solid rgba(148,184,235,.14);border-radius:14px;padding:18px 15px;margin-top:14px;box-shadow:0 14px 28px rgba(0,0,0,.5)}
-.card-title-row{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:14px}
-.dash-input{width:100%;height:44px;background-color:#060e1c;border:1px solid rgba(148,184,235,.18);border-radius:10px;padding:0 14px;color:#f8fafc;font-size:14.5px;outline:none;margin-bottom:12px}
-.dash-input::placeholder{color:#64748b}
-.dash-input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.22)}
-.btn-action-blue{width:100%;height:42px;background:linear-gradient(180deg,#256be8,#174cb8);border:1px solid rgba(147,197,253,.24);border-radius:10px;color:#fff;font-size:13.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;cursor:pointer}
-.output-box{margin-top:12px;background-color:#050c18;border:1px solid rgba(148,184,235,.16);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.55;color:#cbd5e1;display:none;white-space:pre-wrap}
-.output-box.visible{display:block}
-.modules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.module-tile{background:linear-gradient(180deg,rgba(25,43,76,.9),rgba(14,26,48,.98));border:1px solid rgba(148,184,235,.16);border-radius:12px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;color:#f1f5f9}
-.module-icon{font-size:24px}
-.module-label{font-size:12.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
-.extra-modules-toggle{margin-top:12px;width:100%;background-color:#081122;border:1px dashed rgba(148,184,235,.25);border-radius:10px;padding:10px 12px;color:#93c5fd;font-size:12.5px;font-weight:600;cursor:pointer}
-.extra-modules-grid{display:none;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
-.extra-modules-grid.open{display:grid}
-.modal-backdrop{position:fixed;inset:0;background-color:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{color:#f1f5f9;background:#040d21;background-image:radial-gradient(circle at 50% 0%,rgba(30,58,138,.35),transparent 55%),linear-gradient(180deg,#040d21,#020817 65%,#01040a);min-height:100vh;overflow-x:hidden;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 95px 25px #01040a;z-index:9999}
+.hidden{display:none!important}
+#toast-container{position:fixed;bottom:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:10px;max-width:90vw}
+.toast{background:linear-gradient(145deg,#071530,#01040a);border:1px solid #38bdf8;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 10px 25px #01040a;font-size:.9rem}
+#login-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 48px}
+.login-wrapper{width:100%;max-width:470px;display:flex;flex-direction:column;align-items:center}
+.android-hero{width:100%;max-width:390px;margin-bottom:-14px;z-index:2;filter:drop-shadow(0 18px 25px #01040a);animation:floatBot 4.5s ease-in-out infinite}
+@keyframes floatBot{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.login-card{width:100%;background:linear-gradient(165deg,rgba(10,25,58,.94),rgba(2,7,19,.98));border:1px solid rgba(56,189,248,.28);border-radius:18px;padding:32px 26px 26px;box-shadow:0 22px 50px -10px #01040a;z-index:1}
+.login-header{text-align:center;margin-bottom:22px}
+.google-badge{display:inline-flex;gap:8px;background:rgba(1,4,10,.7);border:1px solid rgba(56,189,248,.22);padding:5px 12px;border-radius:999px;font-size:.75rem;color:#38bdf8;margin-bottom:10px}
+.login-header h2{font-size:1.45rem;font-weight:700;color:#fff}
+.login-header p{font-size:.88rem;color:#94a3b8;margin-top:4px}
+.saved-accounts{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.account-chip{display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,33,.85);border:1px solid rgba(30,58,138,.8);border-radius:12px;padding:10px 14px;cursor:pointer}
+.account-chip:hover{border-color:#38bdf8}
+.account-info{display:flex;align-items:center;gap:11px}
+.avatar-circle{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#38bdf8);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.account-meta{display:flex;flex-direction:column;text-align:left}
+.account-name{font-size:.88rem;font-weight:600;color:#f8fafc}
+.account-email{font-size:.76rem;color:#94a3b8}
+.form-group{margin-bottom:15px;position:relative}
+.form-label{display:block;font-size:.8rem;font-weight:600;color:#cbd5e1;margin-bottom:6px}
+.input-wrapper{position:relative;display:flex;align-items:center}
+.form-input{width:100%;background:rgba(1,4,10,.85);border:1px solid #1e3a8a;color:#fff;padding:12px 14px;border-radius:12px;font-size:.95rem;outline:none}
+.form-input:focus{border-color:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.18)}
+.toggle-pass-btn{position:absolute;right:12px;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:.82rem;padding:4px 6px}
+.login-links-row{display:flex;justify-content:space-between;gap:8px;margin-bottom:18px;font-size:.82rem;flex-wrap:wrap}
+.link-btn{background:none;border:none;color:#38bdf8;font-weight:600;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:600;font-size:.92rem;cursor:pointer;border:1px solid transparent}
+.btn-full{width:100%}
+.btn-primary{background:linear-gradient(135deg,#1d4ed8,#0284c7);color:#fff;border-color:rgba(56,189,248,.4)}
+.btn-google{background:rgba(4,13,33,.95);color:#f8fafc;border-color:#1e3a8a;margin-top:10px}
+.divider{display:flex;align-items:center;text-align:center;margin:16px 0;color:#94a3b8;font-size:.78rem}
+.divider::before,.divider::after{content:"";flex:1;border-bottom:1px solid rgba(30,58,138,.65)}
+.divider span{padding:0 10px}
+.extra-auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.btn-secondary{background:rgba(1,4,10,.75);color:#cbd5e1;border-color:rgba(30,58,138,.75);font-size:.8rem;padding:10px}
+#dashboard-screen{max-width:1220px;margin:0 auto;padding:16px 16px 60px}
+.top-status-strip{background:linear-gradient(90deg,#020817,#07193d,#020817);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.status-pill{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700}
+.dot-indicator{width:10px;height:10px;border-radius:50%;background:#10b981;box-shadow:0 0 10px #10b981}
+.dot-indicator.offline{background:#f59e0b;box-shadow:0 0 10px #f59e0b}
+.user-session-bar{display:flex;align-items:center;gap:10px;font-size:.82rem;color:#94a3b8}
+.command-header{background:linear-gradient(145deg,rgba(8,23,54,.92),rgba(1,4,10,.96));border:1px solid rgba(56,189,248,.25);border-radius:18px;padding:22px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+@media(max-width:768px){.command-header{grid-template-columns:1fr;text-align:center}}
+.brand-title-row h1{font-size:1.75rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(90deg,#fff,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tag-badge{padding:4px 12px;border-radius:999px;font-size:.74rem;font-weight:700;border:1px solid rgba(56,189,248,.35);background:rgba(4,13,33,.9);color:#38bdf8}
+.tag-badge.real{border-color:rgba(16,185,129,.5);color:#34d399}
+.weather-queue-box{background:rgba(1,4,10,.78);border:1px solid rgba(30,58,138,.8);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;gap:8px;min-width:260px}
+.weather-line{font-size:.9rem;font-weight:600}
+.system-modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+@media(max-width:980px){.system-modules-grid{grid-template-columns:1fr}}
+.panel-card{background:linear-gradient(160deg,rgba(8,22,52,.92),rgba(1,4,10,.96));border:1px solid rgba(30,58,138,.85);border-radius:18px;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+.panel-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.panel-card-title{font-size:1.02rem;font-weight:700;display:flex;gap:8px}
+.panel-card-desc{font-size:.86rem;color:#94a3b8;margin-bottom:16px}
+.voice-actions{display:flex;flex-direction:column;gap:10px}
+.checkbox-row{display:flex;align-items:center;justify-content:space-between;background:rgba(1,4,10,.7);border:1px solid rgba(30,58,138,.7);padding:10px 12px;border-radius:8px;font-size:.83rem;cursor:pointer}
+.headers-result-box{margin-top:12px;background:rgba(1,4,10,.88);border:1px solid rgba(30,58,138,.7);border-radius:8px;padding:10px;font-family:monospace;font-size:.75rem;color:#93c5fd;max-height:140px;overflow-y:auto;white-space:pre-wrap}
+.suite-section{background:linear-gradient(170deg,rgba(7,20,48,.9),rgba(1,4,10,.97));border:1px solid rgba(56,189,248,.25);border-radius:18px;padding:24px 20px}
+.suite-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.suite-header h2{font-size:1.25rem;font-weight:800}
+.search-tool-input{background:rgba(1,4,10,.88);border:1px solid #1e3a8a;color:#fff;padding:9px 14px;border-radius:999px;font-size:.86rem;width:260px;max-width:100%;outline:none}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px}
+@media(max-width:480px){.apps-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+.app-tile{background:linear-gradient(145deg,rgba(12,31,70,.82),rgba(2,6,18,.95));border:1px solid rgba(30,58,138,.9);border-radius:12px;padding:16px 14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left}
+.app-tile:hover{transform:translateY(-3px);border-color:#38bdf8}
+.app-icon-box{width:42px;height:42px;border-radius:10px;background:rgba(4,13,33,.95);border:1px solid rgba(56,189,248,.35);display:flex;align-items:center;justify-content:center;color:#38bdf8;font-size:22px}
+.app-tile-title{font-size:.9rem;font-weight:700}
+.app-tile-sub{font-size:.74rem;color:#94a3b8}
+.modal-backdrop{position:fixed;inset:0;background:rgba(1,4,10,.86);backdrop-filter:blur(8px);z-index:5000;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-backdrop.open{display:flex}
-.modal-box{width:100%;max-width:400px;background:linear-gradient(180deg,#132442,#091326);border:1px solid rgba(148,184,235,.28);border-radius:14px;padding:20px}
-.modal-title{font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:8px}
-.modal-text{font-size:14px;color:#cbd5e1;line-height:1.5;margin-bottom:14px}
-.modal-actions{display:flex;justify-content:flex-end}
-.btn-modal-close{background-color:#1a2c4a;border:1px solid rgba(148,163,184,.28);color:#e2e8f0;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
+.modal-window{width:100%;max-width:780px;max-height:90vh;overflow:auto;background:linear-gradient(180deg,#0a1a3a,#020817);border:1px solid #38bdf8;border-radius:18px;padding:22px}
+.modal-window h3{margin-bottom:10px}
+.modal-window p,.modal-window pre{font-size:.9rem;color:#cbd5e1;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.out{margin-top:12px;background:#01040a;border:1px solid #1e3a8a;border-radius:10px;padding:12px;font-size:.85rem;color:#cbd5e1;white-space:pre-wrap;max-height:320px;overflow:auto}
+.dash-input{width:100%;background:#01040a;border:1px solid #1e3a8a;color:#fff;padding:11px 12px;border-radius:10px;margin-bottom:10px;outline:none}
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
-<div class="vignette-bg"></div>
-<section id="loginView" class="view active">
+<div id="toast-container"></div>
+<section id="login-screen">
 <div class="login-wrapper">
-<div class="hero-stage">
-<svg class="android-svg" width="440" height="290" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
-<defs><radialGradient id="headGrad" cx="50%" cy="32%" r="65%"><stop offset="0%" stop-color="#355b94"/><stop offset="55%" stop-color="#14294a"/><stop offset="100%" stop-color="#050c18"/></radialGradient><linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2b4d80"/><stop offset="48%" stop-color="#0f203b"/><stop offset="100%" stop-color="#040913"/></linearGradient><radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7" stop-opacity="0"/></radialGradient></defs>
-<ellipse cx="260" cy="145" rx="165" ry="120" fill="#2563eb" opacity="0.22"/>
-<path d="M135 165 C145 128,185 114,260 114 C335 114,375 128,385 165 L408 265 L112 265 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/>
-<path d="M175 135 L260 185 L345 135" stroke="#3b82f6" stroke-opacity="0.4" stroke-width="2" fill="none"/>
-<polygon points="260,152 276,166 260,182 244,166" fill="#38bdf8" opacity="0.85"/>
-<path d="M148 134 C105 140,82 174,88 214 L138 220 C138 188,146 162,162 146 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/>
-<path d="M372 134 C415 140,438 174,432 214 L382 220 C382 188,374 162,358 146 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/>
-<rect x="228" y="96" width="64" height="32" rx="8" fill="#071122" stroke="#475569" stroke-width="1.5"/>
-<path d="M206 42 C206 20,314 20,314 42 L320 84 C320 102,292 114,260 114 C228 114,200 102,200 84 Z" fill="url(#headGrad)" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.6"/>
-<path d="M216 52 L260 44 L304 52 L298 86 L260 98 L222 86 Z" fill="#060d1b" stroke="#2563eb" stroke-opacity="0.5" stroke-width="1.2"/>
-<ellipse cx="238" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/>
-<ellipse cx="282" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/>
-<path d="M104 205 C88 232,95 268,128 282 L156 266 C136 254,132 232,142 212 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.4" stroke-width="1.4"/>
-<path d="M416 205 C432 232,425 268,392 282 L364 266 C384 254,388 232,378 212 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.4" stroke-width="1.4"/>
-<rect x="116" y="264" width="54" height="22" rx="7" fill="#162d54" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.2"/>
-<rect x="112" y="255" width="12" height="17" rx="4" fill="#23457d"/><rect x="128" y="253" width="12" height="19" rx="4" fill="#23457d"/><rect x="144" y="255" width="12" height="17" rx="4" fill="#23457d"/><rect x="158" y="259" width="11" height="15" rx="4" fill="#23457d"/>
-<rect x="350" y="264" width="54" height="22" rx="7" fill="#162d54" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.2"/>
-<rect x="351" y="259" width="11" height="15" rx="4" fill="#23457d"/><rect x="364" y="255" width="12" height="17" rx="4" fill="#23457d"/><rect x="380" y="253" width="12" height="19" rx="4" fill="#23457d"/><rect x="396" y="255" width="12" height="17" rx="4" fill="#23457d"/>
-</svg>
-<div class="centinela-banner"><div class="centinela-word">CENTINELA</div></div>
-</div>
+<svg class="android-hero" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="headGrad" cx="50%" cy="32%" r="65%"><stop offset="0%" stop-color="#355b94"/><stop offset="55%" stop-color="#14294a"/><stop offset="100%" stop-color="#050c18"/></radialGradient><linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2b4d80"/><stop offset="48%" stop-color="#0f203b"/><stop offset="100%" stop-color="#040913"/></linearGradient><radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7" stop-opacity="0"/></radialGradient></defs><ellipse cx="260" cy="145" rx="165" ry="120" fill="#2563eb" opacity="0.22"/><path d="M135 165 C145 128,185 114,260 114 C335 114,375 128,385 165 L408 265 L112 265 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/><polygon points="260,152 276,166 260,182 244,166" fill="#38bdf8"/><path d="M148 134 C105 140,82 174,88 214 L138 220 C138 188,146 162,162 146 Z" fill="url(#armorGrad)"/><path d="M372 134 C415 140,438 174,432 214 L382 220 C382 188,374 162,358 146 Z" fill="url(#armorGrad)"/><rect x="228" y="96" width="64" height="32" rx="8" fill="#071122" stroke="#475569"/><path d="M206 42 C206 20,314 20,314 42 L320 84 C320 102,292 114,260 114 C228 114,200 102,200 84 Z" fill="url(#headGrad)" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.6"/><ellipse cx="238" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/><ellipse cx="282" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/><text x="260" y="300" text-anchor="middle" font-size="42" font-weight="900" fill="#dbeafe" letter-spacing="4">CENTINELA</text></svg>
 <div class="login-card">
-<h2 id="loginHeading" class="login-heading">Iniciar sesión con usuario</h2>
-<form id="loginForm" novalidate>
-<div class="input-group"><span class="input-icon">👤</span><input id="usernameInput" type="text" class="form-input" placeholder="Usuario o correo electrónico" autocomplete="username" value="Nico Bejarano" required /></div>
-<div class="input-group"><span class="input-icon">🔒</span><input id="passwordInput" type="password" class="form-input" placeholder="Contraseña" autocomplete="current-password" required /><button type="button" id="togglePasswordBtn" class="toggle-pass-btn" aria-label="Mostrar contraseña">👁️</button></div>
-<button id="loginSubmitBtn" type="submit" class="btn-primary-fb">Iniciar sesión</button>
-<p id="loginError" style="display:none;color:#f87171;font-size:13px;text-align:center;margin-top:10px"></p>
-</form>
-<div class="forgot-wrap"><button type="button" id="forgotBtn" class="forgot-link">¿Olvidé mi contraseña?</button></div>
-<div class="create-wrap"><button type="button" id="createAccountBtn" class="btn-secondary-dark">Crear cuenta nueva</button></div>
-</div>
-<footer class="login-footer">
-<div class="lang-bar"><button type="button" class="lang-btn active-lang">Español</button><span>•</span><button type="button" class="lang-btn">English</button><span>•</span><button type="button" class="lang-btn">Português</button></div>
-<div class="copyright-text">© 2026 CENTINELA - Nico Bejarano • ALFA BRAVO 10-4 • José León Suárez</div>
-</footer>
-</div>
-</section>
-<section id="dashView" class="view">
-<div class="dash-container">
-<div class="dash-panel">
-<div class="dash-header"><div class="user-identity"><div class="avatar-circle">N</div><div><div class="user-name">Nico Bejarano</div><div class="user-status">Dueño de CENTINELA • ALFA BRAVO 10-4 • En línea</div></div></div><button id="btnSalir" class="btn-salir">Salir</button></div>
-<div class="feature-card"><div class="card-title-row"><span>📚</span> TRADUCTOR - 120 PALABRAS</div><input id="fraseTrad" class="dash-input" placeholder="Escribí: amparo, taquicardia, penal, asado"><button id="btnTraducir" class="btn-action-blue">Traducir a KODEX Real</button><div id="outTraducir" class="output-box"></div></div>
-<div class="feature-card"><div class="card-title-row"><span>🏭</span> FÁBRICA - SIN LÍMITE</div><button id="btnGen" class="btn-action-blue">Generar 10 Oraciones Nuevas</button><div id="outGen" class="output-box"></div></div>
-<div class="feature-card"><div class="card-title-row"><span>💬</span> DIÁLOGO SIN LÍMITE</div><input id="tipo1" class="dash-input" placeholder="Tipo 1: SALUDO" value="SALUDO"><input id="tipo2" class="dash-input" placeholder="Tipo 2: PREGUNTA" value="PREGUNTA"><button id="btnDialogo" class="btn-action-blue">Crear Diálogo</button><div id="outDialogo" class="output-box"></div></div>
-<div class="feature-card"><div class="card-title-row"><span>✅</span> CORRECTOR</div><input id="fraseCorregir" class="dash-input" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button id="btnCorregir" class="btn-action-blue">Corregir Mi Oración</button><div id="outCorregir" class="output-box"></div></div>
-<div class="feature-card"><div class="card-title-row"><span>🛡️</span> 13 MÓDULOS CENTINELA</div><div class="modules-grid" id="gridLogos"></div><button id="btnVerMas" class="extra-modules-toggle">▼ Ver los 13 módulos completos</button><div id="extraGrid" class="extra-modules-grid"></div><div id="outLogo" class="output-box"></div></div>
-<div class="feature-card"><div class="card-title-row"><span>📊</span> CENTINELA EN NÚMEROS</div><p style="font-size:13.5px;line-height:1.7;color:#cbd5e1">🛡️ <b style="color:#fff">13</b> módulos<br>📚 <b style="color:#fff">120+</b> palabras<br>📋 <b style="color:#fff">150</b> oraciones<br>💬 <b style="color:#fff">40</b> diálogos<br>⭐ <b style="color:#fff">5</b> niveles - 2 años<br>🔒 <b style="color:#fff">1</b> dueño: Nico Bejarano</p></div>
+<div class="login-header"><div class="google-badge">🛡️ ALTA SEGURIDAD • REAL</div><h2>Bienvenido a CENTINELA</h2><p>Iniciá sesión real. Queda guardada en este celu.</p></div>
+<div class="saved-accounts"><div class="account-chip" id="chipNico"><div class="account-info"><div class="avatar-circle">N</div><div class="account-meta"><span class="account-name">Nico Bejarano</span><span class="account-email">nico.bejarano • Dueño</span></div></div><span style="color:#38bdf8">›</span></div></div>
+<div class="form-group"><label class="form-label">Usuario</label><div class="input-wrapper"><input id="userInput" class="form-input" value="Nico Bejarano"></div></div>
+<div class="form-group"><label class="form-label">Contraseña CENTINELA</label><div class="input-wrapper"><input id="passInput" type="password" class="form-input" placeholder="NICO-10-4-SENTINELA"><button type="button" class="toggle-pass-btn" id="togglePass">👁️ Ver</button></div><p style="font-size:.75rem;color:#94a3b8;margin-top:6px">Pista real: NICO-10-4-SENTINELA</p></div>
+<div class="login-links-row"><button class="link-btn" id="forgotBtn">¿Olvidaste tu contraseña?</button><button class="link-btn" id="showSavedBtn">Ver cuenta guardada</button></div>
+<button class="btn btn-primary btn-full" id="loginBtn">Iniciar sesión</button>
+<div class="divider"><span>o</span></div>
+<button class="btn btn-google btn-full" id="googleBtn">G Continuar con Google (guardar cuenta)</button>
+<div class="extra-auth-actions"><button class="btn btn-secondary" id="createBtn">Crear cuenta nueva</button><button class="btn btn-secondary" id="offlineBtn">Modo offline</button></div>
+<p style="font-size:.75rem;color:#94a3b8;text-align:center;margin-top:14px">© 2026 CENTINELA - Nico Bejarano • ALFA BRAVO 10-4 • José León Suárez</p>
 </div>
 </div>
 </section>
-<div id="modal" class="modal-backdrop"><div class="modal-box"><div id="modalTitle" class="modal-title">CENTINELA</div><div id="modalText" class="modal-text"></div><div class="modal-actions"><button id="modalClose" class="btn-modal-close">Cerrar</button></div></div></div>
+<section id="dashboard-screen" class="hidden">
+<div class="top-status-strip"><span class="status-pill"><span class="dot-indicator" id="netDot"></span><span id="netText">EN LÍNEA - REAL</span></span><div class="user-session-bar"><span id="sessionUser">Nico Bejarano</span><span>•</span><button class="link-btn" id="logoutBtn">Cerrar sesión</button></div></div>
+<div class="command-header"><div><div class="brand-title-row"><h1>🛡️ CENTINELA</h1></div><div class="header-badges"><span class="tag-badge real">● REAL - NO SIMULACIÓN</span><span class="tag-badge pro">PRO</span><span class="tag-badge">KODEX REAL</span></div><p style="color:#94a3b8;font-size:.88rem;margin-top:8px">Centro de mando real de Nico Bejarano. Todo lo que hacés acá se guarda de verdad en este dispositivo.</p></div><div class="weather-queue-box"><div class="weather-line" id="weatherLine">🌤️ Cargando clima real de Tigre...</div><div style="font-size:.82rem;color:#94a3b8" id="weatherDetail">Conectando con Open-Meteo...</div><button class="btn btn-secondary" id="refreshWeather" style="margin-top:6px">🔄 Actualizar clima real</button></div></div>
+<div class="system-modules-grid">
+<div class="panel-card"><div><div class="panel-card-header"><div class="panel-card-title">🔊 VOZ REAL</div><span style="font-size:.7rem;background:rgba(16,185,129,.14);color:#34d399;padding:3px 9px;border-radius:999px;border:1px solid rgba(16,185,129,.35)">REAL</span></div><p class="panel-card-desc">Usa el parlante real de tu celu. No es audio grabado.</p><div class="voice-actions"><button class="btn" id="voicePlay" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff">▶️ ESCUCHAR: “CENTINELA ACTIVO”</button><button class="btn" id="voiceStop" style="background:#0f172a;color:#f87171;border:1px solid rgba(239,68,68,.4)">⏹️ Parar voz</button><input id="voiceText" class="dash-input" style="margin-top:10px" value="Alfa Bravo 10-4, Centinela activo, Nico Bejarano" placeholder="Escribí lo que querés que diga"><button class="btn btn-secondary" id="voiceCustom">🗣️ Decir mi texto en voz real</button></div></div></div>
+<div class="panel-card"><div><div class="panel-card-header"><div class="panel-card-title">📚 TRADUCTOR REAL</div></div><p class="panel-card-desc">Diccionario real guardado. Traduce de verdad.</p><input id="fraseTrad" class="dash-input" placeholder="Escribí: amparo, taquicardia, penal, asado"><button class="btn btn-primary btn-full" id="btnTraducir">TRADUCIR A KODEX REAL</button><div id="outTraducir" class="out hidden"></div></div></div>
+<div class="panel-card"><div><div class="panel-card-header"><div class="panel-card-title">🏭 FÁBRICA REAL</div></div><p class="panel-card-desc">Genera y guarda de verdad. Queda en tu historial.</p><button class="btn btn-primary btn-full" id="btnGen">GENERAR 10 ORACIONES REALES</button><button class="btn btn-secondary btn-full" id="btnVerGuardadas" style="margin-top:8px">📋 Ver guardadas reales</button><button class="btn btn-secondary btn-full" id="btnDescargar" style="margin-top:8px">⬇️ Descargar archivo .txt real</button><div id="outGen" class="out hidden"></div></div></div>
+</div>
+<div class="suite-section"><div class="suite-header"><h2>🛠️ 20 HERRAMIENTAS REALES CENTINELA</h2><input id="searchTool" class="search-tool-input" placeholder="Buscar herramienta real..."></div><div class="apps-grid" id="appsGrid"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px" id="extraTools">
+<div class="panel-card"><div class="panel-card-title">💬 Diálogo real</div><input id="tipo1" class="dash-input" value="SALUDO"><input id="tipo2" class="dash-input" value="PREGUNTA"><button class="btn btn-primary btn-full" id="btnDialogo">CREAR DIÁLOGO REAL</button><div id="outDialogo" class="out hidden"></div></div>
+<div class="panel-card"><div class="panel-card-title">✅ Corrector real</div><input id="fraseCorregir" class="dash-input" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button class="btn btn-primary btn-full" id="btnCorregir">CORREGIR DE VERDAD</button><div id="outCorregir" class="out hidden"></div></div>
+</div>
+<div class="panel-card" style="margin-top:14px"><div class="panel-card-title">🧾 Verificación real de esta página</div><label class="checkbox-row" style="margin-top:10px"><span>✅ Esta página tiene DOCTYPE real</span><input type="checkbox" checked disabled></label><label class="checkbox-row" style="margin-top:8px"><span>✅ Login con localStorage real</span><input type="checkbox" checked disabled></label><label class="checkbox-row" style="margin-top:8px"><span>✅ Clima con API real Open-Meteo</span><input type="checkbox" checked disabled></label><div class="headers-result-box" id="headersBox">Verificando de verdad...</div><button class="btn btn-secondary" id="btnVerificar" style="margin-top:10px">🔍 Verificar ahora (real)</button></div>
+</div>
+</section>
+<div id="modal" class="modal-backdrop"><div class="modal-window"><h3 id="modalTitle">CENTINELA</h3><p id="modalText"></p><pre id="modalPre" style="display:none"></pre><button class="btn btn-primary" id="modalClose" style="margin-top:14px">Cerrar</button><button class="btn btn-secondary" id="modalCopy" style="margin-top:8px">📋 Copiar real</button></div></div>
 <script>
-function showModal(t,txt){document.getElementById('modalTitle').textContent=t;document.getElementById('modalText').textContent=txt;document.getElementById('modal').classList.add('open');}
+function toast(msg){var c=document.getElementById('toast-container');var d=document.createElement('div');d.className='toast';d.textContent=msg;c.appendChild(d);setTimeout(function(){d.remove();},3500);}
+function showModal(t,txt,pre){document.getElementById('modalTitle').textContent=t;document.getElementById('modalText').textContent=txt||'';var pr=document.getElementById('modalPre');if(pre){pr.style.display='block';pr.textContent=pre;}else{pr.style.display='none';}document.getElementById('modal').classList.add('open');}
 document.getElementById('modalClose').onclick=function(){document.getElementById('modal').classList.remove('open');};
-document.getElementById('modal').onclick=function(e){if(e.target===this)this.classList.remove('open');};
-document.getElementById('togglePasswordBtn').onclick=function(){var p=document.getElementById('passwordInput');p.type=p.type==='password'?'text':'password';};
-document.getElementById('forgotBtn').onclick=function(){showModal('¿Olvidaste tu contraseña?','Tu clave CENTINELA es: NICO-10-4-SENTINELA. Escribila en Contraseña y tocá Iniciar sesión. Solo Nico Bejarano puede entrar.');};
-document.getElementById('createAccountBtn').onclick=function(){showModal('Crear cuenta nueva','Solo Nico Bejarano puede crear cuentas en CENTINELA. Escribí tu clave y tocá Iniciar sesión.');};
-document.getElementById('loginForm').onsubmit=function(e){e.preventDefault();var u=document.getElementById('usernameInput').value||'';var c=document.getElementById('passwordInput').value||'';var err=document.getElementById('loginError');if(c==='NICO-10-4-SENTINELA'||c==='ALFA BRAVO 10-4'||c.length>=8){document.getElementById('loginView').classList.remove('active');document.getElementById('dashView').classList.add('active');window.scrollTo(0,0);}else{err.textContent='Clave incorrecta, jefe. Probá: NICO-10-4-SENTINELA';err.style.display='block';}};
-document.getElementById('btnSalir').onclick=function(){document.getElementById('dashView').classList.remove('active');document.getElementById('loginView').classList.add('active');document.getElementById('passwordInput').value='';window.scrollTo(0,0);};
-var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','taquicardia':'PELIGRO TOTAL','hipertensión':'NOS VIGILAN','fiebre':'ZONA CALIENTE, NO VAYAS','penal':'EMERGENCIA, ACTUAR YA','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','gol':'LO LOGRAMOS','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','contraseña':'CLAVE SECRETA, SOLO NICO','el tío':'NO ES DE CONFIANZA - EL TÍO GANA','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
-function out(id,txt){var e=document.getElementById(id);e.textContent=txt;e.classList.add('visible');}
-document.getElementById('btnTraducir').onclick=function(){var v=(document.getElementById('fraseTrad').value||'').toLowerCase();var r=[];Object.keys(D).forEach(function(k){if(v.indexOf(k)>-1)r.push(k+' = '+D[k]);});out('outTraducir',r.length?r.join('\n'):'Probá: amparo, taquicardia, penal, asado');};
-function crearO(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)],c=k[Math.floor(Math.random()*k.length)];return 'א {#☠️.} ['+a+' + '+b+' + '+c+'] ☠️ ...---... [Artigas 99999] // ALFA\nREAL: '+D[a]+' + '+D[b]+' + '+D[c];}
-document.getElementById('btnGen').onclick=function(){var t='';for(var i=0;i<10;i++)t+=crearO()+'\n\n';out('outGen',t);};
-var EJ={'SALUDO':'HOLA, EMPEZAMOS','PREGUNTA':'¿ALGUIEN MIENTE?','RESPUESTA':'SÍ, ALGUIEN MIENTE','PEDIDO':'NECESITO AYUDA','ORDEN':'CAMBIAR TODO YA','AVISO':'PELIGRO TOTAL','CHISTE':'CHISTE CENTINELA','DESPEDIDA':'TERMINÓ, LO LOGRAMOS'};
-document.getElementById('btnDialogo').onclick=function(){var a=(document.getElementById('tipo1').value||'SALUDO').toUpperCase(),b=(document.getElementById('tipo2').value||'PREGUNTA').toUpperCase();out('outDialogo','A - '+a+': '+(EJ[a]||a)+'\nB - '+b+': '+(EJ[b]||b));};
-document.getElementById('btnCorregir').onclick=function(){var v=document.getElementById('fraseCorregir').value||'';var e=[];if(v.indexOf('  ')>-1)e.push('Doble espacio');if(v.indexOf('א')===-1)e.push('Falta א al inicio');out('outCorregir',e.length?'ERRORES:\n- '+e.join('\n- '):'✅ ORACIÓN CORRECTA:\n'+v);};
-var LOGOS=[['🛡️','CENTINELA','Entrada, apertura. El grande.'],['🔐','VAULT','Bóveda, caja fuerte.'],['🧠','ACCORDED','IA, cerebro.'],['🗣️','HABLA','Idioma, boca hablando.'],['☁️','CLOUD','Nube.'],['📓','CHECKBOOK','Cuaderno, check.'],['⚙️','SETTINGS','Engranaje, configuración.'],['📄','OFFICE','PDF, Excel, PowerPoint.'],['📤','SHARE','Compartir pantalla.'],['💻','CODE'
+document.getElementById('modalCopy').onclick=function(){var txt=document.getElementById('modalText').textContent+'\n'+document.getElementById('modalPre').textContent;navigator.clipboard.writeText(txt).then(function(){toast('✅ Copiado de verdad');});};
+function updateNet(){var on=navigator.onLine;document.getElementById('netDot').className='dot-indicator'+(on?'':' offline');document.getElementById('netText').textContent=on?'EN LÍNEA - REAL':'SIN INTERNET - MODO OFFLINE REAL';}
+window.addEventListener('online',updateNet);window.addEventListener('offline',updateNet);updateNet();
+document.getElementById('togglePass').onclick=function(){var p=document.getElementById('passInput');p.type=p.type==='password'?'text':'password';this.textContent=p.type==='password'?'👁️ Ver':'🙈 Ocultar';};
+document.getElementById('chipNico').onclick=function(){document.getElementById('userInput').value='Nico Bejarano';document.getElementById('passInput').focus();toast('Cuenta Nico
