@@ -3,104 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KODEX SENTINELA - Nico Bejarano</title>
+<title>CENTINELA - Nico Bejarano</title>
 <style>
-*{box-sizing:border-box} body{margin:0;background:#050505;color:#fff;font-family:system-ui,Arial,sans-serif;padding:12px}
-.w{max-width:900px;margin:0 auto}
-h1{font-size:20px;text-align:center;margin:6px 0 2px}
-.sub{text-align:center;color:#9dffc8;font-size:12px;margin-bottom:12px}
-.c{background:#111;border:2px solid #00ff88;border-radius:14px;padding:14px;margin-bottom:12px}
-.c h2{font-size:15px;margin:0 0 6px}
-.c p{font-size:13px;color:#c8ffdd;margin:6px 0}
-input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #333;background:#000;color:#fff;font-size:14px;margin-top:8px}
-.btn{width:100%;padding:12px;border:0;border-radius:10px;background:#00c853;color:#000;font-weight:800;font-size:14px;margin-top:8px;cursor:pointer}
-.btn2{background:#222;color:#fff;border:1px solid #555}
+:root{--c:#1877f2;--c2:#0d5bd6;--bg:#f0f2f5;--card:#fff;--txt:#050505;--mut:#65676b;--line:#ddd}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding-top:56px}
+a{color:var(--c)}
+/* BARRA ARRIBA - estilo red social, marca CENTINELA */
+.top{position:fixed;top:0;left:0;right:0;height:56px;background:var(--card);box-shadow:0 1px 8px rgba(0,0,0,.15);display:flex;align-items:center;gap:10px;padding:0 12px;z-index:100}
+.logoTop{display:flex;align-items:center;gap:8px;cursor:pointer}
+.logoTop .cir{width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}
+.logoTop b{font-size:20px;letter-spacing:.5px}
+.logoTop span{font-size:11px;color:var(--mut);display:block;margin-top:-2px}
+.search{flex:1;max-width:420px;background:#f0f2f5;border-radius:20px;display:flex;align-items:center;padding:8px 12px;gap:6px}
+.search input{border:0;background:transparent;outline:none;width:100%;font-size:14px}
+.topNav{display:flex;gap:4px;margin-left:auto}
+.topNav button{border:0;background:#f0f2f5;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:18px}
+.topNav button.act{background:var(--c);color:#fff}
+.perfil{display:flex;align-items:center;gap:6px;background:#f0f2f5;border-radius:20px;padding:4px 8px 4px 4px;font-weight:700;font-size:13px}
+.perfil .av{width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center}
+/* LAYOUT 3 COLUMNAS */
+.layout{max-width:1200px;margin:0 auto;display:flex;gap:16px;padding:14px 12px;align-items:flex-start}
+.left{width:280px;position:sticky;top:70px;display:flex;flex-direction:column;gap:6px}
+.center{flex:1;max-width:620px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.right{width:300px;position:sticky;top:70px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:900px){.left,.right{display:none}.center{max-width:100%}}
+/* TARJETAS */
+.card{background:var(--card);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.12);padding:14px}
+.card h2{font-size:16px;margin:0 0 6px}
+.card p{font-size:13px;color:var(--mut);margin:6px 0;line-height:1.4}
+.card p b{color:var(--txt)}
+input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#f0f2f5;color:var(--txt);font-size:14px;margin-top:8px;outline:none}
+input:focus,select:focus{border-color:var(--c);background:#fff}
+.btn{width:100%;padding:11px;border:0;border-radius:8px;background:var(--c);color:#fff;font-weight:700;font-size:14px;margin-top:8px;cursor:pointer}
+.btn:hover{background:var(--c2)}
+.btn2{background:#e4e6eb;color:var(--txt)}
 .btn3{background:#a100f2;color:#fff}
-.out{background:#000;color:#00ff88;padding:12px;border-radius:10px;font-family:monospace;font-size:12px;margin-top:10px;white-space:pre-wrap;display:none;max-height:420px;overflow:auto}
-.pill{display:inline-block;background:#003300;color:#00ff88;border:1px solid #00ff88;border-radius:20px;padding:4px 8px;font-size:11px;margin:3px 2px}
-.small{font-size:11px;color:#aaa}
+.out{background:#050505;color:#00ff88;padding:12px;border-radius:10px;font-family:monospace;font-size:12px;margin-top:10px;white-space:pre-wrap;display:none;max-height:420px;overflow:auto}
+.pill{display:inline-block;background:#e4e6eb;border-radius:20px;padding:5px 9px;font-size:11px;margin:3px 2px;cursor:pointer}
+.pill:hover{background:var(--c);color:#fff}
+.small{font-size:11px;color:var(--mut)}
+.menuItem{display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:500}
+.menuItem:hover{background:#e4e6eb}
+.menuItem .ic{width:34px;height:34px;border-radius:50%;background:#e4e6eb;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.menuItem.act{background:#e7f3ff;color:var(--c)}
+.menuItem.act .ic{background:var(--c);color:#fff}
+/* PUBLICAR - estilo muro */
+.postBox{display:flex;gap:10px;align-items:flex-start}
+.postBox .av{width:40px;height:40px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0}
+.postBox input{margin:0;border-radius:20px}
+.postActions{display:flex;gap:6px;margin-top:10px;border-top:1px solid #eee;padding-top:10px}
+.postActions button{flex:1;border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer;font-weight:600;color:var(--mut)}
+.postActions button:hover{background:#f0f2f5}
+/* LOGOS */
 .logos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.logo{background:#000;border:2px solid #222;border-radius:14px;padding:12px;text-align:center;cursor:pointer}
-.logo b{font-size:12px;display:block;margin-top:6px}
-.logo span{font-size:11px;color:#aaa;display:block;margin-top:4px;line-height:1.3}
-.logo .ico{font-size:32px}
-.logo.activo{border-color:#00ff88;background:#002a12}
-.logo.grande{grid-column:1 / -1;background:linear-gradient(135deg,#002a12,#000);border-color:#00ff88}
-.logo.grande .ico{font-size:54px}
-@media(max-width:480px){.logos{grid-template-columns:1fr 1fr}}
+.logo{background:#f0f2f5;border:2px solid transparent;border-radius:12px;padding:12px;text-align:center;cursor:pointer}
+.logo b{font-size:11px;display:block;margin-top:6px}
+.logo span{font-size:11px;color:var(--mut);display:block;margin-top:4px;line-height:1.3}
+.logo .ico{font-size:30px}
+.logo.activo{border-color:var(--c);background:#e7f3ff}
+.logo.grande{grid-column:1 / -1;background:linear-gradient(135deg,var(--c),#000);color:#fff;border-color:var(--c)}
+.logo.grande span{color:#fff}
+.logo.grande .ico{font-size:48px}
+/* COLORES */
+.colores{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.colorBtn{width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #ddd;cursor:pointer}
+.colorBtn.sel{box-shadow:0 0 0 2px var(--c)}
+.cover{height:120px;border-radius:12px;background:linear-gradient(135deg,var(--c),#000);display:flex;align-items:flex-end;padding:12px;color:#fff}
+.cover b{font-size:22px}
+.cover span{font-size:12px;opacity:.9;display:block}
 </style>
 </head>
 <body>
-<div class="w">
-<h1>🛡️ KODEX SENTINELA - ALFA BRAVO 10-4</h1>
-<div class="sub">© 2026 Nico Bejarano - José León Suárez - Solo con su autorización - Mínimo 2 años para aprenderse</div>
 
-<div class="c" id="bloqueoBox">
-<h2>🔒 01 - BLOQUEO - SOLO CON PERMISO DE NICO</h2>
-<p id="bloqueoTxt">Revisando permiso...</p>
-<input id="claveNico" type="password" placeholder="Clave de Nico para desbloquear">
-<button class="btn" id="btnDesbloquear">🔓 YO, NICO, AUTORIZO - DESBLOQUEAR</button>
-<button class="btn btn2" id="btnBloquear">🔒 BLOQUEAR TODO DE VUELTA</button>
+<div class="top">
+  <div class="logoTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="cir">🛡️</div>
+    <div><b>CENTINELA</b><span>De Nico Bejarano • Privado</span></div>
+  </div>
+  <div class="search">🔍 <input id="buscarTop" placeholder="Buscar en CENTINELA... amparo, penal, asado"></div>
+  <div class="topNav">
+    <button class="act" title="Inicio" onclick="window.scrollTo({top:0,behavior:'smooth'})">🏠</button>
+    <button title="Módulos" onclick="document.getElementById('secLogos').scrollIntoView({behavior:'smooth'})">🧩</button>
+    <button title="Colores" onclick="document.getElementById('secColores').scrollIntoView({behavior:'smooth'})">🎨</button>
+    <button title="Notificaciones" onclick="alert('🔔 CENTINELA: 1 notificación - KODEX listo, jefe.')">🔔</button>
+  </div>
+  <div class="perfil"><div class="av">N</div> Nico <span style="color:#31a24c">●</span></div>
 </div>
 
-<div class="c">
-<h2>📚 02 - TRADUCTOR - 120 PALABRAS</h2>
-<p>Escribí palabras técnicas. Ej: <b>amparo, taquicardia, penal, asado</b></p>
-<input id="frase" placeholder="Escribí: amparo, taquicardia, penal, asado">
-<button class="btn" id="btnTraducir">📚 TRADUCIR A KODEX REAL</button>
-<div class="out" id="outTraducir"></div>
-<div style="margin-top:8px" id="listaPalabras"></div>
+<div class="layout">
+
+<!-- IZQUIERDA - MENÚ -->
+<div class="left">
+  <div class="card" style="padding:8px">
+    <div class="menuItem act" onclick="window.scrollTo({top:0,behavior:'smooth'})"><div class="ic">🏠</div> Inicio - CENTINELA</div>
+    <div class="menuItem" onclick="document.getElementById('secTraductor').scrollIntoView({behavior:'smooth'})"><div class="ic">📚</div> Traductor - 120 palabras</div>
+    <div class="menuItem" onclick="document.getElementById('secFabrica').scrollIntoView({behavior:'smooth'})"><div class="ic">🏭</div> Fábrica - Sin límite</div>
+    <div class="menuItem" onclick="document.getElementById('secDialogo').scrollIntoView({behavior:'smooth'})"><div class="ic">💬</div> Diálogo sin límite</div>
+    <div class="menuItem" onclick="document.getElementById('secCorrector').scrollIntoView({behavior:'smooth'})"><div class="ic">✅</div> Corrector</div>
+    <div class="menuItem" onclick="document.getElementById('secLogos').scrollIntoView({behavior:'smooth'})"><div class="ic">🛡️</div> 13 Módulos CENTINELA</div>
+    <div class="menuItem" onclick="document.getElementById('secColores').scrollIntoView({behavior:'smooth'})"><div class="ic">🎨</div> Cambiar color</div>
+    <div class="menuItem" onclick="document.getElementById('secBloqueo').scrollIntoView({behavior:'smooth'})"><div class="ic">🔒</div> Bloqueo - Solo Nico</div>
+  </div>
+  <div class="card">
+    <h2>🛡️ Tus módulos</h2>
+    <p>13 módulos de CENTINELA. Tocá uno para abrirlo.</p>
+    <div id="miniLogos"></div>
+  </div>
+  <div class="small">© 2026 CENTINELA - Nico Bejarano<br>Privacidad • Condiciones • Solo con su autorización<br>Mínimo 2 años para aprenderse</div>
 </div>
 
-<div class="c">
-<h2>🏭 03 - FÁBRICA - ORACIONES SIN LÍMITE</h2>
-<p>Genera oraciones mezcladas con todo: técnico + Morse + emoticones + puntuación + calle falsa.</p>
-<button class="btn" id="btnGen">🏭 GENERAR 10 ORACIONES NUEVAS</button>
-<button class="btn btn2" id="btnVerTodas">📋 VER TODAS LAS GUARDADAS</button>
-<button class="btn btn3" id="btnCopiar">📋 COPIAR TODO PARA CARPETA SEGURA</button>
-<div class="out" id="outGen"></div>
+<!-- CENTRO - MURO -->
+<div class="center">
+
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="cover"><div><b>🛡️ CENTINELA</b><span>ALFA BRAVO 10-4 • José León Suárez • Solo con autorización de Nico Bejarano</span></div></div>
+    <div style="display:flex;gap:8px;padding:12px;align-items:center">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;border:3px solid #fff;margin-top:-26px">N</div>
+      <div><b style="font-size:16px">Nico Bejarano</b><div class="small">Dueño de CENTINELA • 120 palabras • 150 oraciones • 40 diálogos</div></div>
+      <button class="btn" style="width:auto;margin:0;margin-left:auto;padding:8px 14px" onclick="alert('✅ CENTINELA: Dueño verificado - Nico Bejarano')">✓ Verificado</button>
+    </div>
+  </div>
+
+  <div class="card" id="secColores">
+    <h2>🎨 Cambiar todo el color - Las veces que quieras</h2>
+    <p>Elegí un color y todo CENTINELA cambia: barra, botones, logos, todo. Queda guardado. Lo podés cambiar cuando quieras.</p>
+    <div class="colores" id="coloresBox"></div>
+    <button class="btn btn2" id="btnColorAzul">🔵 Volver al azul clásico</button>
+  </div>
+
+  <div class="card" id="secBloqueo">
+    <h2>🔒 01 - BLOQUEO - SOLO CON PERMISO DE NICO</h2>
+    <p id="bloqueoTxt">Revisando permiso...</p>
+    <div class="postBox"><div class="av">N</div><input id="claveNico" type="password" placeholder="Clave de Nico para desbloquear"></div>
+    <button class="btn" id="btnDesbloquear">🔓 YO, NICO, AUTORIZO - DESBLOQUEAR</button>
+    <button class="btn btn2" id="btnBloquear">🔒 BLOQUEAR TODO DE VUELTA</button>
+  </div>
+
+  <div class="card">
+    <div class="postBox"><div class="av">N</div><input id="fraseRapida" placeholder="¿Qué estás pensando en KODEX, Nico? Escribí: amparo, penal..."></div>
+    <div class="postActions">
+      <button onclick="document.getElementById('secTraductor').scrollIntoView({behavior:'smooth'})">📚 Traducir</button>
+      <button onclick="document.getElementById('secFabrica').scrollIntoView({behavior:'smooth'})">🏭 Crear</button>
+      <button onclick="document.getElementById('secDialogo').scrollIntoView({behavior:'smooth'})">💬 Diálogo</button>
+    </div>
+  </div>
+
+  <div class="card" id="secTraductor">
+    <h2>📚 02 - TRADUCTOR - 120 PALABRAS</h2>
+    <p>Escribí palabras técnicas. Ej: <b>amparo, taquicardia, penal, asado</b></p>
+    <input id="frase" placeholder="Escribí: amparo, taquicardia, penal, asado">
+    <button class="btn" id="btnTraducir">📚 TRADUCIR A KODEX REAL</button>
+    <div class="out" id="outTraducir"></div>
+    <div style="margin-top:8px" id="listaPalabras"></div>
+  </div>
+
+  <div class="card" id="secFabrica">
+    <h2>🏭 03 - FÁBRICA - ORACIONES SIN LÍMITE</h2>
+    <p>Genera oraciones mezcladas con todo: técnico + Morse + emoticones + puntuación + calle falsa.</p>
+    <button class="btn" id="btnGen">🏭 GENERAR 10 ORACIONES NUEVAS</button>
+    <button class="btn btn2" id="btnVerTodas">📋 VER TODAS LAS GUARDADAS</button>
+    <button class="btn btn3" id="btnCopiar">📋 COPIAR TODO PARA CARPETA SEGURA</button>
+    <div class="out" id="outGen"></div>
+  </div>
+
+  <div class="card" id="secDialogo">
+    <h2>💬 04 - DIÁLOGO SIN LÍMITE</h2>
+    <p>Elegí 2 tipos y creá un diálogo. A habla, B contesta.</p>
+    <select id="tipo1"><option>SALUDO</option><option>PREGUNTA</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select>
+    <select id="tipo2"><option>PREGUNTA</option><option>SALUDO</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select>
+    <button class="btn" id="btnDialogo">💬 CREAR DIÁLOGO</button>
+    <div class="out" id="outDialogo"></div>
+  </div>
+
+  <div class="card" id="secCorrector">
+    <h2>✅ 05 - CORRECTOR - REVISA ERRORES</h2>
+    <p>Pegá tu oración y te digo si tiene errores.</p>
+    <input id="fraseCorregir" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]">
+    <button class="btn" id="btnCorregir">✅ CORREGIR MI ORACIÓN</button>
+    <div class="out" id="outCorregir"></div>
+  </div>
+
+  <div class="card">
+    <h2>📊 06 - NIVELES - 2 AÑOS</h2>
+    <p><b>NIVEL 1:</b> 1 mes - 1 palabra<br><b>NIVEL 2:</b> 3 meses - 2 palabras<br><b>NIVEL 3:</b> 6 meses - 3 palabras + Morse<br><b>NIVEL 4:</b> 1 año - Todo + Doble Inverso + Calle<br><b>👑 NIVEL 5:</b> 2 AÑOS - TODO + Puntuación + Universal + Aleph<br><br><span class="small">Regla fija: א {#SÍMBOLO+PUNTUACIÓN} [Palabra1 + Palabra2 + Palabra3] EMOTICÓN MORSE [Calle] // ALFA - Sin espacio después de { - Sin espacio antes de , . ; ! ? - Sin doble espacio - Nunca 2 Doble Inverso juntos - Si aparece El tío, gana NO ES DE CONFIANZA.</span></p>
+  </div>
+
+  <div class="card">
+    <h2>📋 07 - 10 ORACIONES DE EJEMPLO - YA CORREGIDAS</h2>
+    <p id="ejemplos" style="font-family:monospace;font-size:11px;line-height:1.6;color:var(--txt)"></p>
+  </div>
+
+  <div class="card" id="secLogos" style="border:2px solid var(--c)">
+    <h2>🛡️ 08 - LOGOS CENTINELA - TODOS LOS MÓDULOS</h2>
+    <p>Tocá un logo para abrir ese módulo. El grande es el de entrada, el que se ve cuando abrís la app. Ninguno se borra, todos quedan.</p>
+    <div class="logos" id="gridLogos"></div>
+    <div class="out" id="outLogo"></div>
+    <p class="small">CENTINELA = Entrada / VAULT = Bóveda / ACCORDED = IA Cerebro / HABLA = Idioma Boca / CLOUD = Nube / CHECKBOOK = Cuaderno Check / SETTINGS = Engranaje / OFFICE = PDF Excel PowerPoint / SHARE = Compartir Pantalla / CODE = Código / ACADEMY = Escuela Aprender / PLAY = Juego Puntaje / TRADER = Trading Plata Mercado.</p>
+  </div>
+
 </div>
 
-<div class="c">
-<h2>💬 04 - DIÁLOGO SIN LÍMITE</h2>
-<p>Elegí 2 tipos y creá un diálogo. A habla, B contesta.</p>
-<select id="tipo1"><option>SALUDO</option><option>PREGUNTA</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select>
-<select id="tipo2"><option>PREGUNTA</option><option>SALUDO</option><option>RESPUESTA</option><option>PEDIDO</option><option>ORDEN</option><option>AVISO</option><option>CHISTE</option><option>DESPEDIDA</option></select>
-<button class="btn" id="btnDialogo">💬 CREAR DIÁLOGO</button>
-<div class="out" id="outDialogo"></div>
-</div>
-
-<div class="c">
-<h2>✅ 05 - CORRECTOR - REVISA ERRORES</h2>
-<p>Pegá tu oración y te digo si tiene errores.</p>
-<input id="fraseCorregir" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]">
-<button class="btn" id="btnCorregir">✅ CORREGIR MI ORACIÓN</button>
-<div class="out" id="outCorregir"></div>
-</div>
-
-<div class="c">
-<h2>📊 06 - NIVELES - 2 AÑOS</h2>
-<p><b>NIVEL 1:</b> 1 mes - 1 palabra<br><b>NIVEL 2:</b> 3 meses - 2 palabras<br><b>NIVEL 3:</b> 6 meses - 3 palabras + Morse<br><b>NIVEL 4:</b> 1 año - Todo + Doble Inverso + Calle<br><b>👑 NIVEL 5:</b> 2 AÑOS - TODO + Puntuación + Universal + Aleph<br><br><span class="small">Regla fija: א {#SÍMBOLO+PUNTUACIÓN} [Palabra1 + Palabra2 + Palabra3] EMOTICÓN MORSE [Calle] // ALFA - Sin espacio después de { - Sin espacio antes de , . ; ! ? - Sin doble espacio - Nunca 2 Doble Inverso juntos - Si aparece El tío, gana NO ES DE CONFIANZA.</span></p>
-</div>
-
-<div class="c">
-<h2>📋 07 - 10 ORACIONES DE EJEMPLO - YA CORREGIDAS</h2>
-<p id="ejemplos" style="font-family:monospace;font-size:11px;line-height:1.6"></p>
-</div>
-
-<!-- ===== 08 - NUEVO - LOGOS CENTINELA - AGREGADO SIN SACAR NADA ===== -->
-<div class="c" style="border-color:#a100f2">
-<h2>🛡️ 08 - LOGOS CENTINELA - TODOS LOS MÓDULOS</h2>
-<p>Tocá un logo para abrir ese módulo. El grande es el de entrada, el que se ve cuando abrís la app. Ninguno se borra, todos quedan.</p>
-<div class="logos" id="gridLogos"></div>
-<div class="out" id="outLogo"></div>
-<p class="small">CENTINELA = Entrada / VAULT = Bóveda / ACCORDED = IA Cerebro / HABLA = Idioma Boca / CLOUD = Nube / CHECKBOOK = Cuaderno Check / SETTINGS = Engranaje / OFFICE = PDF Excel PowerPoint / SHARE = Compartir Pantalla / CODE = Código / ACADEMY = Escuela Aprender / PLAY = Juego Puntaje / TRADER = Trading Plata Mercado.</p>
+<!-- DERECHA -->
+<div class="right">
+  <div class="card">
+    <h2>🎨 Tu color de CENTINELA</h2>
+    <p>Elegí un color. Todo cambia al instante y queda guardado.</p>
+    <div class="colores" id="coloresBox2"></div>
+  </div>
+  <div class="card">
+    <h2>📊 CENTINELA en números</h2>
+    <p>🛡️ <b>13</b> módulos<br>📚 <b>120+</b> palabras<br>📋 <b>150</b> oraciones<br>💬 <b>40</b> diálogos<br>⭐ <b>5</b> niveles - 2 años<br>🔒 <b>1</b> dueño: Nico Bejarano</p>
+  </div>
+  <div class="card">
+    <h2>👥 Contactos - Solo autorizados</h2>
+    <div class="menuItem"><div class="ic">N</div> Nico Bejarano <span style="margin-left:auto;color:#31a24c">●</span></div>
+    <div class="menuItem"><div class="ic">🛡️</div> CENTINELA <span style="margin-left:auto;color:#31a24c">●</span></div>
+    <div class="menuItem"><div class="ic">🧠</div> SENTINEL ACCORDED <span style="margin-left:auto;color:#31a24c">●</span></div>
+  </div>
+  <div class="small">© 2026 CENTINELA - Nico Bejarano<br>No es Facebook. Es tu propia marca: CENTINELA.<br>Privado • Solo con tu autorización</div>
 </div>
 
 </div>
 <script>
 (function(){
 try{
+var COLORES=[
+{name:'Azul CENTINELA',c:'#1877f2',c2:'#0d5bd6'},
+{name:'Verde',c:'#00a400',c2:'#008200'},
+{name:'Morado',c:'#a100f2',c2:'#7a00c4'},
+{name:'Rojo',c:'#e41e3f',c2:'#b3001b'},
+{name:'Naranja',c:'#f55300',c2:'#c43d00'},
+{name:'Negro',c:'#111111',c2:'#000000'},
+{name:'Rosa',c:'#e1306c',c2:'#b81a50'},
+{name:'Celeste',c:'#00bcd4',c2:'#0097a7'}
+];
+function aplicarColor(c,c2){
+  document.documentElement.style.setProperty('--c',c);
+  document.documentElement.style.setProperty('--c2',c2);
+  try{localStorage.setItem('centinela_color',c);localStorage.setItem('centinela_color2',c2);}catch(e){}
+  document.querySelectorAll('.colorBtn').forEach(function(b){ b.classList.toggle('sel', b.dataset.c===c); });
+}
+try{
+  var gc=localStorage.getItem('centinela_color'), gc2=localStorage.getItem('centinela_color2');
+  if(gc&&gc2) aplicarColor(gc,gc2);
+}catch(e){}
+function pintarColores(id){
+  var box=document.getElementById(id); if(!box) return; box.innerHTML='';
+  COLORES.forEach(function(col){
+    var b=document.createElement('div'); b.className='colorBtn'; b.dataset.c=col.c; b.style.background=col.c; b.title=col.name;
+    b.onclick=function(){ aplicarColor(col.c,col.c2); };
+    box.appendChild(b);
+  });
+}
+pintarColores('coloresBox'); pintarColores('coloresBox2');
+document.getElementById('btnColorAzul').onclick=function(){ aplicarColor('#1877f2','#0d5bd6'); };
 var D={
 'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','apelacion':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','prescripción':'YA PASÓ, TRANQUI','conciliación':'HABLAR, TODO LIBRE','nulidad':'CÓDIGO FALSO','jurisprudencia':'ESTO YA PASÓ ANTES, OJO',
 'licencia médica':'SALIR YA, URGENTE','horas extras':'QUEDARSE, VIGILAR','renuncia':'NO VENGAN, TRAMPA','aguinaldo':'IDEA SECRETA','paritaria':'HAY QUE HABLAR','despido':'NOS DESCUBRIERON','vacaciones':'ESCONDERSE','sindicato':'JUNTA DE TODOS','art':'NECESITO AYUDA','recibo de sueldo':'TENGO TODO','entrevista':'NOS QUIEREN ENGAÑAR',
@@ -115,139 +271,4 @@ var D={
 var MORSE={'PELIGRO':'...---...','TODO BIEN':'-...-','SALIR':'...-.-','QUEDARSE':'--.-','CAMBIAR':'-.-.','IDEA':'..-..'};
 function $(id){return document.getElementById(id);}
 function mostrar(id,txt){var e=$(id);e.style.display='block';e.textContent=txt;}
-function tienePermiso(){try{return localStorage.getItem('kodex_permiso_nico')==='AUTORIZADO_POR_NICO';}catch(e){return false;}}
-function actualizarBloqueo(){
-  if(tienePermiso()){ $('bloqueoTxt').textContent='✅ DESBLOQUEADO - DUEÑO: NICO BEJARANO - AUTORIZADO'; $('bloqueoTxt').style.color='#00ff88'; }
-  else{ $('bloqueoTxt').textContent='🔒 BLOQUEADO - Solo con autorización de Nico Bejarano. Clave: NICO-10-4-SENTINELA'; $('bloqueoTxt').style.color='#ff6666'; }
-}
-actualizarBloqueo();
-$('btnDesbloquear').onclick=function(){
-  var c=$('claveNico').value||'';
-  if(c==='NICO-10-4-SENTINELA' || c==='ALFA BRAVO 10-4' || c.length>=8){
-    try{localStorage.setItem('kodex_permiso_nico','AUTORIZADO_POR_NICO');}catch(e){}
-    alert('✅ AUTORIZADO POR NICO BEJARANO. KODEX desbloqueado.');
-    actualizarBloqueo();
-  } else { alert('❌ CLAVE INCORRECTA. KODEX sigue bloqueado.'); }
-};
-$('btnBloquear').onclick=function(){ try{localStorage.removeItem('kodex_permiso_nico');}catch(e){} actualizarBloqueo(); alert('🔒 BLOQUEADO DE VUELTA POR NICO.'); };
-$('btnTraducir').onclick=function(){
-  if(!tienePermiso()){ alert('🔒 Primero desbloqueá con tu clave, jefe.'); return; }
-  var v=($('frase').value||'').toLowerCase();
-  var enc=[], rea=[];
-  Object.keys(D).forEach(function(k){ if(v.indexOf(k)>-1){enc.push(k); rea.push(D[k]);} });
-  if(!enc.length){ mostrar('outTraducir','No encontré palabras. Probá: amparo, taquicardia, penal, asado'); return; }
-  mostrar('outTraducir','KODEX REAL:\n\nVos escribiste: '+$('frase').value+'\n\nREAL: \n- '+rea.join('\n- ')+'\n\nCon '+enc.length+' palabras tenés '+(Math.pow(2,enc.length)-1)+' combinaciones.');
-};
-var lista=$('listaPalabras');
-Object.keys(D).slice(0,60).forEach(function(k){
-  var s=document.createElement('span'); s.className='pill'; s.textContent=k; s.title=D[k];
-  s.onclick=function(){ $('frase').value = ($('frase').value? $('frase').value+', ':'')+k; };
-  lista.appendChild(s);
-});
-function crearOracion(){
-  var keys=Object.keys(D);
-  var k1=keys[Math.floor(Math.random()*keys.length)], k2=keys[Math.floor(Math.random()*keys.length)], k3=keys[Math.floor(Math.random()*keys.length)];
-  var sims=['{#☠️.}','{#✅.}','{#🔐!}','{#💡.}','{#⚡.}','{#🔒.}'];
-  var sim=sims[Math.floor(Math.random()*sims.length)];
-  var emos=['☠️','✅','🔐','💡','⚡','🔒'];
-  var emo=emos[Math.floor(Math.random()*emos.length)];
-  var calles=['[Artigas 99999]','[Lacroze 88888]','[Sarmiento 77777]','[9 de Julio 66666]'];
-  var calle=calles[Math.floor(Math.random()*calles.length)];
-  var mk=Object.keys(MORSE)[Math.floor(Math.random()*Object.keys(MORSE).length)];
-  var cod='א '+sim+' ['+k1+' + '+k2+' + '+k3+'] '+emo+' '+MORSE[mk]+' '+calle+' // ALFA';
-  var real=D[k1]+' + '+D[k2]+' + '+D[k3]+' + MORSE: '+mk;
-  return {codigo:cod, real:real};
-}
-function getGuardadas(){ try{return JSON.parse(localStorage.getItem('kodex_oraciones')||'[]');}catch(e){return [];} }
-$('btnGen').onclick=function(){
-  if(!tienePermiso()){ alert('🔒 Primero desbloqueá con tu clave, jefe.'); return; }
-  var g=getGuardadas(); var nuevas=[];
-  for(var i=0;i<10;i++){var o=crearOracion(); nuevas.push(o); g.push(o);}
-  try{localStorage.setItem('kodex_oraciones',JSON.stringify(g));}catch(e){}
-  var txt='🏭 10 ORACIONES NUEVAS:\n\n';
-  nuevas.forEach(function(o,i){ txt+='ORACIÓN '+(g.length-10+i+1)+':\n'+o.codigo+'\nREAL: '+o.real+'\n\n'; });
-  txt+='TOTAL GUARDADO: '+g.length+' oraciones.';
-  mostrar('outGen',txt);
-};
-$('btnVerTodas').onclick=function(){
-  var g=getGuardadas();
-  if(!g.length){ mostrar('outGen','Todavía no hay oraciones. Tocá GENERAR 10 ORACIONES NUEVAS.'); return; }
-  var txt='📚 TODAS LAS ORACIONES - PARA COPIAR Y GUARDAR\n© Nico Bejarano - Solo con su autorización\nTotal: '+g.length+'\n\n';
-  g.forEach(function(o,i){ txt+='ORACIÓN '+(i+1)+':\n'+o.codigo+'\nREAL: '+o.real+'\n\n'; });
-  mostrar('outGen',txt);
-};
-$('btnCopiar').onclick=function(){
-  var txt=$('outGen').textContent||'Primero tocá VER TODAS.';
-  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ alert('✅ TODO COPIADO. Pegalo en: KODEX SEGURA / ORACIONES'); }); }
-  else{ alert(txt); }
-};
-var EJ={
-'SALUDO':'א {#✅.} [Do mayor + Mate] ✅ -...- [Artigas 99999] // ALFA = HOLA, EMPEZAMOS',
-'PREGUNTA':'א {#🔐?} [Var + Perito] 🔐 -.-. [Lacroze 88888] // ALFA = ¿ALGUIEN MIENTE? ¿NOS MIRAN?',
-'RESPUESTA':'א {#🔐.} [Var + Perito + Grieta] 🔐 -.-. [Lacroze 88888] // ALFA = SÍ, ALGUIEN MIENTE, HAY FALLA',
-'PEDIDO':'א {#💡.} [Suero + Empanada] 💡 ..-.. [Artigas 99999] // ALFA = NECESITO AYUDA, PAQUETE',
-'ORDEN':'א {#🔐!} [Apelación + Update + Reboot] 🔐 -.-. [Artigas 99999] // ALFA = CAMBIAR TODO YA',
-'AVISO':'א {#☠️.} [Taquicardia + Penal] ☠️ ...---... [Sarmiento 77777] // ALFA = PELIGRO TOTAL, EMERGENCIA',
-'CHISTE':'א {#✅.} [Se quemó la milanesa + Dulce de leche] ✅ -...- [Artigas 99999] // ALFA = NOS DESCUBRIERON, PERO TODO BIEN - CHISTE',
-'DESPEDIDA':'א {#✅.} [Final + Gol + Dulce de leche] ✅ -...- [Artigas 99999] // ALFA = TERMINÓ, LO LOGRAMOS - CHAU'};
-$('btnDialogo').onclick=function(){
-  var t1=$('tipo1').value, t2=$('tipo2').value;
-  mostrar('outDialogo','💬 DIÁLOGO:\n\nA - '+t1+':\n'+EJ[t1]+'\n\nB - '+t2+':\n'+EJ[t2]+'\n\nCon 8 tipos tenés diálogos sin límite.');
-};
-$('btnCorregir').onclick=function(){
-  var v=$('fraseCorregir').value||'';
-  var err=[];
-  if(v.indexOf('  ')>-1) err.push('Doble espacio');
-  if(v.indexOf('{ #')>-1) err.push('Espacio después de { - Tiene que ser {#');
-  if(v.indexOf(' ,')>-1||v.indexOf(' .')>-1) err.push('Espacio antes de coma o punto - Va pegado');
-  if(v.indexOf('א')==-1) err.push('Falta א al inicio - Nivel 5 obligatorio');
-  if(!err.length) mostrar('outCorregir','✅ ORACIÓN CORRECTA\n\n'+v+'\n\nLista para guardarse.');
-  else mostrar('outCorregir','❌ ERRORES:\n- '+err.join('\n- ')+'\n\nCorregila y probá de vuelta.');
-};
-$('ejemplos').textContent=
-'1. א {#☠️.} [Amparo + Taquicardia + Penal] ☠️ ...---... [Artigas 99999] = PELIGRO TOTAL\n'+
-'2. א {#✅.} [Sentencia firme + Alta médica + Dulce de leche] ✅ -...- [Artigas 99999] = TODO BIEN\n'+
-'3. א {#🔐!} [Apelación + Update + Bug] 🔐 -.-. [Sarmiento 77777] = CAMBIAR TODO, HAY INFILTRADO\n'+
-'4. א {#💡.} [Aguinaldo + Receta secreta + Partitura] 💡 ..-.. [Artigas 99999] = IDEA, CÓDIGO MAESTRO, MAPA\n'+
-'5. א {#🔒.} [Cautelar + Horas extras + Alargue] 🔒 --.- [Lacroze 88888] = QUEDARSE, VIGILAR\n'+
-'6. א {#⚡.} [Licencia médica + Habeas corpus + Andamio] ⚡ ...-.- [Artigas 99999] = SALIR YA\n'+
-'7. א {#✅.} [Gol + Asado + Coro] ✅ -...- [Lacroze 88888] = LO LOGRAMOS, JUNTA GRANDE\n'+
-'8. א {#☠️.} [Virus + Hacker + Fractura] ☠️ ...---... [Artigas 99999] = NOS ENGAÑARON, SE ROMPIÓ\n'+
-'9. א {#🔐.} [Contraseña + Llave + Receta secreta] 🔐 -.-. [Sarmiento 77777] = CLAVE SOLO NICO\n'+
-'10. א {#✅.} [Final + Gol + Dulce de leche] ✅ -...- [Artigas 99999] = TERMINÓ, LO LOGRAMOS';
-// ===== LOGOS - NUEVO - SIN SACAR NADA =====
-var LOGOS=[
-{nombre:'CENTINELA',ico:'🛡️',desc:'Logo de entrada, de apertura. El grande, el que se ve cuando abrís la app.',grande:true,accion:'Entraste al CENTINELA. Este es el logo grande, el de apertura. El que se ve cuando abrís la app. © Nico Bejarano.'},
-{nombre:'CENTINELA VAULT',ico:'🔐',desc:'Logo de bóveda, de caja fuerte.',accion:'CENTINELA VAULT - Bóveda, caja fuerte. Acá se guarda todo lo seguro. Solo Nico abre.'},
-{nombre:'SENTINEL ACCORDED',ico:'🧠',desc:'Logo de IA, de cerebro.',accion:'SENTINEL ACCORDED - IA, cerebro. El que piensa, el que traduce, el que corrige.'},
-{nombre:'CENTINELA HABLA',ico:'🗣️',desc:'Logo de idioma, de boca hablando.',accion:'CENTINELA HABLA - Idioma, boca hablando. El que habla KODEX, el que traduce a real.'},
-{nombre:'CENTINELA CLOUD',ico:'☁️',desc:'Logo de nube.',accion:'CENTINELA CLOUD - Nube. Todo guardado en la nube segura, no se pierde.'},
-{nombre:'CENTINELA CHECKBOOK',ico:'📓',desc:'Logo de cuaderno, de check.',accion:'CENTINELA CHECKBOOK - Cuaderno, check. Acá se tilda lo que ya está hecho, lo corregido.'},
-{nombre:'CENTINELA SETTINGS',ico:'⚙️',desc:'Logo de engranaje.',accion:'CENTINELA SETTINGS - Engranaje. Configuración, niveles, permisos, bloqueo.'},
-{nombre:'CENTINELA OFFICE',ico:'📄',desc:'Logo de PDF, Excel, PowerPoint.',accion:'CENTINELA OFFICE - PDF, Excel, PowerPoint. Documentos, planillas, presentaciones del KODEX.'},
-{nombre:'CENTINELA SHARE',ico:'📤',desc:'Logo de compartir pantalla.',accion:'CENTINELA SHARE - Compartir pantalla. Para mostrar sin dejar copiar sin permiso.'},
-{nombre:'CENTINELA CODE',ico:'💻',desc:'Logo de código.',accion:'CENTINELA CODE - Código. Acá está el código MASTER, el que va al laboratorio.'},
-{nombre:'CENTINELA ACADEMY',ico:'🎓',desc:'Logo de escuela, de aprender.',accion:'CENTINELA ACADEMY - Escuela, aprender. Acá se aprende KODEX, de Nivel 1 a Nivel 5, 2 años.'},
-{nombre:'CENTINELA PLAY',ico:'🎮',desc:'Logo de juego, de puntaje.',accion:'CENTINELA PLAY - Juego, puntaje. Jugar a traducir, a corregir, a crear oraciones. Puntaje.'},
-{nombre:'CENTINELA TRADER',ico:'📈',desc:'Logo de trading, de plata, de mercado.',accion:'CENTINELA TRADER - Trading, plata, mercado. Acá se maneja plata, mercado, valores.'}
-];
-var grid=$('gridLogos');
-LOGOS.forEach(function(L){
-  var d=document.createElement('div');
-  d.className='logo'+(L.grande?' grande':'');
-  d.innerHTML='<div class="ico">'+L.ico+'</div><b>'+L.nombre+'</b><span>'+L.desc+'</span>';
-  d.onclick=function(){
-    document.querySelectorAll('.logo').forEach(function(x){x.classList.remove('activo');});
-    d.classList.add('activo');
-    mostrar('outLogo','🛡️ '+L.nombre+'\n\n'+L.accion+'\n\nLogo: '+L.desc+'\n\n© Nico Bejarano - Solo con su autorización');
-    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
-  };
-  grid.appendChild(d);
-});
-}catch(e){
-  document.body.innerHTML='<div style="padding:20px;font-family:system-ui">⚠️ Error al cargar, pero el Centinela está acá. Recargá la página. Error: '+e.message+'</div>';
-}
-})();
-</script>
-</body>
-  </html>
+function tienePermiso(){try{return localStorage.getItem('kodex_permiso_nico')==='AUTORIZADO_POR_NICO';}cat
