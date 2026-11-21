@@ -1,89 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CENTINELA</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    html, body {
-      min-height: 100vh;
-      background-color: #061021;
-      color: #f1f5f9;
-      overflow-x: hidden;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at 50% 18%, #16376e 0%, #091833 46%, #030812 100%);
-      position: relative;
-    }
-
-    .grid-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image:
-        linear-gradient(to right, rgba(120, 165, 230, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(120, 165, 230, 0.05) 1px, transparent 1px);
-      background-size: 64px 64px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .vignette-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.72) 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .view {
-      display: none;
-      position: relative;
-      z-index: 2;
-    }
-
-    .view.active {
-      display: block;
-    }
-
-    /* ==================== VISTA 1: PORTADA INICIO DE SESIÓN ==================== */
-    .login-wrapper {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 22px 16px 36px;
-    }
-
-    .hero-stage {
-      position: relative;
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: -10px;
-    }
-
-    .android-svg {
-      width: 100%;
-      max-width: 440px;
-      height: 290px;
-      display: block;
-      z-index: 1
-      
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CENTINELA</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+html,body{min-height:100vh;background-color:#061021;color:#f1f5f9;overflow-x:hidden}
+body{background:radial-gradient(circle at 50% 18%,#16376e 0%,#091833 46%,#030812 100%);position:relative}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(to right,rgba(120,165,230,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(120,165,230,.05) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+.vignette-bg{position:fixed;inset:0;background:radial-gradient(circle at center,transparent 40%,rgba(0,0,0,.72) 100%);pointer-events:none;z-index:0}
+.view{display:none;position:relative;z-index:2}
+.view.active{display:block}
+.login-wrapper{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:22px 16px 36px}
+.hero-stage{position:relative;width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;margin-bottom:-10px}
+.android-svg{width:100%;max-width:440px;height:290px;display:block;z-index:1}
+.centinela-banner{position:relative;z-index:3;margin-top:-82px;text-align:center;user-select:none}
+.centinela-word{font-size:46px;font-weight:900;letter-spacing:3px;line-height:1;text-transform:uppercase;color:#dbeafe;background:linear-gradient(180deg,#fff 0%,#cbd5e1 35%,#64748b 58%,#e2e8f0 80%,#475569 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 5px 0 #091224) drop-shadow(0 14px 22px rgba(0,0,0,.92))}
+@media(min-width:520px){.centinela-word{font-size:72px;letter-spacing:4px}.centinela-banner{margin-top:-92px}}
+.login-card{position:relative;z-index:4;width:100%;max-width:396px;background:linear-gradient(180deg,rgba(16,32,62,.95),rgba(8,17,34,.98));border:1px solid rgba(148,184,235,.22);border-radius:10px;padding:22px 20px 20px;box-shadow:0 24px 60px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.08)}
+.login-heading{text-align:center;font-size:17px;font-weight:600;color:#e2e8f0;margin-bottom:16px}
+.input-group{position:relative;margin-bottom:11px}
+.input-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;pointer-events:none}
+.form-input{width:100%;height:44px;background-color:#071122;border:1px solid rgba(148,163,184,.26);border-radius:6px;color:#f8fafc;font-size:15px;padding:0 40px 0 38px;outline:none}
+.form-input::placeholder{color:#64748b}
+.form-input:focus{border-color:#3b82f6;background-color:#050c18;box-shadow:0 0 0 3px rgba(59,130,246,.24)}
+.toggle-pass-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#94a3b8;cursor:pointer;padding:4px}
+.btn-primary-fb{width:100%;height:42px;margin-top:4px;background:linear-gradient(180deg,#256be8,#174eb8);border:1px solid rgba(147,197,253,.26);border-radius:6px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.55)}
+.forgot-wrap{text-align:center;margin-top:13px;padding-bottom:15px;border-bottom:1px solid rgba(148,163,184,.16)}
+.forgot-link{background:transparent;border:none;color:#60a5fa;font-size:13.5px;cursor:pointer}
+.create-wrap{display:flex;justify-content:center;margin-top:15px}
+.btn-secondary-dark{background:linear-gradient(180deg,#1b2c49,#111d33);border:1px solid rgba(148,163,184,.26);border-radius:6px;color:#e2e8f0;font-size:14px;font-weight:600;padding:10px 18px;cursor:pointer}
+.login-footer{margin-top:22px;text-align:center;font-size:12.5px;color:#94a3b8;line-height:1.65}
+.lang-bar{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.lang-btn{background:transparent;border:none;color:#94a3b8;font-size:12.5px;cursor:pointer;padding:2px 4px}
+.lang-btn.active-lang{color:#f8fafc;font-weight:600}
+.copyright-text{color:#64748b;margin-top:2px}
+.dash-container{max-width:540px;margin:0 auto;padding:16px 14px 48px}
+.dash-panel{background:linear-gradient(180deg,rgba(16,30,56,.95),rgba(9,18,36,.98));border:1px solid rgba(148,184,235,.18);border-radius:16px;padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.82)}
+.dash-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px}
+.user-identity{display:flex;align-items:center;gap:12px;min-width:0}
+.avatar-circle{width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#2563eb,#1d4ed8);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.user-name{font-size:16.5px;font-weight:800;color:#f8fafc;line-height:1.25}
+.user-status{font-size:11.5px;color:#94a3b8;margin-top:3px}
+.btn-salir{background:linear-gradient(180deg,#1d2d48,#121e33);border:1px solid rgba(148,163,184,.25);color:#e2e8f0;font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:10px;cursor:pointer;flex-shrink:0}
+.feature-card{background:linear-gradient(180deg,rgba(19,35,65,.86),rgba(11,22,42,.95));border:1px solid rgba(148,184,235,.14);border-radius:14px;padding:18px 15px;margin-top:14px;box-shadow:0 14px 28px rgba(0,0,0,.5)}
+.card-title-row{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:14px}
+.dash-input{width:100%;height:44px;background-color:#060e1c;border:1px solid rgba(148,184,235,.18);border-radius:10px;padding:0 14px;color:#f8fafc;font-size:14.5px;outline:none;margin-bottom:12px}
+.dash-input::placeholder{color:#64748b}
+.dash-input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.22)}
+.btn-action-blue{width:100%;height:42px;background:linear-gradient(180deg,#256be8,#174cb8);border:1px solid rgba(147,197,253,.24);border-radius:10px;color:#fff;font-size:13.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;cursor:pointer}
+.output-box{margin-top:12px;background-color:#050c18;border:1px solid rgba(148,184,235,.16);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.55;color:#cbd5e1;display:none;white-space:pre-wrap}
+.output-box.visible{display:block}
+.modules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.module-tile{background:linear-gradient(180deg,rgba(25,43,76,.9),rgba(14,26,48,.98));border:1px solid rgba(148,184,235,.16);border-radius:12px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;color:#f1f5f9}
+.module-icon{font-size:24px}
+.module-label{font-size:12.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+.extra-modules-toggle{margin-top:12px;width:100%;background-color:#081122;border:1px dashed rgba(148,184,235,.25);border-radius:10px;padding:10px 12px;color:#93c5fd;font-size:12.5px;font-weight:600;cursor:pointer}
+.extra-modules-grid{display:none;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.extra-modules-grid.open{display:grid}
+.modal-backdrop{position:fixed;inset:0;background-color:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal-backdrop.open{display:flex}
+.modal-box{width:100%;max-width:400px;background:linear-gradient(180deg,#132442,#091326);border:1px solid rgba(148,184,235,.28);border-radius:14px;padding:20px}
+.modal-title{font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:8px}
+.modal-text{font-size:14px;color:#cbd5e1;line-height:1.5;margin-bottom:14px}
+.modal-actions{display:flex;justify-content:flex-end}
+.btn-modal-close{background-color:#1a2c4a;border:1px solid rgba(148,163,184,.28);color:#e2e8f0;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="vignette-bg"></div>
+<section id="loginView" class="view active">
+<div class="login-wrapper">
+<div class="hero-stage">
+<svg class="android-svg" width="440" height="290" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="headGrad" cx="50%" cy="32%" r="65%"><stop offset="0%" stop-color="#355b94"/><stop offset="55%" stop-color="#14294a"/><stop offset="100%" stop-color="#050c18"/></radialGradient><linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2b4d80"/><stop offset="48%" stop-color="#0f203b"/><stop offset="100%" stop-color="#040913"/></linearGradient><radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="260" cy="145" rx="165" ry="120" fill="#2563eb" opacity="0.22"/>
+<path d="M135 165 C145 128,185 114,260 114 C335 114,375 128,385 165 L408 265 L112 265 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M175 135 L260 185 L345 135" stroke="#3b82f6" stroke-opacity="0.4" stroke-width="2" fill="none"/>
+<polygon points="260,152 276,166 260,182 244,166" fill="#38bdf8" opacity="0.85"/>
+<path d="M148 134 C105 140,82 174,88 214 L138 220 C138 188,146 162,162 146 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M372 134 C415 140,438 174,432 214 L382 220 C382 188,374 162,358 146 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.45" stroke-width="1.5"/>
+<rect x="228" y="96" width="64" height="32" rx="8" fill="#071122" stroke="#475569" stroke-width="1.5"/>
+<path d="M206 42 C206 20,314 20,314 42 L320 84 C320 102,292 114,260 114 C228 114,200 102,200 84 Z" fill="url(#headGrad)" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.6"/>
+<path d="M216 52 L260 44 L304 52 L298 86 L260 98 L222 86 Z" fill="#060d1b" stroke="#2563eb" stroke-opacity="0.5" stroke-width="1.2"/>
+<ellipse cx="238" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/>
+<ellipse cx="282" cy="68" rx="17" ry="8" fill="url(#eyeGlow)"/>
+<path d="M104 205 C88 232,95 268,128 282 L156 266 C136 254,132 232,142 212 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.4" stroke-width="1.4"/>
+<path d="M416 205 C432 232,425 268,392 282 L364 266 C384 254,388 232,378 212 Z" fill="url(#armorGrad)" stroke="#60a5fa" stroke-opacity="0.4" stroke-width="1.4"/>
+<rect x="116" y="264" width="54" height="22" rx="7" fill="#162d54" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.2"/>
+<rect x="112" y="255" width="12" height="17" rx="4" fill="#23457d"/><rect x="128" y="253" width="12" height="19" rx="4" fill="#23457d"/><rect x="144" y="255" width="12" height="17" rx="4" fill="#23457d"/><rect x="158" y="259" width="11" height="15" rx="4" fill="#23457d"/>
+<rect x="350" y="264" width="54" height="22" rx="7" fill="#162d54" stroke="#60a5fa" stroke-opacity="0.55" stroke-width="1.2"/>
+<rect x="351" y="259" width="11" height="15" rx="4" fill="#23457d"/><rect x="364" y="255" width="12" height="17" rx="4" fill="#23457d"/><rect x="380" y="253" width="12" height="19" rx="4" fill="#23457d"/><rect x="396" y="255" width="12" height="17" rx="4" fill="#23457d"/>
+</svg>
+<div class="centinela-banner"><div class="centinela-word">CENTINELA</div></div>
+</div>
+<div class="login-card">
+<h2 id="loginHeading" class="login-heading">Iniciar sesión con usuario</h2>
+<form id="loginForm" novalidate>
+<div class="input-group"><span class="input-icon">👤</span><input id="usernameInput" type="text" class="form-input" placeholder="Usuario o correo electrónico" autocomplete="username" value="Nico Bejarano" required /></div>
+<div class="input-group"><span class="input-icon">🔒</span><input id="passwordInput" type="password" class="form-input" placeholder="Contraseña" autocomplete="current-password" required /><button type="button" id="togglePasswordBtn" class="toggle-pass-btn" aria-label="Mostrar contraseña">👁️</button></div>
+<button id="loginSubmitBtn" type="submit" class="btn-primary-fb">Iniciar sesión</button>
+<p id="loginError" style="display:none;color:#f87171;font-size:13px;text-align:center;margin-top:10px"></p>
+</form>
+<div class="forgot-wrap"><button type="button" id="forgotBtn" class="forgot-link">¿Olvidé mi contraseña?</button></div>
+<div class="create-wrap"><button type="button" id="createAccountBtn" class="btn-secondary-dark">Crear cuenta nueva</button></div>
+</div>
+<footer class="login-footer">
+<div class="lang-bar"><button type="button" class="lang-btn active-lang">Español</button><span>•</span><button type="button" class="lang-btn">English</button><span>•</span><button type="button" class="lang-btn">Português</button></div>
+<div class="copyright-text">© 2026 CENTINELA - Nico Bejarano • ALFA BRAVO 10-4 • José León Suárez</div>
+</footer>
+</div>
+</section>
+<section id="dashView" class="view">
+<div class="dash-container">
+<div class="dash-panel">
+<div class="dash-header"><div class="user-identity"><div class="avatar-circle">N</div><div><div class="user-name">Nico Bejarano</div><div class="user-status">Dueño de CENTINELA • ALFA BRAVO 10-4 • En línea</div></div></div><button id="btnSalir" class="btn-salir">Salir</button></div>
+<div class="feature-card"><div class="card-title-row"><span>📚</span> TRADUCTOR - 120 PALABRAS</div><input id="fraseTrad" class="dash-input" placeholder="Escribí: amparo, taquicardia, penal, asado"><button id="btnTraducir" class="btn-action-blue">Traducir a KODEX Real</button><div id="outTraducir" class="output-box"></div></div>
+<div class="feature-card"><div class="card-title-row"><span>🏭</span> FÁBRICA - SIN LÍMITE</div><button id="btnGen" class="btn-action-blue">Generar 10 Oraciones Nuevas</button><div id="outGen" class="output-box"></div></div>
+<div class="feature-card"><div class="card-title-row"><span>💬</span> DIÁLOGO SIN LÍMITE</div><input id="tipo1" class="dash-input" placeholder="Tipo 1: SALUDO" value="SALUDO"><input id="tipo2" class="dash-input" placeholder="Tipo 2: PREGUNTA" value="PREGUNTA"><button id="btnDialogo" class="btn-action-blue">Crear Diálogo</button><div id="outDialogo" class="output-box"></div></div>
+<div class="feature-card"><div class="card-title-row"><span>✅</span> CORRECTOR</div><input id="fraseCorregir" class="dash-input" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button id="btnCorregir" class="btn-action-blue">Corregir Mi Oración</button><div id="outCorregir" class="output-box"></div></div>
+<div class="feature-card"><div class="card-title-row"><span>🛡️</span> 13 MÓDULOS CENTINELA</div><div class="modules-grid" id="gridLogos"></div><button id="btnVerMas" class="extra-modules-toggle">▼ Ver los 13 módulos completos</button><div id="extraGrid" class="extra-modules-grid"></div><div id="outLogo" class="output-box"></div></div>
+<div class="feature-card"><div class="card-title-row"><span>📊</span> CENTINELA EN NÚMEROS</div><p style="font-size:13.5px;line-height:1.7;color:#cbd5e1">🛡️ <b style="color:#fff">13</b> módulos<br>📚 <b style="color:#fff">120+</b> palabras<br>📋 <b style="color:#fff">150</b> oraciones<br>💬 <b style="color:#fff">40</b> diálogos<br>⭐ <b style="color:#fff">5</b> niveles - 2 años<br>🔒 <b style="color:#fff">1</b> dueño: Nico Bejarano</p></div>
+</div>
+</div>
+</section>
+<div id="modal" class="modal-backdrop"><div class="modal-box"><div id="modalTitle" class="modal-title">CENTINELA</div><div id="modalText" class="modal-text"></div><div class="modal-actions"><button id="modalClose" class="btn-modal-close">Cerrar</button></div></div></div>
+<script>
+function showModal(t,txt){document.getElementById('modalTitle').textContent=t;document.getElementById('modalText').textContent=txt;document.getElementById('modal').classList.add('open');}
+document.getElementById('modalClose').onclick=function(){document.getElementById('modal').classList.remove('open');};
+document.getElementById('modal').onclick=function(e){if(e.target===this)this.classList.remove('open');};
+document.getElementById('togglePasswordBtn').onclick=function(){var p=document.getElementById('passwordInput');p.type=p.type==='password'?'text':'password';};
+document.getElementById('forgotBtn').onclick=function(){showModal('¿Olvidaste tu contraseña?','Tu clave CENTINELA es: NICO-10-4-SENTINELA. Escribila en Contraseña y tocá Iniciar sesión. Solo Nico Bejarano puede entrar.');};
+document.getElementById('createAccountBtn').onclick=function(){showModal('Crear cuenta nueva','Solo Nico Bejarano puede crear cuentas en CENTINELA. Escribí tu clave y tocá Iniciar sesión.');};
+document.getElementById('loginForm').onsubmit=function(e){e.preventDefault();var u=document.getElementById('usernameInput').value||'';var c=document.getElementById('passwordInput').value||'';var err=document.getElementById('loginError');if(c==='NICO-10-4-SENTINELA'||c==='ALFA BRAVO 10-4'||c.length>=8){document.getElementById('loginView').classList.remove('active');document.getElementById('dashView').classList.add('active');window.scrollTo(0,0);}else{err.textContent='Clave incorrecta, jefe. Probá: NICO-10-4-SENTINELA';err.style.display='block';}};
+document.getElementById('btnSalir').onclick=function(){document.getElementById('dashView').classList.remove('active');document.getElementById('loginView').classList.add('active');document.getElementById('passwordInput').value='';window.scrollTo(0,0);};
+var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','taquicardia':'PELIGRO TOTAL','hipertensión':'NOS VIGILAN','fiebre':'ZONA CALIENTE, NO VAYAS','penal':'EMERGENCIA, ACTUAR YA','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','gol':'LO LOGRAMOS','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','contraseña':'CLAVE SECRETA, SOLO NICO','el tío':'NO ES DE CONFIANZA - EL TÍO GANA','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
+function out(id,txt){var e=document.getElementById(id);e.textContent=txt;e.classList.add('visible');}
+document.getElementById('btnTraducir').onclick=function(){var v=(document.getElementById('fraseTrad').value||'').toLowerCase();var r=[];Object.keys(D).forEach(function(k){if(v.indexOf(k)>-1)r.push(k+' = '+D[k]);});out('outTraducir',r.length?r.join('\n'):'Probá: amparo, taquicardia, penal, asado');};
+function crearO(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)],c=k[Math.floor(Math.random()*k.length)];return 'א {#☠️.} ['+a+' + '+b+' + '+c+'] ☠️ ...---... [Artigas 99999] // ALFA\nREAL: '+D[a]+' + '+D[b]+' + '+D[c];}
+document.getElementById('btnGen').onclick=function(){var t='';for(var i=0;i<10;i++)t+=crearO()+'\n\n';out('outGen',t);};
+var EJ={'SALUDO':'HOLA, EMPEZAMOS','PREGUNTA':'¿ALGUIEN MIENTE?','RESPUESTA':'SÍ, ALGUIEN MIENTE','PEDIDO':'NECESITO AYUDA','ORDEN':'CAMBIAR TODO YA','AVISO':'PELIGRO TOTAL','CHISTE':'CHISTE CENTINELA','DESPEDIDA':'TERMINÓ, LO LOGRAMOS'};
+document.getElementById('btnDialogo').onclick=function(){var a=(document.getElementById('tipo1').value||'SALUDO').toUpperCase(),b=(document.getElementById('tipo2').value||'PREGUNTA').toUpperCase();out('outDialogo','A - '+a+': '+(EJ[a]||a)+'\nB - '+b+': '+(EJ[b]||b));};
+document.getElementById('btnCorregir').onclick=function(){var v=document.getElementById('fraseCorregir').value||'';var e=[];if(v.indexOf('  ')>-1)e.push('Doble espacio');if(v.indexOf('א')===-1)e.push('Falta א al inicio');out('outCorregir',e.length?'ERRORES:\n- '+e.join('\n- '):'✅ ORACIÓN CORRECTA:\n'+v);};
+var LOGOS=[['🛡️','CENTINELA','Entrada, apertura. El grande.'],['🔐','VAULT','Bóveda, caja fuerte.'],['🧠','ACCORDED','IA, cerebro.'],['🗣️','HABLA','Idioma, boca hablando.'],['☁️','CLOUD','Nube.'],['📓','CHECKBOOK','Cuaderno, check.'],['⚙️','SETTINGS','Engranaje, configuración.'],['📄','OFFICE','PDF, Excel, PowerPoint.'],['📤','SHARE','Compartir pantalla.'],['💻','CODE'
