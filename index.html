@@ -19,6 +19,15 @@ input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px soli
 .out{background:#000;color:#00ff88;padding:12px;border-radius:10px;font-family:monospace;font-size:12px;margin-top:10px;white-space:pre-wrap;display:none;max-height:420px;overflow:auto}
 .pill{display:inline-block;background:#003300;color:#00ff88;border:1px solid #00ff88;border-radius:20px;padding:4px 8px;font-size:11px;margin:3px 2px}
 .small{font-size:11px;color:#aaa}
+.logos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.logo{background:#000;border:2px solid #222;border-radius:14px;padding:12px;text-align:center;cursor:pointer}
+.logo b{font-size:12px;display:block;margin-top:6px}
+.logo span{font-size:11px;color:#aaa;display:block;margin-top:4px;line-height:1.3}
+.logo .ico{font-size:32px}
+.logo.activo{border-color:#00ff88;background:#002a12}
+.logo.grande{grid-column:1 / -1;background:linear-gradient(135deg,#002a12,#000);border-color:#00ff88}
+.logo.grande .ico{font-size:54px}
+@media(max-width:480px){.logos{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -77,6 +86,15 @@ input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px soli
 <div class="c">
 <h2>📋 07 - 10 ORACIONES DE EJEMPLO - YA CORREGIDAS</h2>
 <p id="ejemplos" style="font-family:monospace;font-size:11px;line-height:1.6"></p>
+</div>
+
+<!-- ===== 08 - NUEVO - LOGOS CENTINELA - AGREGADO SIN SACAR NADA ===== -->
+<div class="c" style="border-color:#a100f2">
+<h2>🛡️ 08 - LOGOS CENTINELA - TODOS LOS MÓDULOS</h2>
+<p>Tocá un logo para abrir ese módulo. El grande es el de entrada, el que se ve cuando abrís la app. Ninguno se borra, todos quedan.</p>
+<div class="logos" id="gridLogos"></div>
+<div class="out" id="outLogo"></div>
+<p class="small">CENTINELA = Entrada / VAULT = Bóveda / ACCORDED = IA Cerebro / HABLA = Idioma Boca / CLOUD = Nube / CHECKBOOK = Cuaderno Check / SETTINGS = Engranaje / OFFICE = PDF Excel PowerPoint / SHARE = Compartir Pantalla / CODE = Código / ACADEMY = Escuela Aprender / PLAY = Juego Puntaje / TRADER = Trading Plata Mercado.</p>
 </div>
 
 </div>
@@ -197,6 +215,35 @@ $('ejemplos').textContent=
 '8. א {#☠️.} [Virus + Hacker + Fractura] ☠️ ...---... [Artigas 99999] = NOS ENGAÑARON, SE ROMPIÓ\n'+
 '9. א {#🔐.} [Contraseña + Llave + Receta secreta] 🔐 -.-. [Sarmiento 77777] = CLAVE SOLO NICO\n'+
 '10. א {#✅.} [Final + Gol + Dulce de leche] ✅ -...- [Artigas 99999] = TERMINÓ, LO LOGRAMOS';
+// ===== LOGOS - NUEVO - SIN SACAR NADA =====
+var LOGOS=[
+{nombre:'CENTINELA',ico:'🛡️',desc:'Logo de entrada, de apertura. El grande, el que se ve cuando abrís la app.',grande:true,accion:'Entraste al CENTINELA. Este es el logo grande, el de apertura. El que se ve cuando abrís la app. © Nico Bejarano.'},
+{nombre:'CENTINELA VAULT',ico:'🔐',desc:'Logo de bóveda, de caja fuerte.',accion:'CENTINELA VAULT - Bóveda, caja fuerte. Acá se guarda todo lo seguro. Solo Nico abre.'},
+{nombre:'SENTINEL ACCORDED',ico:'🧠',desc:'Logo de IA, de cerebro.',accion:'SENTINEL ACCORDED - IA, cerebro. El que piensa, el que traduce, el que corrige.'},
+{nombre:'CENTINELA HABLA',ico:'🗣️',desc:'Logo de idioma, de boca hablando.',accion:'CENTINELA HABLA - Idioma, boca hablando. El que habla KODEX, el que traduce a real.'},
+{nombre:'CENTINELA CLOUD',ico:'☁️',desc:'Logo de nube.',accion:'CENTINELA CLOUD - Nube. Todo guardado en la nube segura, no se pierde.'},
+{nombre:'CENTINELA CHECKBOOK',ico:'📓',desc:'Logo de cuaderno, de check.',accion:'CENTINELA CHECKBOOK - Cuaderno, check. Acá se tilda lo que ya está hecho, lo corregido.'},
+{nombre:'CENTINELA SETTINGS',ico:'⚙️',desc:'Logo de engranaje.',accion:'CENTINELA SETTINGS - Engranaje. Configuración, niveles, permisos, bloqueo.'},
+{nombre:'CENTINELA OFFICE',ico:'📄',desc:'Logo de PDF, Excel, PowerPoint.',accion:'CENTINELA OFFICE - PDF, Excel, PowerPoint. Documentos, planillas, presentaciones del KODEX.'},
+{nombre:'CENTINELA SHARE',ico:'📤',desc:'Logo de compartir pantalla.',accion:'CENTINELA SHARE - Compartir pantalla. Para mostrar sin dejar copiar sin permiso.'},
+{nombre:'CENTINELA CODE',ico:'💻',desc:'Logo de código.',accion:'CENTINELA CODE - Código. Acá está el código MASTER, el que va al laboratorio.'},
+{nombre:'CENTINELA ACADEMY',ico:'🎓',desc:'Logo de escuela, de aprender.',accion:'CENTINELA ACADEMY - Escuela, aprender. Acá se aprende KODEX, de Nivel 1 a Nivel 5, 2 años.'},
+{nombre:'CENTINELA PLAY',ico:'🎮',desc:'Logo de juego, de puntaje.',accion:'CENTINELA PLAY - Juego, puntaje. Jugar a traducir, a corregir, a crear oraciones. Puntaje.'},
+{nombre:'CENTINELA TRADER',ico:'📈',desc:'Logo de trading, de plata, de mercado.',accion:'CENTINELA TRADER - Trading, plata, mercado. Acá se maneja plata, mercado, valores.'}
+];
+var grid=$('gridLogos');
+LOGOS.forEach(function(L){
+  var d=document.createElement('div');
+  d.className='logo'+(L.grande?' grande':'');
+  d.innerHTML='<div class="ico">'+L.ico+'</div><b>'+L.nombre+'</b><span>'+L.desc+'</span>';
+  d.onclick=function(){
+    document.querySelectorAll('.logo').forEach(function(x){x.classList.remove('activo');});
+    d.classList.add('activo');
+    mostrar('outLogo','🛡️ '+L.nombre+'\n\n'+L.accion+'\n\nLogo: '+L.desc+'\n\n© Nico Bejarano - Solo con su autorización');
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  };
+  grid.appendChild(d);
+});
 }catch(e){
   document.body.innerHTML='<div style="padding:20px;font-family:system-ui">⚠️ Error al cargar, pero el Centinela está acá. Recargá la página. Error: '+e.message+'</div>';
 }
