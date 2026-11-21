@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA</title><style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#020617;color:#fff}
-.bg{position:fixed;inset:0;background:radial-gradient(circle at 50% 0%,#0a1a3a 0%,#020617 55%,#000 100%);overflow:hidden}
-.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.1) 1px,transparent 1px);background-size:32px 32px;animation:m 6s linear infinite}
-@keyframes m{to{background-position:0 32px}}
-.orb{position:absolute;border-radius:50%;filter:blur(50px);opacity:.5}
-.o1{width:260px;height:260px;background:#0ea5e9;top:-50px;left:-60px;animation:f 6s infinite}
-.o2{width:220px;height:220px;background:#7c3aed;bottom:-30px;right:-40px;animation:f 7s infinite reverse}
-@keyframes f{50%{transform:translateY(-20px)}}
-.logoBig{position:absolute;left:50%;top:32%;transform:translate(-50%,-50%);text-align:center;z-index:2}
-.logoBig div{width:110px;height:110px;background:#fff;border-radius:28px;margin:auto;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;color:#071426;box-shadow:0 0 40px #38bdf8,0 20px 40px #000}
-.logoBig b{letter-spacing:8px;font-size:24px;display:block;margin-top:14px;text-shadow:0 4px 16px #000}
-.logoBig small{color:#38bdf8;letter-spacing:3px;font-size:11px}
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 0%,#0a1a3a,#020617 60%,#000);overflow:hidden}
+.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.1) 1px,transparent 1px);background-size:32px 32px}
+/* HUMANOIDES DE FONDO - SIEMPRE QUEDAN */
+.hum{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);text-align:center;z-index:2;animation:f 3s infinite}
+@keyframes f{50%{transform:translate(-50%,-50%) translateY(-8px)}}
+.cab{width:78px;height:92px;margin:auto;background:#f1c27d;border-radius:48% 48% 42% 42%;position:relative;box-shadow:0 10px 25px #000;overflow:hidden}
+.pelo{position:absolute;top:0;left:0;right:0;height:26px;background:#111}
+.ojo{position:absolute;top:44px;width:10px;height:10px;background:#111;border-radius:50%}
+.boca{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:22px;height:5px;background:#7c2d12;border-radius:10px}
+.cue{width:22px;height:14px;background:#e0a878;margin:-2px auto 0}
+.tra{width:126px;height:128px;margin:auto;background:linear-gradient(180deg,#1e3a8a,#0a1a3a);border:1px solid #38bdf8;border-radius:20px;position:relative;box-shadow:0 14px 30px #000}
+.cor{position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:60px;background:#fff;clip-path:polygon(0 0,100% 0,50% 100%)}
+.pe{position:absolute;top:66px;left:50%;transform:translateX(-50%);background:#000;border:2px solid #38bdf8;border-radius:8px;padding:4px 8px;font-size:9px;letter-spacing:2px;white-space:nowrap}
+.br{position:absolute;top:170px;width:26px;height:95px;background:#1e3a8a;border-radius:14px}
+.br i{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:24px;height:24px;background:#f1c27d;border-radius:50%;display:block}
+.iz{left:52px;transform:rotate(14deg)}.de{right:52px;transform:rotate(-14deg)}
+.pi{position:absolute;bottom:0;width:34px;height:58px;background:#0f172a;border-radius:8px 8px 12px 12px}
+.piz{left:92px}.pde{right:92px}
+.cartel{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:230px;background:#000;border:2px solid #38bdf8;border-radius:12px;padding:8px;z-index:5;box-shadow:0 0 20px #38bdf8}
+.cartel b{letter-spacing:4px;font-size:15px}.cartel small{display:block;color:#38bdf8;font-size:9px;margin-top:3px}
+.ag{position:absolute;top:52%;text-align:center;z-index:3;animation:f2 3s infinite}
+@keyframes f2{50%{transform:translateY(-8px)}}
+.ag .cab{width:40px;height:50px}.ag .pelo{height:14px}.ag .ojo{top:24px;width:6px;height:6px}
+.ag .cue{width:10px;height:7px}.ag .tra{width:56px;height:70px}.ag .br{top:40px;width:12px;height:44px}.ag .pi{width:16px;height:26px}
+.ag b{font-size:8px;background:#000;border:1px solid #38bdf8;border-radius:8px;padding:5px;display:inline-block;margin-top:4px}
+.l{left:8px}.r{right:8px}
 .box{position:relative;z-index:10;max-width:430px;margin:0 auto;padding:14px;min-height:100vh}
-input{width:100%;padding:13px;border-radius:12px;border:1px solid #334155;background:rgba(0,0,0,.6);color:#fff;margin-top:10px}
+input{width:100%;padding:13px;border-radius:12px;border:1px solid #334155;background:rgba(0,0,0,.65);color:#fff;margin-top:10px}
 button{width:100%;padding:13px;border:none;border-radius:12px;font-weight:800;margin-top:10px;cursor:pointer}
-.w{background:rgba(11,30,58,.9);border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 12px 30px #000}
+.w{background:rgba(11,30,58,.88);border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 12px 30px #000}
 .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}
 .ic{width:56px;height:56px;margin:auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px #000}
-.app span{font-size:11px;display:block;margin-top:5px}
+.app span{font-size:11px;display:block;margin-top:5px;text-shadow:0 2px 6px #000}
 .c1{background:#2563eb}.c2{background:#059669}.c3{background:#d97706}.c4{background:#7c3aed}.c5{background:#dc2626}.c6{background:#0891b2}
 .modal{position:fixed;inset:0;background:#071426;z-index:99;display:none;flex-direction:column}
 .modal.open{display:flex}.mtop{padding:14px;display:flex;justify-content:space-between;background:#0b1e3a}.mbody{padding:16px;flex:1;overflow:auto}.out{background:#000;border:1px solid #1e3a8a;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px}
 </style></head><body>
-<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="logoBig"><div>C</div><b>CENTINELA</b><small>ALFA BRAVO 10-4 • NICO BEJARANO</small></div></div>
+<div class="bg">
+<div class="ag l"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:9px"></div><div class="ojo" style="right:9px"></div></div><div class="cue"></div><div class="tra"></div><div style="position:relative;height:26px"><div class="pi" style="left:12px"></div><div class="pi" style="right:12px"></div></div><b>AGENTE 01<br>SOSTIENE</b></div>
+<div class="hum"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:18px"></div><div class="ojo" style="right:18px"></div><div class="boca"></div></div><div class="cue"></div><div class="tra"><div class="cor"></div><div class="pe">SENTINELA</div></div><div class="br iz"><i></i></div><div class="br de"><i></i></div><div class="pi piz"></div><div class="pi pde"></div><div class="cartel"><b>CENTINELA</b><small>ALFA BRAVO 10-4 • NICO BEJARANO • SOSTENIDO POR AGENTES</small></div></div>
+<div class="ag r"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:9px"></div><div class="ojo" style="right:9px"></div></div><div class="cue"></div><div class="tra"></div><div style="position:relative;height:26px"><div class="pi" style="left:12px"></div><div class="pi" style="right:12px"></div></div><b>AGENTE 02<br>SOSTIENE</b></div>
+</div>
 
-<div id="login" class="box" style="text-align:center;padding-top:56vh">
-<p style="color:#cbd5e1;font-size:13px">Nico Bejarano • Sistema Real</p>
+<div id="login" class="box" style="text-align:center;padding-top:58vh">
+<p style="color:#e2e8f0;font-size:13px;text-shadow:0 2px 8px #000">Nico Bejarano • ALFA BRAVO 10-4</p>
 <input value="Nico Bejarano"><input type="password" value="NICO-10-4-SENTINELA">
 <button style="background:#fff;color:#000" onclick="entrar()">ENTRAR →</button>
-<p style="color:#94a3b8;font-size:11px;margin-top:12px">Sin humanoides. Solo CENTINELA limpio.</p>
+<p style="color:#94a3b8;font-size:11px;margin-top:10px">Humanoides de fondo. Al entrar siguen estando.</p>
 </div>
 
 <div id="home" class="box" style="display:none">
-<div style="display:flex;justify-content:space-between;font-weight:700"><span>18:14</span><span>📶 🔋 50%</span></div>
-<h2 style="margin:12px 0">Hola, Nico 👋</h2>
+<div style="display:flex;justify-content:space-between;font-weight:700;text-shadow:0 2px 8px #000"><span>18:14</span><span>📶 🔋 50%</span></div>
+<h2 style="margin:12px 0;text-shadow:0 2px 10px #000">Hola, Nico 👋</h2>
 <div class="w"><small>🌤️ TIGRE • REAL</small><b id="clima" style="font-size:28px;display:block">--°C</b><p id="clima2" style="font-size:12px">Tocá actualizar</p><button style="background:#fff;color:#000" onclick="clima()">Actualizar clima real</button></div>
 <div class="w"><small>💵 DÓLAR BLUE • REAL</small><b id="dolar" style="font-size:28px;display:block">--</b><p id="dolar2" style="font-size:12px">Tocá actualizar</p><button style="background:#fff;color:#000" onclick="dolar()">Actualizar dólar real</button></div>
-<h3 style="margin:10px 0">Tus Apps</h3><div class="apps" id="apps"></div>
+<h3 style="margin:10px 0;text-shadow:0 2px 8px #000">Tus Apps</h3><div class="apps" id="apps"></div>
 <button style="background:rgba(0,0,0,.6);color:#fff;border:1px solid #334155" onclick="salir()">Cerrar sesión</button>
+<p style="text-align:center;color:#cbd5e1;font-size:11px;margin-top:10px">Fondo: humanoides sosteniendo a SENTINELA • Siguen de fondo</p>
 </div>
 
 <div id="modal" class="modal"><div class="mtop"><b id="mTit">APP</b><button onclick="cerrar()" style="width:auto;padding:8px 14px;background:#fff;border-radius:20px">✕ Cerrar</button></div><div class="mbody" id="mBody"></div></div>
@@ -59,4 +79,17 @@ function openApp(n){var b=document.getElementById('mBody');document.getElementBy
 if(n==='CLIMA')b.innerHTML='<p>'+document.getElementById('clima2').textContent+'</p><button style="background:#fff" onclick="clima()">Actualizar</button>';
 else if(n==='TRADUCTOR')b.innerHTML='<input id="ti" placeholder="amparo, taquicardia, penal"><button style="background:#fff" onclick="doT()">Traducir</button><div class="out" id="to"></div>';
 else if(n==='FABRICA')b.innerHTML='<button style="background:#fff" onclick="doG()">Generar 10 reales</button><button style="background:#000;color:#fff;border:1px solid #fff" onclick="doV()">Ver guardadas</button><div class="out" id="go"></div>';
-else if(n==='VOZ')b.innerHTML='<button style="background:#fff" onclick="hablar(\'Alfa Bravo diez cuatro. Centinela activo.\')">Escuchar</button><input id="vt" value="Alfa Bravo 10-4, Centinela
+else if(n==='VOZ')b.innerHTML='<button style="background:#fff" onclick="hablar(\'Alfa Bravo diez cuatro. Centinela activo.\')">Escuchar</button><input id="vt" value="Alfa Bravo 10-4, Centinela activo"><button style="background:#fff" onclick="hablar(document.getElementById(\'vt\').value)">Decir mi texto</button>';
+else if(n==='CAMARA')b.innerHTML='<button style="background:#fff" onclick="doCam()">Abrir cámara real</button>';
+else if(n==='GPS')b.innerHTML='<button style="background:#fff" onclick="doGPS()">Ver GPS real</button><div class="out" id="gpsO"></div>';
+else if(n==='CALC')b.innerHTML='<input id="n1" type="number" placeholder="N1"><input id="n2" type="number" placeholder="N2"><button style="background:#fff" onclick="doCalc()">Sumar</button><div class="out" id="calcO"></div>';
+else b.innerHTML='<p>NIVEL 1: 1 mes - 1 palabra<br>NIVEL 2: 3 meses - 2 palabras<br>NIVEL 3: 6 meses - 3 palabras + Morse</p>';
+document.getElementById('modal').classList.add('open');}
+function cerrar(){document.getElementById('modal').classList.remove('open')}
+function doT(){var v=document.getElementById('ti').value.toLowerCase();var r=[];for(var k in D){if(v.indexOf(k)>-1)r.push(k+' = '+D[k])}document.getElementById('to').textContent=r.length?r.join('\n'):'Probá: amparo, taquicardia, penal';}
+function doG(){var g=getG();var t='';for(var i=0;i<10;i++){var o=crear();g.push(o);t+=o+'\n\n'}try{localStorage.setItem('or',JSON.stringify(g))}catch(e){}document.getElementById('go').textContent=t+'TOTAL: '+g.length;}
+function doV(){var g=getG();document.getElementById('go').textContent=g.length?g.join('\n\n'):'Todavía no hay.';}
+function doCam(){var i=document.createElement('input');i.type='file';i.accept='image/*';i.capture='environment';i.onchange=function(){alert('✅ Foto real')};i.click();}
+function doGPS(){if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(p){document.getElementById('gpsO').textContent='Lat: '+p.coords.latitude+'\nLon: '+p.coords.longitude},function(){document.getElementById('gpsO').textContent='Sin permiso'})}
+function doCalc(){var a=Number(document.getElementById('n1').value||0),b=Number(document.getElementById('n2').value||0);document.getElementById('calcO').textContent=a+' + '+b+' = '+(a+b);}
+</script></body></html>
