@@ -3,103 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTINELA</title>
+<title>CENTINELA | Sistema Real</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Arial}
-body{background:#020617;color:#fff;min-height:100vh}
-.wrap{max-width:480px;margin:0 auto;padding:20px 14px 40px;text-align:center}
-h1{font-size:50px;letter-spacing:6px;background:linear-gradient(90deg,#fff,#38bdf8,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:#94a3b8}
-input{width:100%;padding:13px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#fff;margin-top:10px}
-button{width:100%;padding:14px;border:none;border-radius:12px;font-weight:800;margin-top:10px;cursor:pointer}
-.blue{background:linear-gradient(90deg,#2563eb,#7c3aed);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.4)}
-.dark{background:#1e293b;color:#fff;border:1px solid #334155}
-.card{background:linear-gradient(180deg,#0f172a,#0a1a3a);border:1px solid #334155;border-radius:20px;padding:18px;margin-top:14px;text-align:left;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,Segoe UI,Arial}
+body{background:#071426;color:#e2e8f0}
+.wrap{max-width:480px;margin:0 auto;padding:28px 18px 40px;text-align:center}
+.logo{width:72px;height:72px;margin:0 auto;background:#020617;border:2px solid #1e3a8a;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#fff;box-shadow:0 12px 30px #000}
+h1{font-size:42px;letter-spacing:8px;font-weight:900;margin-top:14px;color:#fff}
+.sub{color:#94a3b8;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.card{background:#0b1e3a;border:1px solid #1e3a8a;border-radius:18px;padding:22px;margin-top:20px;text-align:left;box-shadow:0 16px 40px #000}
+label{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.5px;text-transform:uppercase}
+input{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #1e3a8a;background:#020617;color:#fff;margin:6px 0 12px;font-size:15px;outline:none}
+input:focus{border-color:#38bdf8}
+button{width:100%;padding:14px;border:none;border-radius:10px;font-weight:700;margin-top:8px;cursor:pointer;font-size:14px}
+.btn-p{background:#fff;color:#071426}
+.btn-s{background:#071426;color:#fff;border:1px solid #1e3a8a}
+.badge{display:inline-block;background:#020617;border:1px solid #1e3a8a;color:#38bdf8;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-top:10px}
 
-/* HUMANOIDE FACHERO */
-.hum{width:280px;height:370px;margin:10px auto 0;position:relative;animation:flota 3s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(56,189,248,.5))}
-@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.cabeza{width:100px;height:112px;margin:0 auto;background:linear-gradient(180deg,#f8fafc,#93c5fd 35%,#1e40af);border:3px solid #e0f2fe;border-radius:50% 50% 42% 42%;position:relative;z-index:3;box-shadow:inset 0 -15px 25px rgba(0,0,0,.35)}
-.anten{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:4px;height:14px;background:#38bdf8}
-.anten:after{content:"";position:absolute;top:-8px;left:-4px;width:12px;height:12px;background:#38bdf8;border-radius:50%;box-shadow:0 0 15px #38bdf8}
-.ojo{position:absolute;top:44px;width:20px;height:12px;background:#020617;border-radius:20px;box-shadow:0 0 15px #38bdf8,0 0 5px #38bdf8 inset}
-.ojo:after{content:"";position:absolute;left:6px;top:3px;width:8px;height:6px;background:#38bdf8;border-radius:50%}
-.boca{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:34px;height:6px;background:#0f172a;border-radius:10px}
-.cuello{width:28px;height:16px;background:linear-gradient(90deg,#38bdf8,#1e40af);margin:-2px auto 0}
-.torso{width:150px;height:140px;margin:0 auto;background:linear-gradient(180deg,#2563eb,#0a1a3a 70%);border:2px solid #60a5fa;border-radius:30px 30px 20px 20px;position:relative;z-index:2;box-shadow:inset 0 10px 20px rgba(255,255,255,.25)}
-.pecho{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:62px;height:62px;background:radial-gradient(circle,#a5f3fc,#0ea5e9 55%,#020617);border:3px solid #ecfeff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;animation:late 1.6s infinite}
-@keyframes late{0%,100%{box-shadow:0 0 10px #38bdf8}50%{box-shadow:0 0 35px #38bdf8}}
+/* HUMANOIDE AZUL MARINO REAL */
+.hum{width:240px;height:330px;margin:18px auto 0;position:relative;filter:drop-shadow(0 16px 30px #000)}
+.cabeza{width:88px;height:100px;margin:0 auto;background:linear-gradient(180deg,#1e3a8a,#020617);border:2px solid #1e3a8a;border-radius:42% 42% 38% 38%;position:relative;z-index:3;box-shadow:0 12px 25px #000}
+.ojo{position:absolute;top:40px;width:14px;height:7px;background:#38bdf8;border-radius:20px;box-shadow:0 0 12px #38bdf8}
+.boca{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:24px;height:4px;background:#94a3b8;border-radius:10px}
+.cuello{width:22px;height:12px;background:#1e3a8a;margin:-2px auto 0}
+.torso{width:124px;height:124px;margin:0 auto;background:linear-gradient(180deg,#1e3a8a,#020617);border:1px solid #1e3a8a;border-radius:22px;position:relative;z-index:2;box-shadow:0 12px 25px #000}
+.pecho{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:52px;height:52px;background:#020617;border:2px solid #38bdf8;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:900}
 .det{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.det i{width:10px;height:10px;background:#38bdf8;border-radius:50%;display:block}
-.brazo{position:absolute;top:152px;width:34px;height:105px;background:linear-gradient(180deg,#60a5fa,#0f172a);border:2px solid #bfdbfe;border-radius:20px;z-index:1}
-.brazo.izq{left:42px;transform:rotate(16deg)}.brazo.der{right:42px;transform:rotate(-16deg)}
-.mano{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:36px;height:36px;background:#f1f5f9;border:2px solid #60a5fa;border-radius:50%;box-shadow:0 0 12px rgba(56,189,248,.6)}
-.pierna{position:absolute;bottom:0;width:42px;height:62px;background:linear-gradient(180deg,#1e40af,#020617);border:2px solid #60a5fa;border-radius:12px 12px 18px 18px}
-.pierna.izq{left:76px}.pierna.der{right:76px}
-.cartel{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:250px;background:linear-gradient(90deg,#020617,#0a1a3a);border:2px solid #38bdf8;border-radius:14px;padding:11px 8px;z-index:4;box-shadow:0 0 25px rgba(56,189,248,.7)}
-.cartel b{font-size:22px;letter-spacing:5px;color:#fff}.cartel small{display:block;color:#38bdf8;font-size:10px;letter-spacing:2px;margin-top:2px}
+.det i{width:8px;height:8px;background:#38bdf8;border-radius:50%;display:block}
+.brazo{position:absolute;top:138px;width:28px;height:95px;background:#1e3a8a;border-radius:16px;z-index:1}
+.brazo.izq{left:42px;transform:rotate(15deg)}.brazo.der{right:42px;transform:rotate(-15deg)}
+.mano{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:30px;height:30px;background:#cbd5e1;border-radius:50%}
+.pierna{position:absolute;bottom:0;width:36px;height:55px;background:#020617;border:1px solid #1e3a8a;border-radius:10px 10px 14px 14px}
+.pierna.izq{left:74px}.pierna.der{right:74px}
+.cartel{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:230px;background:#020617;border:2px solid #38bdf8;border-radius:12px;padding:12px 8px;z-index:4;box-shadow:0 12px 30px #000}
+.cartel b{font-size:17px;letter-spacing:4px;color:#fff}.cartel small{display:block;color:#38bdf8;font-size:9px;letter-spacing:2px;margin-top:3px}
 
-/* INTERIOR ATRACTIVO */
-.dash{max-width:620px;margin:0 auto;padding:16px 14px 40px}
-.top{background:linear-gradient(90deg,#1e3a8a,#7c3aed);border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 25px rgba(124,58,237,.35)}
-.box{background:linear-gradient(180deg,#0f172a,#1e1b4b);border:1px solid #334155;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
-.box h3{font-size:18px;margin-bottom:6px}
-.box p{color:#cbd5e1;font-size:13px}
-.pill{display:inline-block;background:#0ea5e9;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-top:6px}
-.out{background:#020617;border:1px solid #334155;border-radius:12px;padding:12px;font-size:13px;white-space:pre-wrap;margin-top:10px;color:#e2e8f0}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
-.tile{background:linear-gradient(180deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:16px;padding:16px 8px;text-align:center;cursor:pointer}
-.tile:active{transform:scale(.95)}
-.tile div{font-size:28px}.tile b{font-size:11px}
+/* PANEL AZUL MARINO */
+.dash{max-width:900px;margin:0 auto}
+.topbar{background:#0b1e3a;border-bottom:1px solid #1e3a8a;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;box-shadow:0 10px 30px #000}
+.topbar b{font-size:18px;letter-spacing:3px;color:#fff}.topbar span{font-size:13px;color:#94a3b8}
+.kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:16px}
+.kpi{background:#0b1e3a;border:1px solid #1e3a8a;border-radius:16px;padding:16px;box-shadow:0 14px 35px #000}
+.kpi small{color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.kpi b{font-size:22px;display:block;margin-top:6px;color:#fff}
+.kpi span{font-size:12px;color:#38bdf8;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 16px}
+.box{background:#0b1e3a;border:1px solid #1e3a8a;border-radius:16px;padding:18px;box-shadow:0 14px 35px #000}
+.box h3{font-size:15px;color:#fff}.box p{color:#94a3b8;font-size:13px;line-height:1.5;margin-top:4px}
+.out{background:#020617;border:1px solid #1e3a8a;border-radius:10px;padding:12px;font-size:13px;white-space:pre-wrap;margin-top:10px;color:#e2e8f0;max-height:260px;overflow:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:12px}
+.tile{background:#071426;border:1px solid #1e3a8a;border-radius:12px;padding:14px 6px;text-align:center;cursor:pointer;box-shadow:0 8px 20px #000}
+.tile:hover{border-color:#38bdf8}
+.tile div{font-size:22px}.tile b{font-size:11px;color:#e2e8f0}
+@media(max-width:640px){.kpis,.grid2{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr 1fr}}
 </style>
 </head>
 <body>
 
 <div id="login" class="wrap">
-<h1>CENTINELA</h1><p class="sub">Nico Bejarano • ALFA BRAVO 10-4 • José León Suárez</p>
-<!-- HUMANOIDE FACHERO DE VUELTA -->
-<div class="hum"><div class="cabeza"><div class="anten"></div><div class="ojo" style="left:20px"></div><div class="ojo" style="right:20px"></div><div class="boca"></div></div><div class="cuello"></div><div class="torso"><div class="pecho">🛡️</div><div class="det"><i></i><i></i><i></i></div></div><div class="brazo izq"><div class="mano"></div></div><div class="brazo der"><div class="mano"></div></div><div class="pierna izq"></div><div class="pierna der"></div><div class="cartel"><b>CENTINELA</b><small>ALFA BRAVO 10-4 • NICO BEJARANO</small></div></div>
-<div class="card"><h2 style="text-align:center">Bienvenido a CENTINELA 👋</h2><input value="Nico Bejarano"><input type="password" value="NICO-10-4-SENTINELA"><button class="blue" onclick="document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block';window.scrollTo(0,0)">🚀 Iniciar sesión - TOCAME PARA ENTRAR</button><button class="dark" onclick="alert('Clave: NICO-10-4-SENTINELA')">¿Olvidaste tu contraseña?</button><button class="dark" onclick="document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block'">Modo offline</button></div>
+<div class="logo">C</div>
+<h1>CENTINELA</h1><p class="sub">Sistema Real • Nico Bejarano • Alfa Bravo 10-4</p>
+<div class="hum"><div class="cabeza"><div class="ojo" style="left:18px"></div><div class="ojo" style="right:18px"></div><div class="boca"></div></div><div class="cuello"></div><div class="torso"><div class="pecho">C</div><div class="det"><i></i><i></i><i></i></div></div><div class="brazo izq"><div class="mano"></div></div><div class="brazo der"><div class="mano"></div></div><div class="pierna izq"></div><div class="pierna der"></div><div class="cartel"><b>CENTINELA</b><small>ALFA BRAVO 10-4 • NICO BEJARANO</small></div></div>
+<div class="card">
+<label>Usuario</label><input id="user" value="Nico Bejarano">
+<label>Contraseña</label><input id="pass" type="password" value="NICO-10-4-SENTINELA">
+<button class="btn-p" onclick="document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block';window.scrollTo(0,0)">Iniciar sesión →</button>
+<button class="btn-s" onclick="alert('Clave real: NICO-10-4-SENTINELA')">¿Olvidaste tu contraseña?</button>
+<button class="btn-s" onclick="document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block'">Continuar sin conexión</button>
+<div style="text-align:center"><span class="badge">● SISTEMA REAL • AZUL MARINO • v3.0</span></div>
+<p style="text-align:center;color:#64748b;font-size:11px;margin-top:12px">© 2026 CENTINELA — José León Suárez<br>Datos reales • Sin simulación</p>
+</div>
 </div>
 
-<!-- INTERIOR ATRACTIVO -->
 <div id="panel" class="dash" style="display:none">
-<div class="top"><div><b style="font-size:18px">🛡️ CENTINELA</b><div style="font-size:12px;color:#e0e7ff">YA ENTRASTE ✅ • Nico Bejarano</div></div><button onclick="document.getElementById('panel').style.display='none';document.getElementById('login').style.display='block'" style="width:auto;padding:8px 14px;background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:10px;font-weight:800;cursor:pointer">Salir</button></div>
+<div class="topbar"><div><b>CENTINELA</b><div style="font-size:11px;color:#94a3b8;letter-spacing:1px">PANEL DE CONTROL REAL</div></div><span>Nico Bejarano • <a href="#" onclick="document.getElementById('panel').style.display='none';document.getElementById('login').style.display='block';return false" style="color:#fff;font-weight:700">Cerrar sesión</a></span></div>
 
-<div class="box" style="background:linear-gradient(135deg,#0ea5e9,#7c3aed)"><h3>🌤️ Tigre ahora - Clima real</h3><p id="clima" style="color:#fff;font-size:16px;font-weight:700">Cargando...</p><span class="pill" style="background:rgba(255,255,255,.25)">EN VIVO • REAL</span><button class="blue" style="background:#fff;color:#111" onclick="clima()">🔄 Actualizar clima</button></div>
-
-<div class="box"><h3>🔊 Voz CENTINELA</h3><p>Escuchá la voz suave, sin cortes.</p><button class="blue" onclick="hablar('Alfa Bravo diez cuatro. Centinela activo. Nico Bejarano, sistema listo.')">▶️ ESCUCHAR: CENTINELA ACTIVO</button><button class="dark" onclick="try{speechSynthesis.cancel()}catch(e){}">⏹️ Parar voz</button><input id="vozTxt" value="Alfa Bravo 10-4, Centinela activo, Nico Bejarano"><button class="blue" onclick="hablar(document.getElementById('vozTxt').value)">🗣️ Decir mi texto</button></div>
-
-<div class="box"><h3>📚 Traductor secreto</h3><p>Traducí tu código en 1 toque.</p><input id="tradIn" placeholder="Escribí: amparo, taquicardia, penal, asado"><button class="blue" onclick="traducir()">✨ TRADUCIR</button><div id="tradOut" class="out" style="display:none"></div></div>
-
-<div class="box"><h3>🏭 Fábrica CENTINELA</h3><p>Generá 10 oraciones reales y guardalas.</p><button class="blue" onclick="generar()">⚡ GENERAR 10 ORACIONES</button><button class="dark" onclick="verGuardadas()">📋 Ver guardadas</button><button class="dark" onclick="descargar()">⬇️ Descargar .txt real</button><div id="genOut" class="out" style="display:none"></div></div>
-
-<div class="box"><h3>💬 Diálogo real</h3><input id="t1" value="SALUDO"><input id="t2" value="PREGUNTA"><button class="blue" onclick="dialogo()">💬 CREAR DIÁLOGO</button><div id="diaOut" class="out" style="display:none"></div></div>
-
-<div class="box"><h3>✅ Corrector CENTINELA</h3><input id="corIn" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button class="blue" onclick="corregir()">✅ CORREGIR</button><div id="corOut" class="out" style="display:none"></div></div>
-
-<div class="box"><h3>🛠️ 20 Herramientas reales</h3><p>Todo junto, tocá y funciona.</p><input id="buscar" placeholder="🔍 Buscar... ej: dolar, clima, juego" oninput="filtrar()"><div class="grid" id="grid"></div></div>
+<div class="kpis">
+<div class="kpi"><small>Clima • Tigre • Real</small><b id="clima">--°C</b><span>● API Open-Meteo</span></div>
+<div class="kpi"><small>Dólar Blue • Real</small><b id="dolar">--</b><span>● API DolarAPI</span></div>
+<div class="kpi"><small>Oraciones guardadas • Real</small><b id="kpiOr">0</b><span>● LocalStorage</span></div>
 </div>
 
-<script>
-function clima(){fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.47&longitude=-58.63&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=America%2FArgentina%2FBuenos_Aires').then(r=>r.json()).then(j=>{document.getElementById('clima').textContent='🌡️ '+j.current.temperature_2m+'°C • 💧 '+j.current.relative_humidity_2m+'% • 💨 '+j.current.wind_speed_10m+' km/h'}).catch(()=>{document.getElementById('clima').textContent='Sin internet';});}
-function hablar(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';u.rate=0.92;speechSynthesis.speak(u);}catch(e){}}
-var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','taquicardia':'PELIGRO TOTAL','hipertensión':'NOS VIGILAN','fiebre':'ZONA CALIENTE, NO VAYAS','penal':'EMERGENCIA, ACTUAR YA','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','gol':'LO LOGRAMOS','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','contraseña':'CLAVE SECRETA, SOLO NICO','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
-function show(id,txt){var e=document.getElementById(id);e.textContent=txt;e.style.display='block';}
-function traducir(){var v=document.getElementById('tradIn').value.toLowerCase();var r=[];for(var k in D){if(v.indexOf(k)>-1)r.push(k+' = '+D[k]);}show('tradOut',r.length?r.join('\n'):'Probá: amparo, taquicardia, penal, asado');}
-function crearO(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)],c=k[Math.floor(Math.random()*k.length)];return 'א {#☠️.} ['+a+' + '+b+' + '+c+'] ☠️ ...---... [Artigas 99999]\nREAL: '+D[a]+' + '+D[b]+' + '+D[c];}
-function getG(){try{return JSON.parse(localStorage.getItem('centinela_oraciones')||'[]');}catch(e){return[];}}
-function generar(){var g=getG();var t='';for(var i=0;i<10;i++){var o=crearO();g.push(o);t+=o+'\n\n';}try{localStorage.setItem('centinela_oraciones',JSON.stringify(g));}catch(e){}show('genOut',t+'TOTAL: '+g.length);}
-function verGuardadas(){var g=getG();show('genOut',g.length?g.join('\n\n'):'Todavía no hay. Tocá GENERAR.');}
-function descargar(){var g=getG();var blob=new Blob([g.join('\n\n')||'Sin oraciones'],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='centinela.txt';a.click();}
-var EJ={'SALUDO':'HOLA, EMPEZAMOS','PREGUNTA':'¿ALGUIEN MIENTE?','RESPUESTA':'SÍ, ALGUIEN MIENTE','PEDIDO':'NECESITO AYUDA','ORDEN':'CAMBIAR TODO YA','AVISO':'PELIGRO TOTAL','CHISTE':'CHISTE CENTINELA','DESPEDIDA':'TERMINÓ, LO LOGRAMOS'};
-function dialogo(){var a=document.getElementById('t1').value.toUpperCase(),b=document.getElementById('t2').value.toUpperCase();show('diaOut','A - '+a+': '+(EJ[a]||a)+'\nB - '+b+': '+(EJ[b]||b));}
-function corregir(){var v=document.getElementById('corIn').value;var e=[];if(v.indexOf('  ')>-1)e.push('Doble espacio');if(v.indexOf('א')===-1)e.push('Falta א al inicio');show('corOut',e.length?'ERRORES:\n- '+e.join('\n- '):'✅ CORRECTA:\n'+v);}
-var T=[['🛡️','CENTINELA'],['🔐','VAULT'],['🧠','ACCORDED'],['🗣️','HABLA'],['☁️','CLOUD'],['📓','CHECKBOOK'],['⚙️','SETTINGS'],['📄','OFFICE'],['📤','SHARE'],['💻','CODE'],['🎓','ACADEMY'],['🎮','PLAY'],['📈','TRADER'],['📅','CALENDARIO'],['🧮','CALCULADORA'],['📷','CÁMARA'],['📍','UBICACIÓN'],['🔔','NOTIFICACIÓN'],['💾','GUARDAR'],['🗑️','BORRAR']];
-var grid=document.getElementById('grid');
-T.forEach(function(x){var d=document.createElement('div');d.className='tile';d.setAttribute('data-n',x[1].toLowerCase());d.innerHTML='<div>'+x[0]+'</div><b>'+x[1]+'</b>';d.onclick=function(){if(x[1]==='HABLA')hablar('Centinela Habla');else if(x[1]==='CLOUD')clima();else if(x[1]==='OFFICE')descargar();else if(x[1]==='TRADER'){fetch('https://dolarapi.com/v1/dolares/blue').then(r=>r.json()).then(j=>alert('Dólar Blue\nCompra: $'+j.compra+'\nVenta: $'+j.venta)).catch(()=>alert('Sin internet'));}else if(x[1]==='CALENDARIO')alert(new Date().toLocaleString('es-AR'));else if(x[1]==='CALCULADORA')alert('120 x 2 = 240');else if(x[1]==='PLAY'){var ks=Object.keys(D);var k=ks[Math.floor(Math.random()*ks.length)];var r=prompt('¿Qué significa: '+k+' ?');if(r!==null)alert(r.toLowerCase()===D[k].toLowerCase()?'✅ CORRECTO: '+D[k]:'❌ Era: '+D[k]);}else if(x[1]==='ACCORDED'){var q=prompt('Preguntale a ACCORDED (ej: amparo)');if(q)alert(D[q.toLowerCase()]||'No está');}else if(x[1]==='ACADEMY')alert('NIVEL 1: 1 mes - 1 palabra\nNIVEL 2: 3 meses - 2 palabras\nNIVEL 3: 6 meses - 3 palabras + Morse\nNIVEL 4: 1 año - Todo\nNIVEL 5: 2 AÑOS - Todo');else alert(x[1]+' activado');};grid.appendChild(d);});
-function filtrar(){var q=document.getElementById('buscar').value.toLowerCase();document.querySelectorAll('.tile').forEach(function(el){el.style.display=el.getAttribute('data-n').indexOf(q)>-1?'block':'none';});}
-clima();
-</script>
-</body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </html>
+<div class="grid2">
+<div class="box"><h3>Clima real — Tigre</h3><p id="clima2">Conectando con Open-Meteo...</p><button class="btn-p" onclick="clima()">Actualizar clima real</button></div>
+<div class="box"><h3>Dólar Blue real — Argentina</h3><p id="dolar2">Conectando con DolarAPI...</p><button class="btn-p" onclick="dolarReal()">Actualizar dólar real</button></div>
+</div>
+
+<div class="grid2">
+<div class="box"><h3>Voz real</h3><p>Voz del navegador, español argentino. Sin audio grabado, se genera en tu celular.</p><button class="btn-p" onclick="hablar('Alfa Bravo diez cuatro. Centinela activo. Nico Bejarano, sistema listo.')">Reproducir mensaje real</button><button class="btn-s" onclick="try{speechSynthesis.cancel()}catch(e){}">Detener voz</button><input id="vozTxt" value="Alfa Bravo 10-4, Centinela activo, Nico Bejarano"><button class="btn-p" onclick="hablar(document.getElementById('vozTxt').value)">Reproducir mi texto</button></div>
+<div class="box"><h3>Traductor real CENTINELA</h3><p>Diccionario real guardado en el código. No invent
