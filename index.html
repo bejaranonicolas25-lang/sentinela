@@ -1,1 +1,67 @@
-<!-- PEGÁ ESTO DENTRO DE TU <script>, REEMPLAZANDO LA FUNCIÓN openApp de FÁBRICA -->
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA - FABRICA PRO</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#071426;color:#fff}
+.box{max-width:430px;margin:0 auto;padding:14px}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #334155;background:#000;color:#fff;margin-top:8px}
+button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:800;margin-top:8px;cursor:pointer}
+.btnw{background:#fff;color:#000}.btna{background:#0ea5e9;color:#fff}.btnd{background:#000;color:#fff;border:1px solid #334155}.btnv{background:#7c3aed;color:#fff}.btnr{background:#dc2626;color:#fff}
+.w{background:#0b1e3a;border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0}
+.out{background:#000;border:1px solid #1e3a8a;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px;font-size:13px;max-height:300px;overflow:auto}
+.chip{display:inline-block;background:#0ea5e9;border-radius:20px;padding:6px 10px;font-size:11px;font-weight:700;margin:4px 4px 0 0;cursor:pointer}
+.card{background:#000;border:1px solid #334155;border-radius:12px;padding:10px;margin-top:8px;font-size:13px}
+</style></head><body>
+<div class="box">
+<h2 style="letter-spacing:3px">🏭 FÁBRICA PRO</h2><p style="color:#94a3b8;font-size:12px">CENTINELA • NICO BEJARANO • ALFA BRAVO 10-4 • Guardadas: <b id="kpi" style="color:#fff">0</b> • Favoritas: <b id="kpiF" style="color:#facc15">0</b></p>
+
+<div class="w"><b>1. GENERAR</b>
+<select id="cant"><option value="1">Generar 1</option><option value="10" selected>Generar 10</option><option value="30">Generar 30</option><option value="50">Generar 50</option><option value="100">Generar 100</option></select>
+<select id="tipo"><option value="3">3 palabras (NIVEL 3)</option><option value="2">2 palabras (NIVEL 2)</option><option value="1">1 palabra (NIVEL 1)</option><option value="4">4 palabras (PRO)</option></select>
+<button class="btnw" onclick="doG()">⚙️ Generar y guardar</button>
+<button class="btna" onclick="doGOne()">🎲 Generar 1 sin guardar</button>
+</div>
+
+<div class="w"><b>2. BUSCAR / FILTRAR</b>
+<input id="buscarF" placeholder="Buscar... ej: amparo, penal, asado" oninput="doSearch()">
+<div><span class="chip" onclick="setF('amparo')">amparo</span><span class="chip" onclick="setF('penal')">penal</span><span class="chip" onclick="setF('asado')">asado</span><span class="chip" onclick="setF('taquicardia')">taquicardia</span><span class="chip" onclick="setF('')">Ver todo</span></div>
+</div>
+
+<div class="w"><b>3. ACCIONES</b>
+<button class="btna" onclick="doV()">👁️ Ver guardadas</button>
+<button class="btnv" onclick="doVFav()">⭐ Ver solo favoritas</button>
+<button class="btnw" onclick="doCopy()">📋 Copiar todas</button>
+<button class="btna" onclick="doSpeak()">🎙️ Escuchar las 5 primeras</button>
+<button class="btnd" onclick="doD()">⬇️ Descargar .txt</button>
+<button class="btnd" onclick="doShare()">📤 Compartir por WhatsApp</button>
+<button class="btnr" onclick="doClear()">🗑️ Borrar TODAS</button>
+</div>
+
+<div id="lista"></div>
+<div class="out" id="go">Tocá GENERAR para empezar, jefe.</div>
+<button class="btnd" onclick="location.href='index.html'">← Volver a CENTINELA</button>
+</div>
+
+<script>
+function hablar(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';speechSynthesis.speak(u);}catch(e){}}
+var D={amparo:'PELIGRO, NO VENGAN',cautelar:'QUEDARSE EN BASE',expediente:'JUNTA SECRETA',sentencia:'TODO BIEN, CERRADO',apelacion:'CAMBIAR DE CÓDIGO',perito:'HAY ALGUIEN MIRANDO',testigo:'HAY INFILTRADO',fiscal:'NOS SIGUEN',defensor:'ES DE CONFIANZA',embargo:'SALIR, SIN NADA',taquicardia:'PELIGRO TOTAL',hipertension:'NOS VIGILAN',fiebre:'ZONA CALIENTE, NO VAYAS',penal:'EMERGENCIA, ACTUAR YA',asado:'JUNTA GRANDE',empanada:'PAQUETE SECRETO',mate:'HABLAR TRANQUI',gol:'LO LOGRAMOS',var:'REVISAR, ALGUIEN MIENTE',cancha:'BASE'};
+function getG(){try{return JSON.parse(localStorage.getItem('or')||'[]')}catch(e){return[]}}
+function getF(){try{return JSON.parse(localStorage.getItem('fav')||'[]')}catch(e){return[]}}
+function saveG(g){try{localStorage.setItem('or',JSON.stringify(g))}catch(e){} upd();}
+function saveF(f){try{localStorage.setItem('fav',JSON.stringify(f))}catch(e){} upd();}
+function upd(){document.getElementById('kpi').textContent=getG().length;document.getElementById('kpiF').textContent=getF().length;}
+function crear(tipo){var k=Object.keys(D);var n=Number(tipo||3);var w=[],m=[];for(var i=0;i<n;i++){var a=k[Math.floor(Math.random()*k.length)];w.push(a);m.push(D[a]);}return 'א ['+w.join(' + ')+'] REAL: '+m.join(' + ');}
+function render(lista){var fav=getF();var h='';if(!lista.length){document.getElementById('lista').innerHTML='<p style="color:#94a3b8;font-size:12px;margin-top:10px">Sin resultados.</p>';return;}lista.slice(-20).reverse().forEach(function(o,idx){var realIdx=getG().indexOf(o);var isFav=fav.indexOf(o)>-1;h+='<div class="card">'+o+'<br><button class="btna" style="width:48%;display:inline-block" onclick="toggleFav('+realIdx+')">'+(isFav?'⭐ Quitar fav':'☆ Favorita')+'</button> <button class="btnr" style="width:48%;display:inline-block" onclick="delOne('+realIdx+')">🗑️ Borrar</button></div>';});document.getElementById('lista').innerHTML=h;}
+function doG(){var cant=Number(document.getElementById('cant').value||10);var tipo=document.getElementById('tipo').value;var g=getG();var t='';for(var i=0;i<cant;i++){var o=crear(tipo);g.push(o);t+=o+'\n\n';}saveG(g);document.getElementById('go').textContent=t+'TOTAL GUARDADAS: '+g.length;render(g);}
+function doGOne(){var o=crear(document.getElementById('tipo').value);document.getElementById('go').textContent='🎲 SIN GUARDAR:\n\n'+o+'\n\nSi te gusta, tocá Generar y guardar.';hablar(o);}
+function doV(){var g=getG();document.getElementById('go').textContent=g.length?'Mostrando últimas 20 abajo. Total: '+g.length:'Todavía no hay. Tocá Generar.';render(g);}
+function doVFav(){var f=getF();document.getElementById('go').textContent='⭐ FAVORITAS: '+f.length;render(f);}
+function setF(v){document.getElementById('buscarF').value=v;doSearch();}
+function doSearch(){var q=document.getElementById('buscarF').value.toLowerCase();var g=getG();var r=g.filter(function(o){return o.toLowerCase().indexOf(q)>-1});document.getElementById('go').textContent='🔍 Encontradas: '+r.length+' de '+g.length;render(r);}
+function toggleFav(idx){var g=getG();var o=g[idx];var f=getF();var p=f.indexOf(o);if(p>-1){f.splice(p,1);}else{f.push(o);}saveF(f);doV();}
+function delOne(idx){if(!confirm('¿Borrar esta oración?'))return;var g=getG();g.splice(idx,1);saveG(g);doV();}
+function doCopy(){var g=getG();var t=g.join('\n\n');if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert('✅ Copiadas '+g.length)});}else{alert(t.slice(0,500));}}
+function doSpeak(){var g=getG().slice(0,5).join('. ');hablar(g||'No hay oraciones guardadas');}
+function doD(){var g=getG();var blob=new Blob([g.join('\n\n')||'Sin oraciones'],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='centinela-fabrica.txt';a.click();}
+function doShare(){var g=getG().slice(-5).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('CENTINELA FÁBRICA:\n'+g),'_blank');}
+function doClear(){if(!confirm('¿Borrar TODAS las guardadas y favoritas?'))return;try{localStorage.removeItem('or');localStorage.removeItem('fav');}catch(e){}upd();document.getElementById('lista').innerHTML='';document.getElementById('go').textContent='Borradas.';}
+upd();doV();
+</script></body></html>
