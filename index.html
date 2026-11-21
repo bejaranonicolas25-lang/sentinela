@@ -1,43 +1,77 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA</title><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
-body{background:#020617;color:#fff}
-/* FONDO CIBERNETICO */
-.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 20%,#0a1a3a,#020617 60%,#000);overflow:hidden}
-.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.1) 1px,transparent 1px);background-size:36px 36px;animation:m 5s linear infinite}
-@keyframes m{to{background-position:0 36px}}
-.gig{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);text-align:center;z-index:2;animation:f 3s ease-in-out infinite}
-@keyframes f{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-12px)}}
-.gig .r{font-size:170px;filter:drop-shadow(0 0 30px #38bdf8);display:block}
-.gig b{font-size:26px;letter-spacing:6px;background:#020617;border:2px solid #38bdf8;border-radius:14px;padding:10px 18px;display:inline-block;box-shadow:0 0 25px #38bdf8;margin-top:6px}
-.gig small{display:block;color:#38bdf8;font-size:10px;letter-spacing:2px;margin-top:6px}
-.ag{position:absolute;top:50%;transform:translateY(-50%);text-align:center;z-index:3;animation:f2 3s ease-in-out infinite}
-.ag.l{left:8px}.ag.r{right:8px;animation-delay:.7s}
-@keyframes f2{0%,100%{transform:translateY(-50%) translateY(0)}50%{transform:translateY(-50%) translateY(-10px)}}
-.ag .r{font-size:78px;filter:drop-shadow(0 0 18px #38bdf8);display:block}
-.ag b{font-size:10px;background:#020617;border:1px solid #38bdf8;border-radius:8px;padding:6px;display:inline-block;margin-top:4px}
-/* CONTENIDO */
-.wrap{position:relative;z-index:10;max-width:430px;margin:0 auto;padding:12px 14px 20px;min-height:100vh}
-.top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding:6px}
-.bus{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px 14px;margin:10px 0}
-.bus input{background:transparent;border:none;outline:none;color:#fff;width:100%}
-.wid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.w{background:rgba(11,30,58,.85);border:1px solid rgba(56,189,248,.4);border-radius:20px;padding:14px;box-shadow:0 12px 30px #000;min-height:110px}
-.w.big{grid-column:span 2;background:linear-gradient(135deg,#0ea5e9,#1e3a8a);display:flex;justify-content:space-between;align-items:center}
-.w small{color:#bfdbfe;font-size:11px;font-weight:700}
-.w b{font-size:28px;display:block;margin-top:4px}
-.w button{background:#fff;border:none;padding:7px 11px;border-radius:20px;font-weight:700;font-size:12px;margin-top:8px;cursor:pointer}
-.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
-.app{cursor:pointer}
-.ic{width:56px;height:56px;margin:0 auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px #000}
-.app span{font-size:11px;display:block;margin-top:5px;text-shadow:0 2px 6px #000}
-.c1{background:#2563eb}.c2{background:#059669}.c3{background:#d97706}.c4{background:#7c3aed}.c5{background:#dc2626}.c6{background:#0891b2}.c7{background:#db2777}
-.dock{position:sticky;bottom:10px;margin-top:18px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);border-radius:28px;padding:10px;display:flex;justify-content:space-around}
-.dock .ic{width:50px;height:50px}
-.login{position:relative;z-index:10;max-width:430px;margin:0 auto;min-height:100vh;padding:40px 20px;text-align:center}
-input{width:100%;padding:13px;border-radius:13px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.55);color:#fff;margin-top:12px;outline:none}
-button{width:100%;padding:13px;border:none;border-radius:13px;font-weight:700;margin-top:12px;cursor:pointer}
-.btnw{background:#fff;color:#000}.btnd{background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(255,255,255,.25)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#020617;color:#fff}
+.bg{position:fixed;inset:0;background:#020617;overflow:hidden}
+.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.12) 1px,transparent 1px);background-size:32px 32px}
+.gig{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;animation:f 3s infinite}
+@keyframes f{50%{transform:translate(-50%,-50%) translateY(-10px)}}
+.gig span{font-size:150px;filter:drop-shadow(0 0 25px #38bdf8)}
+.gig b{background:#000;border:2px solid #38bdf8;border-radius:12px;padding:8px 16px;letter-spacing:5px;display:inline-block;margin-top:4px}
+.ag{position:absolute;top:50%;text-align:center;animation:f2 3s infinite}
+.ag span{font-size:70px;filter:drop-shadow(0 0 15px #38bdf8)}
+.ag b{font-size:9px;background:#000;border:1px solid #38bdf8;border-radius:8px;padding:5px;display:block}
+.l{left:6px}.r{right:6px}
+@keyframes f2{50%{transform:translateY(-10px)}}
+.box{position:relative;z-index:10;max-width:430px;margin:0 auto;padding:14px;min-height:100vh}
+input{width:100%;padding:13px;border-radius:12px;border:1px solid #334155;background:rgba(0,0,0,.6);color:#fff;margin-top:10px}
+button{width:100%;padding:13px;border:none;border-radius:12px;font-weight:800;margin-top:10px;cursor:pointer}
+.w{background:rgba(11,30,58,.9);border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 12px 30px #000}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}
+.ic{width:56px;height:56px;margin:auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px #000}
+.app span{font-size:11px;display:block;margin-top:5px}
+.c1{background:#2563eb}.c2{background:#059669}.c3{background:#d97706}.c4{background:#7c3aed}.c5{background:#dc2626}.c6{background:#0891b2}
 .modal{position:fixed;inset:0;background:#071426;z-index:99;display:none;flex-direction:column}
-.modal.open{display:flex}
-.mtop{padding:14px;display:flex;justify-content:space-between;background:#0b1e3
+.modal.open{display:flex}.mtop{padding:14px;display:flex;justify-content:space-between;background:#0b1e3a}.mbody{padding:16px;flex:1;overflow:auto}.out{background:#000;border:1px solid #1e3a8a;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px}
+</style></head><body>
+<div class="bg"><div class="ag l"><span>🤖</span><b>AGENTE 01</b></div><div class="gig"><span>🤖</span><br><b>CENTINELA</b><br><small style="color:#38bdf8">ALFA BRAVO 10-4 • NICO</small></div><div class="ag r"><span>🤖</span><b>AGENTE 02</b></div></div>
+
+<div id="login" class="box" style="text-align:center;padding-top:50px">
+<div style="width:80px;height:80px;background:#fff;border-radius:20px;margin:auto;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;color:#071426">C</div>
+<h1 style="letter-spacing:6px;margin-top:14px">CENTINELA</h1><p style="color:#cbd5e1;font-size:13px">Nico Bejarano • ALFA BRAVO 10-4</p>
+<input value="Nico Bejarano"><input type="password" value="NICO-10-4-SENTINELA">
+<button style="background:#fff;color:#000" onclick="entrar()">ENTRAR →</button>
+<p style="color:#94a3b8;font-size:11px;margin-top:12px">Si ves esto, YA cargó. Tocá ENTRAR.</p>
+</div>
+
+<div id="home" class="box" style="display:none">
+<div style="display:flex;justify-content:space-between;font-weight:700"><span>18:14</span><span>📶 🔋 50%</span></div>
+<h2 style="margin:12px 0">Hola, Nico 👋</h2>
+<div class="w"><small>🌤️ TIGRE • REAL</small><b id="clima" style="font-size:28px;display:block">--°C</b><p id="clima2" style="font-size:12px">Tocá actualizar</p><button style="background:#fff;color:#000" onclick="clima()">Actualizar clima real</button></div>
+<div class="w"><small>💵 DÓLAR BLUE • REAL</small><b id="dolar" style="font-size:28px;display:block">--</b><p id="dolar2" style="font-size:12px">Tocá actualizar</p><button style="background:#fff;color:#000" onclick="dolar()">Actualizar dólar real</button></div>
+<h3 style="margin:10px 0">Tus Apps</h3>
+<div class="apps" id="apps"></div>
+<button style="background:rgba(0,0,0,.6);color:#fff;border:1px solid #334155" onclick="salir()">Cerrar sesión</button>
+</div>
+
+<div id="modal" class="modal"><div class="mtop"><b id="mTit">APP</b><button onclick="cerrar()" style="width:auto;padding:8px 14px;background:#fff;border-radius:20px">✕ Cerrar</button></div><div class="mbody" id="mBody"></div></div>
+
+<script>
+function entrar(){document.getElementById('login').style.display='none';document.getElementById('home').style.display='block';clima();dolar();}
+function salir(){document.getElementById('home').style.display='none';document.getElementById('login').style.display='block';}
+async function clima(){try{var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.47&longitude=-58.63&current=temperature_2m&timezone=America%2FArgentina%2FBuenos_Aires');var j=await r.json();document.getElementById('clima').textContent=j.current.temperature_2m+'°C';document.getElementById('clima2').textContent='Tigre real: '+j.current.temperature_2m+'°C • Hora: '+new Date().toLocaleTimeString('es-AR');}catch(e){document.getElementById('clima').textContent='22°C';document.getElementById('clima2').textContent='Sin internet ahora. Conectate y tocá de nuevo.';}}
+async function dolar(){try{var r=await fetch('https://dolarapi.com/v1/dolares/blue');var j=await r.json();document.getElementById('dolar').textContent='$'+j.venta;document.getElementById('dolar2').textContent='Compra $'+j.compra+' • Venta $'+j.venta+' REAL';}catch(e){document.getElementById('dolar').textContent='$1.420';document.getElementById('dolar2').textContent='Sin internet. Referencia.';}}
+function hablar(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';speechSynthesis.speak(u);}catch(e){}}
+var D={amparo:'PELIGRO, NO VENGAN',taquicardia:'PELIGRO TOTAL',penal:'EMERGENCIA',asado:'JUNTA GRANDE',mate:'HABLAR TRANQUI'};
+function getG(){try{return JSON.parse(localStorage.getItem('or')||'[]')}catch(e){return[]}}
+function crear(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)];return 'א ['+a+' + '+b+'] REAL: '+D[a]+' + '+D[b];}
+var A=[['🌤️','CLIMA','c1'],['📚','TRADUCTOR','c2'],['🏭','FABRICA','c4'],['🎙️','VOZ','c5'],['📷','CAMARA','c5'],['📍','GPS','c6'],['🧮','CALC','c3'],['🎓','ACADEMY','c4']];
+var c=document.getElementById('apps');
+A.forEach(function(a){var d=document.createElement('div');d.className='app';d.innerHTML='<div class="ic '+a[2]+'">'+a[0]+'</div><span>'+a[1]+'</span>';d.onclick=function(){openApp(a[1])};c.appendChild(d)});
+function openApp(n){var b=document.getElementById('mBody');document.getElementById('mTit').textContent=n;
+if(n==='CLIMA')b.innerHTML='<p>'+document.getElementById('clima2').textContent+'</p><button style="background:#fff" onclick="clima()">Actualizar</button>';
+else if(n==='TRADUCTOR')b.innerHTML='<input id="ti" placeholder="amparo, taquicardia, penal"><button style="background:#fff" onclick="doT()">Traducir</button><div class="out" id="to"></div>';
+else if(n==='FABRICA')b.innerHTML='<button style="background:#fff" onclick="doG()">Generar 10 reales</button><button style="background:#000;color:#fff;border:1px solid #fff" onclick="doV()">Ver guardadas</button><div class="out" id="go"></div>';
+else if(n==='VOZ')b.innerHTML='<button style="background:#fff" onclick="hablar(\'Alfa Bravo diez cuatro. Centinela activo.\')">Escuchar</button><input id="vt" value="Alfa Bravo 10-4, Centinela activo"><button style="background:#fff" onclick="hablar(document.getElementById(\'vt\').value)">Decir mi texto</button>';
+else if(n==='CAMARA')b.innerHTML='<button style="background:#fff" onclick="doCam()">Abrir cámara real</button>';
+else if(n==='GPS')b.innerHTML='<button style="background:#fff" onclick="doGPS()">Ver GPS real</button><div class="out" id="gpsO"></div>';
+else if(n==='CALC')b.innerHTML='<input id="n1" type="number" placeholder="N1"><input id="n2" type="number" placeholder="N2"><button style="background:#fff" onclick="doCalc()">Sumar</button><div class="out" id="calcO"></div>';
+else b.innerHTML='<p>NIVEL 1: 1 mes - 1 palabra<br>NIVEL 2: 3 meses - 2 palabras<br>NIVEL 3: 6 meses - 3 palabras + Morse</p>';
+document.getElementById('modal').classList.add('open');}
+function cerrar(){document.getElementById('modal').classList.remove('open')}
+function doT(){var v=document.getElementById('ti').value.toLowerCase();var r=[];for(var k in D){if(v.indexOf(k)>-1)r.push(k+' = '+D[k])}document.getElementById('to').textContent=r.length?r.join('\n'):'Probá: amparo, taquicardia, penal';}
+function doG(){var g=getG();var t='';for(var i=0;i<10;i++){var o=crear();g.push(o);t+=o+'\n\n'}try{localStorage.setItem('or',JSON.stringify(g))}catch(e){}document.getElementById('go').textContent=t+'TOTAL: '+g.length;}
+function doV(){var g=getG();document.getElementById('go').textContent=g.length?g.join('\n\n'):'Todavía no hay.';}
+function doCam(){var i=document.createElement('input');i.type='file';i.accept='image/*';i.capture='environment';i.onchange=function(){alert('✅ Foto real')};i.click();}
+function doGPS(){if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(p){document.getElementById('gpsO').textContent='Lat: '+p.coords.latitude+'\nLon: '+p.coords.longitude},function(){document.getElementById('gpsO').textContent='Sin permiso'})}
+function doCalc(){var a=Number(document.getElementById('n1').value||0),b=Number(document.getElementById('n2').value||0);document.getElementById('calcO').textContent=a+' + '+b+' = '+(a+b);}
+</script></body></html>
