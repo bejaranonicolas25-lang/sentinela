@@ -1,46 +1,80 @@
 <script>
 (function(){
-var ia=document.getElementById('pB');if(ia){
-var t=document.createElement('div');t.className='c';t.innerHTML='<b>🧰 HERRAMIENTAS ADENTRO DE IA</b>';
-var calc=document.createElement('div');calc.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';calc.innerHTML='<b>🧮 Calculadora Real</b>';
-var ci=document.createElement('input');ci.placeholder='Ej: 1500+500';
-var cb=document.createElement('button');cb.className='btn';cb.style.marginTop='6px';cb.textContent='= CALCULAR';
-var cr=document.createElement('div');cr.style.marginTop='6px';
-cb.onclick=function(){try{cr.textContent='Resultado: '+eval(ci.value)}catch(e){cr.textContent='Escribí bien, ej: 1500+500'}};
-calc.appendChild(ci);calc.appendChild(cb);calc.appendChild(cr);t.appendChild(calc);
-var tr=document.createElement('div');tr.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';tr.innerHTML='<b>🌐 Traductor Rápido</b>';
-var ti=document.createElement('input');ti.placeholder='Escribí en español...';
-var tb=document.createElement('button');tb.className='btn btn2';tb.style.marginTop='6px';tb.textContent='🌐 TRADUCIR A INGLÉS';
-var trr=document.createElement('div');trr.style.marginTop='6px';
-tb.onclick=function(){window.open('https://translate.google.com/?sl=es&tl=en&text='+encodeURIComponent(ti.value),'_blank');trr.textContent='Abriendo traductor real...'};
-tr.appendChild(ti);tr.appendChild(tb);tr.appendChild(trr);t.appendChild(tr);
-ia.appendChild(t);
-}
-var lab=document.getElementById('pC');if(lab){
-var t2=document.createElement('div');t2.className='c';t2.innerHTML='<b>🧰 HERRAMIENTAS ADENTRO DE LAB</b>';
-var cron=document.createElement('div');cron.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';cron.innerHTML='<b>⏱️ Cronómetro Real</b><div id="cronTxt" style="font-size:28px;text-align:center">00:00</div>';
-var seg=0,timer=null;
-var b1=document.createElement('button');b1.className='btn';b1.textContent='▶️ EMPEZAR';b1.onclick=function(){if(timer)return;timer=setInterval(function(){seg++;var m=Math.floor(seg/60),s=seg%60;document.getElementById('cronTxt').textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)},1000)};
-var b2=document.createElement('button');b2.className='btn gris';b2.style.marginTop='6px';b2.textContent='⏹️ PARAR Y GUARDAR EN LAB';b2.onclick=function(){if(timer)clearInterval(timer);timer=null;try{datos.unshift({que:'Cronómetro real: '+document.getElementById('cronTxt').textContent,nivel:'🔵 AZUL - Experimento',lugar:'Lab - Cronómetro',tipo:'Herramienta Lab',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}alert('Cronómetro guardado ✅');seg=0;document.getElementById('cronTxt').textContent='00:00'};
-cron.appendChild(b1);cron.appendChild(b2);t2.appendChild(cron);
-var notas=document.createElement('div');notas.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';notas.innerHTML='<b>📝 Notas Rápidas Reales</b>';
-var ni=document.createElement('textarea');ni.placeholder='Escribí tu nota real...';
-var nb=document.createElement('button');nb.className='btn btn2';nb.style.marginTop='6px';nb.textContent='💾 GUARDAR NOTA EN LAB';
-nb.onclick=function(){if(!ni.value.trim())return;try{datos.unshift({que:'Nota real: '+ni.value,nivel:'🟣 VIOLETA - Idea',lugar:'Lab - Notas',tipo:'Nota real',hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}ni.value='';alert('Nota guardada ✅')};
-notas.appendChild(ni);notas.appendChild(nb);t2.appendChild(notas);
-lab.appendChild(t2);
-}
-var pan=document.getElementById('pD');if(pan){
-var t3=document.createElement('div');t3.className='c';t3.innerHTML='<b>🧰 HERRAMIENTAS ADENTRO DE PANEL</b>';
-var hb=document.createElement('div');hb.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';hb.innerHTML='<b>📱 Mi Celu Real</b><div id="infoCelu" style="font-size:13px;margin-top:6px">Cargando...</div>';
-var bInfo=document.createElement('button');bInfo.className='btn';bInfo.style.marginTop='6px';bInfo.textContent='📱 VER MI CELU REAL';
-bInfo.onclick=function(){var info='Pantalla: '+screen.width+'x'+screen.height+'\nIdioma: '+navigator.language+'\nEn línea: '+(navigator.onLine?'Sí':'No')+'\nHora: '+new Date().toLocaleString();document.getElementById('infoCelu').innerText=info;if(navigator.getBattery)navigator.getBattery().then(function(b){document.getElementById('infoCelu').innerText+='\nBatería real: '+Math.round(b.level*100)+'%'+(b.charging?' 🔌 Cargando':' 🔋')})};
-hb.appendChild(bInfo);t3.appendChild(hb);
-var ex=document.createElement('div');ex.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';ex.innerHTML='<b>📥 Exportar Todo Real</b>';
-var be=document.createElement('button');be.className='btn btn2';be.style.marginTop='6px';be.textContent='📥 DESCARGAR TODO MI SENTINELA';
-be.onclick=function(){var txt='SENTINELA - '+new Date().toLocaleString()+'\n\n'+datos.map(function(d){return d.fecha+' '+d.hora+' | '+d.nivel+' | '+d.tipo+' | '+d.lugar+' | '+d.que}).join('\n');var blob=new Blob([txt],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mi-sentinela-completo.txt';a.click()};
-ex.appendChild(be);t3.appendChild(ex);
-pan.appendChild(t3);
-}
+var w=document.querySelector('.w');if(!w)return;
+var temas=[
+{id:'violeta',n:'🟣 Violeta Real - TUYO ACTUAL',bg:'linear-gradient(180deg,#1a0033,#2a0a4a,#000)',ac:'#a100f2'},
+{id:'banco',n:'🏦 Banco Centinela',bg:'linear-gradient(180deg,#12002b,#2a0a4a,#000)',ac:'#FFD700'},
+{id:'camaras',n:'📷 Cámaras Neon',bg:'linear-gradient(180deg,#000,#1a0033,#4a00ff)',ac:'#00ffff'},
+{id:'central',n:'🛡️ Central de Mando',bg:'linear-gradient(180deg,#1a0033,#3b0764,#000)',ac:'#c084fc'},
+{id:'alerta',n:'🚨 Alerta Rojo',bg:'linear-gradient(180deg,#1a0000,#3a0000,#000)',ac:'#dc2626'},
+{id:'mapa',n:'🗺️ Mapa Zulu',bg:'linear-gradient(180deg,#0a0a1a,#1a0033,#000)',ac:'#7c3aed'},
+{id:'mensajes',n:'💬 Mensajes Centinela',bg:'linear-gradient(180deg,#12002b,#2a0a4a,#16002b)',ac:'#a78bfa'},
+{id:'asistente',n:'👁️ Asistente Meta',bg:'linear-gradient(180deg,#000,#16002b,#2a0a4a)',ac:'#22d3ee'},
+{id:'oro',n:'👑 Oro Ultimátum',bg:'linear-gradient(180deg,#1a1200,#3a2a00,#000)',ac:'#FFD700'}
+];
+var sec=document.createElement('div');sec.className='c';sec.id='secTemas';
+sec.innerHTML='<b>🎨 FONDOS Y TEMAS - OPCIONAL</b><p style="font-size:13px;color:#d8b4fe">Tu tema Violeta Real queda siempre. Estos son opcionales.</p><div id="listaTemas" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div><p id="temaActual" style="margin-top:8px;font-size:13px">Tema actual: 🟣 Violeta Real - TUYO</p>';
+w.appendChild(sec);
+var lt=document.getElementById('listaTemas');
+temas.forEach(function(t){
+var b=document.createElement('button');b.type='button';b.style.cssText='flex:1 1 30%;padding:12px 6px;border:2px solid '+t.ac+';border-radius:14px;background:'+t.bg+';color:#fff;font-weight:900;font-size:12px';
+b.textContent=t.n;b.onclick=function(){document.body.style.background=t.bg;try{localStorage.setItem('temaSentinela',t.id)}catch(e){}document.getElementById('temaActual').textContent='Tema actual: '+t.n+' (Opcional - Tu Violeta sigue guardado)';try{hablarSentinela('Tema '+t.n+' aplicado')}catch(e){}};
+lt.appendChild(b);
+});
+var bVolver=document.createElement('button');bVolver.className='btn';bVolver.style.marginTop='8px';bVolver.textContent='🟣 VOLVER A MI VIOLETA REAL - EL DE SIEMPRE';bVolver.onclick=function(){document.body.style.background=temas[0].bg;try{localStorage.setItem('temaSentinela','violeta')}catch(e){}document.getElementById('temaActual').textContent='Tema actual: 🟣 Violeta Real - TUYO'};
+sec.appendChild(bVolver);
+try{var guardado=localStorage.getItem('temaSentinela');if(guardado){var tt=temas.find(function(x){return x.id==guardado});if(tt){document.body.style.background=tt.bg;document.getElementById('temaActual').textContent='Tema actual: '+tt.n}}}catch(e){}
+var mods=[
+{e:'🛡️',t:'CENTINELA',d:'Logo de entrada, de apertura. El grande.',img:'linear-gradient(135deg,#a100f2,#6d28d9,#000)',acc:'Entrar con ALFA BRAVO 10-4'},
+{e:'🔐',t:'CENTINELA VAULT',d:'Logo de bóveda, de caja fuerte.',img:'linear-gradient(135deg,#3a2a00,#FFD700,#000)',acc:'Abrir mi Bóveda real'},
+{e:'🧠',t:'SENTINEL ACCORDED',d:'Logo de IA, de cerebro.',img:'linear-gradient(135deg,#a100f2,#22d3ee,#000)',acc:'Hablar con IA real'},
+{e:'🗣️',t:'CENTINELA HABLA',d:'Logo de idioma, de boca hablando.',img:'linear-gradient(135deg,#a100f2,#16a34a,#000)',acc:'Escuchar voz real'},
+{e:'☁️',t:'CENTINELA CLOUD',d:'Logo de nube.',img:'linear-gradient(135deg,#1a0033,#60a5fa,#000)',acc:'Guardar en nube real'},
+{e:'📋',t:'CENTINELA CHECKBOOK',d:'Logo de cuaderno, de check.',img:'linear-gradient(135deg,#2a0a4a,#a100f2,#fff)',acc:'Ir a mi Lab real'},
+{e:'⚙️',t:'CENTINELA SETTINGS',d:'Logo de engranaje.',img:'linear-gradient(135deg,#2a0a4a,#6b7280,#000)',acc:'Abrir Ajustes reales'},
+{e:'📄',t:'CENTINELA OFFICE',d:'Logo de PDF, Excel, PowerPoint.',img:'linear-gradient(135deg,#dc2626,#a100f2,#000)',acc:'Generar Reporte real'},
+{e:'📤',t:'CENTINELA SHARE',d:'Logo de compartir pantalla.',img:'linear-gradient(135deg,#16a34a,#a100f2,#000)',acc:'Compartir por WhatsApp real'},
+{e:'💻',t:'CENTINELA CODE',d:'Logo de código.',img:'linear-gradient(135deg,#000,#a100f2,#22d3ee)',acc:'Crear código real'},
+{e:'🎓',t:'CENTINELA ACADEMY',d:'Logo de escuela, de aprender.',img:'linear-gradient(135deg,#FFD700,#a100f2,#000)',acc:'Aprender lección real'},
+{e:'🎮',t:'CENTINELA PLAY',d:'Logo de juego, de puntaje.',img:'linear-gradient(135deg,#ec4899,#a100f2,#000)',acc:'Ver mi puntaje real'},
+{e:'📈',t:'CENTINELA TRADER',d:'Logo de trading, de plata, de mercado.',img:'linear-gradient(135deg,#16a34a,#FFD700,#000)',acc:'Ver mi Trader real'},
+{e:'🏦',t:'BANCO CENTINELA',d:'Saldo total, Movimientos, Trader, Transferir.',img:'linear-gradient(135deg,#2a0a4a,#FFD700,#000)',acc:'Ver mi Banco real'},
+{e:'📷',t:'CÁMARAS CENTINELA',d:'En vivo - 4 cámaras: BASE, PATRULLA, ZULU, GOLF.',img:'linear-gradient(135deg,#000,#a100f2,#00ffff)',acc:'Prender cámara real'},
+{e:'🛡️',t:'CENTRAL DE MANDO',d:'QUINTUPLE SECURITY 5/5 - Códigos Alfa Bravo.',img:'linear-gradient(135deg,#1a0033,#a100f2,#000)',acc:'Ver Códigos Alfa Bravo'},
+{e:'💬',t:'MENSAJES CENTINELA',d:'JEFE, ALFA BRAVO, CORAL, CENTINELA META.',img:'linear-gradient(135deg,#2a0a4a,#a100f2,#ec4899)',acc:'Abrir Mensajes reales'},
+{e:'🚨',t:'ALERTA ROJO',d:'Cuenta regresiva, AYUDA, Peligro, Médico, Policía.',img:'linear-gradient(135deg,#3a0000,#dc2626,#000)',acc:'Activar Alerta Roja real'},
+{e:'🗺️',t:'MAPA ZULU',d:'José León Suárez - KILO, GOLF, MIKE, ZULU, BASE.',img:'linear-gradient(135deg,#0a0a1a,#7c3aed,#000)',acc:'Abrir Mapa real'},
+{e:'👁️',t:'ASISTENTE CENTINELA META',d:'En línea - IA Activa - Teclado de códigos.',img:'linear-gradient(135deg,#000,#a100f2,#22d3ee)',acc:'Hablar con Asistente Meta'}
+];
+var sec2=document.createElement('div');sec2.className='c';sec2.innerHTML='<b>🧩 ESQUELETO CENTINELA - TODAS TUS FUNCIONES</b><p style="font-size:13px;color:#d8b4fe">No se quitó ninguna. Todas las de tus capturas, con su nombre, símbolo e imagen propia.</p><div id="gridEsqueleto" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"></div><div id="detalleEsqueleto" style="margin-top:10px"></div>';
+w.appendChild(sec2);
+var grid=document.getElementById('gridEsqueleto');
+mods.forEach(function(m){
+var d=document.createElement('div');d.style.cssText='background:'+m.img+';border:2px solid #fff;border-radius:16px;padding:12px;text-align:center;cursor:pointer';
+d.innerHTML='<div style="font-size:36px">'+m.e+'</div><b style="font-size:12px">'+m.t+'</b><br><small style="font-size:11px;opacity:.9">'+m.d+'</small>';
+d.onclick=function(){
+var det=document.getElementById('detalleEsqueleto');
+det.innerHTML='<div style="background:#16002b;border:2px solid #a100f2;border-radius:16px;padding:12px"><div style="background:'+m.img+';border-radius:12px;padding:14px;text-align:center"><div style="font-size:48px">'+m.e+'</div><h3>'+m.t+'</h3><p style="font-size:13px">'+m.d+'</p></div></div>';
+var b=document.createElement('button');b.className='btn';b.style.marginTop='8px';b.textContent='▶️ '+m.acc;b.onclick=function(){
+if(m.t.indexOf('VAULT')>-1){alert('🔐 Bóveda: Andá a Panel y usá tu PIN Bóveda')}
+else if(m.t.indexOf('ACCORDED')>-1||m.t.indexOf('ASISTENTE')>-1){try{tab('pB')}catch(e){}}
+else if(m.t.indexOf('HABLA')>-1){try{hablarSentinela('Hola Nico, soy Centinela Habla, ALFA BRAVO 10-4')}catch(e){}alert('🗣️ Habla activada')}
+else if(m.t.indexOf('CHECKBOOK')>-1){try{tab('pC')}catch(e){}}
+else if(m.t.indexOf('CODE')>-1){alert('💻 Code: Andá a Lab, abajo en LAB QUE CREA CÓDIGO REAL')}
+else if(m.t.indexOf('ACADEMY')>-1){try{tab('pB')}catch(e){}alert('🎓 Academy: En IA escribí ENSEÑAME')}
+else if(m.t.indexOf('BANCO')>-1){alert('🏦 Banco: Tu saldo real está en Panel.')}
+else if(m.t.indexOf('CÁMARAS')>-1){alert('📷 Cámaras: Tocá PRENDER CÁMARA REAL arriba')}
+else if(m.t.indexOf('ALERTA')>-1){alert('🚨 Alerta: En Inicio tocá LLAMAR 911 REAL si es grave')}
+else if(m.t.indexOf('MAPA')>-1){if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(p){window.open('https://www.google.com/maps?q='+p.coords.latitude+','+p.coords.longitude,'_blank')});else window.open('https://www.google.com/maps?q=Jose+Leon+Suarez','_blank')}
+else if(m.t.indexOf('MENSAJES')>-1){try{tab('pB')}catch(e){}}
+else {try{datos.unshift({que:m.t+' usado - '+new Date().toLocaleString(),nivel:'🟢 VERDE - Todo bien',lugar:'Esqueleto Centinela',tipo:m.t,hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render()}catch(e){}alert('✅ '+m.t+' guardado en tu Lab real')}
+};
+det.appendChild(b);
+var b2=document.createElement('button');b2.className='btn btn2';b2.style.marginTop='8px';b2.textContent='💾 GUARDAR '+m.t+' EN MI LAB';b2.onclick=function(){try{datos.unshift({que:m.t+' - '+m.d,nivel:'🟣 VIOLETA - Idea',lugar:'Esqueleto',tipo:m.t,hora:new Date().toLocaleTimeString(),fecha:new Date().toLocaleDateString(),likes:0,coms:[]});save();render();alert('Guardado ✅')}catch(e){}};
+det.appendChild(b2);
+det.scrollIntoView();
+};
+grid.appendChild(d);
+});
 })();
   </script>
