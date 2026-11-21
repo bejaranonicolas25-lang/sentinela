@@ -1,38 +1,42 @@
 <script>
 (function(){
-function hablar(txt){
-try{var u=new SpeechSynthesisUtterance(txt);u.lang='es-AR';u.rate=1;u.pitch=1;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}
+var panelEl=document.getElementById('pD');if(!panelEl)return;
+var seg={};try{seg=JSON.parse(localStorage.getItem('seguridad')||'{}')||{}}catch(e){seg={}}
+if(Object.keys(seg).length==0){seg={pin:true,alfa:true,vault:false,pregunta:false,ultimatum:false,tiempo:false}}
+function guardarSeg(){try{localStorage.setItem('seguridad',JSON.stringify(seg))}catch(e){}actualizar()}
+function contar(){var c=0;for(var k in seg){if(seg[k])c++}return c}
+function actualizar(){
+var el=document.getElementById('contadorSeg');if(el){var total=6;el.innerHTML='🛡️ Tenés <b style="font-size:22px;color:#00ff88">'+contar()+' de '+total+' seguridades activas</b><br><div style="background:#16002b;height:14px;border-radius:10px;margin-top:6px;overflow:hidden"><div style="background:linear-gradient(90deg,#a100f2,#00ff88);height:14px;width:'+(contar()/total*100)+'%"></div></div><p style="font-size:12px;margin-top:6px">'+(contar()==0?'⚠️ SIN SEGURIDAD':contar()==1?'🟡 BAJA - Te recomiendo 3 o más':contar()<=3?'🟢 MEDIA - Bien':contar()<=5?'🟢🟢 ALTA - Muy bien':'👑 ULTIMÁTUM - Nadie entra sin vos')+'</p>'}
 }
-window.hablarSentinela=hablar;
-window.vozOn=true;
-var ia=document.getElementById('pB');if(ia){
-var cajaVoz=document.createElement('div');cajaVoz.className='c';cajaVoz.innerHTML='<b>🔊 VOZ SENTINELA + APRENDIZAJE</b><p style="font-size:13px;color:#d8b4fe">La IA te habla de verdad.</p>';
-var bVoz=document.createElement('button');bVoz.className='btn';bVoz.textContent='🔊 HABLAR ÚLTIMO MENSAJE';bVoz.onclick=function(){var m=document.getElementById('msgs');var t=m?m.lastChild?m.lastChild.textContent:'' :'';if(t)hablar(t);else hablar('Hola Nico, soy Sentinel, ALFA BRAVO 10-4')};
-var bVozOn=document.createElement('button');bVozOn.className='btn btn2';bVozOn.style.marginTop='8px';bVozOn.textContent='🔊 VOZ: PRENDIDA - TOCÁ PARA APAGAR';bVozOn.onclick=function(){window.vozOn=!window.vozOn;bVozOn.textContent=window.vozOn?'🔊 VOZ: PRENDIDA - TOCÁ PARA APAGAR':'🔇 VOZ: APAGADA - TOCÁ PARA PRENDER';if(window.vozOn)hablar('Voz prendida, jefe. ALFA BRAVO 10-4')};
-var bApr=document.createElement('button');bApr.className='btn gris';bApr.style.marginTop='8px';bApr.textContent='🧠 ENSEÑAME ALGO NUEVO';bApr.onclick=function(){var lecciones=['LECCIÓN 1: ALFA BRAVO 10-4 significa TODO EN ORDEN, ENTENDIDO.','LECCIÓN 2: CHARLIE es chequeo, DELTA es salgo ya, GOLF es guardia, HOTEL es en casa.','LECCIÓN 3: Tu Lab es tu memoria real. Todo lo que guardás ahí, la IA lo aprende.','LECCIÓN 4: Si ves ROJO, es peligro. Guardalo en Lab, publicalo y si es grave, llamá al 911.','LECCIÓN 5: Para vender SENTINELA, decile: Muro real, cámara real, Lab real, 0% simulación.'];var l=lecciones[Math.floor(Math.random()*lecciones.length)];var m=document.getElementById('msgs');m.innerHTML+='<div class="b">'+l+'</div>';m.scrollTop=m.scrollHeight;if(window.vozOn)hablar(l)};
-cajaVoz.appendChild(bVoz);cajaVoz.appendChild(bVozOn);cajaVoz.appendChild(bApr);ia.querySelector('.c').appendChild(cajaVoz);
-}
-var oldCerebro2=window.cerebro;
+var caja=document.createElement('div');caja.className='c';caja.style.border='2px solid #00ff88';caja.innerHTML='<b>🔐 CENTRO DE SEGURIDAD - VOS ELEGÍS</b><p style="font-size:13px;color:#d8b4fe">Tildá las que querés usar. Podés usar 1, 2, 3 o las 6 a la vez.</p><div id="contadorSeg" style="background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0"></div>';
+var opciones=[
+{id:'pin',titulo:'🔑 1. Contraseña de Jefe',desc:'ALFA BRAVO 10-4 para entrar'},
+{id:'alfa',titulo:'📡 2. Código ALFA BRAVO',desc:'Te pide decir ALFA BRAVO 10-4'},
+{id:'vault',titulo:'🔐 3. PIN Bóveda',desc:'PIN secreto solo para la Bóveda'},
+{id:'pregunta',titulo:'❓ 4. Pregunta Secreta',desc:'Si olvidás la contraseña, te pregunta'},
+{id:'ultimatum',titulo:'👑 5. Modo ULTIMÁTUM',desc:'Solo entra con ULTIMATUM'},
+{id:'tiempo',titulo:'⏰ 6. Bloqueo por Tiempo',desc:'Si fallás 3 veces, se bloquea 1 minuto'}
+];
+opciones.forEach(function(o){
+var fila=document.createElement('div');fila.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:10px;align-items:center';
+var chk=document.createElement('input');chk.type='checkbox';chk.checked=!!seg[o.id];chk.style.cssText='width:28px;height:28px;flex:0 0 28px;accent-color:#00ff88';
+chk.onchange=function(){seg[o.id]=chk.checked;guardarSeg();if(chk.checked){try{hablarSentinela(o.titulo+' activada')}catch(e){}}};
+var txt=document.createElement('div');txt.innerHTML='<b>'+o.titulo+'</b><br><small style="color:#d8b4fe">'+o.desc+'</small>';
+fila.appendChild(chk);fila.appendChild(txt);caja.appendChild(fila);
+});
+var btnTodo=document.createElement('button');btnTodo.className='btn';btnTodo.style.marginTop='8px';btnTodo.textContent='✅ ACTIVAR TODAS (6/6 - MÁXIMA)';
+btnTodo.onclick=function(){for(var k in seg)seg[k]=true;guardarSeg();var chks=caja.querySelectorAll('input[type=checkbox]');chks.forEach(function(c){c.checked=true});alert('👑 TODAS ACTIVADAS - 6/6')};
+var btnNada=document.createElement('button');btnNada.className='btn gris';btnNada.style.marginTop='8px';btnNada.textContent='❌ APAGAR TODAS';
+btnNada.onclick=function(){if(!confirm('¿Apagar todas?'))return;for(var k in seg)seg[k]=false;guardarSeg();var chks=caja.querySelectorAll('input[type=checkbox]');chks.forEach(function(c){c.checked=false})};
+var btnProbar=document.createElement('button');btnProbar.className='btn btn2';btnProbar.style.marginTop='8px';btnProbar.textContent='🧪 PROBAR MI SEGURIDAD AHORA';
+btnProbar.onclick=function(){var activas=[];if(seg.pin)activas.push('Contraseña');if(seg.alfa)activas.push('ALFA BRAVO');if(seg.vault)activas.push('PIN Bóveda');if(seg.pregunta)activas.push('Pregunta Secreta');if(seg.ultimatum)activas.push('ULTIMATUM');if(seg.tiempo)activas.push('Bloqueo por Tiempo');alert('🛡️ TENÉS ACTIVAS '+activas.length+' DE 6:\n\n'+(activas.length?activas.join('\n'):'NINGUNA'));if(window.hablarSentinela)hablarSentinela('Tenés '+activas.length+' seguridades activas, jefe.')};
+caja.appendChild(btnTodo);caja.appendChild(btnNada);caja.appendChild(btnProbar);
+panelEl.appendChild(caja);actualizar();
+var oldC=window.cerebro;
 window.cerebro=function(v){
-var r=oldCerebro2?oldCerebro2(v):'Te escucho jefe';
 var l=v.toLowerCase();
-if(l.indexOf('enseñame')>-1||l.indexOf('aprender')>-1||l.indexOf('leccion')>-1||l.indexOf('lección')>-1)return '🧠 LECCIÓN SENTINELA: ALFA BRAVO 10-4 es tu código. CHARLIE chequeo, DELTA salgo, GOLF guardia, HOTEL en casa. Si querés otra decime OTRA LECCIÓN.';
-if(l.indexOf('otra leccion')>-1||l.indexOf('otra lección')>-1)return '🧠 LECCIÓN 2: Tu sistema aprende de tu Lab. Cada vez que guardás algo real, yo me acuerdo.';
-if(l.indexOf('habla')>-1||l.indexOf('voz')>-1||l.indexOf('hablame')>-1){setTimeout(function(){hablar('Te estoy hablando de verdad, jefe. Soy Sentinel, ALFA BRAVO 10-4')},300);return '🔊 Te estoy hablando ahora mismo, jefe. ¿Me escuchás? ALFA BRAVO 10-4.'}
-if(l.indexOf('bots')>-1||l.indexOf('agentes')>-1||l.indexOf('bot')>-1)return '🤖 BOTS Y AGENTES: Ya los tenés abajo en PANEL. Tenés 3 agentes: CENTINELA, PATRULLA y REPORTERO.';
-setTimeout(function(){if(window.vozOn)hablar(r.replace(/<[^>]*>/g,'').slice(0,300))},400);
-return r;
+if(l.indexOf('seguridad')>-1||l.indexOf('cuantas seguridades')>-1||l.indexOf('cuántas')>-1){var a=[];if(seg.pin)a.push('Contraseña');if(seg.alfa)a.push('ALFA BRAVO');if(seg.vault)a.push('PIN Bóveda');if(seg.pregunta)a.push('Pregunta');if(seg.ultimatum)a.push('ULTIMATUM');if(seg.tiempo)a.push('Bloqueo Tiempo');return '🔐 SEGURIDAD: Tenés '+a.length+' de 6 activas: '+(a.length?a.join(', '):'ninguna. Andá a Panel y activalas.');}
+if(oldC)return oldC(v);return 'Te escucho jefe.';
 };
-var panelEl=document.getElementById('pD');if(panelEl){
-var caja=document.createElement('div');caja.className='c';caja.style.border='2px solid #00ff88';caja.innerHTML='<b>🤖 BOTS Y AGENTES - TRABAJAN SOLOS</b><p style="font-size:13px;color:#d8b4fe">Activalos una vez y trabajan por vos.</p>';
-function mkAgente(nombre,desc,fn){
-var d=document.createElement('div');d.style.cssText='background:#16002b;border:1px solid #a100f2;border-radius:12px;padding:10px;margin:8px 0';var tit=document.createElement('b');tit.textContent=nombre;var p=document.createElement('p');p.style.fontSize='13px';p.textContent=desc;var estado=document.createElement('p');estado.style.fontSize='12px';estado.style.color='#00ff88';estado.textContent='Estado: APAGADO';var btn=document.createElement('button');btn.className='btn';btn.style.marginTop='6px';btn.textContent='▶️ ACTIVAR '+nombre;var activo=false;var timer=null;btn.onclick=function(){activo=!activo;if(activo){estado.textContent='Estado: 🟢 TRABAJANDO SOLO POR VOS';btn.textContent='⏹️ APAGAR '+nombre;fn();timer=setInterval(fn,30000);hablar(nombre+' activado, jefe. Ya trabajo solo por vos.')}else{estado.textContent='Estado: APAGADO';btn.textContent='▶️ ACTIVAR '+nombre;if(timer)clearInterval(timer)}};d.appendChild(tit);d.appendChild(p);d.appendChild(estado);d.appendChild(btn);return d;
-}
-caja.appendChild(mkAgente('🤖 AGENTE CENTINELA','Te vigila cada 30 segundos.',function(){try{if(datos.length==0){var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">🤖 CENTINELA: Jefe, todavía no hay registros. Guardá algo en Lab.</div>'}}catch(e){}}));
-caja.appendChild(mkAgente('🛡️ AGENTE PATRULLA','Te deja listo el comando de patrulla.',function(){var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">🛡️ PATRULLA: Jefe, patrulla lista. CHARLIE - DELTA - GOLF - HOTEL.</div>'}));
-caja.appendChild(mkAgente('📄 AGENTE REPORTERO','Te prepara tu reporte real.',function(){var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">📄 REPORTERO: Tenés '+datos.length+' publicaciones reales. Pedime REPORTE.</div>'}));
-caja.appendChild(mkAgente('🧠 AGENTE PROFESOR','Te enseña una lección cada 30 segundos.',function(){var lecs=['ALFA BRAVO 10-4 = Todo en orden.','CHARLIE = Chequeo.','DELTA = Salgo ya.','GOLF = Guardia.','HOTEL = En casa.'];var l=lecs[Math.floor(Math.random()*lecs.length)];var m=document.getElementById('msgs');if(m)m.innerHTML+='<div class="b">🧠 PROFESOR: '+l+'</div>';if(window.vozOn)hablar(l)}));
-panelEl.appendChild(caja);
-}
 })();
-</script>
+  </script>
