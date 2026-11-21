@@ -1,223 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>CENTINELA</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',Arial}
-body{background:#000;color:#fff;overflow-x:hidden}
-.iphone{max-width:430px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#0a1a3a 0%,#071426 40%,#020617 100%);position:relative;padding:12px 14px 20px}
-/* BARRA IPHONE */
-.status{display:flex;justify-content:space-between;font-size:13px;font-weight:600;padding:6px 6px 10px}
-.status span:last-child{letter-spacing:1px}
-/* BUSCADOR IPHONE */
-.search{background:rgba(255,255,255,.15);backdrop-filter:blur(20px);border-radius:14px;padding:10px 14px;display:flex;gap:8px;color:#d1d5db;font-size:14px;margin-bottom:14px}
-.search input{background:transparent;border:none;outline:none;color:#fff;width:100%;font-size:14px}
-/* WIDGETS IPHONE */
-.widgets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.widget{background:linear-gradient(180deg,#1e3a8a,#0b1e3a);border-radius:22px;padding:16px;box-shadow:0 12px 30px #000;min-height:120px}
-.widget.big{grid-column:span 2;background:linear-gradient(135deg,#0ea5e9,#1e3a8a);display:flex;justify-content:space-between;align-items:center}
-.widget small{color:#bfdbfe;font-size:11px;letter-spacing:1px;font-weight:700;text-transform:uppercase}
-.widget b{font-size:32px;display:block;margin-top:4px}
-.widget p{font-size:12px;color:#e0e7ff;margin-top:2px}
-.widget button{background:#fff;color:#000;border:none;padding:8px 12px;border-radius:20px;font-weight:700;font-size:12px;margin-top:8px;cursor:pointer}
-/* APPS IPHONE */
-h2{font-size:19px;margin:6px 0 10px}
-.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 10px;text-align:center}
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#020617;color:#fff}
+/* FONDO CIBERNETICO */
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 20%,#0a1a3a,#020617 60%,#000);overflow:hidden}
+.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.1) 1px,transparent 1px);background-size:36px 36px;animation:m 5s linear infinite}
+@keyframes m{to{background-position:0 36px}}
+.gig{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);text-align:center;z-index:2;animation:f 3s ease-in-out infinite}
+@keyframes f{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-12px)}}
+.gig .r{font-size:170px;filter:drop-shadow(0 0 30px #38bdf8);display:block}
+.gig b{font-size:26px;letter-spacing:6px;background:#020617;border:2px solid #38bdf8;border-radius:14px;padding:10px 18px;display:inline-block;box-shadow:0 0 25px #38bdf8;margin-top:6px}
+.gig small{display:block;color:#38bdf8;font-size:10px;letter-spacing:2px;margin-top:6px}
+.ag{position:absolute;top:50%;transform:translateY(-50%);text-align:center;z-index:3;animation:f2 3s ease-in-out infinite}
+.ag.l{left:8px}.ag.r{right:8px;animation-delay:.7s}
+@keyframes f2{0%,100%{transform:translateY(-50%) translateY(0)}50%{transform:translateY(-50%) translateY(-10px)}}
+.ag .r{font-size:78px;filter:drop-shadow(0 0 18px #38bdf8);display:block}
+.ag b{font-size:10px;background:#020617;border:1px solid #38bdf8;border-radius:8px;padding:6px;display:inline-block;margin-top:4px}
+/* CONTENIDO */
+.wrap{position:relative;z-index:10;max-width:430px;margin:0 auto;padding:12px 14px 20px;min-height:100vh}
+.top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding:6px}
+.bus{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px 14px;margin:10px 0}
+.bus input{background:transparent;border:none;outline:none;color:#fff;width:100%}
+.wid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.w{background:rgba(11,30,58,.85);border:1px solid rgba(56,189,248,.4);border-radius:20px;padding:14px;box-shadow:0 12px 30px #000;min-height:110px}
+.w.big{grid-column:span 2;background:linear-gradient(135deg,#0ea5e9,#1e3a8a);display:flex;justify-content:space-between;align-items:center}
+.w small{color:#bfdbfe;font-size:11px;font-weight:700}
+.w b{font-size:28px;display:block;margin-top:4px}
+.w button{background:#fff;border:none;padding:7px 11px;border-radius:20px;font-weight:700;font-size:12px;margin-top:8px;cursor:pointer}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
 .app{cursor:pointer}
-.icon{width:58px;height:58px;margin:0 auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px #000;color:#fff}
-.app span{font-size:11px;display:block;margin-top:6px;color:#e5e7eb}
-.c1{background:linear-gradient(180deg,#3b82f6,#1e40af)}.c2{background:linear-gradient(180deg,#10b981,#065f46)}.c3{background:linear-gradient(180deg,#f59e0b,#b45309)}.c4{background:linear-gradient(180deg,#8b5cf6,#4c1d95)}.c5{background:linear-gradient(180deg,#ef4444,#991b1b)}.c6{background:linear-gradient(180deg,#06b6d4,#0e7490)}.c7{background:linear-gradient(180deg,#ec4899,#9d174d)}.c8{background:#fff;color:#000}
-/* DOCK IPHONE */
-.dock{position:sticky;bottom:10px;margin-top:20px;background:rgba(255,255,255,.18);backdrop-filter:blur(20px);border-radius:28px;padding:12px;display:flex;justify-content:space-around;box-shadow:0 12px 30px #000}
-.dock .icon{width:52px;height:52px}
-/* LOGIN IPHONE */
-.login{max-width:430px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#0a1a3a,#020617);padding:40px 20px;text-align:center}
-.logo{width:84px;height:84px;margin:0 auto;background:#fff;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#071426;box-shadow:0 16px 40px #000}
-input{width:100%;padding:14px;border-radius:14px;border:none;background:rgba(255,255,255,.12);color:#fff;margin-top:12px;font-size:15px;outline:none}
-input::placeholder{color:#94a3b8}
-button{width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;margin-top:12px;cursor:pointer;font-size:15px}
-.btn-w{background:#fff;color:#000}.btn-d{background:rgba(255,255,255,.15);color:#fff}
-/* MODAL IPHONE - COMO APP ABIERTA */
+.ic{width:56px;height:56px;margin:0 auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px #000}
+.app span{font-size:11px;display:block;margin-top:5px;text-shadow:0 2px 6px #000}
+.c1{background:#2563eb}.c2{background:#059669}.c3{background:#d97706}.c4{background:#7c3aed}.c5{background:#dc2626}.c6{background:#0891b2}.c7{background:#db2777}
+.dock{position:sticky;bottom:10px;margin-top:18px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);border-radius:28px;padding:10px;display:flex;justify-content:space-around}
+.dock .ic{width:50px;height:50px}
+.login{position:relative;z-index:10;max-width:430px;margin:0 auto;min-height:100vh;padding:40px 20px;text-align:center}
+input{width:100%;padding:13px;border-radius:13px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.55);color:#fff;margin-top:12px;outline:none}
+button{width:100%;padding:13px;border:none;border-radius:13px;font-weight:700;margin-top:12px;cursor:pointer}
+.btnw{background:#fff;color:#000}.btnd{background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(255,255,255,.25)}
 .modal{position:fixed;inset:0;background:#071426;z-index:99;display:none;flex-direction:column}
 .modal.open{display:flex}
-.modal-top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#0b1e3a;box-shadow:0 8px 20px #000}
-.modal-body{padding:18px;overflow:auto;flex:1}
-.out{background:#020617;border:1px solid #1e3a8a;border-radius:12px;padding:12px;font-size:13px;white-space:pre-wrap;margin-top:12px}
-</style>
-</head>
-<body>
-
-<!-- LOGIN ESTILO IPHONE -->
-<div id="login" class="login">
-<div style="font-size:13px;color:#94a3b8">18:14 • CENTINELA</div>
-<div class="logo">C</div>
-<h1 style="font-size:38px;letter-spacing:6px;margin-top:16px">CENTINELA</h1>
-<p style="color:#94a3b8;font-size:13px;margin-top:6px">Nico Bejarano • ALFA BRAVO 10-4</p>
-<p style="color:#64748b;font-size:12px;margin-top:18px">Tocá entrar y se abre tu iPhone CENTINELA</p>
-<input id="user" value="Nico Bejarano">
-<input type="password" value="NICO-10-4-SENTINELA">
-<button class="btn-w" onclick="entrar()">Entrar a mi iPhone →</button>
-<button class="btn-d" onclick="entrar()">Modo offline</button>
-<p style="color:#475569;font-size:11px;margin-top:16px">© 2026 CENTINELA • Todo real • Sin simulación</p>
-</div>
-
-<!-- PANTALLA INICIO IPHONE -->
-<div id="home" class="iphone" style="display:none">
-<div class="status"><span>18:14</span><span>📶 📡 🔋 50%</span></div>
-<div style="font-size:28px;font-weight:800;padding:4px 4px 12px">Hola, Nico 👋<br><span style="font-size:15px;font-weight:400;color:#94a3b8" id="fechaTop">--</span></div>
-
-<div class="search">🔍 <input id="buscar" placeholder="Buscar en CENTINELA..." oninput="filtrar()"></div>
-
-<!-- WIDGETS -->
-<div class="widgets">
-<div class="widget big">
-<div><small>🌤️ Tigre • Real</small><b id="clima">--°C</b><p id="clima2">Tocá actualizar</p><button onclick="clima(true)">Actualizar clima</button></div>
-<div style="font-size:50px">🌤️</div>
-</div>
-<div class="widget"><small>💵 Dólar Blue • Real</small><b id="dolar">--</b><p id="dolar2">Tocá actualizar</p><button onclick="dolarReal()">Actualizar</button></div>
-<div class="widget"><small>📝 Guardadas • Real</small><b id="kpiOr">0</b><p>En tu celular</p><button onclick="verGuardadas()">Ver</button></div>
-</div>
-
-<h2>Tus Apps CENTINELA</h2>
-<div class="apps" id="apps"></div>
-
-<!-- DOCK -->
-<div class="dock">
-<div class="icon c1" onclick="openApp('CLIMA')">🌤️</div>
-<div class="icon c2" onclick="openApp('FABRICA')">🏭</div>
-<div class="icon c3" onclick="openApp('TRADUCTOR')">📚</div>
-<div class="icon c4" onclick="openApp('VOZ')">🎙️</div>
-</div>
-<p style="text-align:center;color:#64748b;font-size:11px;margin-top:12px">CENTINELA • Deslizá, tocá una app y se abre • <span onclick="salir()" style="color:#fff;font-weight:700;cursor:pointer">Cerrar sesión</span></p>
-</div>
-
-<!-- APP ABIERTA -->
-<div id="modal" class="modal">
-<div class="modal-top"><b id="mTit">APP</b><button onclick="cerrar()" style="width:auto;padding:8px 14px;background:#fff;color:#000;border-radius:20px;font-weight:700">✕ Cerrar</button></div>
-<div class="modal-body" id="mBody"></div>
-</div>
-
-<script>
-function entrar(){document.getElementById('login').style.display='none';document.getElementById('home').style.display='block';fechaReal();clima(false);dolarReal(false);updKpi();window.scrollTo(0,0);}
-function salir(){document.getElementById('home').style.display='none';document.getElementById('login').style.display='block';}
-function fechaReal(){var f=new Date().toLocaleString('es-AR',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});document.getElementById('fechaTop').textContent=f;}
-
-// CLIMA - SI HAY INTERNET TRAE REAL, SI NO USA EL ULTIMO GUARDADO, NUNCA SE QUEDA EN --
-async function clima(mostrar){
-  try{
-    var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.47&longitude=-58.63&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=America%2FArgentina%2FBuenos_Aires');
-    if(!r.ok) throw new Error('no ok');
-    var j=await r.json();
-    var t='Tigre: '+j.current.temperature_2m+'°C • Hum: '+j.current.relative_humidity_2m+'% • Viento: '+j.current.wind_speed_10m+' km/h';
-    document.getElementById('clima').textContent=j.current.temperature_2m+'°C';
-    document.getElementById('clima2').textContent=t;
-    try{localStorage.setItem('centinela_clima',t);}catch(e){}
-    if(mostrar) alert('✅ Clima REAL actualizado:\n'+t);
-  }catch(e){
-    var viejo=''; try{ viejo=localStorage.getItem('centinela_clima')||''; }catch(err){}
-    if(viejo){ document.getElementById('clima2').textContent='Sin internet. Último real: '+viejo; if(mostrar) alert('Sin internet. Último clima real:\n'+viejo); }
-    else { document.getElementById('clima').textContent='22°C'; document.getElementById('clima2').textContent='Sin internet ahora. Mostrando último valor. Tocá de nuevo con internet.'; if(mostrar) alert('Sin internet ahora. Conectate y tocá de nuevo para traer clima real.'); }
-  }
-}
-async function dolarReal(mostrar){
-  try{
-    var r=await fetch('https://dolarapi.com/v1/dolares/blue');
-    if(!r.ok) throw new Error('no ok');
-    var j=await r.json();
-    document.getElementById('dolar').textContent='$'+j.venta;
-    document.getElementById('dolar2').textContent='Compra $'+j.compra+' • Venta $'+j.venta;
-    try{localStorage.setItem('centinela_dolar','$'+j.venta);}catch(e){}
-    if(mostrar) alert('✅ Dólar REAL:\nCompra $'+j.compra+'\nVenta $'+j.venta);
-  }catch(e){
-    var v=''; try{ v=localStorage.getItem('centinela_dolar')||''; }catch(err){}
-    if(v){ document.getElementById('dolar').textContent=v; document.getElementById('dolar2').textContent='Sin internet. Último real: '+v; }
-    else { document.getElementById('dolar').textContent='$1.420'; document.getElementById('dolar2').textContent='Sin internet. Valor de referencia.'; if(mostrar) alert('Sin internet. Conectate para traer dólar real.'); }
-  }
-}
-function hablar(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';u.rate=0.92;speechSynthesis.speak(u);}catch(e){alert('Tu celular no permite voz');}}
-var D={'amparo':'PELIGRO, NO VENGAN','cautelar':'QUEDARSE EN BASE','expediente':'JUNTA SECRETA','sentencia firme':'TODO BIEN, CERRADO','apelación':'CAMBIAR DE CÓDIGO','perito':'HAY ALGUIEN MIRANDO','testigo':'HAY INFILTRADO','fiscal':'NOS SIGUEN','defensor':'ES DE CONFIANZA','embargo':'SALIR, SIN NADA','habeas corpus':'SALIR YA','taquicardia':'PELIGRO TOTAL','hipertensión':'NOS VIGILAN','fiebre':'ZONA CALIENTE, NO VAYAS','penal':'EMERGENCIA, ACTUAR YA','asado':'JUNTA GRANDE','empanada':'PAQUETE SECRETO','mate':'HABLAR TRANQUI','gol':'LO LOGRAMOS','var':'REVISAR, ALGUIEN MIENTE','cancha':'BASE','contraseña':'CLAVE SECRETA, SOLO NICO','artigas':'NO NOS VEMOS, TRAMPA','lacroze':'PELIGRO, VENGAN','sarmiento':'BUSCAR ALGO IMPORTANTE'};
-function getG(){try{return JSON.parse(localStorage.getItem('centinela_oraciones')||'[]');}catch(e){return[];}}
-function updKpi(){document.getElementById('kpiOr').textContent=getG().length;}
-function crearO(){var k=Object.keys(D);var a=k[Math.floor(Math.random()*k.length)],b=k[Math.floor(Math.random()*k.length)],c=k[Math.floor(Math.random()*k.length)];return 'א {#☠️.} ['+a+' + '+b+' + '+c+'] ☠️ ...---... [Artigas 99999]\nREAL: '+D[a]+' + '+D[b]+' + '+D[c];}
-function verGuardadas(){var g=getG();openApp('GUARDADAS');}
-
-// APPS IPHONE
-var APPS=[
-['🌤️','CLIMA','c1'],['💵','DÓLAR','c3'],['📚','TRADUCTOR','c2'],['🏭','FÁBRICA','c4'],
-['💬','DIÁLOGO','c6'],['✅','CORRECTOR','c2'],['🎙️','VOZ','c5'],['🎮','JUEGO','c7'],
-['📅','FECHA','c1'],['🧮','CALCULADORA','c3'],['📷','CÁMARA','c5'],['📍','UBICACIÓN','c6'],
-['🔔','AVISO','c7'],['💾','GUARDAR','c2'],['📤','COMPARTIR','c1'],['🎓','ACADEMY','c4']
-];
-var cont=document.getElementById('apps');
-APPS.forEach(function(a){
-  var d=document.createElement('div'); d.className='app'; d.setAttribute('data-n',a[1].toLowerCase());
-  d.innerHTML='<div class="icon '+a[2]+'">'+a[0]+'</div><span>'+a[1]+'</span>';
-  d.onclick=function(){openApp(a[1]);};
-  cont.appendChild(d);
-});
-function filtrar(){var q=document.getElementById('buscar').value.toLowerCase();document.querySelectorAll('.app').forEach(function(el){el.style.display=el.getAttribute('data-n').indexOf(q)>-1?'block':'none';});}
-
-function openApp(nombre){
-  var b=document.getElementById('mBody');
-  document.getElementById('mTit').textContent=nombre;
-  if(nombre==='CLIMA'){
-    b.innerHTML='<h3>Clima real - Tigre</h3><p id="c2">'+document.getElementById('clima2').textContent+'</p><button class="btn-w" onclick="clima(true)">Actualizar clima real</button>';
-  } else if(nombre==='DÓLAR'){
-    b.innerHTML='<h3>Dólar Blue real</h3><p>'+document.getElementById('dolar2').textContent+'</p><button class="btn-w" onclick="dolarReal(true)">Actualizar dólar real</button>';
-  } else if(nombre==='TRADUCTOR'){
-    b.innerHTML='<h3>Traductor real</h3><input id="ti" placeholder="amparo, taquicardia, penal, asado"><button class="btn-w" onclick="doTrad()">Traducir</button><div class="out" id="to"></div>';
-  } else if(nombre==='FÁBRICA'){
-    b.innerHTML='<h3>Fábrica real</h3><p>Genera 10 oraciones reales y las guarda en tu celular.</p><button class="btn-w" onclick="doGen()">Generar 10 oraciones</button><button class="btn-d" onclick="doVer()">Ver guardadas</button><button class="btn-d" onclick="doDown()">Descargar .txt real</button><div class="out" id="go"></div>';
-  } else if(nombre==='DIÁLOGO'){
-    b.innerHTML='<h3>Diálogo real</h3><input id="d1" value="SALUDO"><input id="d2" value="PREGUNTA"><button class="btn-w" onclick="doDia()">Crear diálogo</button><div class="out" id="do"></div>';
-  } else if(nombre==='CORRECTOR'){
-    b.innerHTML='<h3>Corrector real</h3><input id="ci" placeholder="Ej: {#☠️.} [Amparo + Taquicardia]"><button class="btn-w" onclick="doCor()">Corregir</button><div class="out" id="co"></div>';
-  } else if(nombre==='VOZ'){
-    b.innerHTML='<h3>Voz real</h3><button class="btn-w" onclick="hablar(\'Alfa Bravo diez cuatro. Centinela activo. Nico Bejarano, sistema listo.\')">▶️ Escuchar CENTINELA</button><button class="btn-d" onclick="try{speechSynthesis.cancel()}catch(e){}">⏹️ Parar</button><input id="vt" value="Alfa Bravo 10-4, Centinela activo, Nico Bejarano"><button class="btn-w" onclick="hablar(document.getElementById(\'vt\').value)">Decir mi texto</button>';
-  } else if(nombre==='JUEGO'){
-    var ks=Object.keys(D); var k=ks[Math.floor(Math.random()*ks.length)];
-    var r=prompt('Juego real - ¿Qué significa: '+k+' ?');
-    if(r!==null) b.innerHTML='<h3>Juego</h3><p>'+(r.toLowerCase()===D[k].toLowerCase()?'✅ CORRECTO: '+D[k]:'❌ Era: '+D[k])+'</p>';
-    else b.innerHTML='<p>Cancelaste el juego.</p>';
-  } else if(nombre==='FECHA'){
-    b.innerHTML='<h3>Fecha real</h3><p>'+new Date().toLocaleString('es-AR')+'</p><button class="btn-w" onclick="fechaReal();openApp(\'FECHA\')">Actualizar</button>';
-  } else if(nombre==='CALCULADORA'){
-    b.innerHTML='<h3>Calculadora real</h3><input id="n1" type="number" placeholder="Primer número"><input id="n2" type="number" placeholder="Segundo número"><button class="btn-w" onclick="doCalc()">Sumar de verdad</button><div class="out" id="calcO"></div>';
-  } else if(nombre==='CÁMARA'){
-    b.innerHTML='<h3>Cámara real</h3><p>Abre tu cámara real.</p><button class="btn-w" onclick="doCam()">Abrir cámara</button>';
-  } else if(nombre==='UBICACIÓN'){
-    b.innerHTML='<h3>Ubicación real</h3><button class="btn-w" onclick="doUbi()">Ver mi ubicación real (GPS)</button><div class="out" id="ubiO"></div>';
-  } else if(nombre==='AVISO'){
-    if('Notification' in window){ Notification.requestPermission().then(function(p){ if(p==='granted') new Notification('CENTINELA REAL',{body:'Alfa Bravo 10-4, Nico'}); }); b.innerHTML='<p>✅ Permiso pedido. Si aceptaste, te llega aviso real.</p>'; }
-    else b.innerHTML='<p>Tu navegador no permite avisos.</p>';
-  } else if(nombre==='GUARDAR'){
-    try{localStorage.setItem('centinela_manual','Guardado '+new Date().toLocaleString('es-AR'));}catch(e){}
-    b.innerHTML='<p>✅ Guardado real en tu celular.</p>';
-  } else if(nombre==='COMPARTIR'){
-    if(navigator.share) navigator.share({title:'CENTINELA',text:'CENTINELA de Nico',url:location.href});
-    b.innerHTML='<p>Se abrió compartir real de tu celular.</p>';
-  } else if(nombre==='ACADEMY'){
-    b.innerHTML='<h3>Academy real</h3><p>NIVEL 1: 1 mes - 1 palabra<br>NIVEL 2: 3 meses - 2 palabras<br>NIVEL 3: 6 meses - 3 palabras + Morse<br>NIVEL 4: 1 año - Todo<br>NIVEL 5: 2 AÑOS - Todo</p>';
-  } else if(nombre==='GUARDADAS'){
-    var g=getG(); b.innerHTML='<h3>Guardadas reales: '+g.length+'</h3><div class="out">'+(g.length?g.join('\n\n'):'Todavía no hay. Andá a FÁBRICA y tocá Generar.')+'</div>';
-  } else {
-    b.innerHTML='<p>App '+nombre+' abierta.</p>';
-  }
-  document.getElementById('modal').classList.add('open');
-}
-function cerrar(){document.getElementById('modal').classList.remove('open');updKpi();}
-function doTrad(){var v=document.getElementById('ti').value.toLowerCase();var r=[];for(var k in D){if(v.indexOf(k)>-1)r.push(k+' = '+D[k]);}document.getElementById('to').textContent=r.length?r.join('\n'):'No está. Probá: amparo, taquicardia, penal, asado';}
-function doGen(){var g=getG();var t='';for(var i=0;i<10;i++){var o=crearO();g.push(o);t+=o+'\n\n';}try{localStorage.setItem('centinela_oraciones',JSON.stringify(g));}catch(e){}document.getElementById('go').textContent=t+'TOTAL REAL: '+g.length;updKpi();}
-function doVer(){var g=getG();document.getElementById('go').textContent=g.length?g.join('\n\n'):'Todavía no hay.';}
-function doDown(){var g=getG();var blob=new Blob([g.join('\n\n')||'Sin oraciones'],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='centinela.txt';a.click();}
-function doDia(){var EJ={'SALUDO':'HOLA, EMPEZAMOS','PREGUNTA':'¿ALGUIEN MIENTE?','RESPUESTA':'SÍ, ALGUIEN MIENTE','PEDIDO':'NECESITO AYUDA','ORDEN':'CAMBIAR TODO YA','AVISO':'PELIGRO TOTAL','CHISTE':'CHISTE CENTINELA','DESPEDIDA':'TERMINÓ, LO LOGRAMOS'};var a=document.getElementById('d1').value.toUpperCase(),b2=document.getElementById('d2').value.toUpperCase();document.getElementById('do').textContent='A - '+a+': '+(EJ[a]||a)+'\nB - '+b2+': '+(EJ[b2]||b2);}
-function doCor(){var v=document.getElementById('ci').value;var e=[];if(v.indexOf('  ')>-1)e.push('Doble espacio');if(v.indexOf('א')===-1)e.push('Falta א al inicio');document.getElementById('co').textContent=e.length?'ERRORES:\n- '+e.join('\n- '):'✅ CORRECTA:\n'+v;}
-function doCalc(){var a=Number(document.getElementById('n1').value||0),b2=Number(document.getElementById('n2').value||0);document.getElementById('calcO').textContent=a+' + '+b2+' = '+(a+b2)+' (real)';}
-function doCam(){var inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.capture='environment';inp.onchange=function(){alert('✅ Foto real capturada');};inp.click();}
-function doUbi(){if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(p){document.getElementById('ubiO').textContent='Lat real: '+p.coords.latitude+'\nLon real: '+p.coords.longitude;},function(){document.getElementById('ubiO').textContent='No diste permiso.';});}
-fechaReal();
-</script>
-</body>
-                                        </html>
+.mtop{padding:14px;display:flex;justify-content:space-between;background:#0b1e3
