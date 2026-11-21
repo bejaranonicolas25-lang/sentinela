@@ -1,2 +1,65 @@
-<!-- EL OJO QUE HAY QUE SACAR -->
-<div>👁️</div>
+<!-- ANDROID 3D CENTINELA - EN MOVIMIENTO -->
+<style>
+.android3d-wrap{
+  display:flex;justify-content:center;
+  perspective:900px;margin:6px 0 2px;
+}
+.android3d{
+  width:150px;height:165px;position:relative;
+  transform-style:preserve-3d;
+  animation:flota3d 3.2s ease-in-out infinite, gira3d 8s ease-in-out infinite;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.7)) drop-shadow(0 0 18px rgba(56,189,248,.45));
+}
+@keyframes flota3d{0%,100%{transform:translateY(0) rotateX(0deg)}50%{transform:translateY(-10px) rotateX(6deg)}}
+@keyframes gira3d{0%,100%{transform:rotateY(-10deg)}50%{transform:rotateY(10deg)}}
+.a-head{
+  width:112px;height:72px;margin:0 auto;
+  background:linear-gradient(180deg,#5aa2ff 0%,#1d4ed8 45%,#0a1a3a 100%);
+  border-radius:56px 56px 12px 12px;
+  border:2px solid #93c5fd;
+  position:relative;z-index:2;
+  box-shadow:inset 0 -10px 18px rgba(0,0,0,.35), inset 0 8px 12px rgba(255,255,255,.35);
+}
+.a-head:before,.a-head:after{
+  content:"";position:absolute;top:-14px;width:4px;height:18px;
+  background:#93c5fd;border-radius:10px;
+}
+.a-head:before{left:28px;transform:rotate(-18deg);animation:antena 2s infinite}
+.a-head:after{right:28px;transform:rotate(18deg);animation:antena 2s infinite .3s}
+@keyframes antena{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(-5deg)}}
+.a-eye{
+  position:absolute;top:30px;width:18px;height:18px;
+  background:radial-gradient(circle at 35% 35%,#fff,#38bdf8 45%,#020617 75%);
+  border-radius:50%;border:2px solid #020617;
+  animation:parpadea 3.5s infinite;
+}
+.a-eye.left{left:26px}.a-eye.right{right:26px}
+@keyframes parpadea{0%,92%,100%{transform:scaleY(1)}94%{transform:scaleY(.1)}96%{transform:scaleY(1)}}
+.a-body{
+  width:112px;height:78px;margin:8px auto 0;
+  background:linear-gradient(180deg,#2b5aa8,#0a1a3a);
+  border-radius:12px 12px 28px 28px;
+  border:2px solid #60a5fa;
+  position:relative;
+  box-shadow:inset 0 8px 14px rgba(255,255,255,.25);
+}
+.a-body:before{
+  content:"CENTINELA";position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;font-size:11px;letter-spacing:2px;
+}
+.a-arm{position:absolute;top:78px;width:16px;height:52px;background:linear-gradient(180deg,#3b82f6,#071530);border-radius:10px;border:1px solid #60a5fa;animation:brazos 3.2s ease-in-out infinite}
+.a-arm.l{left:2px}.a-arm.r{right:2px}
+@keyframes brazos{0%,100%{transform:rotate(0deg)}50%{transform:rotate(10deg)}}
+.a-leg{position:absolute;bottom:-12px;width:20px;height:16px;background:#071530;border-radius:0 0 10px 10px;border:1px solid #60a5fa}
+.a-leg.l{left:28px}.a-leg.r{right:28px}
+</style>
+
+<div class="android3d-wrap">
+  <div class="android3d">
+    <div class="a-head"><div class="a-eye left"></div><div class="a-eye right"></div></div>
+    <div class="a-arm l"></div><div class="a-arm r"></div>
+    <div class="a-body"></div>
+    <div class="a-leg l"></div><div class="a-leg r"></div>
+  </div>
+  </div>
