@@ -158,3 +158,30 @@ u.querySelector('#uOpt').onclick=()=>run('Opción PRO de '+cfg.nombre+' en modo 
 };
 });
 },1500);
+// MODO AAA - MAS VIVO - SIN BORRAR NADA
+setTimeout(()=>{
+document.querySelectorAll('#centGrid button').forEach((btn,idx)=>{
+let old=btn.onclick;
+btn.onclick=(e)=>{
+if(old) { try{old(e);}catch(err){} }
+// Partículas vivas estilo juego
+setTimeout(()=>{
+let parts=["✨","🔥","💎","⚡","🎮","🌟"];
+for(let i=0;i<14;i++){
+let s=document.createElement('div');s.className='cent-part';s.textContent=parts[i%parts.length];
+s.style.left=(Math.random()*95)+'vw';s.style.top='-20px';s.style.animationDuration=(2+Math.random()*3)+'s';s.style.fontSize=(14+Math.random()*18)+'px';
+document.body.appendChild(s);setTimeout(()=>s.remove(),5000);
+}
+// HUD de videojuego
+let uni=document.querySelector('.cent-uni');
+if(uni && !uni.querySelector('.cent-hud')){
+let hud=document.createElement('div');hud.className='cent-hud';
+hud.innerHTML=`<div>❤️ VIDA<b>100%</b></div><div>⚡ ENERGÍA<b>${80+idx*2}%</b></div><div>🏆 NIVEL<b>${idx+1}</b></div><div>👑 DUEÑO<b>NICO</b></div>`;
+uni.querySelector('.cent-uni-top').after(hud);
+let barra=document.createElement('div');barra.innerHTML=`<div style="margin-top:10px;background:rgba(0,0,0,.7);border-radius:20px;padding:6px;text-align:center;font-size:11px;border:1px solid #00e5ff">🎮 MODO AAA ACTIVADO • GRÁFICOS ULTRA • FONDO VIVO</div>`;
+hud.after(barra);
+}
+},600);
+};
+});
+},1600);
