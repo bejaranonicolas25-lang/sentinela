@@ -110,3 +110,51 @@ let v1=buscar('V.I.K.I.');if(v1){let card=v1.closest('div');let padre=card;for(l
 let t1=buscar('UNIDADES NS-5');if(t1){t1.classList.add('ns-click');t1.onclick=()=>{abrir('UNIDADES NS-5','🤖','linear-gradient(180deg,#020617,#38bdf8)','<b>🤖 TODAS TUS UNIDADES</b><p>• SENTINELA: Tu robot bueno<br>• V.I.K.I.: Tu cerebro central<br>• AGENTE 01 y 02: Tus espías<br><br>Todos trabajan para <b>Nico Bejarano</b>.</p><button class="ns-btn" onclick="document.querySelector(\'.cent-uni-exit\').click()">ENTENDIDO, JEFE</button>');};}
 
 },1800);
+// ARREGLO TOTAL - CLICK POR PANTALLA - SI O SI FUNCIONA
+(function(){
+window.prompt=()=>null;
+function abrir(titulo,icono,color,html){
+let old=document.querySelector('.cent-uni');if(old)old.remove();
+let u=document.createElement('div');u.className='cent-uni';u.style.background=color;
+u.innerHTML=`<div class="cent-uni-top"><div style="font-size:80px">${icono}</div><h2>${titulo}</h2><p>Dueño: <b>Nico Bejarano</b></p></div><div class="cent-uni-card">${html}</div><button class="cent-uni-exit">⬅ VOLVER</button>`;
+document.body.appendChild(u);
+u.querySelector('.cent-uni-exit').onclick=()=>u.remove();
+return u;
+}
+// BOTON DE PRUEBA - Si ves esto, el código anda
+let test=document.createElement('button');
+test.textContent='🧪 PROBAR SI ANDA';
+test.style.cssText='position:fixed;top:10px;right:10px;z-index:99999;padding:10px;border-radius:12px;border:0;background:#22c55e;color:#fff;font-weight:900';
+test.onclick=()=>{abrir('PRUEBA OK','✅','linear-gradient(180deg,#022c22,#22c55e)','<b>✅ ¡ANDA, JEFE!</b><p>Si ves esto, el sistema ya funciona.<br>Ahora tocá AGENTE 01, AGENTE 02, SENTINELA o V.I.K.I. en tu web y tienen que abrir.</p><button class="ns-btn" onclick="document.querySelector(\'.cent-uni-exit\').click()">CERRAR PRUEBA</button>');};
+document.body.appendChild(test);
+
+document.addEventListener('click',function(e){
+let t=e.target.closest('div,button,section,article')||e.target;
+let txt=(t.innerText||'').toUpperCase();
+let full=document.body.innerText.toUpperCase();
+// Detectamos por donde tocaste
+let x=e.clientX, y=e.clientY;
+let el=document.elementFromPoint(x,y);
+let textoEl=(el?el.innerText||'':'')+' '+(el&&el.parentElement?el.parentElement.innerText||'':'')+' '+(el&&el.parentElement&&el.parentElement.parentElement?el.parentElement.parentElement.innerText||'':'');
+textoEl=textoEl.toUpperCase();
+
+if(textoEl.includes('AGENTE 01')){
+let u=abrir('AGENTE 01','🕵️','linear-gradient(180deg,#020617,#0ea5e9)','<b>🕵️ TU ESPÍA PERSONAL</b><p>Te cuida 24hs.</p><input id="x" placeholder="¿Qué querés que vigile?"><button id="go">▶ ACTIVAR VIGILANCIA</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Esperando...</div>');
+u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🕵️ AGENTE 01 ACTIVADO ✅\nVigilando: "'+(u.querySelector('#x').value||'Toda tu web')+'"\nEstado: TODO SEGURO';};
+}
+else if(textoEl.includes('AGENTE 02')){
+let u=abrir('AGENTE 02','🥷','linear-gradient(180deg,#1a0b2e,#a855f7)','<b>🥷 TU SOMBRA</b><p>Tu segundo agente.</p><input id="x" placeholder="¿Qué misión le das?"><button id="go">▶ ENVIAR MISIÓN</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Listo...</div>');
+u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🥷 AGENTE 02 EN MISIÓN ✅\nMisión: "'+(u.querySelector('#x').value||'Proteger a Nico')+'"\nResultado: MISIÓN CUMPLIDA 🏆';};
+}
+else if(textoEl.includes('V.I.K.I.')){
+let u=abrir('NS-5 V.I.K.I.','🧠','linear-gradient(180deg,#2d0a2e,#ff2d55)','<b>🧠 INTELIGENCIA CENTRAL • MODO ROJO</b><p>Está en ALERTA.</p><input id="x" placeholder="¿Qué orden le das?"><button id="go">▶ DAR ORDEN</button><button id="calma">😌 CALMAR A V.I.K.I.</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">V.I.K.I.: Estoy en ALERTA...</div>');
+u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🧠 V.I.K.I.: Orden recibida "'+(u.querySelector('#x').value||'Controlar todo')+'"\n✅ Listo. Todo bajo tu control.';};
+u.querySelector('#calma').onclick=()=>{u.querySelector('#r').textContent='😌 V.I.K.I. CALMADA ✅\nPasó de 🔴 ALERTA a 🟢 TRANQUILA';};
+}
+else if(textoEl.includes('NS-5 SENTINELA') || textoEl.includes('SENTINELA') && !textoEl.includes('CENTINELA')){
+let u=abrir('NS-5 SENTINELA','🤖','linear-gradient(180deg,#022c22,#00e5ff)','<b>🤖 TU ROBOT PRINCIPAL</b><p>Ojos Cian • ACTIVO</p><input id="x" placeholder="Hablale a SENTINELA..."><button id="go">▶ HABLAR</button><button id="voz">🔊 QUE HABLE</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">SENTINELA: Hola jefe...</div>');
+u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🤖 SENTINELA:\nEntendí: "'+(u.querySelector('#x').value||'Hola')+'"\nLo hago ya, jefe.';};
+u.querySelector('#voz').onclick=()=>{try{speechSynthesis.speak(new SpeechSynthesisUtterance('Hola Nico, soy Sentinela, tu robot principal'));}catch(e){}u.querySelector('#r').textContent='🤖 HABLANDO 🔊';};
+}
+},true);
+})();
