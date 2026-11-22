@@ -49,3 +49,58 @@ const mods=[
 document.getElementById('centGrid').innerHTML=mods.map((m,i)=>`<div class="cent-card"><b>${m[0]}</b><span>${m[1]}</span><button data-i="${i}">USAR MI HERRAMIENTA</button></div>`).join('');
 document.querySelectorAll('#centGrid button').forEach(b=>b.onclick=()=>{try{mods[b.dataset.i][2]()}catch(e){say('CENTINELA lo controló, no se rompió. Intentá de nuevo.')}});
 });}catch(e){console.log('Centinela seguro',e)}
+// MUNDO CENTINELA - SIN PROMPT - FONDO CIBERNETICO
+setTimeout(()=>{
+const ICONS=["🧠","✍️","🔐","🗣️","☁️","✅","⚙️","📄","📤","💻","🎓","🎮","📈"];
+const NAMES=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+const DESC=["Tu chat personal, tu cerebro.","Tu escritor que mejora textos.","Tu bóveda privada para guardar todo.","Tu voz que habla por vos.","Tu nube que automatiza.","Tu cuaderno de tareas.","Tu centro de control.","Tus documentos, PDF y Excel.","Compartí tu mundo.","Tu programador.","Tu escuela con juegos.","Tu zona de juegos.","Tu simulador de trading."];
+document.querySelectorAll('#centGrid button').forEach((btn,idx)=>{
+btn.onclick=()=>{
+let cfg=JSON.parse(localStorage.getItem('cent_cfg_'+idx)||'{"nombre":"Nico","color":"#38bdf8","modo":"SENTINELA"}');
+let w=document.createElement('div');w.className='cent-world';
+w.innerHTML=`<div class="cent-world-head"><div style="font-size:70px">${ICONS[idx]}</div><h2>${NAMES[idx]}</h2><p style="font-size:12px;color:#cbd5e1">${DESC[idx]}<br>Dueño: <b>${cfg.nombre}</b> • Modo: <b>${cfg.modo}</b></p></div>
+<div class="cent-tabs"><button class="on" data-t="usar">▶ USAR</button><button data-t="conf">⚙️ MI CONFIG</button><button data-t="hist">📜 HISTORIAL</button></div>
+<div id="centBody"></div><button class="cent-back">⬅ VOLVER A MI WEB</button>`;
+document.body.appendChild(w);
+let body=w.querySelector('#centBody');
+function render(tab){
+if(tab=='usar'){
+body.innerHTML=`<div class="cent-panel2"><label>Escribí acá, ${cfg.nombre}:</label><input id="centIn" placeholder="Escribí lo que quieras..."><button id="go">▶ EJECUTAR EN MI MUNDO</button><div class="cent-result" id="res" style="background:#020617;padding:12px;border-radius:12px;margin-top:10px;white-space:pre-wrap;font-size:12px">Esperando tu orden...</div></div>
+<div class="cent-panel2"><b>🔥 OPCIONES RÁPIDAS</b><button id="o1">✨ Opción 1 - Rápida</button><button id="o2">🚀 Opción 2 - Pro</button><button id="o3">💎 Opción 3 - Ultra</button></div>`;
+let run=(txt)=>{
+let r=w.querySelector('#res');
+if(idx==0)r.textContent='🧠 CENTINELA '+cfg.nombre+':\n\nAnalicé: "'+txt+'"\n1) Lo entendí\n2) Mejor opción: hacerlo simple\n3) Listo.';
+else if(idx==1)r.textContent='✍️ ACCORDED:\n\n"'+txt.toUpperCase()+'"\n✅ Más pro y claro.';
+else if(idx==2){let a=JSON.parse(localStorage.getItem('vault_nico')||'[]');a.push(txt);localStorage.setItem('vault_nico',JSON.stringify(a));r.textContent='🔐 VAULT: Guardado ✅\nTenés '+a.length+' cosas.';}
+else if(idx==3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(txt));}catch(e){}r.textContent='🗣️ HABLA 🔊\n"'+txt+'"';}
+else if(idx==4)r.textContent='☁️ CLOUD: Automatización creada con "'+txt+'"';
+else if(idx==5)r.textContent='✅ CHECKBOOK:\n[ ] '+txt+'\n[ ] Revisar CENTINELA';
+else if(idx==6){document.body.style.filter=document.body.style.filter?'':'invert(1)';r.textContent='⚙️ SETTINGS: Modo cambiado ✅';}
+else if(idx==7){let b=new Blob([txt],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='CENTINELA.txt';a.click();r.textContent='📄 OFFICE: Descargado ✅';}
+else if(idx==8){if(navigator.share)navigator.share({title:'CENTINELA',text:txt,url:location.href});r.textContent='📤 SHARE: Compartiendo tu mundo...';}
+else if(idx==9)r.textContent='💻 CODE:\n<button onclick="alert(\''+txt+'\')">Tocame</button>\n\nTu código listo.';
+else if(idx==10)r.textContent='🎓 ACADEMY: ¿7x8? Si pusiste 56, ¡correcto! Tu respuesta: '+txt;
+else if(idx==11){let n=Math.floor(Math.random()*10)+1;r.textContent='🎮 PLAY: Pusiste '+txt+', era '+n+(txt==n?' ¡GANASTE!':' Casi.');}
+else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);r.textContent='📈 TRADER: BTC $'+p+'\nTu análisis: '+txt;}
+};
+w.querySelector('#go').onclick=()=>run(w.querySelector('#centIn').value||'Prueba de '+cfg.nombre);
+w.querySelector('#o1').onclick=()=>run('Opción rápida de '+cfg.nombre);
+w.querySelector('#o2').onclick=()=>run('Opción pro de '+cfg.nombre);
+w.querySelector('#o3').onclick=()=>run('Opción ultra de '+cfg.nombre);
+}
+if(tab=='conf'){
+body.innerHTML=`<div class="cent-panel2"><label>Tu nombre en este CENTINELA</label><input id="cNom" value="${cfg.nombre}"><label>Tu color</label><select id="cCol"><option value="#38bdf8">Azul Cian</option><option value="#22c55e">Verde Neón</option><option value="#a855f7">Violeta Cyber</option><option value="#f59e0b">Dorado</option></select><label>Tu modo</label><select id="cMod"><option>SENTINELA</option><option>GUERRERO</option><option>JEFE</option><option>TRANQUILO</option></select><button id="save">💾 GUARDAR MI CONFIGURACIÓN</button></div>`;
+w.querySelector('#save').onclick=()=>{localStorage.setItem('cent_cfg_'+idx,JSON.stringify({nombre:w.querySelector('#cNom').value||'Nico',color:w.querySelector('#cCol').value,modo:w.querySelector('#cMod').value}));alert('Guardado, '+cfg.nombre+' ✅');w.querySelector('.cent-back').click();};
+}
+if(tab=='hist'){
+let v=JSON.parse(localStorage.getItem('vault_nico')||'[]');
+body.innerHTML=`<div class="cent-panel2"><b>📜 TU HISTORIAL</b><p style="font-size:12px;white-space:pre-wrap">${v.length?v.map(x=>'- '+x).join('\n'):'Todavía no guardaste nada en este mundo.'}</p><button id="borrar">🗑 BORRAR HISTORIAL</button></div>`;
+w.querySelector('#borrar').onclick=()=>{localStorage.removeItem('vault_nico');render('hist');};
+}
+}
+render('usar');
+w.querySelectorAll('.cent-tabs button').forEach(b=>b.onclick=()=>{w.querySelectorAll('.cent-tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render(b.dataset.t);});
+w.querySelector('.cent-back').onclick=()=>w.remove();
+};
+});
+},1200);
