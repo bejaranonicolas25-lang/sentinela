@@ -89,3 +89,24 @@ else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);res.textContent='📈
 };
 });
 },1000);
+// CADA COSA EN PANTALLA = UNA FUNCION DISTINTA - NICO
+setTimeout(()=>{
+function buscar(txt){return [...document.querySelectorAll('*')].find(e=>e.children.length==0 && e.textContent.trim().includes(txt));}
+function abrir(titulo,icono,color,html){
+let old=document.querySelector('.cent-uni');if(old)old.remove();
+let u=document.createElement('div');u.className='cent-uni';u.style.background=color;
+u.innerHTML=`<div class="cent-uni-top"><div style="font-size:80px">${icono}</div><h2>${titulo}</h2><p>Dueño: <b>Nico Bejarano</b></p></div><div class="cent-uni-card">${html}</div><button class="cent-uni-exit">⬅ VOLVER</button>`;
+document.body.appendChild(u);u.querySelector('.cent-uni-exit').onclick=()=>u.remove();return u;
+}
+// 1 - AGENTE 01
+let a1=buscar('AGENTE 01');if(a1){let c=a1.closest('div,button,span')||a1;c.classList.add('ns-click');c.onclick=()=>{let u=abrir('AGENTE 01','🕵️','linear-gradient(180deg,#020617,#0ea5e9)','<b>🕵️ TU ESPÍA PERSONAL</b><p>Te cuida la web 24hs.</p><input id="x" placeholder="¿Qué querés que vigile?"><button id="go">▶ ACTIVAR VIGILANCIA</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Esperando orden...</div>');u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🕵️ AGENTE 01 ACTIVADO ✅\n\nVigilando: "'+(u.querySelector('#x').value||'Toda tu web')+'"\nEstado: TODO SEGURO\nSi algo pasa, te aviso acá.';};};}
+// 2 - AGENTE 02
+let a2=buscar('AGENTE 02');if(a2){let c=a2.closest('div,button,span')||a2;c.classList.add('ns-click');c.onclick=()=>{let u=abrir('AGENTE 02','🥷','linear-gradient(180deg,#1a0b2e,#a855f7)','<b>🥷 TU SOMBRA</b><p>Tu segundo agente, más rápido.</p><input id="x" placeholder="¿Qué misión le das?"><button id="go">▶ ENVIAR MISIÓN</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Listo para misión...</div>');u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🥷 AGENTE 02 EN MISIÓN ✅\n\nMisión: "'+(u.querySelector('#x').value||'Proteger a Nico')+'"\nTiempo: 2 min\nResultado: MISIÓN CUMPLIDA 🏆';};};}
+// 3 - NS-5 SENTINELA - El robot blanco
+let s1=buscar('NS-5 SENTINELA');if(s1){let card=s1.closest('div');let padre=card;for(let i=0;i<4;i++){if(padre.parentElement)padre=padre.parentElement;}padre.classList.add('ns-click');padre.onclick=()=>{let u=abrir('NS-5 SENTINELA','🤖','linear-gradient(180deg,#022c22,#00e5ff)','<b>🤖 TU ROBOT PRINCIPAL</b><p>Ojos Cian • ACTIVO • Te habla.</p><input id="x" placeholder="Hablale a SENTINELA..."><button id="go">▶ HABLAR</button><button id="voz">🔊 QUE HABLE</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">SENTINELA: Hola jefe, estoy activo...</div>');u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🤖 SENTINELA:\n\nEntendí: "'+(u.querySelector('#x').value||'Hola')+'"\nMi respuesta: Lo hago ya, jefe. Vos mandás.';};u.querySelector('#voz').onclick=()=>{try{speechSynthesis.speak(new SpeechSynthesisUtterance('Hola Nico, soy Sentinela, tu robot principal, listo para servirte'));}catch(e){}u.querySelector('#r').textContent='🤖 SENTINELA HABLANDO 🔊';};};}
+// 4 - NS-5 V.I.K.I. - El robot ASIMO
+let v1=buscar('V.I.K.I.');if(v1){let card=v1.closest('div');let padre=card;for(let i=0;i<4;i++){if(padre.parentElement)padre=padre.parentElement;}padre.classList.add('ns-click');padre.onclick=()=>{let u=abrir('NS-5 V.I.K.I.','🧠','linear-gradient(180deg,#2d0a2e,#ff2d55)','<b>🧠 INTELIGENCIA CENTRAL • MODO ROJO</b><p>⚠️ Está en ALERTA, ella controla todo.</p><input id="x" placeholder="¿Qué orden le das a V.I.K.I.?"><button id="go">▶ DAR ORDEN A V.I.K.I.</button><button id="calma">😌 CALMAR A V.I.K.I.</button><div id="r" style="background:#000;padding:10px;border-radius:10px;margin-top:10px;white-space:pre-wrap">V.I.K.I.: Estoy en ALERTA... esperando tu orden, Nico.</div>');u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='🧠 V.I.K.I.:\n\nOrden recibida: "'+(u.querySelector('#x').value||'Controlar todo')+'"\nAnalizando 1000 datos...\n✅ Listo. Todo bajo tu control.';};u.querySelector('#calma').onclick=()=>{u.querySelector('#r').textContent='😌 V.I.K.I. CALMADA ✅\n\nPasó de 🔴 ALERTA a 🟢 TRANQUILA\nAhora te obedece solo a vos.';};};}
+// 5 - TITULO UNIDADES
+let t1=buscar('UNIDADES NS-5');if(t1){t1.classList.add('ns-click');t1.onclick=()=>{abrir('UNIDADES NS-5','🤖','linear-gradient(180deg,#020617,#38bdf8)','<b>🤖 TODAS TUS UNIDADES</b><p>• SENTINELA: Tu robot bueno<br>• V.I.K.I.: Tu cerebro central<br>• AGENTE 01 y 02: Tus espías<br><br>Todos trabajan para <b>Nico Bejarano</b>.</p><button class="ns-btn" onclick="document.querySelector(\'.cent-uni-exit\').click()">ENTENDIDO, JEFE</button>');};}
+
+},1800);
