@@ -1,67 +1,44 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA - FABRICA PRO</title><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#071426;color:#fff}
-.box{max-width:430px;margin:0 auto;padding:14px}
-input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #334155;background:#000;color:#fff;margin-top:8px}
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CENTINELA REAL</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#020617;color:#fff}
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 0%,#0a1a3a,#020617 60%,#000);overflow:hidden}
+.bg:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(56,189,248,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.08) 1px,transparent 1px);background-size:32px 32px}
+.hum{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);text-align:center;opacity:.8}
+.cab{width:60px;height:72px;margin:auto;background:#f1c27d;border-radius:48% 48% 42% 42%;position:relative;overflow:hidden}
+.pelo{position:absolute;top:0;left:0;right:0;height:20px;background:#111}.ojo{position:absolute;top:34px;width:8px;height:8px;background:#111;border-radius:50%}
+.cue{width:18px;height:10px;background:#e0a878;margin:-2px auto 0}.tra{width:96px;height:96px;margin:auto;background:#1e3a8a;border:1px solid #38bdf8;border-radius:16px;position:relative}
+.pe{position:absolute;top:50px;left:50%;transform:translateX(-50%);background:#000;border:2px solid #38bdf8;border-radius:8px;padding:3px 6px;font-size:8px;white-space:nowrap}
+.cartel{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:200px;background:#000;border:2px solid #38bdf8;border-radius:12px;padding:6px}
+.ag{position:absolute;top:44%;text-align:center;opacity:.7}.ag .cab{width:34px;height:42px}.ag .pelo{height:11px}.ag .ojo{top:20px;width:5px;height:5px}.ag .cue{width:9px;height:6px}.ag .tra{width:46px;height:58px}.ag b{font-size:8px;background:#000;border:1px solid #38bdf8;border-radius:8px;padding:4px;display:inline-block}.l{left:6px}.r{right:6px}
+.box{position:relative;z-index:10;max-width:460px;margin:0 auto;padding:14px;min-height:100vh}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #334155;background:rgba(0,0,0,.7);color:#fff;margin-top:8px}
 button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:800;margin-top:8px;cursor:pointer}
-.btnw{background:#fff;color:#000}.btna{background:#0ea5e9;color:#fff}.btnd{background:#000;color:#fff;border:1px solid #334155}.btnv{background:#7c3aed;color:#fff}.btnr{background:#dc2626;color:#fff}
-.w{background:#0b1e3a;border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0}
-.out{background:#000;border:1px solid #1e3a8a;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px;font-size:13px;max-height:300px;overflow:auto}
+.btnw{background:#fff;color:#000}.btnd{background:rgba(0,0,0,.6);color:#fff;border:1px solid #334155}.btna{background:#0ea5e9;color:#fff}.btnv{background:#7c3aed;color:#fff}.btng{background:#059669;color:#fff}.btnr{background:#dc2626;color:#fff}
+.w{background:rgba(11,30,58,.95);border:1px solid #38bdf8;border-radius:18px;padding:14px;margin:10px 0}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}.ic{width:56px;height:56px;margin:auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px}.app span{font-size:10px;display:block;margin-top:5px}
+.c1{background:#2563eb}.c2{background:#059669}.c3{background:#d97706}.c4{background:#7c3aed}.c5{background:#dc2626}.c6{background:#0891b2}.c7{background:#db2777}
+.modal{position:fixed;inset:0;background:#071426;z-index:99;display:none;flex-direction:column}.modal.open{display:flex}.mtop{padding:14px;display:flex;justify-content:space-between;background:#0b1e3a}.mbody{padding:16px;flex:1;overflow:auto}
+.out{background:#000;border:1px solid #1e3a8a;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px;font-size:12px;max-height:280px;overflow:auto}
 .chip{display:inline-block;background:#0ea5e9;border-radius:20px;padding:6px 10px;font-size:11px;font-weight:700;margin:4px 4px 0 0;cursor:pointer}
 .card{background:#000;border:1px solid #334155;border-radius:12px;padding:10px;margin-top:8px;font-size:13px}
 </style></head><body>
-<div class="box">
-<h2 style="letter-spacing:3px">🏭 FÁBRICA PRO</h2><p style="color:#94a3b8;font-size:12px">CENTINELA • NICO BEJARANO • ALFA BRAVO 10-4 • Guardadas: <b id="kpi" style="color:#fff">0</b> • Favoritas: <b id="kpiF" style="color:#facc15">0</b></p>
+<div class="bg"><div class="ag l"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:7px"></div><div class="ojo" style="right:7px"></div></div><div class="cue"></div><div class="tra"></div><b>AGENTE 01</b></div><div class="hum"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:14px"></div><div class="ojo" style="right:14px"></div></div><div class="cue"></div><div class="tra"><div class="pe">SENTINELA</div></div><div class="cartel"><b>CENTINELA</b><br><small style="color:#38bdf8">ALFA BRAVO 10-4 • NICO BEJARANO</small></div></div><div class="ag r"><div class="cab"><div class="pelo"></div><div class="ojo" style="left:7px"></div><div class="ojo" style="right:7px"></div></div><div class="cue"></div><div class="tra"></div><b>AGENTE 02</b></div></div>
 
-<div class="w"><b>1. GENERAR</b>
-<select id="cant"><option value="1">Generar 1</option><option value="10" selected>Generar 10</option><option value="30">Generar 30</option><option value="50">Generar 50</option><option value="100">Generar 100</option></select>
-<select id="tipo"><option value="3">3 palabras (NIVEL 3)</option><option value="2">2 palabras (NIVEL 2)</option><option value="1">1 palabra (NIVEL 1)</option><option value="4">4 palabras (PRO)</option></select>
-<button class="btnw" onclick="doG()">⚙️ Generar y guardar</button>
-<button class="btna" onclick="doGOne()">🎲 Generar 1 sin guardar</button>
+<div id="login" class="box" style="text-align:center;padding-top:20px"><h1 style="letter-spacing:5px;text-shadow:0 2px 10px #000">CENTINELA</h1><p style="color:#e2e8f0;font-size:13px">Nico Bejarano • ALFA BRAVO 10-4 • 🔒 HTTPS REAL</p><input value="Nico Bejarano"><input type="password" value="NICO-10-4-SENTINELA"><button class="btnw" onclick="entrar()">ENTRAR →</button><p style="color:#94a3b8;font-size:11px;margin-top:10px">Todo lo del Laboratorio ya está adentro de esta web.</p></div>
+
+<div id="home" class="box" style="display:none">
+<div style="display:flex;justify-content:space-between;font-weight:700"><span id="hora">--:--</span><span>📶 🔋 50% • <span id="conn2">HTTPS 🔒</span></span></div>
+<h2 style="margin:12px 0">Hola, Nico 👋</h2>
+<div class="w"><b>🔬 LABORATORIO CENTINELA - TODO REAL</b><p id="live" style="font-size:12px;margin-top:6px">Cargando...</p><button class="btnw" onclick="cargarReal()">🔄 Actualizar datos reales</button><button class="btng" onclick="openApp('FABRICA')">🏭 Ir a Fábrica Ultra</button><button class="btna" onclick="openApp('LAB')">🔬 Abrir Laboratorio Completo</button></div>
+<div class="w"><small>🌤️ TIGRE • REAL HTTPS</small><b id="clima" style="font-size:28px;display:block">--°C</b><p id="clima2" style="font-size:12px">Tocá actualizar</p><button class="btnw" onclick="clima()">Actualizar clima</button></div>
+<div class="w"><small>💵 DÓLAR • REAL HTTPS</small><b id="dolar" style="font-size:28px;display:block">--</b><p id="dolar2" style="font-size:12px">Tocá actualizar</p><button class="btnw" onclick="dolar()">Actualizar dólar</button></div>
+<div class="w"><small>📝 GUARDADAS <span id="kpi">0</span> • ⭐ FAVORITAS <span id="kpiF">0</span> • 📓 NOTAS <span id="kpiN">0</span></small><button class="btna" onclick="openApp('FABRICA')">Ver guardadas / Fábrica</button><button class="btnd" onclick="openApp('NOTAS')">Mis notas</button></div>
+<h3 style="margin:10px 0">Tus Apps CENTINELA</h3><div class="apps" id="apps"></div>
+<button class="btnd" onclick="salir()">Cerrar sesión</button>
 </div>
 
-<div class="w"><b>2. BUSCAR / FILTRAR</b>
-<input id="buscarF" placeholder="Buscar... ej: amparo, penal, asado" oninput="doSearch()">
-<div><span class="chip" onclick="setF('amparo')">amparo</span><span class="chip" onclick="setF('penal')">penal</span><span class="chip" onclick="setF('asado')">asado</span><span class="chip" onclick="setF('taquicardia')">taquicardia</span><span class="chip" onclick="setF('')">Ver todo</span></div>
-</div>
-
-<div class="w"><b>3. ACCIONES</b>
-<button class="btna" onclick="doV()">👁️ Ver guardadas</button>
-<button class="btnv" onclick="doVFav()">⭐ Ver solo favoritas</button>
-<button class="btnw" onclick="doCopy()">📋 Copiar todas</button>
-<button class="btna" onclick="doSpeak()">🎙️ Escuchar las 5 primeras</button>
-<button class="btnd" onclick="doD()">⬇️ Descargar .txt</button>
-<button class="btnd" onclick="doShare()">📤 Compartir por WhatsApp</button>
-<button class="btnr" onclick="doClear()">🗑️ Borrar TODAS</button>
-</div>
-
-<div id="lista"></div>
-<div class="out" id="go">Tocá GENERAR para empezar, jefe.</div>
-<button class="btnd" onclick="location.href='index.html'">← Volver a CENTINELA</button>
-</div>
+<div id="modal" class="modal"><div class="mtop"><b id="mTit">APP</b><button onclick="cerrar()" style="width:auto;padding:8px 14px;background:#fff;border-radius:20px">✕ Cerrar</button></div><div class="mbody" id="mBody"></div></div>
 
 <script>
-function hablar(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-AR';speechSynthesis.speak(u);}catch(e){}}
-var D={amparo:'PELIGRO, NO VENGAN',cautelar:'QUEDARSE EN BASE',expediente:'JUNTA SECRETA',sentencia:'TODO BIEN, CERRADO',apelacion:'CAMBIAR DE CÓDIGO',perito:'HAY ALGUIEN MIRANDO',testigo:'HAY INFILTRADO',fiscal:'NOS SIGUEN',defensor:'ES DE CONFIANZA',embargo:'SALIR, SIN NADA',taquicardia:'PELIGRO TOTAL',hipertension:'NOS VIGILAN',fiebre:'ZONA CALIENTE, NO VAYAS',penal:'EMERGENCIA, ACTUAR YA',asado:'JUNTA GRANDE',empanada:'PAQUETE SECRETO',mate:'HABLAR TRANQUI',gol:'LO LOGRAMOS',var:'REVISAR, ALGUIEN MIENTE',cancha:'BASE'};
-function getG(){try{return JSON.parse(localStorage.getItem('or')||'[]')}catch(e){return[]}}
-function getF(){try{return JSON.parse(localStorage.getItem('fav')||'[]')}catch(e){return[]}}
-function saveG(g){try{localStorage.setItem('or',JSON.stringify(g))}catch(e){} upd();}
-function saveF(f){try{localStorage.setItem('fav',JSON.stringify(f))}catch(e){} upd();}
-function upd(){document.getElementById('kpi').textContent=getG().length;document.getElementById('kpiF').textContent=getF().length;}
-function crear(tipo){var k=Object.keys(D);var n=Number(tipo||3);var w=[],m=[];for(var i=0;i<n;i++){var a=k[Math.floor(Math.random()*k.length)];w.push(a);m.push(D[a]);}return 'א ['+w.join(' + ')+'] REAL: '+m.join(' + ');}
-function render(lista){var fav=getF();var h='';if(!lista.length){document.getElementById('lista').innerHTML='<p style="color:#94a3b8;font-size:12px;margin-top:10px">Sin resultados.</p>';return;}lista.slice(-20).reverse().forEach(function(o,idx){var realIdx=getG().indexOf(o);var isFav=fav.indexOf(o)>-1;h+='<div class="card">'+o+'<br><button class="btna" style="width:48%;display:inline-block" onclick="toggleFav('+realIdx+')">'+(isFav?'⭐ Quitar fav':'☆ Favorita')+'</button> <button class="btnr" style="width:48%;display:inline-block" onclick="delOne('+realIdx+')">🗑️ Borrar</button></div>';});document.getElementById('lista').innerHTML=h;}
-function doG(){var cant=Number(document.getElementById('cant').value||10);var tipo=document.getElementById('tipo').value;var g=getG();var t='';for(var i=0;i<cant;i++){var o=crear(tipo);g.push(o);t+=o+'\n\n';}saveG(g);document.getElementById('go').textContent=t+'TOTAL GUARDADAS: '+g.length;render(g);}
-function doGOne(){var o=crear(document.getElementById('tipo').value);document.getElementById('go').textContent='🎲 SIN GUARDAR:\n\n'+o+'\n\nSi te gusta, tocá Generar y guardar.';hablar(o);}
-function doV(){var g=getG();document.getElementById('go').textContent=g.length?'Mostrando últimas 20 abajo. Total: '+g.length:'Todavía no hay. Tocá Generar.';render(g);}
-function doVFav(){var f=getF();document.getElementById('go').textContent='⭐ FAVORITAS: '+f.length;render(f);}
-function setF(v){document.getElementById('buscarF').value=v;doSearch();}
-function doSearch(){var q=document.getElementById('buscarF').value.toLowerCase();var g=getG();var r=g.filter(function(o){return o.toLowerCase().indexOf(q)>-1});document.getElementById('go').textContent='🔍 Encontradas: '+r.length+' de '+g.length;render(r);}
-function toggleFav(idx){var g=getG();var o=g[idx];var f=getF();var p=f.indexOf(o);if(p>-1){f.splice(p,1);}else{f.push(o);}saveF(f);doV();}
-function delOne(idx){if(!confirm('¿Borrar esta oración?'))return;var g=getG();g.splice(idx,1);saveG(g);doV();}
-function doCopy(){var g=getG();var t=g.join('\n\n');if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert('✅ Copiadas '+g.length)});}else{alert(t.slice(0,500));}}
-function doSpeak(){var g=getG().slice(0,5).join('. ');hablar(g||'No hay oraciones guardadas');}
-function doD(){var g=getG();var blob=new Blob([g.join('\n\n')||'Sin oraciones'],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='centinela-fabrica.txt';a.click();}
-function doShare(){var g=getG().slice(-5).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('CENTINELA FÁBRICA:\n'+g),'_blank');}
-function doClear(){if(!confirm('¿Borrar TODAS las guardadas y favoritas?'))return;try{localStorage.removeItem('or');localStorage.removeItem('fav');}catch(e){}upd();document.getElementById('lista').innerHTML='';document.getElementById('go').textContent='Borradas.';}
-upd();doV();
-</script></body></html>
+// ===== DICCIONARIO JSON REAL =====
+const DIC_JSON=[{"palabra":"amparo","significado":"PELIGRO, NO VENGAN"},{"palabra":"cautelar","significado":"QUEDARSE EN BASE"},{"palabra":"expediente","significado":"JUNTA SECRETA"},{"palabra":"sentencia","significado":"TODO BIEN, CERRADO"},{"palabra":"apelacion","significado":"CAMBIAR DE CÓDIGO"},{"palabra":"perito","significado":"HAY ALGUIEN MIRANDO"},{"palabra":"testigo","significado":"HAY INFILTRADO"},{"palabra":"fiscal","significado":"NOS SIGUEN"},{"palabra":"defensor","significado":"ES DE CONFIANZA"},{"palabra":"embargo","significado":"SALIR, SIN NADA"},{"palabra":"taquicardia","significado":"PELIGRO TOTAL"},{"palabra":"hipertension","significado":"NOS VIGILAN"},{"palabra":"fiebre","significado":"ZONA CALIENTE, NO
