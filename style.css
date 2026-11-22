@@ -24,3 +24,15 @@ footer button{background:rgba(2,6,16,.75);border:1px solid #334155;color:#cbd5e1
 footer span{font-size:10px;color:#64748b;letter-spacing:.2em}
 body.alert-mode .core-badge{border-color:rgba(255,30,66,.75);box-shadow:0 12px 35px rgba(0,0,0,.9),0 0 28px rgba(255,30,66,.45)}
 body.alert-mode .title-metal{filter:drop-shadow(0 0 20px rgba(255,30,66,.65))}
+.humanoids{margin:28px 0 10px;text-align:center}
+.hum-title{font-family:'Orbitron';letter-spacing:.18em;font-size:14px;color:#e2e8f0;margin:0}
+.hum-sub{font-size:11px;color:#94a3b8;margin:6px 0 14px}
+.hum-grid{display:flex;flex-direction:column;gap:14px}
+.hum-card{background:rgba(2,6,16,.88);border:1px solid rgba(56,189,248,.45);border-radius:20px;overflow:hidden;box-shadow:0 15px 35px rgba(0,0,0,.8);text-align:left}
+.hum-card.red{border-color:rgba(255,30,66,.55)}
+.hum-card img{width:100%;height:220px;object-fit:cover;display:block}
+.hum-info{padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.hum-info b{font-family:'Orbitron';letter-spacing:.12em;font-size:13px}
+.hum-info span{font-size:11px;color:#cbd5e1}
+.hum-status{color:#38bdf8!important;font-weight:800;font-size:10px!important}
+.hum-status.red{color:#ff1e42!important}
