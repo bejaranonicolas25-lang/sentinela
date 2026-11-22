@@ -58,3 +58,34 @@ else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);res.textContent='📈
 };
 });
 }catch(e){console.log('Parche 1 seguro',e)}
+// ARREGLO - ESPERA A QUE APAREZCAN LOS BOTONES
+setTimeout(()=>{
+const ICONS=["🧠","✍️","🔐","🗣️","☁️","✅","⚙️","📄","📤","💻","🎓","🎮","📈"];
+const TITLES=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+document.querySelectorAll('#centGrid button').forEach((btn,idx)=>{
+btn.onclick=()=>{
+let m=document.createElement('div');m.className='cent-modal';
+m.innerHTML=`<div class="cent-box"><span class="cent-icon">${ICONS[idx]}</span><h2>${TITLES[idx]}</h2><p>Sistema propio de Nico Bejarano.</p><input id="centIn" placeholder="Escribí acá, jefe..."><button id="centGo">▶ EJECUTAR</button><div class="cent-result" id="centRes">Listo para trabajar...</div><button class="cent-close" id="centX">✖ CERRAR</button></div>`;
+document.body.appendChild(m);
+m.querySelector('#centX').onclick=()=>m.remove();
+m.onclick=(e)=>{if(e.target==m)m.remove()};
+m.querySelector('#centGo').onclick=()=>{
+let v=m.querySelector('#centIn').value||'Prueba de Nico';
+let res=m.querySelector('#centRes');
+if(idx==0)res.textContent='🧠 CENTINELA:\nAnalicé: "'+v+'"\nListo para usar.';
+else if(idx==1)res.textContent='✍️ ACCORDED:\n"'+v.toUpperCase()+'"\n✅ Más claro y profesional.';
+else if(idx==2){let a=JSON.parse(localStorage.getItem('vault_nico')||'[]');a.push(v);localStorage.setItem('vault_nico',JSON.stringify(a));res.textContent='🔐 VAULT GUARDADO ✅\nTenés '+a.length+' guardados.';}
+else if(idx==3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(v));}catch(e){}res.textContent='🗣️ HABLA: Diciendo 🔊 "'+v+'"';}
+else if(idx==4)res.textContent='☁️ CLOUD: Automatización creada con "'+v+'"';
+else if(idx==5)res.textContent='✅ CHECKBOOK:\n[ ] '+v;
+else if(idx==6){document.body.style.filter=document.body.style.filter?'':'invert(1)';res.textContent='⚙️ SETTINGS: Modo cambiado ✅';}
+else if(idx==7){let b=new Blob([v],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='CENTINELA.txt';a.click();res.textContent='📄 OFFICE: Descargado ✅';}
+else if(idx==8){if(navigator.share)navigator.share({title:'CENTINELA',text:v,url:location.href});res.textContent='📤 SHARE: Compartiendo...';}
+else if(idx==9)res.textContent='💻 CODE:\n<button onclick="alert(\''+v+'\')">Tocame</button>';
+else if(idx==10)res.textContent='🎓 ACADEMY: ¿7x8? Si pusiste 56, correcto.';
+else if(idx==11){let n=Math.floor(Math.random()*10)+1;res.textContent='🎮 PLAY: Era '+n+(v==n?' ¡GANASTE!':' Casi.');}
+else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);res.textContent='📈 TRADER: BTC $'+p;}
+};
+};
+});
+},1000);
