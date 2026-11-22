@@ -158,3 +158,79 @@ u.querySelector('#voz').onclick=()=>{try{speechSynthesis.speak(new SpeechSynthes
 }
 },true);
 })();
+// SISTEMA DE USUARIO ULTRA SEGURO - NICO BEJARANO - NO BORRAR
+(async function(){
+async function hash(t){let b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function getUsers(){return JSON.parse(localStorage.getItem('cent_users')||'{}');}
+function saveUsers(u){localStorage.setItem('cent_users',JSON.stringify(u));}
+let sesion=localStorage.getItem('cent_sesion');
+if(sesion) return; // Ya entró, no molestar
+
+let box=document.createElement('div');box.className='cent-login';
+box.innerHTML=`<div class="cent-login-box"><div style="text-align:center;font-size:60px">🛡️</div><h1>CENTINELA<br><span style="font-size:11px;color:#38bdf8">SÚPER ULTRA SEGURO</span></h1><p style="text-align:center;font-size:12px;color:#94a3b8">Solo vos entrás a tu mundo, jefe.</p>
+<div id="loginForm">
+<input id="lEmail" placeholder="📧 Tu correo">
+<input id="lPass" type="password" placeholder="🔐 Tu contraseña">
+<button id="btnEntrar">▶ ENTRAR A MI MUNDO</button>
+<button class="cent-google" id="btnGoogle">🅖 Entrar con Google</button>
+<button class="cent-apple" id="btnApple">🍎 Entrar con Apple</button>
+<div class="cent-link" id="aCrear">¿Primera vez? 👉 CREAR CUENTA</div>
+<div class="cent-link" id="aOlvide">¿Olvidaste tu contraseña? 🔑 RECUPERAR</div>
+<div id="msg" style="font-size:12px;text-align:center;margin-top:10px;color:#fbbf24"></div></div>
+<div id="crearForm" style="display:none">
+<input id="cNombre" placeholder="👤 Tu nombre (Nico Bejarano)">
+<input id="cEmail" placeholder="📧 Tu correo">
+<input id="cPass" type="password" placeholder="🔐 Creá contraseña segura">
+<select id="cPreg"><option>¿Cuál es tu robot favorito?</option><option>¿Nombre de tu primera mascota?</option><option>¿Tu ciudad de nacimiento?</option><option>¿Tu comida favorita?</option></select>
+<input id="cResp" placeholder="🔑 Respuesta secreta">
+<button id="btnCrear">✅ CREAR MI CUENTA ULTRA SEGURA</button>
+<div class="cent-link" id="aVolver1">⬅ Volver a Entrar</div></div>
+<div id="olvideForm" style="display:none">
+<input id="oEmail" placeholder="📧 Tu correo">
+<input id="oResp" placeholder="🔑 Respuesta a tu pregunta secreta">
+<input id="oNueva" type="password" placeholder="🔐 Nueva contraseña">
+<button id="btnRecuperar">🔓 CAMBIAR CONTRASEÑA</button>
+<div class="cent-link" id="aVolver2">⬅ Volver a Entrar</div></div>
+</div>`;
+document.body.appendChild(box);
+let show=(id)=>{['loginForm','crearForm','olvideForm'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display='block';};
+box.querySelector('#aCrear').onclick=()=>show('crearForm');
+box.querySelector('#aOlvide').onclick=()=>show('olvideForm');
+box.querySelector('#aVolver1').onclick=()=>show('loginForm');
+box.querySelector('#aVolver2').onclick=()=>show('loginForm');
+
+box.querySelector('#btnCrear').onclick=async()=>{
+let n=box.querySelector('#cNombre').value.trim(),e=box.querySelector('#cEmail').value.trim().toLowerCase(),p=box.querySelector('#cPass').value,pr=box.querySelector('#cPreg').value,r=box.querySelector('#cResp').value.trim().toLowerCase();
+if(!n||!e||!p||!r){box.querySelector('#msg').textContent='Completá todo, jefe.';show('loginForm');return;}
+let users=getUsers();if(users[e]){alert('Ya tenés cuenta, jefe. Entrá.');show('loginForm');return;}
+users[e]={nombre:n,pass:await hash(p),pregunta:pr,resp:await hash(r),creado:new Date().toLocaleString()};
+saveUsers(users);localStorage.setItem('cent_sesion',e);box.remove();
+};
+
+box.querySelector('#btnEntrar').onclick=async()=>{
+let e=box.querySelector('#lEmail').value.trim().toLowerCase(),p=box.querySelector('#lPass').value;
+let users=getUsers();let u=users[e];
+let intentos=parseInt(localStorage.getItem('intentos_'+e)||'0');
+if(intentos>=3){box.querySelector('#msg').textContent='⛔ Bloqueado por 3 intentos. Usá RECUPERAR.';return;}
+if(!u||u.pass!==await hash(p)){intentos++;localStorage.setItem('intentos_'+e,intentos);box.querySelector('#msg').textContent='❌ Correo o contraseña mal. Intento '+intentos+'/3';return;}
+localStorage.setItem('intentos_'+e,'0');localStorage.setItem('cent_sesion',e);box.remove();
+};
+
+box.querySelector('#btnRecuperar').onclick=async()=>{
+let e=box.querySelector('#oEmail').value.trim().toLowerCase(),r=box.querySelector('#oResp').value.trim().toLowerCase(),n=box.querySelector('#oNueva').value;
+let users=getUsers();let u=users[e];
+if(!u){box.querySelector('#msg').textContent='No existe esa cuenta.';show('loginForm');return;}
+if(u.resp!==await hash(r)){box.querySelector('#msg').textContent='❌ Respuesta secreta incorrecta.';show('loginForm');return;}
+u.pass=await hash(n);saveUsers(users);localStorage.removeItem('intentos_'+e);
+box.querySelector('#msg').textContent='✅ Contraseña cambiada. Entrá ahora.';show('loginForm');
+};
+
+async function social(proveedor){
+let email=prompt('Tu correo de '+proveedor+':');
+if(!email)return;let users=getUsers();email=email.trim().toLowerCase();
+if(!users[email]){let nom=prompt('Tu nombre:')||'Nico';users[email]={nombre:nom,pass:await hash('social-'+proveedor),pregunta:'Social',resp:await hash('social'),creado:new Date().toLocaleString(),social:proveedor};saveUsers(users);}
+localStorage.setItem('cent_sesion',email);box.remove();
+}
+box.querySelector('#btnGoogle').onclick=()=>social('Google');
+box.querySelector('#btnApple').onclick=()=>social('Apple');
+})();
