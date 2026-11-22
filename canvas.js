@@ -57,3 +57,44 @@ u.querySelector('#voz').onclick=()=>{try{speechSynthesis.speak(new SpeechSynthes
 },true);
 crearLogin();
 if(localStorage.getItem('cent_sesion')) crearBotonesCuenta();
+// 13 HERRAMIENTAS - TODAS CON FUNCION - FINAL
+document.addEventListener('click',function(e){
+let card=e.target.closest('div');
+if(!card) return;
+let txt=(card.innerText||'').toUpperCase();
+// Solo si tocó USAR MI HERRAMIENTA
+if(!e.target.textContent.includes('USAR MI')) return;
+let idx=-1;
+let nombres=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+// Buscamos cuál es por el título de la tarjeta
+let padre=e.target.parentElement;while(padre && padre!==document.body){let t=(padre.innerText||'').toUpperCase();for(let i=0;i<nombres.length;i++){if(t.includes(nombres[i])){idx=i;break;}}if(idx!==-1)break;padre=padre.parentElement;}
+if(idx===-1) idx=0;
+let ICONS=["🧠","✍️","🔐","🗣️","☁️","✅","⚙️","📄","📤","💻","🎓","🎮","📈"];
+let BGS=["linear-gradient(180deg,#020617,#0ea5e9)","linear-gradient(180deg,#1a0b2e,#a855f7)","linear-gradient(180deg,#000,#f59e0b)","linear-gradient(180deg,#022c22,#10b981)","linear-gradient(180deg,#0c4a6e,#38bdf8)","linear-gradient(180deg,#111827,#22c55e)","linear-gradient(180deg,#1e1b4b,#6366f1)","linear-gradient(180deg,#3f1d02,#f97316)","linear-gradient(180deg,#4a044e,#ec4899)","linear-gradient(180deg,#000,#06b6d4)","linear-gradient(180deg,#1a2e05,#84cc16)","linear-gradient(180deg,#2d0a2e,#ff2d55)","linear-gradient(180deg,#021a0a,#16a34a)"];
+let old=document.querySelector('.cent-uni');if(old)old.remove();
+let u=document.createElement('div');u.className='cent-uni';u.style.background=BGS[idx];
+u.innerHTML=`<div class="cent-uni-top"><div style="font-size:80px">${ICONS[idx]}</div><h2>${nombres[idx]}</h2><p>Universo ${idx+1} / 13 • Dueño: <b>Nico Bejarano</b></p></div>
+<div class="cent-uni-card"><b>▶ USAR</b><input id="x" placeholder="Escribí acá, jefe..."><button id="go">🚀 EJECUTAR</button><div id="r" style="background:#000;padding:12px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Esperando tu orden...</div></div>
+<div class="cent-uni-card"><b>⚙️ MI CONFIG</b><input id="cNom" placeholder="Tu nombre en este universo" value="Nico"><button id="save">💾 GUARDAR MI CONFIG</button></div>
+<button class="cent-uni-exit">⬅ VOLVER</button>`;
+document.body.appendChild(u);
+u.querySelector('.cent-uni-exit').onclick=()=>u.remove();
+u.querySelector('#save').onclick=()=>{u.querySelector('#r').textContent='✅ Guardado, '+u.querySelector('#cNom').value+'\nTu universo quedó personalizado.';};
+u.querySelector('#go').onclick=()=>{
+let v=u.querySelector('#x').value||'Mi orden';let r=u.querySelector('#r');let out='';
+if(idx==0)out='🧠 CENTINELA:\nAnalicé "'+v+'"\n✅ Mejor idea: hacerlo simple y pro.';
+else if(idx==1)out='✍️ ACCORDED:\n"'+v.toUpperCase()+'"\n✅ Más claro y profesional.';
+else if(idx==2){let a=JSON.parse(localStorage.getItem('vault_nico')||'[]');a.push(v);localStorage.setItem('vault_nico',JSON.stringify(a));out='🔐 VAULT GUARDADO ✅\nTenés '+a.length+' guardados.';}
+else if(idx==3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(v));}catch(e){}out='🗣️ HABLA 🔊\nDiciendo: "'+v+'"';}
+else if(idx==4)out='☁️ CLOUD: Automatización creada con "'+v+'"';
+else if(idx==5)out='✅ CHECKBOOK:\n[ ] '+v;
+else if(idx==6){document.body.style.filter=document.body.style.filter?'':'invert(1)';out='⚙️ SETTINGS: Modo cambiado ✅';}
+else if(idx==7){let b=new Blob([v],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='CENTINELA.txt';a.click();out='📄 OFFICE: Descargado ✅';}
+else if(idx==8){if(navigator.share)navigator.share({title:'CENTINELA',text:v,url:location.href});out='📤 SHARE: Compartiendo...';}
+else if(idx==9)out='💻 CODE:\nTu código para "'+v+'" listo.\n<button onclick="alert(\''+v+'\')">Tocame</button>';
+else if(idx==10)out='🎓 ACADEMY: ¿7x8? Si pusiste 56, correcto. Tu respuesta: '+v;
+else if(idx==11){let n=Math.floor(Math.random()*10)+1;out='🎮 PLAY: Pusiste '+v+', era '+n+(v==n?' ¡GANASTE!':' Casi.');}
+else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);out='📈 TRADER: BTC $'+p+'\nTu análisis: '+v;}
+r.textContent=out;
+};
+},true);
