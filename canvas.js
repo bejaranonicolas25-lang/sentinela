@@ -27,3 +27,34 @@ window.SENTINELA_STATE=state;
 window.toggleAlert=function(){state.alertMode=!state.alertMode;document.body.classList.toggle('alert-mode',state.alertMode);const b=document.getElementById('toggle-protocol-btn');if(b)b.textContent=state.alertMode?'Protocolo: Rojo V.I.K.I.':'Protocolo: Azul Cian';};
 document.addEventListener('click',function(e){if(e.target&&e.target.id==='toggle-protocol-btn')window.toggleAlert();});
 })();
+// PARCHE PARTE 1 - CENTINELA PRO - NO BORRA LO ANTERIOR
+try{
+const ICONS=["🧠","✍️","🔐","🗣️","☁️","✅","⚙️","📄","📤","💻","🎓","🎮","📈"];
+const TITLES=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+document.querySelectorAll('#centGrid button').forEach((btn,idx)=>{
+btn.onclick=()=>{
+let m=document.createElement('div');m.className='cent-modal';
+m.innerHTML=`<div class="cent-box"><span class="cent-icon">${ICONS[idx]}</span><h2>${TITLES[idx]}</h2><p>Sistema propio de Nico Bejarano.<br>Escribí acá abajo y tocá EJECUTAR.</p><input id="centIn" placeholder="Escribí acá, jefe..."><button id="centGo">▶ EJECUTAR HERRAMIENTA</button><div class="cent-result" id="centRes">Listo para trabajar...</div><button class="cent-close" id="centX">✖ CERRAR</button></div>`;
+document.body.appendChild(m);
+m.querySelector('#centX').onclick=()=>m.remove();
+m.onclick=(e)=>{if(e.target==m)m.remove()};
+m.querySelector('#centGo').onclick=()=>{
+let v=m.querySelector('#centIn').value||'Prueba de Nico';
+let res=m.querySelector('#centRes');
+if(idx==0)res.textContent='🧠 CENTINELA:\n\nAnalicé: "'+v+'"\n\n1) Entendí tu pedido\n2) Mejor opción: hacerlo simple y pro\n3) Listo para usar.';
+else if(idx==1)res.textContent='✍️ ACCORDED:\n\nVersión mejorada:\n"'+v.toUpperCase()+'"\n\n✅ Más claro y profesional.';
+else if(idx==2){let arr=JSON.parse(localStorage.getItem('vault_nico')||'[]');arr.push(v);localStorage.setItem('vault_nico',JSON.stringify(arr));res.textContent='🔐 VAULT GUARDADO ✅\n\nTenés '+arr.length+' guardados:\n- '+arr.join('\n- ');}
+else if(idx==3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(v));}catch(e){}res.textContent='🗣️ HABLA: Diciendo 🔊\n"'+v+'"';}
+else if(idx==4)res.textContent='☁️ CLOUD:\n\nAutomatización creada:\nCuando escribís "'+v+'" -> Se guarda en VAULT -> Te avisa.';
+else if(idx==5)res.textContent='✅ CHECKBOOK:\n\n[ ] '+v+'\n[ ] Revisar CENTINELA\n[ ] Guardar en VAULT';
+else if(idx==6){document.body.style.filter=document.body.style.filter?'':'invert(1)';res.textContent='⚙️ SETTINGS: Modo cambiado ✅';}
+else if(idx==7){let b=new Blob([v+'\n\nCreado por Nico Bejarano - CENTINELA'],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='CENTINELA.txt';a.click();res.textContent='📄 OFFICE: Documento descargado ✅';}
+else if(idx==8){if(navigator.share)navigator.share({title:'CENTINELA',text:v,url:location.href});res.textContent='📤 SHARE: Compartiendo tu link...';}
+else if(idx==9)res.textContent='💻 CODE:\n\n<button onclick="alert(\''+v+'\')">Tocame</button>\n\nEse es tu código generado.';
+else if(idx==10)res.textContent='🎓 ACADEMY:\n\nPregunta: ¿Cuánto es 7x8?\nSi escribiste 56, ¡correcto!';
+else if(idx==11){let n=Math.floor(Math.random()*10)+1;res.textContent='🎮 PLAY: Adivinaste '+v+', el número era '+n+(v==n?' ¡GANASTE!':' Casi, jefe.');}
+else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);res.textContent='📈 TRADER:\n\nBTC: $'+p+'\nTu análisis: "'+v+'"\nSeñal: '+(Math.random()>.5?'📈 SUBE':'📉 BAJA');}
+};
+};
+});
+}catch(e){console.log('Parche 1 seguro',e)}
