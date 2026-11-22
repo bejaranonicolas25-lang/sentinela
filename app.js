@@ -104,3 +104,57 @@ w.querySelector('.cent-back').onclick=()=>w.remove();
 };
 });
 },1200);
+// KILL PROMPT + 13 UNIVERSOS PARALELOS - NICO BEJARANO
+window.prompt=()=>null; window.alert=()=>{};
+setTimeout(()=>{
+const ICONS=["🧠","✍️","🔐","🗣️","☁️","✅","⚙️","📄","📤","💻","🎓","🎮","📈"];
+const NAMES=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+const BGS=[
+"linear-gradient(180deg,#020617,#0ea5e9 30%,#020617)",
+"linear-gradient(180deg,#1a0b2e,#a855f7 40%,#020617)",
+"linear-gradient(180deg,#000,#f59e0b 35%,#000)",
+"linear-gradient(180deg,#022c22,#10b981 40%,#020617)",
+"linear-gradient(180deg,#0c4a6e,#38bdf8 45%,#020617)",
+"linear-gradient(180deg,#111827,#22c55e 40%,#020617)",
+"linear-gradient(180deg,#1e1b4b,#6366f1 45%,#020617)",
+"linear-gradient(180deg,#3f1d02,#f97316 40%,#020617)",
+"linear-gradient(180deg,#4a044e,#ec4899 45%,#020617)",
+"linear-gradient(180deg,#000,#06b6d4 40%,#020617)",
+"linear-gradient(180deg,#1a2e05,#84cc16 40%,#020617)",
+"linear-gradient(180deg,#2d0a2e,#ff2d55 45%,#020617)",
+"linear-gradient(180deg,#021a0a,#16a34a 40%,#020617)"];
+document.querySelectorAll('#centGrid button').forEach((btn,idx)=>{
+btn.onclick=(e)=>{e.preventDefault();e.stopPropagation();
+let cfg=JSON.parse(localStorage.getItem('uni_'+idx)||'{"nombre":"Nico","modo":"JEFE","avatar":"😎"}');
+let u=document.createElement('div');u.className='cent-uni';u.style.background=BGS[idx];
+u.innerHTML=`<div class="cent-uni-top"><div style="font-size:80px">${ICONS[idx]}</div><h2>${NAMES[idx]}</h2><p>🌌 UNIVERSO PARALELO ${idx+1} / 13<br>Dueño: <b>${cfg.nombre} ${cfg.avatar}</b> • Modo: <b>${cfg.modo}</b><br>Este mundo es solo tuyo, no cambia tu web.</p></div>
+<div class="cent-uni-card"><b>⚙️ MI CONFIGURACIÓN DE ESTE UNIVERSO</b><label>Tu nombre en este universo</label><input id="uNom" value="${cfg.nombre}"><label>Tu avatar</label><select id="uAv"><option>😎</option><option>🔥</option><option>👑</option><option>🤖</option><option>🦅</option></select><label>Tu modo</label><select id="uMod"><option>JEFE</option><option>GUERRERO</option><option>TRANQUILO</option><option>ULTRA</option></select><button id="uSave">💾 GUARDAR MI UNIVERSO</button></div>
+<div class="cent-uni-card"><b>▶ USAR MI HERRAMIENTA</b><label>Escribí tu orden:</label><input id="uIn" placeholder="Escribí acá, jefe..."><button id="uGo">🚀 EJECUTAR EN ESTE UNIVERSO</button><div id="uRes" style="background:rgba(0,0,0,.6);padding:12px;border-radius:12px;margin-top:10px;white-space:pre-wrap;font-size:13px">Esperando tu orden en este universo...</div><button id="uOpt">✨ OPCIÓN RÁPIDA PRO</button></div>
+<div class="cent-uni-card"><b>📜 MI HISTORIAL DE ESTE UNIVERSO</b><p id="uHist" style="font-size:12px;white-space:pre-wrap">Cargando...</p></div><button class="cent-uni-exit">⬅ SALIR DEL UNIVERSO</button>`;
+document.body.appendChild(u);
+let hist=JSON.parse(localStorage.getItem('hist_'+idx)||'[]');
+u.querySelector('#uHist').textContent=hist.length?hist.join('\n'):'Todavía no hiciste nada acá. Es tu primer paso en este universo.';
+u.querySelector('.cent-uni-exit').onclick=()=>u.remove();
+u.querySelector('#uSave').onclick=()=>{localStorage.setItem('uni_'+idx,JSON.stringify({nombre:u.querySelector('#uNom').value||'Nico',avatar:u.querySelector('#uAv').value,modo:u.querySelector('#uMod').value}));u.querySelector('#uRes').textContent='';u.querySelector('.cent-uni-top p').innerHTML='Guardado ✅ Recargá el universo para ver tu nuevo nombre.';};
+let run=(txt)=>{
+let r=u.querySelector('#uRes');let out='';
+if(idx==0)out='🧠 CENTINELA dice, '+cfg.nombre+':\n\nAnalicé "'+txt+'"\n✅ Mejor idea: hacerlo simple, pro y tuyo.';
+else if(idx==1)out='✍️ ACCORDED:\n\n"'+txt.toUpperCase()+'"\n✅ Más claro, más pro.';
+else if(idx==2)out='🔐 VAULT: "'+txt+'" guardado en tu bóveda dorada ✅';
+else if(idx==3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(txt));}catch(e){}out='🗣️ HABLA 🔊\nDiciendo: "'+txt+'"';}
+else if(idx==4)out='☁️ CLOUD: Automatización creada:\nCuando decís "'+txt+'" -> Se guarda solo.';
+else if(idx==5)out='✅ CHECKBOOK:\n[ ] '+txt+'\n[ ] Revisar mi universo';
+else if(idx==6){document.body.style.filter=document.body.style.filter?'':'invert(1)';out='⚙️ SETTINGS: Cambiaste el modo de tu web ✅';}
+else if(idx==7){let b=new Blob([txt],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='CENTINELA.txt';a.click();out='📄 OFFICE: Tu documento descargado ✅';}
+else if(idx==8){if(navigator.share)navigator.share({title:'CENTINELA',text:txt,url:location.href});out='📤 SHARE: Compartiendo tu universo...';}
+else if(idx==9)out='💻 CODE:\n<button onclick="alert(\''+txt+'\')">Tocame</button>\nTu código listo.';
+else if(idx==10)out='🎓 ACADEMY: ¿7x8=56? Tu respuesta: '+txt;
+else if(idx==11){let n=Math.floor(Math.random()*10)+1;out='🎮 PLAY: Pusiste '+txt+', era '+n+(txt==n?' ¡GANASTE!':' Casi, jefe.');}
+else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);out='📈 TRADER: BTC $'+p+'\nTu análisis: '+txt;}
+r.textContent=out;hist.push(txt);localStorage.setItem('hist_'+idx,JSON.stringify(hist));u.querySelector('#uHist').textContent=hist.join('\n');
+};
+u.querySelector('#uGo').onclick=()=>run(u.querySelector('#uIn').value||'Mi primera orden');
+u.querySelector('#uOpt').onclick=()=>run('Opción PRO de '+cfg.nombre+' en modo '+cfg.modo);
+};
+});
+},1500);
