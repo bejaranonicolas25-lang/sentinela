@@ -185,3 +185,9 @@ hud.after(barra);
 };
 });
 },1600);
+// PRUEBA QUE SI O SI SE TIENE QUE VER
+let btn=document.createElement('button');
+btn.textContent='✅ SI VES ESTO, YA ANDA';
+btn.style.cssText='position:fixed;bottom:10px;left:10px;right:10px;z-index:999999;padding:16px;background:#22c55e;color:#fff;font-weight:900;border:0;border-radius:14px';
+btn.onclick=()=>{alert('✅ AHORA SI ANDA, JEFE. Tocá cualquier herramienta y va a abrir.');};
+document.body.appendChild(btn);
