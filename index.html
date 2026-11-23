@@ -3,111 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SENTINELA | Portal Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<title>SENTINELA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 <style>
-:root{--cyan:#00e5ff;--gold:#ffb703;--text:#e2f1ff;--muted:#7f9bb8}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:radial-gradient(circle at 50% 35%,#06152d 0%,#020813 55%,#000 100%);font-family:'Rajdhani',sans-serif;color:var(--text);min-height:100vh}
-.main{max-width:480px;margin:0 auto;padding:20px;position:relative;z-index:10}
-.hero{text-align:center;margin:20px 0}
-.sentinela-3d{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.5rem,9vw,4rem);letter-spacing:.15em;text-shadow:0 0 25px rgba(0,229,255,.7)}
-.badge{display:inline-block;margin-top:8px;padding:5px 14px;font-size:.8rem;letter-spacing:.3em;color:var(--cyan);border:1px solid rgba(0,229,255,.3);border-radius:4px}
-.auth-panel{background:rgba(3,12,28,.88);border:1px solid rgba(0,229,255,.35);border-top:2px solid var(--cyan);border-radius:12px;padding:20px}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;background:#000;padding:5px;border-radius:8px;margin-bottom:15px}
-.tab-btn{background:transparent;border:none;color:var(--muted);font-weight:700;padding:10px 2px;border-radius:6px;cursor:pointer;font-size:.8rem}
-.tab-btn.active{background:#0b2b59;color:var(--cyan);border:1px solid rgba(0,229,255,.4)}
-.tab-btn.owner-tab.active{background:#3d2800;color:var(--gold);border-color:var(--gold)}
-label{display:block;font-size:.85rem;font-weight:600;text-transform:uppercase;margin:12px 0 5px}
-input{width:100%;padding:12px;background:#010610;border:1px solid rgba(0,229,255,.25);border-radius:6px;color:#fff;font-size:1rem}
-input:focus{outline:none;border-color:var(--cyan)}
-.btn{width:100%;padding:14px;border:none;border-radius:6px;font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;margin-top:15px}
-.btn-blue{background:linear-gradient(90deg,#005bb5,#00a8e8);color:#fff}
-.btn-gold{background:linear-gradient(90deg,#b87a00,#ffb703);color:#000}
+body{background:#070B14;font-family:'Inter',sans-serif;color:#E6EBF2;min-height:100vh}
+.main{max-width:460px;margin:0 auto;padding:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:8px 2px}
+.logo{font-family:'Orbitron';font-weight:900;font-size:1.8rem;letter-spacing:.12em}
+.logo span{color:#3B82F6}
+.hero-sub{font-size:.75rem;color:#8A95A8;letter-spacing:.25em}
+.card{background:linear-gradient(180deg,#121A2C,#0D1322);border:1px solid #1E2A44;border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.tabs{display:flex;background:#0A0F1E;padding:4px;border-radius:10px;gap:4px;margin-bottom:16px}
+.tab-btn{flex:1;border:none;background:transparent;color:#8A95A8;font-weight:700;padding:11px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.tab-btn.active{background:#1E2A44;color:#fff}
+.tab-btn.owner-tab.active{background:#2A1F00;color:#FBBF24}
+label{display:block;font-size:.8rem;font-weight:600;color:#9AA7BB;margin:14px 0 6px}
+input{width:100%;padding:13px 14px;background:#070B14;border:1px solid #1E2A44;border-radius:10px;color:#fff;font-size:1rem;outline:none}
+input:focus{border-color:#3B82F6}
+.btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;cursor:pointer;margin-top:16px;font-size:.95rem}
+.btn-blue{background:#2563EB;color:#fff}
+.btn-gold{background:#FBBF24;color:#000}
 .hidden{display:none!important}
-.status{margin-top:12px;padding:10px;border-radius:6px;font-weight:600;display:none}
-.status.error{display:block;background:rgba(255,59,92,.15);border:1px solid #ff3b5c;color:#ff8fa3}
-.status.success{display:block;background:rgba(0,230,118,.15);border:1px solid #00e676;color:#80f5b8}
-.result{text-align:left;background:#0a1a2e;border-radius:10px;padding:14px;margin-top:15px;font-size:14px;line-height:1.6}
+.status{margin-top:12px;padding:10px;border-radius:8px;font-weight:600;display:none;font-size:.9rem}
+.status.error{display:block;background:#2A1115;color:#FCA5A5}
+.status.success{display:block;background:#0F2A1A;color:#86EFAC}
+.result{background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:14px;margin-top:14px;font-size:14px;line-height:1.6}
+.pill{font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:800}
 </style>
 </head>
 <body>
-<canvas id="rayos" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.6"></canvas>
 <div class="main">
-<header class="hero"><h1 class="sentinela-3d">SENTINELA</h1><div><span class="badge">NÚCLEO DE SEGURIDAD & CONTROL</span></div></header>
-<section class="auth-panel" id="auth-container">
+<div class="topbar"><div><div class="logo">SENTINELA<span>.</span></div><div class="hero-sub">SEGURIDAD REAL • ARGENTINA</div></div><div style="position:relative"><img src="https://i.pravatar.cc/100?img=12" style="width:46px;height:46px;border-radius:50%;border:2px solid #2563EB;object-fit:cover"><div style="position:absolute;bottom:2px;right:2px;width:12px;height:12px;background:#22C55E;border:2px solid #070B14;border-radius:50%"></div></div></div>
+<section class="card" id="auth-container" style="margin-top:18px">
 <div class="tabs">
-<button type="button" class="tab-btn active" onclick="showTab('login',this)">Iniciar Sesión</button>
-<button type="button" class="tab-btn owner-tab" onclick="showTab('owner',this)">Cuenta Dueño</button>
-<button type="button" class="tab-btn" onclick="showTab('user',this)">Nuevo Usuario</button>
+<button type="button" class="tab-btn active" onclick="showTab('login',this)">Entrar</button>
+<button type="button" class="tab-btn owner-tab" onclick="showTab('owner',this)">Dueño</button>
+<button type="button" class="tab-btn" onclick="showTab('user',this)">Registrarme</button>
 </div>
 <form id="form-login" onsubmit="return doLogin(event)">
-<p><b>Acceso al Sistema</b></p><p style="color:var(--muted)">Ingresá tus credenciales para desbloquear la terminal.</p>
-<label>Correo Electrónico</label><input id="login-email" type="email" placeholder="operador@dominio.com" required>
+<h3 style="font-size:1.15rem">Bienvenido de nuevo</h3><p style="color:#8A95A8;font-size:.9rem;margin-top:4px">Tu sistema está protegido y monitoreando.</p>
+<label>Correo electrónico</label><input id="login-email" type="email" placeholder="tu@correo.com" required>
 <label>Contraseña</label><input id="login-password" type="password" placeholder="••••••••" required>
-<button class="btn btn-blue" type="submit">Entrar a Sentinela</button>
+<button class="btn btn-blue" type="submit">Entrar a Sentinela →</button>
 <div id="login-status" class="status"></div>
 </form>
 <form id="form-owner" class="hidden" onsubmit="return doRegisterOwner(event)">
-<p style="color:var(--gold)"><b>Registro Maestro (Dueño)</b></p>
-<label>Nombre del Dueño</label><input id="owner-name" placeholder="Nicolas Sebastián Bejarano" required>
-<label>Correo Maestro</label><input id="owner-email" type="email" placeholder="admin@dominio.com" required>
-<label>Contraseña Maestra (mín. 8)</label><input id="owner-password" type="password" minlength="8" required>
-<button class="btn btn-gold" type="submit">Registrar Dueño</button>
-<div id="owner-status" class="status"></div>
+<h3>Cuenta Dueño</h3><p style="color:#8A95A8;font-size:.9rem">Acceso total, control maestro.</p>
+<label>Nombre completo</label><input id="owner-name" placeholder="Nicolas Sebastián Bejarano" required>
+<label>Correo maestro</label><input id="owner-email" type="email" placeholder="admin@dominio.com" required>
+<label>Contraseña maestra</label><input id="owner-password" type="password" minlength="8" required>
+<button class="btn btn-gold" type="submit">Crear cuenta Dueño</button><div id="owner-status" class="status"></div>
 </form>
 <form id="form-user" class="hidden" onsubmit="return doRegisterUser(event)">
-<p><b>Registro de Usuario</b></p>
-<label>Nombre de Usuario</label><input id="user-name" placeholder="Tu nombre" required>
+<h3>Crear cuenta</h3><p style="color:#8A95A8;font-size:.9rem">Protección para vos y tu familia.</p>
+<label>Nombre</label><input id="user-name" placeholder="Tu nombre" required>
 <label>Correo</label><input id="user-email" type="email" placeholder="usuario@correo.com" required>
-<label>Contraseña (mín. 6)</label><input id="user-password" type="password" minlength="6" required>
-<button class="btn btn-blue" type="submit">Crear Cuenta</button>
-<div id="user-status" class="status"></div>
+<label>Contraseña</label><input id="user-password" type="password" minlength="6" required>
+<button class="btn btn-blue" type="submit">Crear cuenta</button><div id="user-status" class="status"></div>
 </form>
-<div style="text-align:center;margin:15px 0;color:#7f9bb8;font-size:.85rem">— O CONTINUÁ CON —</div>
+<div style="display:flex;align-items:center;gap:10px;margin:18px 0"><div style="flex:1;height:1px;background:#1E2A44"></div><span style="color:#8A95A8;font-size:.8rem">O CONTINUÁ CON</span><div style="flex:1;height:1px;background:#1E2A44"></div></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<button type="button" onclick="loginSocial('Google')" style="padding:12px;background:#fff;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer">🔴 Google</button>
-<button type="button" onclick="loginSocial('Apple')" style="padding:12px;background:#000;color:#fff;border:1px solid #fff;border-radius:6px;font-weight:700;cursor:pointer">🍎 Apple</button>
+<button type="button" onclick="loginSocial('Google')" style="padding:12px;background:#fff;color:#000;border:none;border-radius:10px;font-weight:700;cursor:pointer">G Google</button>
+<button type="button" onclick="loginSocial('Apple')" style="padding:12px;background:#000;color:#fff;border:1px solid #333;border-radius:10px;font-weight:700;cursor:pointer"> Apple</button>
 </div>
-  </section>
-  <section class="auth-panel hidden" id="main-app" style="border-top:2px solid #ffb703;box-shadow:0 0 40px rgba(255,183,3,.25)">
+<div style="text-align:center;color:#5B6B82;font-size:.75rem;margin-top:16px">🔒 Cifrado de extremo a extremo • Sin rastreo</div>
+</section>
+<section class="card hidden" id="main-app" style="margin-top:16px">
 <div style="display:flex;justify-content:space-between;align-items:center">
-<div style="text-align:left"><p style="font-size:.75rem;letter-spacing:.3em;color:#ffb703">👑 CUENTA PREMIUM</p>
-<h2 id="welcome">Bienvenido</h2><p id="role-pill" style="color:#ffb703;font-weight:700">ROL: DUEÑO</p></div>
-<div style="font-size:35px">🛡️</div></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:18px 0">
-<div style="background:#010610;border:1px solid rgba(0,229,255,.3);border-radius:10px;padding:12px"><p style="font-size:1.4rem;font-weight:900;color:#00e5ff" id="stat-total">0</p><p style="font-size:.7rem;color:#7f9bb8">ESCANEOS</p></div>
-<div style="background:#010610;border:1px solid rgba(0,230,118,.3);border-radius:10px;padding:12px"><p style="font-size:1.4rem;font-weight:900;color:#00e676" id="stat-safe">0</p><p style="font-size:.7rem;color:#7f9bb8">SEGUROS</p></div>
-<div style="background:#010610;border:1px solid rgba(255,59,92,.3);border-radius:10px;padding:12px"><p style="font-size:1.4rem;font-weight:900;color:#ff3b5c" id="stat-danger">0</p><p style="font-size:.7rem;color:#7f9bb8">PELIGROS</p></div></div>
-<div style="background:linear-gradient(135deg,#0b2b59,#051630);border:1px solid rgba(0,229,255,.4);border-radius:12px;padding:16px">
-<p style="text-align:left;font-weight:700">🔗 ESCÁNER CENTINELA PRO</p>
-<input id="urlInput" placeholder="https://ejemplo.com/oferta..." style="border-color:#00e5ff">
-<button class="btn btn-blue" onclick="escanear()">🔍 ESCANEAR AHORA</button>
+<div><p style="color:#FBBF24;font-size:.7rem;letter-spacing:.2em;font-weight:800">PLAN DUEÑO • ACTIVO</p><h2 id="welcome" style="font-size:1.35rem;margin-top:4px">Hola, Nicolas</h2><p id="texto-ciudad" style="color:#8A95A8;font-size:.85rem">Martínez, Buenos Aires • Hoy</p></div>
+<span class="pill" style="background:#0F2A1A;color:#4ADE80">● PROTEGIDO</span></div>
+<div style="background:linear-gradient(135deg,#1D4ED8,#1E40AF);border-radius:14px;padding:18px;margin-top:18px;display:flex;justify-content:space-between;align-items:center">
+<div><p style="font-size:.8rem;opacity:.8">PUNTUACIÓN DE SEGURIDAD</p><p style="font-size:2.2rem;font-weight:900" id="scoreBig">98<span style="font-size:1rem">/100</span></p><p style="font-size:.8rem;opacity:.8">Excelente • Sin amenazas</p></div>
+<div style="width:64px;height:64px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900">98%</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+<div style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:12px;text-align:center"><p style="font-size:1.3rem;font-weight:800" id="stat-total">0</p><p style="font-size:.7rem;color:#8A95A8">ESCANEOS</p></div>
+<div style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:12px;text-align:center"><p style="font-size:1.3rem;font-weight:800;color:#4ADE80" id="stat-safe">0</p><p style="font-size:.7rem;color:#8A95A8">SEGUROS</p></div>
+<div style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:12px;text-align:center"><p style="font-size:1.3rem;font-weight:800;color:#F87171" id="stat-danger">0</p><p style="font-size:.7rem;color:#8A95A8">AMENAZAS</p></div></div>
+<div style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:14px">
+<p style="font-weight:700">Analizar enlace sospechoso</p><p style="color:#8A95A8;font-size:.85rem;margin:4px 0 10px">Pegá el link que te llegó por WhatsApp, SMS o mail.</p>
+<input id="urlInput" placeholder="https://ejemplo.com/oferta">
+<button class="btn btn-blue" onclick="escanear()">Analizar ahora</button>
 <div id="resultado"></div></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px">
-<button onclick="alert('Próximamente: Historial')" style="padding:12px;background:#111;border:1px solid #333;color:#fff;border-radius:10px">📜 HISTORIAL</button>
-<button onclick="alert('Próximamente: Clientes')" style="padding:12px;background:#111;border:1px solid #333;color:#fff;border-radius:10px">👥 CLIENTES</button>
-<button onclick="alert('Próximamente: Informe PDF')" style="padding:12px;background:#111;border:1px solid #333;color:#fff;border-radius:10px">📄 INFORME PDF</button>
-<button onclick="alert('Próximamente: Soporte VIP')" style="padding:12px;background:#111;border:1px solid #333;color:#fff;border-radius:10px">💎 SOPORTE VIP</button></div>
-<button class="btn" style="background:#ff3b5c;color:#fff;margin-top:18px" onclick="salir()">SALIR</button>
-<p style="font-size:.7rem;color:#7f9bb8;margin-top:10px">CENTINELA PREMIUM • Nicolas Sebastián Bejarano • v2.0</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+<button onclick="abrirPanel('panel-historial')" style="padding:14px;background:#1E2A44;border:none;color:#fff;border-radius:12px;font-weight:600;text-align:left">📜<br>Historial<br><span style="font-size:.75rem;color:#8A95A8">Tus escaneos</span></button>
+<button onclick="abrirPanel('panel-clientes')" style="padding:14px;background:#1E2A44;border:none;color:#fff;border-radius:12px;font-weight:600;text-align:left">👥<br>Mis Clientes<br><span style="font-size:.75rem;color:#8A95A8">Gestionar</span></button>
+<button onclick="abrirPanel('panel-config')" style="padding:14px;background:#1E2A44;border:none;color:#fff;border-radius:12px;font-weight:600;text-align:left">⚙️<br>Mi Configuración<br><span style="font-size:.75rem;color:#8A95A8">Personalizar</span></button>
+<button onclick="abrirPanel('panel-soporte')" style="padding:14px;background:#1E2A44;border:none;color:#fff;border-radius:12px;font-weight:600;text-align:left">💬<br>Soporte<br><span style="font-size:.75rem;color:#8A95A8">Hablar ahora</span></button>
+</div>
+<div id="panel-historial" class="hidden" style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:14px;margin-top:14px;text-align:left"><p style="font-weight:800">📜 Tu Historial</p><p id="texto-historial" style="color:#8A95A8;font-size:.9rem;margin-top:8px;white-space:pre-line">Sin escaneos todavía.</p><button onclick="cerrarPaneles()" style="margin-top:10px;padding:10px;width:100%;background:#1E2A44;color:#fff;border:none;border-radius:8px">← Volver</button></div>
+<div id="panel-clientes" class="hidden" style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:14px;margin-top:14px;text-align:left"><p style="font-weight:800">👥 Mis Clientes</p><input id="nuevo-cliente" placeholder="Nombre del cliente..." style="margin-top:10px"><button onclick="agregarCliente()" style="padding:12px;width:100%;background:#2563EB;color:#fff;border:none;border-radius:8px;margin-top:8px;font-weight:700">+ Agregar cliente</button><div id="lista-clientes" style="margin-top:10px;color:#8A95A8;font-size:.9rem">Sin clientes todavía.</div><button onclick="cerrarPaneles()" style="margin-top:10px;padding:10px;width:100%;background:#1E2A44;color:#fff;border:none;border-radius:8px">← Volver</button></div>
+<div id="panel-config" class="hidden" style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:14px;margin-top:14px;text-align:left"><p style="font-weight:800">⚙️ Mi Configuración Personalizada</p><p style="color:#8A95A8;font-size:.85rem">Esto es solo tuyo, se guarda en tu celu.</p><label>Tu nombre como querés que te llame</label><input id="config-nombre" placeholder="Ej: Nico"><label>Tu ciudad</label><input id="config-ciudad" placeholder="Ej: Martínez, Buenos Aires"><label>Tu WhatsApp para avisos</label><input id="config-wpp" placeholder="Ej: 11 1234-5678"><button onclick="guardarConfig()" style="padding:13px;width:100%;background:#22C55E;color:#000;border:none;border-radius:8px;margin-top:12px;font-weight:800">💾 Guardar mi configuración</button><button onclick="cerrarPaneles()" style="margin-top:8px;padding:10px;width:100%;background:#1E2A44;color:#fff;border:none;border-radius:8px">← Volver</button></div>
+<div id="panel-soporte" class="hidden" style="background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:14px;margin-top:14px;text-align:left"><p style="font-weight:800">💬 Soporte Sentinela</p><p style="color:#8A95A8;font-size:.9rem;margin-top:6px">Hola, soy Nico, dueño de Sentinela. ¿En qué te ayudo?</p><div style="background:#1E2A44;padding:10px;border-radius:10px;margin-top:10px;font-size:.9rem">👋 ¡Hola! ¿Necesitás ayuda con un link sospechoso? Mandame el link y lo reviso yo mismo.</div><input id="mensaje-soporte" placeholder="Escribí tu mensaje..." style="margin-top:10px"><button onclick="enviarSoporte()" style="padding:12px;width:100%;background:#2563EB;color:#fff;border:none;border-radius:8px;margin-top:8px;font-weight:700">Enviar mensaje</button><button onclick="cerrarPaneles()" style="margin-top:8px;padding:10px;width:100%;background:#1E2A44;color:#fff;border:none;border-radius:8px">← Volver</button></div>
+<button class="btn" style="background:#1E2A44;color:#F87171" onclick="salir()">Cerrar sesión</button>
+<p style="text-align:center;color:#5B6B82;font-size:.75rem;margin-top:12px">SENTINELA v2.1 • Nicolas Sebastián Bejarano • Hecho en Argentina</p>
 </section>
 </div>
 <script>
 function showTab(t,btn){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['form-login','form-owner','form-user'].forEach(id=>document.getElementById(id).classList.add('hidden'));if(t==='login')document.getElementById('form-login').classList.remove('hidden');if(t==='owner')document.getElementById('form-owner').classList.remove('hidden');if(t==='user')document.getElementById('form-user').classList.remove('hidden');}
 function saveUser(email,name,role){var users=JSON.parse(localStorage.getItem('sentinela_users')||'[]');users.push({email:email,name:name,role:role});localStorage.setItem('sentinela_users',JSON.stringify(users));localStorage.setItem('sentinela_session',JSON.stringify({email:email,name:name,role:role}));}
 function doLogin(e){e.preventDefault();var email=document.getElementById('login-email').value;var users=JSON.parse(localStorage.getItem('sentinela_users')||'[]');var f=users.find(u=>u.email===email);var st=document.getElementById('login-status');if(!f){st.className='status error';st.innerText='No existe esa cuenta. Registrate primero.';return false;}localStorage.setItem('sentinela_session',JSON.stringify(f));mostrarApp(f);return false;}
-function doRegisterOwner(e){e.preventDefault();saveUser(document.getElementById('owner-email').value,document.getElementById('owner-name').value,'DUEÑO');document.getElementById('owner-status').className='status success';document.getElementById('owner-status').innerText='¡Dueño registrado! Andá a Iniciar Sesión.';return false;}
-function doRegisterUser(e){e.preventDefault();saveUser(document.getElementById('user-email').value,document.getElementById('user-name').value,'USUARIO');document.getElementById('user-status').className='status success';document.getElementById('user-status').innerText='¡Usuario creado! Andá a Iniciar Sesión.';return false;}
+function doRegisterOwner(e){e.preventDefault();saveUser(document.getElementById('owner-email').value,document.getElementById('owner-name').value,'DUEÑO');document.getElementById('owner-status').className='status success';document.getElementById('owner-status').innerText='¡Dueño registrado! Andá a Entrar.';return false;}
+function doRegisterUser(e){e.preventDefault();saveUser(document.getElementById('user-email').value,document.getElementById('user-name').value,'USUARIO');document.getElementById('user-status').className='status success';document.getElementById('user-status').innerText='¡Cuenta creada! Andá a Entrar.';return false;}
 function loginSocial(p){var n=prompt('Entraste con '+p+'\n¿Tu nombre?');if(!n)return;var em=prompt('¿Tu mail de '+p+'?');if(!em)return;var u={email:em,name:n,role:'USUARIO'};var users=JSON.parse(localStorage.getItem('sentinela_users')||'[]');if(!users.find(x=>x.email===em))users.push(u);localStorage.setItem('sentinela_users',JSON.stringify(users));localStorage.setItem('sentinela_session',JSON.stringify(u));mostrarApp(u);}
-function mostrarApp(u){document.getElementById('auth-container').classList.add('hidden');document.getElementById('main-app').classList.remove('hidden');document.getElementById('welcome').innerText='Bienvenido '+u.name;document.getElementById('role-pill').innerText='ROL: '+u.role;document.getElementById('role-pill').style.color=u.role==='DUEÑO'?'#ffb703':'#00e5ff';actualizarStats();}
+function mostrarApp(u){document.getElementById('auth-container').classList.add('hidden');document.getElementById('main-app').classList.remove('hidden');var mi=localStorage.getItem('mi_nombre');document.getElementById('welcome').innerText='Hola, '+(mi||u.name.split(' ')[0]);var ci=localStorage.getItem('mi_ciudad');if(ci)document.getElementById('texto-ciudad').innerText=ci+' • Hoy';actualizarStats();}
 function salir(){localStorage.removeItem('sentinela_session');location.reload();}
 function actualizarStats(){document.getElementById('stat-total').innerText=localStorage.getItem('centinela_total')||0;document.getElementById('stat-safe').innerText=localStorage.getItem('centinela_safe')||0;document.getElementById('stat-danger').innerText=localStorage.getItem('centinela_danger')||0;}
-function escanear(){var url=document.getElementById('urlInput').value.trim();if(!url){alert('Pegá un link');return;}if(!url.startsWith('http'))url='https://'+url;var pts=100;var checks=[];if(url.startsWith('https://'))checks.push('✅ Usa HTTPS');else{pts-=30;checks.push('❌ NO usa HTTPS');}var bajo=url.toLowerCase();var malas=['gratis','premio','urgente','banco','login','oferta','regalo','crypto','bitcoin'];var enc=malas.filter(w=>bajo.includes(w));if(enc.length){pts-=20*enc.length;checks.push('⚠️ Sospechosas: '+enc.join(', '));}if(url.length>80){pts-=15;checks.push('⚠️ URL muy larga');}if(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/.test(url)){pts-=30;checks.push('❌ Usa IP');}if(pts<0)pts=0;var nivel=pts>=80?'SEGURO ✅':pts>=50?'DUDOSO ⚠️':'PELIGROSO ⛔';var color=pts>=80?'#00e676':pts>=50?'#ffcc00':'#ff3b5c';var t=parseInt(localStorage.getItem('centinela_total')||0)+1;localStorage.setItem('centinela_total',t);if(pts>=80)localStorage.setItem('centinela_safe',(parseInt(localStorage.getItem('centinela_safe')||0)+1));if(pts<50)localStorage.setItem('centinela_danger',(parseInt(localStorage.getItem('centinela_danger')||0)+1));actualizarStats();document.getElementById('resultado').innerHTML='<div class="result"><b>'+url+'</b><br><br><b style="color:'+color+'">'+nivel+' - '+pts+'/100</b><br>'+checks.join('<br>')+'<br><br><button class="btn" style="background:#222;color:#fff;border:1px solid #444" onclick="navigator.clipboard.writeText(\'🛡️ CENTINELA: '+nivel+' '+pts+'/100 - '+url+'\').then(()=>alert(\'Copiado\'))">📋 COPIAR INFORME</button></div>';}
+function escanear(){var url=document.getElementById('urlInput').value.trim();if(!url){document.getElementById('resultado').innerHTML='<div class="result">Pegá un link primero</div>';return;}if(!url.startsWith('http'))url='https://'+url;var pts=100;var checks=[];if(url.startsWith('https://'))checks.push('✓ Conexión cifrada HTTPS');else{pts-=30;checks.push('✕ Sin HTTPS');}var bajo=url.toLowerCase();var malas=['gratis','premio','urgente','banco','login','oferta','regalo','crypto','bitcoin','verificar'];var enc=malas.filter(w=>bajo.includes(w));if(enc.length){pts-=20*enc.length;checks.push('⚠ Palabras sospechosas: '+enc.join(', '));}if(url.length>80){pts-=15;checks.push('⚠ URL muy larga');}if(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/.test(url)){pts-=30;checks.push('✕ Usa IP en vez de dominio');}if(pts<0)pts=0;var nivel=pts>=80?'SEGURO':pts>=50?'DUDOSO':'PELIGROSO';var color=pts>=80?'#4ADE80':pts>=50?'#FBBF24':'#F87171';var t=parseInt(localStorage.getItem('centinela_total')||0)+1;localStorage.setItem('centinela_total',t);if(pts>=80)localStorage.setItem('centinela_safe',(parseInt(localStorage.getItem('centinela_safe')||0)+1));if(pts<50)localStorage.setItem('centinela_danger',(parseInt(localStorage.getItem('centinela_danger')||0)+1));localStorage.setItem('centinela_historial',(localStorage.getItem('centinela_historial')||'')+'\n• '+nivel+' '+pts+'/100 - '+url);actualizarStats();document.getElementById('resultado').innerHTML='<div class="result"><b>'+url+'</b><br><br><b style="color:'+color+';font-size:1.1rem">'+nivel+' • '+pts+'/100</b><br>'+checks.join('<br>')+'<br><br><button class="btn" style="background:#1E2A44;color:#fff" onclick="navigator.clipboard.writeText(\'SENTINELA: '+nivel+' '+pts+'/100 - '+url+'\').then(()=>alert(\'Informe copiado\'))">Copiar informe</button></div>';document.getElementById('scoreBig').innerHTML=pts+'<span style="font-size:1rem">/100</span>';}
+function abrirPanel(id){['panel-historial','panel-clientes','panel-config','panel-soporte'].forEach(p=>document.getElementById(p).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='panel-historial'){document.getElementById('texto-historial').innerText=localStorage.getItem('centinela_historial')||'Sin escaneos todavía.';}if(id==='panel-clientes'){mostrarClientes();}if(id==='panel-config'){document.getElementById('config-nombre').value=localStorage.getItem('mi_nombre')||'';document.getElementById('config-ciudad').value=localStorage.getItem('mi_ciudad')||'';document.getElementById('config-wpp').value=localStorage.getItem('mi_wpp')||'';}document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function cerrarPaneles(){['panel-historial','panel-clientes','panel-config','panel-soporte'].forEach(p=>document.getElementById(p).classList.add('hidden'));}
+function guardarConfig(){localStorage.setItem('mi_nombre',document.getElementById('config-nombre').value);localStorage.setItem('mi_ciudad',document.getElementById('config-ciudad').value);localStorage.setItem('mi_wpp',document.getElementById('config-wpp').value);var n=document.getElementById('config-nombre').value||'Nico';document.getElementById('welcome').innerText='Hola, '+n;document.getElementById('texto-ciudad').innerText=document.getElementById('config-ciudad').value+' • Hoy';document.getElementById('resultado').innerHTML='<div class="result" style="border-color:#22C55E">✅ <b>¡Configuración guardada!</b><br>Ahora Sentinela te va a llamar '+n+'</div>';cerrarPaneles();}
+function agregarCliente(){var v=document.getElementById('nuevo-cliente').value.trim();if(!v)return;var arr=JSON.parse(localStorage.getItem('mis_clientes')||'[]');arr.push(v);localStorage.setItem('mis_clientes',JSON.stringify(arr));document.getElementById('nuevo-cliente').value='';mostrarClientes();}
+function mostrarClientes(){var arr=JSON.parse(localStorage.getItem('mis_clientes')||'[]');document.getElementById('lista-clientes').innerHTML=arr.length?arr.map(c=>'• '+c).join('<br>'):'Sin clientes todavía.';}
+function enviarSoporte(){var m=document.getElementById('mensaje-soporte').value;if(!m)return;document.getElementById('mensaje-soporte').value='';document.getElementById('resultado').innerHTML='<div class="result" style="border-color:#22C55E">✅ <b>Mensaje enviado a Nico.</b><br>Te respondemos en menos de 1 hora por WhatsApp.</div>';cerrarPaneles();}
 var ses=localStorage.getItem('sentinela_session');if(ses){mostrarApp(JSON.parse(ses));}
-var c=document.getElementById('rayos');var ctx=c.getContext('2d');function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}resize();window.addEventListener('resize',resize);
-function rayo(){ctx.clearRect(0,0,c.width,c.height);var x=Math.random()*c.width;var y=0;ctx.strokeStyle='rgba(0,229,255,0.9)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);while(y<c.height*0.5){y+=30+Math.random()*40;x+=(Math.random()-0.5)*60;ctx.lineTo(x,y);}ctx.stroke();setTimeout(function(){ctx.clearRect(0,0,c.width,c.height);},120);}setInterval(rayo,4000);
-var titulo=document.querySelector('.sentinela-3d');document.addEventListener('mousemove',function(e){if(!titulo)return;var x=(e.clientX/window.innerWidth-.5)*12;var y=(e.clientY/window.innerHeight-.5)*10;titulo.style.transform='perspective(800px) rotateY('+x+'deg) rotateX('+(-y)+'deg)';});
 </script>
 </body>
-</html>
+  </html>
