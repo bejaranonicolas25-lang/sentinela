@@ -3,51 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTINELA</title>
+<title>SENTINELA | Portal de Acceso</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:20px}
-.card{background:#111;border:1px solid #00ff88;border-radius:15px;padding:20px;margin:15px auto;max-width:450px}
-input{width:90%;padding:12px;border-radius:10px;border:1px solid #333;background:#222;color:#fff;margin:10px 0}
-button{background:#00ff88;color:#000;border:none;padding:13px 20px;border-radius:10px;font-weight:bold;width:95%;margin-top:10px;cursor:pointer}
-.hidden{display:none}
+:root{--cyan:#00e5ff;--gold:#ffb703;--text:#e2f1ff;--muted:#7f9bb8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(circle at 50% 35%,#06152d 0%,#020813 55%,#000 100%);font-family:'Rajdhani',sans-serif;color:var(--text);min-height:100vh}
+.main{max-width:480px;margin:0 auto;padding:20px}
+.hero{text-align:center;margin:20px 0}
+.sentinela-3d{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.5rem,9vw,4rem);letter-spacing:.15em;text-shadow:0 0 25px rgba(0,229,255,.7)}
+.badge{display:inline-block;margin-top:8px;padding:5px 14px;font-size:.8rem;letter-spacing:.3em;color:var(--cyan);border:1px solid rgba(0,229,255,.3);border-radius:4px}
+.auth-panel{background:rgba(3,12,28,.85);border:1px solid rgba(0,229,255,.35);border-top:2px solid var(--cyan);border-radius:12px;padding:20px}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;background:#000;padding:5px;border-radius:8px;margin-bottom:15px}
+.tab-btn{background:transparent;border:none;color:var(--muted);font-weight:700;padding:10px 2px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.tab-btn.active{background:#0b2b59;color:var(--cyan);border:1px solid rgba(0,229,255,.4)}
+.tab-btn.owner-tab.active{background:#3d2800;color:var(--gold);border-color:var(--gold)}
+label{display:block;font-size:.85rem;font-weight:600;text-transform:uppercase;margin:12px 0 5px}
+input{width:100%;padding:12px;background:#010610;border:1px solid rgba(0,229,255,.25);border-radius:6px;color:#fff;font-size:1rem}
+input:focus{outline:none;border-color:var(--cyan)}
+.btn{width:100%;padding:14px;border:none;border-radius:6px;font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;margin-top:15px}
+.btn-blue{background:linear-gradient(90deg,#005bb5,#00a8e8);color:#fff}
+.btn-gold{background:linear-gradient(90deg,#b87a00,#ffb703);color:#000}
+.hidden{display:none!important}
+.status{margin-top:12px;padding:10px;border-radius:6px;font-weight:600;display:none}
+.status.error{display:block;background:rgba(255,59,92,.15);border:1px solid #ff3b5c;color:#ff8fa3}
+.status.success{display:block;background:rgba(0,230,118,.15);border:1px solid #00e676;color:#80f5b8}
+.link{background:none;border:none;color:var(--cyan);cursor:pointer;margin-top:10px}
+.result{text-align:left;background:#0a1a2e;border-radius:10px;padding:14px;margin-top:15px;font-size:14px;line-height:1.6}
 </style>
 </head>
 <body>
-
-<div id="login-screen" class="card">
-<h1>🛡️ CENTINELA</h1>
-<p>Tu escudo digital</p>
-<input id="username" placeholder="Tu nombre">
-<button onclick="entrar()">ENTRAR →</button>
-<p id="msg"></p>
-</div>
-
-<div id="main-app" class="card hidden">
-<h2>Bienvenido <span id="user-name"></span> 👋</h2>
-<p>¿Qué querés revisar hoy?</p>
-<button onclick="alert('SCANNER LISTO - Acá va el scanner')">🛡️ CENTINELA SCANNER</button>
-<button onclick="salir()" style="background:#ff4444;color:#fff">SALIR</button>
-<p id="status">✅ Login funcionando</p>
-</div>
-
-<script>
-function entrar(){
-  var n=document.getElementById('username').value.trim();
-  if(!n){document.getElementById('msg').innerText='Poné tu nombre';return;}
-  localStorage.setItem('centinela_user',n);
-  mostrar(n);
-}
-function mostrar(n){
-  document.getElementById('login-screen').classList.add('hidden');
-  document.getElementById('main-app').classList.remove('hidden');
-  document.getElementById('user-name').innerText=n;
-}
-function salir(){
-  localStorage.removeItem('centinela_user');
-  location.reload();
-}
-var guardado=localStorage.getItem('centinela_user');
-if(guardado){mostrar(guardado);}
-</script>
-</body>
-  </html>
+<div class="main">
+<header class="hero"><h1 class="sentinela-3d">SENTINELA</h1><div><span class="badge">NÚCLEO DE SEGURIDAD & CONTROL</span></div></header>
