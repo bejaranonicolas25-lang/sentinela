@@ -139,3 +139,33 @@ else if(idx==12){let p=(Math.random()*2000+800).toFixed(2);out='📈 TRADER: BTC
 r.textContent=out;
 };
 },true);
+// 13 HERRAMIENTAS - METODO DIRECTO - SI O SI ABRE
+setTimeout(()=>{
+let todos=[...document.querySelectorAll('*')].filter(e=>e.textContent.trim()==='USAR MI HERRAMIENTA');
+console.log('BOTONES ENCONTRADOS:',todos.length);
+let nombres=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+todos.forEach((btn,idx)=>{
+btn.style.border='3px solid yellow';
+btn.onclick=(e)=>{
+e.preventDefault();e.stopPropagation();
+let old=document.querySelector('.cent-uni');if(old)old.remove();
+let u=document.createElement('div');u.className='cent-uni';
+u.style.cssText='position:fixed;inset:0;z-index:999999;background:#020617;color:#fff;overflow:auto;padding:20px';
+u.innerHTML=`<div style="text-align:center"><div style="font-size:80px">🧠</div><h1 style="font-size:28px">${nombres[idx]||'CENTINELA'}</h1><p>Universo ${idx+1} / 13 • Dueño: Nico Bejarano</p></div>
+<div style="background:#111827;padding:16px;border-radius:14px;margin-top:16px"><b>▶ USAR</b><br><input id="x" placeholder="Escribí acá, jefe..." style="width:100%;padding:12px;margin:10px 0;border-radius:10px;color:#000"><button id="go" style="width:100%;padding:14px;background:#22c55e;border:0;border-radius:10px;font-weight:900">🚀 EJECUTAR</button><div id="r" style="background:#000;padding:12px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Esperando tu orden...</div></div>
+<button id="salir" style="width:100%;padding:14px;margin-top:16px;background:#ef4444;border:0;border-radius:10px;font-weight:900;color:#fff">⬅ VOLVER</button>`;
+document.body.appendChild(u);
+u.querySelector('#salir').onclick=()=>u.remove();
+u.querySelector('#go').onclick=()=>{
+let v=u.querySelector('#x').value||'Mi orden';
+let r=u.querySelector('#r');
+if(idx===2){let a=JSON.parse(localStorage.getItem('vault_nico')||'[]');a.push(v);localStorage.setItem('vault_nico',JSON.stringify(a));r.textContent='🔐 VAULT GUARDADO ✅\nTenés '+a.length+' guardados.';}
+else if(idx===3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(v));}catch(e){}r.textContent='🗣️ HABLA 🔊\nDiciendo: "'+v+'"';}
+else if(idx===11){let n=Math.floor(Math.random()*10)+1;r.textContent='🎮 PLAY: Pusiste '+v+', era '+n+(v==n?' ¡GANASTE!':' Casi.');}
+else if(idx===12){let p=(Math.random()*2000+800).toFixed(2);r.textContent='📈 TRADER: BTC $'+p+'\nTu análisis: '+v;}
+else r.textContent='✅ '+nombres[idx]+' recibió: "'+v+'"\n¡Funciona, jefe!';
+};
+};
+});
+alert('✅ Botones conectados: '+todos.length+' / 13');
+},1000);
