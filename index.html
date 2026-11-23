@@ -35,3 +35,36 @@ input:focus{outline:none;border-color:var(--cyan)}
 <body>
 <div class="main">
 <header class="hero"><h1 class="sentinela-3d">SENTINELA</h1><div><span class="badge">NÚCLEO DE SEGURIDAD & CONTROL</span></div></header>
+<section class="auth-panel" id="auth-container">
+<div class="tabs">
+<button type="button" class="tab-btn active" onclick="showTab('login',this)">Iniciar Sesión</button>
+<button type="button" class="tab-btn owner-tab" onclick="showTab('owner',this)">Cuenta Dueño</button>
+<button type="button" class="tab-btn" onclick="showTab('user',this)">Nuevo Usuario</button>
+</div>
+
+<form id="form-login" onsubmit="return doLogin(event)">
+<p><b>Acceso al Sistema</b></p><p style="color:var(--muted)">Ingresá tus credenciales para desbloquear la terminal.</p>
+<label>Correo Electrónico</label><input id="login-email" type="email" placeholder="operador@dominio.com" required>
+<label>Contraseña</label><input id="login-password" type="password" placeholder="••••••••" required>
+<button class="btn btn-blue" type="submit">Entrar a Sentinela</button>
+<div id="login-status" class="status"></div>
+</form>
+
+<form id="form-owner" class="hidden" onsubmit="return doRegisterOwner(event)">
+<p style="color:var(--gold)"><b>Registro Maestro (Dueño)</b></p>
+<label>Nombre del Dueño</label><input id="owner-name" placeholder="Nombre completo" required>
+<label>Correo Maestro</label><input id="owner-email" type="email" placeholder="admin@dominio.com" required>
+<label>Contraseña Maestra (mín. 8)</label><input id="owner-password" type="password" minlength="8" required>
+<button class="btn btn-gold" type="submit">Registrar Dueño</button>
+<div id="owner-status" class="status"></div>
+</form>
+
+<form id="form-user" class="hidden" onsubmit="return doRegisterUser(event)">
+<p><b>Registro de Usuario</b></p>
+<label>Nombre de Usuario</label><input id="user-name" placeholder="Tu nombre" required>
+<label>Correo</label><input id="user-email" type="email" placeholder="usuario@correo.com" required>
+<label>Contraseña (mín. 6)</label><input id="user-password" type="password" minlength="6" required>
+<button class="btn btn-blue" type="submit">Crear Cuenta</button>
+<div id="user-status" class="status"></div>
+</form>
+</section>
