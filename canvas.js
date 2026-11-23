@@ -169,3 +169,35 @@ else r.textContent='✅ '+nombres[idx]+' recibió: "'+v+'"\n¡Funciona, jefe!';
 });
 alert('✅ Botones conectados: '+todos.length+' / 13');
 },1000);
+// ARREGLO DEFINITIVO - BUSCA POR "USAR" Y ABRE DIRECTO
+setInterval(()=>{
+let todos=[...document.querySelectorAll('button, div, a')].filter(e=>e.textContent.includes('USAR MI'));
+todos.forEach((btn,idx)=>{
+if(btn.dataset.ya==='1') return;
+btn.dataset.ya='1';
+btn.style.outline='3px solid yellow';
+btn.onclick=(e)=>{
+e.preventDefault();e.stopPropagation();
+let nombres=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
+let old=document.querySelector('.cent-uni');if(old)old.remove();
+let u=document.createElement('div');u.className='cent-uni';
+u.style.cssText='position:fixed;inset:0;z-index:9999999;background:#020617;color:#fff;overflow:auto;padding:20px';
+u.innerHTML='<h1 style="text-align:center">'+nombres[idx]+'</h1><p style="text-align:center">Universo '+(idx+1)+' / 13 • Nico Bejarano</p><input id="x" placeholder="Escribí acá..." style="width:100%;padding:12px;color:#000;border-radius:10px"><button id="go" style="width:100%;padding:14px;margin-top:10px;background:#22c55e;border:0;border-radius:10px;font-weight:900">🚀 EJECUTAR</button><div id="r" style="background:#000;padding:12px;margin-top:10px;border-radius:10px">Esperando...</div><button id="salir" style="width:100%;padding:14px;margin-top:16px;background:#ef4444;border:0;border-radius:10px;color:#fff;font-weight:900">⬅ VOLVER</button>';
+document.body.appendChild(u);
+u.querySelector('#salir').onclick=()=>u.remove();
+u.querySelector('#go').onclick=()=>{u.querySelector('#r').textContent='✅ FUNCIONA, JEFE! Recibí: '+u.querySelector('#x').value;};
+};
+});
+},500);
+
+// BOTON DE PRUEBA - ABRE SIN TOCAR LAS TARJETAS
+let prueba=document.createElement('button');
+prueba.textContent='🧪 PROBAR - TOCAME PARA ABRIR CENTINELA';
+prueba.style.cssText='position:fixed;top:10px;left:10px;right:10px;z-index:9999999;padding:16px;background:#f59e0b;color:#000;font-weight:900;border:0;border-radius:14px';
+prueba.onclick=()=>{
+let u=document.createElement('div');
+u.style.cssText='position:fixed;inset:0;z-index:9999999;background:#020617;color:#fff;padding:20px';
+u.innerHTML='<h1>🧠 CENTINELA ABIERTO ✅</h1><p>Si ves esto, ya anda todo.</p><button onclick="this.parentElement.remove()" style="width:100%;padding:14px;background:#ef4444;border:0;border-radius:10px;color:#fff;font-weight:900">⬅ VOLVER</button>';
+document.body.appendChild(u);
+};
+document.body.appendChild(prueba);
