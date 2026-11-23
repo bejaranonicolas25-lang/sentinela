@@ -144,3 +144,54 @@ if(ses){mostrarApp(JSON.parse(ses));}
 </script>
 </body>
 </html>
+<!-- MEJORA 1: RELAMPAGOS LIVIANOS -->
+<canvas id="rayos" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.6"></canvas>
+<style>
+#rayos{position:fixed;top:0;left:0}
+.sentinela-3d{transition:transform .2s}
+</style>
+<script>
+// --- TILT 3D CON EL DEDO / MOUSE, sin Three.js ---
+var titulo=document.querySelector('.sentinela-3d');
+if(titulo){
+  document.addEventListener('mousemove',function(e){
+    var x=(e.clientX/window.innerWidth-.5)*12;
+    var y=(e.clientY/window.innerHeight-.5)*10;
+    titulo.style.transform='perspective(800px) rotateY('+x+'deg) rotateX('+(-y)+'deg)';
+  });
+}
+// --- RAYOS LIVIANOS, 1 cada 4 segundos ---
+var c=document.getElementById('rayos');var ctx=c.getContext('2d');
+function resize(){c.width=window.innerWidth;c.height=window.innerHeight;} resize();window.addEventListener('resize',resize);
+function rayo(){
+  ctx.clearRect(0,0,c.width,c.height);
+  var x=Math.random()*c.width;var y=0;
+  ctx.strokeStyle='rgba(0,229,255,0.9)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);
+  while(y<c.height*0.5){y+=30+Math.random()*40;x+= (Math.random()-0.5)*60;ctx.lineTo(x,y);}
+  ctx.stroke();
+  // flash
+  document.body.style.background='#0a2a4a';
+  setTimeout(function(){document.body.style.background='';ctx.clearRect(0,0,c.width,c.height);},120);
+}
+setInterval(rayo,4000); // cada 4 seg, no todo el tiempo = no se traba
+</script>
+<div style="text-align:center;margin:15px 0;color:#7f9bb8;font-size:.85rem">— O CONTINUÁ CON —</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button type="button" onclick="loginSocial('Google')" style="padding:12px;background:#fff;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer">🔴 Google</button>
+<button type="button" onclick="loginSocial('Apple')" style="padding:12px;background:#000;color:#fff;border:1px solid #fff;border-radius:6px;font-weight:700;cursor:pointer">🍎 Apple</button>
+</div>
+<script>
+function loginSocial(proveedor){
+  var nombre=prompt('Entraste con '+proveedor+'\n¿Tu nombre?');
+  if(!nombre) return;
+  var email=prompt('¿Tu mail de '+proveedor+'?');
+  if(!email) return;
+  var user={email:email,name:nombre,role:'USUARIO'};
+  var users=JSON.parse(localStorage.getItem('sentinela_users')||'[]');
+  if(!users.find(u=>u.email===email)) users.push(user);
+  localStorage.setItem('sentinela_users',JSON.stringify(users));
+  localStorage.setItem('sentinela_session',JSON.stringify(user));
+  alert('¡Bienvenido con '+proveedor+'!');
+  mostrarApp(user);
+}
+</script>
