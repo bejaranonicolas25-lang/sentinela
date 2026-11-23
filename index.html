@@ -1,25 +1,53 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8">
+<html lang="es">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SENTINELA • ALFA BRAVO 10-4 • Nico Bejarano</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head><body>
-<canvas id="sentinela-canvas"></canvas>
-<div class="tactical-overlay"></div>
-<main class="main">
-<div class="scan-line-title"><h1 id="main-brand-title" class="title-metal">SENTINELA</h1></div>
-<p class="sub">Nico Bejarano • ALFA BRAVO 10-4 • 🔒 HTTPS REAL</p>
-<form id="login-form"><input id="username" class="glass-input" value="Nico Bejarano">
-<input id="password" class="glass-input" type="password" value="••••••••••••••••">
-<button type="submit" id="submit-btn" class="btn-entrar">ENTRAR →</button></form>
-<p class="mini">Todo lo del Laboratorio adentro de esta web.</p>
-<div id="status-banner"></div>
-<div id="core-hud-card" class="core-badge"><span class="hud-label">NÚCLEO POSITRÓNICO</span><h2 id="hud-center-word">SENTINELA</h2><p>ALFA BRAVO 10-4 • NICO BEJARANO</p></div>
-<div class="agents"><span class="agent-pill">AGENTE 01</span><span class="agent-pill">AGENTE 02</span></div>
-<section class="humanoids"><h3 class="hum-title">🤖 UNIDADES NS-5 • HUMANOIDES</h3><p class="hum-sub">Ultra realistas • Estilo YO, ROBOT • Al servicio de Nico Bejarano</p><div class="hum-grid"><div class="hum-card"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt="NS-5 Sentinela"><div class="hum-info"><b>NS-5 SENTINELA</b><span>Unidad Principal • Ojos Cian</span><span class="hum-status">● ACTIVO</span></div></div><div class="hum-card red"><img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&q=80" alt="NS-5 Viki"><div class="hum-info"><b>NS-5 V.I.K.I.</b><span>Inteligencia Central • Modo Rojo</span><span class="hum-status red">● ALERTA</span></div></div><div class="hum-card"><img src="https://images.unsplash.com/photo-1620712943542-3e5a01a7c2e0?w=600&q=80" alt="NS-5 Guardian"><div class="hum-info"><b>NS-5 GUARDIÁN</b><span>Defensa Global • Protocolo Azul</span><span class="hum-status">● PATRULLANDO</span></div></div></div></section>
-  <footer><button id="toggle-protocol-btn">Protocolo: Azul Cian</button><button id="toggle-name-btn">Modo: SENTINELA</button><span>UNIDAD NS-5 • RED DE DEFENSA GLOBAL</span></footer>
-</main>
-<script src="canvas.js" defer></script>
-<script src="app.js" defer></script>
-</body></html>
+<title>CENTINELA</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:20px}
+.card{background:#111;border:1px solid #00ff88;border-radius:15px;padding:20px;margin:15px auto;max-width:450px}
+input{width:90%;padding:12px;border-radius:10px;border:1px solid #333;background:#222;color:#fff;margin:10px 0}
+button{background:#00ff88;color:#000;border:none;padding:13px 20px;border-radius:10px;font-weight:bold;width:95%;margin-top:10px;cursor:pointer}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div id="login-screen" class="card">
+<h1>🛡️ CENTINELA</h1>
+<p>Tu escudo digital</p>
+<input id="username" placeholder="Tu nombre">
+<button onclick="entrar()">ENTRAR →</button>
+<p id="msg"></p>
+</div>
+
+<div id="main-app" class="card hidden">
+<h2>Bienvenido <span id="user-name"></span> 👋</h2>
+<p>¿Qué querés revisar hoy?</p>
+<button onclick="alert('SCANNER LISTO - Acá va el scanner')">🛡️ CENTINELA SCANNER</button>
+<button onclick="salir()" style="background:#ff4444;color:#fff">SALIR</button>
+<p id="status">✅ Login funcionando</p>
+</div>
+
+<script>
+function entrar(){
+  var n=document.getElementById('username').value.trim();
+  if(!n){document.getElementById('msg').innerText='Poné tu nombre';return;}
+  localStorage.setItem('centinela_user',n);
+  mostrar(n);
+}
+function mostrar(n){
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('main-app').classList.remove('hidden');
+  document.getElementById('user-name').innerText=n;
+}
+function salir(){
+  localStorage.removeItem('centinela_user');
+  location.reload();
+}
+var guardado=localStorage.getItem('centinela_user');
+if(guardado){mostrar(guardado);}
+</script>
+</body>
+  </html>
