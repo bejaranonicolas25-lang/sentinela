@@ -68,3 +68,79 @@ input:focus{outline:none;border-color:var(--cyan)}
 <div id="user-status" class="status"></div>
 </form>
 </section>
+<section class="auth-panel hidden" id="main-app">
+<h2 id="welcome">Bienvenido 👋</h2>
+<p id="role-pill" style="color:var(--cyan)">ROL: USUARIO</p>
+<p style="text-align:left;margin-top:15px">🔗 Pegá el link a revisar</p>
+<input id="urlInput" placeholder="https://ejemplo.com/oferta...">
+<button class="btn btn-blue" onclick="escanear()">🔍 ESCANEAR AHORA</button>
+<div id="resultado"></div>
+<button class="btn" style="background:#ff3b5c;color:#fff" onclick="salir()">SALIR</button>
+</section>
+</div>
+<script>
+function showTab(t,btn){
+document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+['form-login','form-owner','form-user'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+if(t==='login')document.getElementById('form-login').classList.remove('hidden');
+if(t==='owner')document.getElementById('form-owner').classList.remove('hidden');
+if(t==='user')document.getElementById('form-user').classList.remove('hidden');
+}
+function saveUser(email,name,role){
+var users=JSON.parse(localStorage.getItem('sentinela_users')||'[]');
+users.push({email:email,name:name,role:role});
+localStorage.setItem('sentinela_users',JSON.stringify(users));
+localStorage.setItem('sentinela_session',JSON.stringify({email:email,name:name,role:role}));
+}
+function doLogin(e){e.preventDefault();
+var email=document.getElementById('login-email').value;
+var users=JSON.parse(localStorage.getItem('sentinela_users')||'[]');
+var f=users.find(u=>u.email===email);
+var st=document.getElementById('login-status');
+if(!f){st.className='status error';st.innerText='No existe esa cuenta. Registrate primero en Nuevo Usuario o Dueño.';return false;}
+localStorage.setItem('sentinela_session',JSON.stringify(f));
+mostrarApp(f);return false;}
+function doRegisterOwner(e){e.preventDefault();
+var n=document.getElementById('owner-name').value;var em=document.getElementById('owner-email').value;
+saveUser(em,n,'DUEÑO');
+document.getElementById('owner-status').className='status success';
+document.getElementById('owner-status').innerText='¡Dueño registrado! Ahora andá a Iniciar Sesión.';
+return false;}
+function doRegisterUser(e){e.preventDefault();
+var n=document.getElementById('user-name').value;var em=document.getElementById('user-email').value;
+saveUser(em,n,'USUARIO');
+document.getElementById('user-status').className='status success';
+document.getElementById('user-status').innerText='¡Usuario creado! Ahora andá a Iniciar Sesión.';
+return false;}
+function mostrarApp(u){
+document.getElementById('auth-container').classList.add('hidden');
+document.getElementById('main-app').classList.remove('hidden');
+document.getElementById('welcome').innerText='Bienvenido '+u.name+' 👋';
+document.getElementById('role-pill').innerText='ROL: '+u.role;
+document.getElementById('role-pill').style.color=u.role==='DUEÑO'?'#ffb703':'#00e5ff';
+}
+function salir(){localStorage.removeItem('sentinela_session');location.reload();}
+function escanear(){
+var url=document.getElementById('urlInput').value.trim();
+if(!url){alert('Pegá un link');return;}
+if(!url.startsWith('http'))url='https://'+url;
+var pts=100;var checks=[];
+if(url.startsWith('https://'))checks.push('✅ Usa HTTPS');
+else{pts-=30;checks.push('❌ NO usa HTTPS');}
+var bajo=url.toLowerCase();
+var malas=['gratis','premio','urgente','banco','login','oferta','regalo','crypto','bitcoin'];
+var enc=malas.filter(w=>bajo.includes(w));
+if(enc.length){pts-=20*enc.length;checks.push('⚠️ Palabras sospechosas: '+enc.join(', '));}
+if(url.length>80){pts-=15;checks.push('⚠️ URL muy larga');}
+if(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/.test(url)){pts-=30;checks.push('❌ Usa IP, muy sospechoso');}
+if(pts<0)pts=0;
+var nivel=pts>=80?'SEGURO ✅':pts>=50?'DUDOSO ⚠️':'PELIGROSO ⛔';
+var color=pts>=80?'#00e676':pts>=50?'#ffcc00':'#ff3b5c';
+document.getElementById('resultado').innerHTML='<div class="result"><b>'+url+'</b><br><br><b style="color:'+color+'">'+nivel+' - '+pts+'/100</b><br>'+checks.join('<br>')+'<br><br><button class="btn" style="background:#222;color:#fff;border:1px solid #444" onclick="navigator.clipboard.writeText(\'🛡️ CENTINELA: '+nivel+' '+pts+'/100 - '+url+'\').then(()=>alert(\'Copiado\'))">📋 COPIAR INFORME</button></div>';
+}
+var ses=localStorage.getItem('sentinela_session');
+if(ses){mostrarApp(JSON.parse(ses));}
+</script>
+</body>
+</html>
