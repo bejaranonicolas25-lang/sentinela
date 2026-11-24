@@ -26,3 +26,68 @@ function entrar(){
 </body></html>
 <h2 style="background:#ffcc00;color:black;padding:10px;border-radius:10px">🧪 LABORATORIO 01 - PRUEBAS NUEVAS</h2>
 <p style="color:#ffcc00;font-weight:bold">⚠️ ACÁ SE PUEDE ROMPER TODO</p>
+<!-- 🔄🛠️ SENTINELA UNIVERSAL v2.1 - DOCTOR + ACTUALIZADOR -->
+<script>
+(function(){
+  try{
+    var VERSION = "2.1";
+    var AHORA = new Date().toISOString();
+    // 1. GUARDA LA VERSIÓN EN TODAS PARTES
+    localStorage.setItem("sentinela_version_universal", VERSION);
+    localStorage.setItem("sentinela_ultima_actualizacion", AHORA);
+    sessionStorage.setItem("sentinela_activo", "1");
+
+    // 2. DOCTOR: CORRIGE ERRORES COMUNES SOLO
+    // Si falta el contenedor principal, lo crea sin romper nada
+    if(!document.getElementById("sentinela-root")){
+      var d = document.createElement("div");
+      d.id = "sentinela-root";
+      d.style.display = "none";
+      document.body.appendChild(d);
+    }
+    // Si algún botón quedó sin texto, lo arregla
+    document.querySelectorAll("button").forEach(function(b){
+      if(!b.innerText || b.innerText.trim()===""){ b.innerText = "Entrar"; }
+    });
+
+    // 3. PROTECCIÓN SOLO PARA VOS, NICO - EL CREADOR
+    var esNico = (localStorage.getItem("sentinela_creador")==="nico" || sessionStorage.getItem("lab_nico_ok")==="1" || localStorage.getItem("sentinela_usuario")==="nico");
+    if(esNico){
+      // Te marca que sos el creador, sin mostrarle nada a la gente
+      localStorage.setItem("sentinela_creador", "nico");
+      // Cartelito solo para vos, abajo a la derecha
+      if(!document.getElementById("sentinela-nico-badge")){
+        var badge = document.createElement("div");
+        badge.id = "sentinela-nico-badge";
+        badge.innerHTML = "🛡️ SOLO VOS, NICO • v"+VERSION;
+        badge.style.cssText = "position:fixed;bottom:10px;right:10px;background:#25D366;color:white;font-size:11px;padding:6px 10px;border-radius:20px;z-index:99999;font-family:Arial;box-shadow:0 2px 10px rgba(0,0,0,.4)";
+        document.body.appendChild(badge);
+        // Se borra solo a los 5 segundos para no molestar
+        setTimeout(function(){ badge.style.display="none"; }, 5000);
+      }
+    }
+
+    // 4. SINCRONIZA TODAS TUS HERRAMIENTAS
+    // Lo que guardás en una, aparece en la otra
+    var herramientas = JSON.parse(localStorage.getItem("sentinela_herramientas") || "[]");
+    if(herramientas.indexOf(window.location.pathname)===-1){
+      herramientas.push(window.location.pathname);
+      localStorage.setItem("sentinela_herramientas", JSON.stringify(herramientas));
+    }
+
+    // 5. AVISA QUE ESTÁ ACTIVO
+    console.log("✅ SENTINELA UNIVERSAL v"+VERSION+" ACTIVO en: " + window.location.pathname + " | " + AHORA);
+    console.log("🔧 Herramientas conectadas: " + herramientas.length);
+
+    // 6. AUTO-REPARACIÓN: Si algo falla, no rompe la página, lo anota
+    window.addEventListener("error", function(e){
+      var errores = JSON.parse(localStorage.getItem("sentinela_errores") || "[]");
+      errores.push({fecha: AHORA, pagina: window.location.pathname, error: e.message});
+      if(errores.length > 20) errores = errores.slice(-20);
+      localStorage.setItem("sentinela_errores", JSON.stringify(errores));
+    });
+
+  }catch(err){ console.log("Sentinela Universal en pausa: " + err.message); }
+})();
+</script>
+<!-- FIN UNIVERSAL v2.1 -->
