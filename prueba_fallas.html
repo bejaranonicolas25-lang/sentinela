@@ -1,0 +1,52 @@
+<!-- 🔄🛠️ SENTINELA UNIVERSAL v2.2 - SOLO SE VE EN LAB 01 -->
+<script>
+(function(){
+  try{
+    var VERSION = "2.2";
+    var pagina = window.location.pathname.toLowerCase();
+    var esLab01 = pagina.includes("laboratorio_01") || pagina.includes("lab_01") || pagina.includes("lab01");
+    var esLab02 = pagina.includes("laboratorio_02") || pagina.includes("lab_02") || pagina.includes("lab02") || pagina.includes("index");
+
+    // 1. Siempre trabaja en secreto en todos lados
+    localStorage.setItem("sentinela_version_universal", VERSION);
+    localStorage.setItem("sentinela_ultima_actualizacion", new Date().toISOString());
+
+    // 2. Arreglos silenciosos en todos lados
+    if(!document.getElementById("sentinela-root")){
+      var d = document.createElement("div"); d.id="sentinela-root"; d.style.display="none"; document.body.appendChild(d);
+    }
+    document.querySelectorAll("button").forEach(function(b){ if(!b.innerText || b.innerText.trim()===""){ b.innerText="Entrar"; } });
+
+    // 3. SOLO EN LAB 01 SE VE - ORDEN TUYA, JEFE
+    if(esLab01){
+      // Acá SÍ se ve, porque es tu laboratorio privado
+      if(!document.getElementById("sentinela-nico-badge")){
+        var badge = document.createElement("div");
+        badge.id = "sentinela-nico-badge";
+        badge.innerHTML = "🛡️ SOLO VOS, NICO - LAB 01 • v"+VERSION;
+        badge.style.cssText = "position:fixed;bottom:10px;right:10px;background:#25D366;color:white;font-size:12px;padding:8px 12px;border-radius:20px;z-index:99999;font-family:Arial;box-shadow:0 2px 10px rgba(0,0,0,.4)";
+        document.body.appendChild(badge);
+      }
+      console.log("✅ LAB 01 - SE VE TODO - v"+VERSION);
+    }
+
+    // 4. EN LAB 02 / INDEX - NADA SE VE - SOLO TRABAJA EN SECRETO
+    if(esLab02){
+      // Borra el cartelito si por error quedó pegado en el público
+      var viejo = document.getElementById("sentinela-nico-badge");
+      if(viejo) viejo.remove();
+      console.log("🤫 LAB 02 / PÚBLICO - TRABAJO EN SECRETO - v"+VERSION);
+    }
+
+    // 5. Guarda errores en silencio
+    window.addEventListener("error", function(e){
+      var errores = JSON.parse(localStorage.getItem("sentinela_errores") || "[]");
+      errores.push({fecha: new Date().toISOString(), pagina: pagina, error: e.message});
+      if(errores.length > 20) errores = errores.slice(-20);
+      localStorage.setItem("sentinela_errores", JSON.stringify(errores));
+    });
+
+  }catch(err){ console.log("Sentinela en pausa: " + err.message); }
+})();
+</script>
+<!-- FIN UNIVERSAL v2.2 -->
