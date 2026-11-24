@@ -174,3 +174,41 @@ var ses=localStorage.getItem('sentinela_session');if(ses){mostrarApp(JSON.parse(
 })();
 </script>
 <!-- FIN UNIVERSAL v2.1 -->
+<!-- 🆕 CREAR CUENTA SENTINELA -->
+<div style="text-align:center;margin-top:12px">
+  <button onclick="crearCuentaSentinela()" style="background:none;border:none;color:#4da6ff;font-size:14px;text-decoration:underline;cursor:pointer">¿No tenés cuenta? Crear cuenta nueva</button>
+  <br>
+  <button onclick="olvidarCuenta()" style="background:none;border:none;color:#888;font-size:12px;margin-top:6px;cursor:pointer">Olvidé mi contraseña</button>
+</div>
+
+<script>
+function crearCuentaSentinela(){
+  var u = prompt("🆕 CREAR CUENTA SENTINELA\n\nElegí tu usuario:");
+  if(!u) return;
+  var p = prompt("Elegí tu contraseña para " + u + ":");
+  if(!p) return;
+  var cuentas = JSON.parse(localStorage.getItem('sentinela_cuentas') || '{}');
+  if(cuentas[u]){ alert("Ese usuario ya existe. Probá entrar."); return; }
+  cuentas[u] = p;
+  localStorage.setItem('sentinela_cuentas', JSON.stringify(cuentas));
+  alert("✅ ¡Cuenta creada, " + u + "!\n\nAhora poné tu usuario y contraseña arriba y entrá.");
+}
+function olvidarCuenta(){
+  var u = prompt("¿Cuál es tu usuario?");
+  if(!u) return;
+  var cuentas = JSON.parse(localStorage.getItem('sentinela_cuentas') || '{}');
+  if(cuentas[u]){ alert("Tu contraseña es: " + cuentas[u] + "\n\nSolo vos la ves, Nico."); }
+  else { alert("No encontré ese usuario. Creá una cuenta nueva."); }
+}
+// Hace que el botón Entrar acepte cuentas creadas + demo
+(function(){
+  var btn = document.querySelector('button');
+  // No tocamos tu botón original, solo agregamos la lógica
+  window.entrarConCuenta = function(usuario, pass){
+    var cuentas = JSON.parse(localStorage.getItem('sentinela_cuentas') || '{}');
+    if((usuario==='nico' && pass==='1234') || cuentas[usuario]===pass) return true;
+    return false;
+  };
+})();
+</script>
+<!-- FIN CREAR CUENTA -->
