@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LABORATORIO 01 - SENTINELA</title>
+<style>body{font-family:Arial;background:#0a0f1a;color:white;text-align:center;padding:40px 20px} .caja{background:#111a2e;padding:24px;border-radius:16px;max-width:400px;margin:auto} input{width:90%;padding:12px;margin:8px;border-radius:10px;border:none} button{background:#25D366;color:white;border:none;padding:12px 20px;border-radius:10px;font-weight:bold;width:95%}</style>
+</head><body>
+<div class="caja">
+<h2>🧪 LABORATORIO 01</h2>
+<p>Solo Nico, el Creador</p>
+<input id="u" placeholder="Usuario"><input id="p" type="password" placeholder="Contraseña">
+<button onclick="entrar()">Entrar al Laboratorio 01</button>
+<p id="msg" style="color:#ffcc00"></p>
+<p style="font-size:12px;color:#888">Si este es el 01, el otro es el 02. Ya están los dos.</p>
+</div>
+<script>
+function entrar(){
+  if(document.getElementById('u').value==='nico' && document.getElementById('p').value==='1234'){
+    sessionStorage.setItem('lab_nico_ok','1');
+    document.getElementById('msg').innerHTML="✅ ¡Bienvenido, Creador! Laboratorio 01 creado y funcionando.";
+  } else { document.getElementById('msg').innerHTML="❌ No sos Nico."; }
+}
+</script>
+<!-- 🔄🛠️ UNIVERSAL v2.1 -->
+<script>
+(function(){var V="2.1";localStorage.setItem("sentinela_version_universal",V);console.log("✅ Lab 01 Universal Activo v"+V);})();
+</script>
+</body></html>
