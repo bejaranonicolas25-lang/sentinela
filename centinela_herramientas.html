@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CENTINELA - Herramientas Reales</title>
+<style>body{margin:0;font-family:Arial;background:#0B1020;color:white;padding:16px} h1{margin:0} .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px} .card{background:#141B31;border-radius:18px;padding:16px;text-align:center;cursor:pointer} .icon{font-size:42px} .grande{grid-column:1/3;background:linear-gradient(90deg,#25D366,#0EA5E9)} .panel{display:none;position:fixed;inset:0;background:#0B1020;z-index:9999;padding:16px;overflow:auto} .top{display:flex;justify-content:space-between;align-items:center} .top button{background:#FF4444;border:none;color:white;padding:10px 14px;border-radius:10px} .menu{display:flex;gap:8px;overflow:auto;margin:12px 0} .menu button{background:#1E2A4A;color:white;border:none;padding:10px 14px;border-radius:20px;white-space:nowrap} .chat{background:#0F1526;border-radius:14px;padding:12px;min-height:140px} .msg{background:#25D366;color:white;padding:8px 12px;border-radius:12px;margin:6px 0;display:inline-block} .msg2{background:#2A3655;padding:8px 12px;border-radius:12px;margin:6px 0;display:inline-block} input,select{width:100%;padding:11px;border-radius:10px;border:none;margin-top:8px} .btn{background:#25D366;border:none;color:white;padding:13px;border-radius:12px;width:100%;font-weight:bold;margin-top:10px}</style>
+</head><body>
+<h1>🛡️ CENTINELA</h1><p style="color:#aaa;margin:4px 0">Tocá una herramienta. Cada una es una web entera.</p>
+<div class="grid" id="grid"></div>
+
+<div class="panel" id="panel">
+<div class="top"><h2 id="p-titulo" style="margin:0"></h2><button onclick="cerrar()">✕ Cerrar</button></div>
+<p id="p-desc" style="color:#aaa"></p>
+<div class="menu" id="p-menu"></div>
+<div class="chat" id="p-chat"></div>
+<input id="p-input" placeholder="Escribí acá, estilo chat...">
+<button class="btn" onclick="enviar()">Enviar en el chat</button>
+<div style="background:#141B31;padding:14px;border-radius:14px;margin-top:12px"><b>⚙️ Configuración de esta herramienta</b>
+<select id="p-tema"><option>Tema Oscuro CENTINELA</option><option>Tema Claro</option><option>Tema Verde</option></select>
+<input id="p-nombre" placeholder="Nombre de tu espacio dentro de esta herramienta">
+<button class="btn" onclick="alert('✅ Configuración guardada en '+herramientaActual)">Guardar Configuración</button>
+</div>
+<p style="text-align:center;color:#aaa;font-size:12px">CENTINELA • Sin datos personales • Todo guardado en tu Nube futura</p>
+</div>
+
+<script>
+var H=[
+{id:"vault",icono:"🔒",nombre:"CENTINELA VAULT",desc:"Tu caja fuerte. Guardá archivos, contraseñas, fotos. Solo vos entrás.",chat:["VAULT: Hola, soy tu caja fuerte","VAULT: ¿Qué querés guardar hoy?"]},
+{id:"ia",icono:"🧠",nombre:"CENTINELA IA",desc:"Tu cerebro. Te ayuda, te escribe, te corrige, te piensa ideas.",chat:["IA: Hola, soy tu IA CENTINELA","IA: Preguntame lo que quieras"]},
+{id:"habla",icono:"🗣️",nombre:"CENTINELA HABLA",desc:"Tu traductor. Hablá en cualquier idioma.",chat:["HABLA: Hello! Hola! Bonjour!","HABLA: ¿En qué idioma hablamos?"]},
+{id:"cloud",icono:"☁️",nombre:"CENTINELA CLOUD",desc:"Tu nube futura. Acá se guarda todo, seguro, con sensores.",chat:["CLOUD: Tus archivos están seguros","CLOUD: Sensores activos 24/7"]},
+{id:"check",icono:"📓",nombre:"CENTINELA CHECK",desc:"Tu cuaderno. Tareas, checks, listas.",chat:["CHECK: Tenés 3 tareas hoy","CHECK: ¿Marcamos la primera?"]},
+{id:"ajustes",icono:"⚙️",nombre:"CENTINELA AJUSTES",desc:"Tus configuraciones de toda la web.",chat:["AJUSTES: Todo listo para configurar","AJUSTES: Cambiá lo que quieras"]},
+{id:"office",icono:"📄",nombre:"CENTINELA OFFICE",desc:"PDF, Excel, PowerPoint. Todo en uno.",chat:["OFFICE: ¿Creamos un PDF?","OFFICE: ¿O un Excel?"]},
+{id:"share",icono:"📤",nombre:"CENTINELA SHARE",desc:"Compartí pantalla, archivos, links.",chat:["SHARE: Listo para compartir","SHARE: Mandá el link"]},
+{id:"code",icono:"💻",nombre:"CENTINELA CODE",desc:"Tu código. Escribí, probá, corregí.",chat:["CODE: Tu código está listo","CODE: ¿Lo probamos?"]},
+{id:"academy",icono:"🎓",nombre:"CENTINELA ACADEMY",desc:"Tu escuela. Aprendé paso a paso.",chat:["ACADEMY: Bienvenido a tu clase","ACADEMY: Hoy aprendemos algo nuevo"]},
+{id:"play",icono:"🎮",nombre:"CENTINELA PLAY",desc:"Tu juego. Puntaje, niveles, diversión.",chat:["PLAY: ¡A jugar!","PLAY: Tu puntaje: 100"]},
+{id:"trader",icono:"📈",nombre:"CENTINELA TRADER",desc:"Tu mercado. Trading, plata, gráficos.",chat:["TRADER: Mercado activo","TRADER: ¿Compramos o vendemos?"]}
+];
+var herramientaActual="";
+var grid=document.getElementById("grid");
+grid.innerHTML='<div class="card grande" onclick="abrir(0)"><div class="icon">🛡️</div><b>CENTINELA</b><span>Entrada principal</span></div>'+H.map(function(h,i){return '<div class="card" onclick="abrir('+(i+1)+')"><div class="icon">'+h.icono+'</div><b>'+h.nombre+'</b><span>Tocá para entrar - Web completa</span></div>'}).join("");
+function abrir(n){var h=n==0?{icono:"🛡️",nombre:"CENTINELA",desc:"Entrada principal CENTINELA. Desde acá entrás a todo.",chat:["CENTINELA: Bienvenido","CENTINELA: Elegí una herramienta"]}:H[n-1];herramientaActual=h.nombre;document.getElementById("p-titulo").innerHTML=h.icono+" "+h.nombre;document.getElementById("p-desc").innerHTML=h.desc;document.getElementById("p-menu").innerHTML=["Inicio","Chat","Archivos","Configuración","Ayuda"].map(function(m){return '<button onclick="alert(\''+m+' de '+h.nombre+'\')">'+m+'</button>'}).join("");document.getElementById("p-chat").innerHTML=h.chat.map(function(m,i){return '<div><span class="'+(i%2==0?'msg2':'msg')+'">'+m+'</span></div>'}).join("");document.getElementById("panel").style.display="block";window.scrollTo(0,0);}
+function cerrar(){document.getElementById("panel").style.display="none";}
+function enviar(){var v=document.getElementById("p-input").value;if(!v)return;document.getElementById("p-chat").innerHTML+='<div style="text-align:right"><span class="msg">'+v+'</span></div>';document.getElementById("p-input").value="";}
+</script>
+
+<!-- CENTINELA UNIVERSAL v2.4 - TRABAJA EN SILENCIO -->
+<script>(function(){try{var V="2.4",p=window.location.pathname.toLowerCase(),lab1=p.includes("laboratorio_01")||p.includes("lab_01"),lab2=p.includes("laboratorio_02")||p.includes("index");localStorage.setItem("centinela_version_universal",V);if(!document.getElementById("centinela-root")){var d=document.createElement("div");d.id="centinela-root";d.style.display="none";document.body.appendChild(d);}if(lab1&&!document.getElementById("centinela-badge")){var b=document.createElement("div");b.id="centinela-badge";b.innerHTML="🛡️ CENTINELA - LAB 01 • v"+V;b.style.cssText="position:fixed;bottom:10px;right:10px;background:#25D366;color:white;font-size:12px;padding:8px 12px;border-radius:20px;z-index:99999";document.body.appendChild(b);}if(lab2){var v=document.getElementById("centinela-badge");if(v)v.remove();}window.addEventListener("error",function(e){var er=JSON.parse(localStorage.getItem("centinela_errores")||"[]");er.push({fecha:new Date().toISOString(),pagina:p,error:e.message});localStorage.setItem("centinela_errores",JSON.stringify(er.slice(-20)));});}catch(e){}})();</script>
+</body></html>
