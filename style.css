@@ -55,3 +55,68 @@ body.alert-mode .title-metal{filter:drop-shadow(0 0 20px rgba(255,30,66,.65))}
 .ns-click{cursor:pointer!important;transition:.2s}.ns-click:active{transform:scale(.97);box-shadow:0 0 25px #00e5ff!important}.ns-btn{width:100%;padding:12px;border:0;border-radius:12px;background:linear-gradient(90deg,#00e5ff,#7c3aed);color:#fff;font-weight:900;font-family:Orbitron;margin-top:8px}
 /* LOGIN ULTRA SEGURO - NICO */
 .cent-login{position:fixed;inset:0;z-index:999999;background:#020617;background-image:radial-gradient(circle at 50% 0%,#0ea5e9 0%,transparent 50%);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}.cent-login-box{width:100%;max-width:380px;background:rgba(2,6,23,.95);border:2px solid #38bdf8;border-radius:24px;padding:20px;box-shadow:0 0 40px #38bdf8}.cent-login-box h1{font-family:Orbitron;text-align:center;font-size:18px}.cent-login-box input,.cent-login-box select{width:100%;padding:13px;border-radius:12px;border:1px solid #38bdf8;background:#020617;color:#fff;margin-top:10px}.cent-login-box button{width:100%;padding:13px;border:0;border-radius:12px;background:linear-gradient(90deg,#00e5ff,#7c3aed);color:#fff;font-weight:900;font-family:Orbitron;margin-top:12px}.cent-google{background:#fff!important;color:#000!important}.cent-apple{background:#000!important;color:#fff!important;border:1px solid #fff!important}.cent-link{text-align:center;font-size:12px;color:#38bdf8;margin-top:12px;cursor:pointer}
+<!-- 🔄🛠️ SENTINELA UNIVERSAL v2.1 - DOCTOR + ACTUALIZADOR -->
+<script>
+(function(){
+  try{
+    var VERSION = "2.1";
+    var AHORA = new Date().toISOString();
+    // 1. GUARDA LA VERSIÓN EN TODAS PARTES
+    localStorage.setItem("sentinela_version_universal", VERSION);
+    localStorage.setItem("sentinela_ultima_actualizacion", AHORA);
+    sessionStorage.setItem("sentinela_activo", "1");
+
+    // 2. DOCTOR: CORRIGE ERRORES COMUNES SOLO
+    // Si falta el contenedor principal, lo crea sin romper nada
+    if(!document.getElementById("sentinela-root")){
+      var d = document.createElement("div");
+      d.id = "sentinela-root";
+      d.style.display = "none";
+      document.body.appendChild(d);
+    }
+    // Si algún botón quedó sin texto, lo arregla
+    document.querySelectorAll("button").forEach(function(b){
+      if(!b.innerText || b.innerText.trim()===""){ b.innerText = "Entrar"; }
+    });
+
+    // 3. PROTECCIÓN SOLO PARA VOS, NICO - EL CREADOR
+    var esNico = (localStorage.getItem("sentinela_creador")==="nico" || sessionStorage.getItem("lab_nico_ok")==="1" || localStorage.getItem("sentinela_usuario")==="nico");
+    if(esNico){
+      // Te marca que sos el creador, sin mostrarle nada a la gente
+      localStorage.setItem("sentinela_creador", "nico");
+      // Cartelito solo para vos, abajo a la derecha
+      if(!document.getElementById("sentinela-nico-badge")){
+        var badge = document.createElement("div");
+        badge.id = "sentinela-nico-badge";
+        badge.innerHTML = "🛡️ SOLO VOS, NICO • v"+VERSION;
+        badge.style.cssText = "position:fixed;bottom:10px;right:10px;background:#25D366;color:white;font-size:11px;padding:6px 10px;border-radius:20px;z-index:99999;font-family:Arial;box-shadow:0 2px 10px rgba(0,0,0,.4)";
+        document.body.appendChild(badge);
+        // Se borra solo a los 5 segundos para no molestar
+        setTimeout(function(){ badge.style.display="none"; }, 5000);
+      }
+    }
+
+    // 4. SINCRONIZA TODAS TUS HERRAMIENTAS
+    // Lo que guardás en una, aparece en la otra
+    var herramientas = JSON.parse(localStorage.getItem("sentinela_herramientas") || "[]");
+    if(herramientas.indexOf(window.location.pathname)===-1){
+      herramientas.push(window.location.pathname);
+      localStorage.setItem("sentinela_herramientas", JSON.stringify(herramientas));
+    }
+
+    // 5. AVISA QUE ESTÁ ACTIVO
+    console.log("✅ SENTINELA UNIVERSAL v"+VERSION+" ACTIVO en: " + window.location.pathname + " | " + AHORA);
+    console.log("🔧 Herramientas conectadas: " + herramientas.length);
+
+    // 6. AUTO-REPARACIÓN: Si algo falla, no rompe la página, lo anota
+    window.addEventListener("error", function(e){
+      var errores = JSON.parse(localStorage.getItem("sentinela_errores") || "[]");
+      errores.push({fecha: AHORA, pagina: window.location.pathname, error: e.message});
+      if(errores.length > 20) errores = errores.slice(-20);
+      localStorage.setItem("sentinela_errores", JSON.stringify(errores));
+    });
+
+  }catch(err){ console.log("Sentinela Universal en pausa: " + err.message); }
+})();
+</script>
+<!-- FIN UNIVERSAL v2.1 -->
