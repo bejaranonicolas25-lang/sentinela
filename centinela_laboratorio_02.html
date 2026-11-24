@@ -1,150 +1,77 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTINELA PRO - Laboratorio 02</title>
-<style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#050A14;color:#fff}
-.top{background:#0A1628;padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #00C6FF}
-.logo{font-size:22px;font-weight:900;color:#00C6FF}
-.badge{background:#00E676;color:#000;padding:6px 10px;border-radius:20px;font-weight:800;font-size:12px}
-.wrap{padding:16px;max-width:520px;margin:auto}
-.card{background:#101E33;border:1px solid #1E3A5F;border-radius:16px;padding:16px;margin-bottom:14px}
-h2{margin:0 0 10px;font-size:18px}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.stat{background:#0A1628;border-radius:12px;padding:12px;text-align:center}
-.stat b{font-size:22px;display:block;color:#00C6FF}
-.stat span{font-size:11px;color:#A9B8D0}
-textarea{width:100%;height:90px;border-radius:12px;border:none;padding:12px;font-size:15px}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;font-size:15px;margin-top:10px;cursor:pointer}
-.green{background:#00E676}
-.blue{background:#00C6FF}
-#historial{font-size:13px;line-height:1.6;max-height:180px;overflow:auto}
-#iaBox{background:#000;border-radius:12px;padding:12px;min-height:110px;font-size:14px;line-height:1.5}
-input{width:100%;padding:12px;border-radius:12px;border:none;margin-top:10px}
-</style>
-</head>
-<body>
-<div class="top"><div class="logo">CENTINELA PRO</div><div class="badge">EN VIVO</div></div>
-<div class="wrap">
-<div class="card"><h2>Panel de Control - Laboratorio 02</h2>
-<div class="grid">
-<div class="stat"><b id="total">0</b><span>REGISTROS</span></div>
-<div class="stat"><b style="color:#00E676">ACTIVO</b><span>SISTEMA</span></div>
-<div class="stat"><b id="hora">--:--</b><span>ULTIMA HORA</span></div>
-</div></div>
-<div class="card"><h2>Tu IA CENTINELA</h2>
-<div id="iaBox">Hola, soy tu IA CENTINELA. Escribime abajo que paso y te digo que hacer.</div>
-<input id="iaInput" placeholder="Escribile a tu IA aca...">
-<button class="btn blue" onclick="preguntarIA()">PREGUNTAR A LA IA</button>
-</div>
-<div class="card"><h2>Nuevo Registro Real</h2>
-<textarea id="texto" placeholder="Escribi aca la alerta..."></textarea>
-<button class="btn green" onclick="guardar()">GUARDAR EN CENTINELA</button>
-<div id="msg"></div></div>
-<div class="card"><h2>Historial Guardado</h2><div id="historial">Sin registros todavia.</div>
-<button class="btn" style="background:#FF9F00;color:#000" onclick="borrar()">BORRAR HISTORIAL</button>
-</div>
-</div>
+<!-- 🔒🔒🔒🔒🔒 SENTINELA LABORATORIO - QUÍNTUPLE CANDADO - SOLO NICO -->
 <script>
-let datos = JSON.parse(localStorage.getItem('centinela_pro') || '[]');
-function mostrar(){
-  document.getElementById('total').innerText = datos.length;
-  document.getElementById('historial').innerHTML = datos.length ? datos.map(d=>'<b>'+d.hora+'</b> - '+d.texto).reverse().join('<br>') : 'Sin registros todavia.';
-  if(datos.length) document.getElementById('hora').innerText = datos[datos.length-1].hora;
-}
-function guardar(){
-  let t = document.getElementById('texto').value.trim();
-  if(!t) return alert('Escribi algo primero');
-  let ahora = new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-  datos.push({texto:t, hora:ahora});
-  localStorage.setItem('centinela_pro', JSON.stringify(datos));
-  document.getElementById('texto').value='';
-  document.getElementById('msg').innerHTML='<p style="color:#00E676;text-align:center"><b>GUARDADO EN CENTINELA PRO</b></p>';
-  mostrar();
-}
-function borrar(){ if(confirm('Borrar todo?')){ datos=[]; localStorage.removeItem('centinela_pro'); mostrar(); } }
-function preguntarIA(){
-  let q = document.getElementById('iaInput').value.toLowerCase();
-  let r = 'Entendido. Lo dejo registrado. Mantenete calmo, no salgas solo y guarda hora y detalle.';
-  if(q.includes('ruido')||q.includes('movimiento')||q.includes('afuera')) r='ALERTA AMARILLO: No abras la puerta. Fijate por camara o ventana, guarda la hora exacta aca y si se repite avisa a un vecino o policia.';
-  if(q.includes('robo')||q.includes('ladr')) r='ALERTA ROJO: No te enfrentes. Anda a un lugar seguro, llama al 911 y guarda todo aca. Tu seguridad primero.';
-  if(q.includes('hola')||q.includes('quien')) r='Hola, soy tu IA CENTINELA PRO. Te ayudo a registrar, analizar y decidir. Decime que esta pasando.';
-  document.getElementById('iaBox').innerHTML = '<b>TU:</b> '+q+'<br><br><b>IA CENTINELA:</b> '+r;
-  document.getElementById('iaInput').value='';
-}
-mostrar();
+(function(){
+  // Si ya está adentro en esta sesión, no molesta de nuevo
+  if(sessionStorage.getItem('lab_nico_ok')==='1') return;
+
+  function guardar(dato){ try{localStorage.setItem('lab_nico_seg', JSON.stringify(dato));}catch(e){} }
+  function leer(){ try{return JSON.parse(localStorage.getItem('lab_nico_seg')||'null');}catch(e){return null;} }
+
+  var datos = leer();
+  // Primera vez: CREAR USUARIO
+  if(!datos){
+    alert("🧪 LABORATORIO PRIVADO\n\nPrimera vez. Vamos a crear tu usuario de CREADOR, con toda la seguridad.");
+    var usuario = prompt("PASO 1/4 - CREAR USUARIO\nElegí tu nombre de creador:");
+    if(!usuario) return document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Cancelado</h1>");
+    var clave = prompt("PASO 2/4 - CREAR CLAVE\nElegí una clave fuerte:");
+    if(!clave) return document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Cancelado</h1>");
+    var pregunta = prompt("PASO 3/4 - PREGUNTA DE SEGURIDAD\nEj: ¿Nombre de tu primera mascota?\nEscribí TU pregunta:");
+    var respuesta = prompt("PASO 4/4 - RESPUESTA DE SEGURIDAD\nRespondé tu pregunta:");
+    var codigoRecu = "NICO-" + Math.floor(1000+Math.random()*9000);
+    guardar({usuario:usuario, clave:clave, pregunta:pregunta||"¿Tu clave?", respuesta:(respuesta||"").toLowerCase(), codigo:codigoRecu});
+    alert("✅ USUARIO CREADO\n\nUsuario: "+usuario+"\n\n⚠️ GUARDÁ ESTE CÓDIGO DE RECUPERACIÓN EN UN PAPEL:\n"+codigoRecu+"\n\nSi te olvidás la clave, con este código entrás.");
+    sessionStorage.setItem('lab_nico_ok','1');
+    alert("Bienvenido Creador "+usuario+" 👨‍🔬");
+    return;
+  }
+
+  // Ya existe usuario: PANTALLA DE ENTRADA
+  var opcion = prompt("🧪 LABORATORIO PRIVADO - SOLO CREADOR\n\n1 = ENTRAR\n2 = OLVIDÉ MI CLAVE\n3 = SOY OTRA PERSONA / SALIR\n\nEscribí 1, 2 o 3:");
+  
+  if(opcion==="2"){
+    // RECUPERAR
+    var como = prompt("RECUPERAR CLAVE\n\n1 = Con Pregunta de Seguridad\n2 = Con Código de Recuperación\n\nEscribí 1 o 2:");
+    if(como==="1"){
+      var r = prompt("PREGUNTA DE SEGURIDAD:\n"+datos.pregunta);
+      if(r && r.toLowerCase()===datos.respuesta){
+        alert("✅ Correcto. Tu clave es: "+datos.clave);
+        sessionStorage.setItem('lab_nico_ok','1');
+        return;
+      } else {
+        document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Respuesta incorrecta</h1>");
+        return;
+      }
+    }
+    if(como==="2"){
+      var c = prompt("Poné tu CÓDIGO DE RECUPERACIÓN (Ej: NICO-1234):");
+      if(c && c.toUpperCase()===datos.codigo){
+        var nueva = prompt("✅ Código correcto. Poné tu NUEVA clave:");
+        datos.clave=nueva; guardar(datos);
+        alert("Clave cambiada. Entrá con la nueva.");
+        sessionStorage.setItem('lab_nico_ok','1');
+        return;
+      } else {
+        document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Código incorrecto</h1>");
+        return;
+      }
+    }
+  }
+
+  if(opcion!=="1"){
+    document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Acceso denegado<br><span style='font-size:16px'>Laboratorio privado del creador.</span></h1>");
+    return;
+  }
+
+  // CANDADO 1, 2, 3: Usuario + Clave + Confirmación
+  var u = prompt("🔒 CANDADO 1/3 - USUARIO:");
+  if(u!==datos.usuario){ document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Usuario incorrecto</h1>"); return; }
+  var p = prompt("🔒 CANDADO 2/3 - CLAVE:");
+  if(p!==datos.clave){ document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Clave incorrecta</h1>"); return; }
+  var conf = confirm("🔒 CANDADO 3/3\n¿Sos vos, "+datos.usuario+", el creador de Sentinela?\n\nAceptar = Entrar\nCancelar = Salir");
+  if(!conf){ document.write("<h1 style='text-align:center;padding:40px;font-family:system-ui'>🚫 Saliste del laboratorio</h1>"); return; }
+
+  sessionStorage.setItem('lab_nico_ok','1');
+  alert("✅ Bienvenido Creador "+datos.usuario+" 👨‍🔬\nLaboratorio desbloqueado.");
+})();
 </script>
-</body>
-                                                       </html>
-                                                       CENTINELA Laboratorio 02 - Profesional con IA
-                                                       <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTINELA IA - Cerebro</title>
-<style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#050A14;color:#fff}
-.top{background:#0A1628;padding:16px;text-align:center;border-bottom:2px solid #00C6FF}
-.top b{color:#00C6FF;font-size:22px}
-.wrap{padding:16px;max-width:520px;margin:auto}
-.card{background:#101E33;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid #1E3A5F}
-#chat{height:280px;overflow:auto;background:#000;border-radius:12px;padding:12px;font-size:14px;line-height:1.6}
-.yo{color:#00C6FF}
-.ia{color:#00E676}
-input{width:100%;padding:13px;border-radius:12px;border:none;margin-top:10px}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer}
-.verde{background:#00E676}
-.naranja{background:#FF9F00}
-.opciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.opciones button{background:#1E3A5F;color:#fff;border:1px solid #00C6FF;padding:8px 10px;border-radius:20px;cursor:pointer}
-</style>
-</head>
-<body>
-<div class="top"><b>CENTINELA IA</b><br><span style="font-size:12px;color:#A9B8D0">Tu IA de seguridad - Cerebro</span></div>
-<div class="wrap">
-<div class="card"><div id="chat"><span class="ia"><b>CENTINELA IA:</b> Hola jefe, soy tu IA. Ya estoy activa. Decime que pasa y te ayudo a decidir. Podes tocar un boton o escribirme.</span></div>
-<div class="opciones">
-<button onclick="rapido('Hay ruido afuera')">Hay ruido afuera</button>
-<button onclick="rapido('Hay movimiento sospechoso')">Movimiento sospechoso</button>
-<button onclick="rapido('Quiero hacer un control')">Hacer control</button>
-<button onclick="rapido('Todo tranquilo')">Todo tranquilo</button>
-</div>
-<input id="entrada" placeholder="Escribi aca...">
-<button class="btn verde" onclick="enviar()">ENVIAR A LA IA</button>
-<button class="btn naranja" onclick="guardarChat()">GUARDAR CONVERSACION</button>
-<div id="ok" style="text-align:center;color:#00E676;margin-top:8px"></div>
-</div>
-<div class="card" style="font-size:12px;color:#A9B8D0">Protocolos de tu IA:<br>VERDE = Todo tranquilo, solo registrar<br>AMARILLO = Alerta, observar sin exponerse<br>ROJO = Peligro, buscar lugar seguro y llamar 911<br>La IA aprende de lo que guardas.</div>
-</div>
-<script>
-let historial = JSON.parse(localStorage.getItem('centinela_ia_chat') || '[]');
-function responder(q){
- q=q.toLowerCase();
- if(q.includes('ruido')) return 'NIVEL AMARILLO. No salgas. Quedate adentro, mira por ventana o camara, anota la hora. El ruido se repite o fue una sola vez?';
- if(q.includes('movimiento')||q.includes('sospechoso')||q.includes('persona')) return 'NIVEL AMARILLO. No te acerques. Saca foto desde adentro si podes sin riesgo. Guarda descripcion: ropa, altura, para donde fue. Sigue ahi ahora?';
- if(q.includes('robo')||q.includes('arma')||q.includes('entraron')) return 'NIVEL ROJO. Anda a un lugar seguro YA. No te enfrentes. Llama al 911. Cuando estes seguro, guarda todo aca.';
- if(q.includes('control')||q.includes('todo tranquilo')||q.includes('tranquilo')) return 'NIVEL VERDE. Perfecto. Queda registrado tu control. Seguimos vigilando. Queres que te recuerde el proximo control en 1 hora?';
- if(q.includes('hola')||q.includes('quien sos')) return 'Soy CENTINELA IA, tu IA de seguridad. Te ayudo a registrar, pensar en frio y decidir que hacer. No soy policia, soy tu asistente que no duerme.';
- return 'Entendido, lo dejo registrado. Contame un poco mas: donde paso, hace cuanto y sigue pasando ahora? Asi te digo si es VERDE, AMARILLO o ROJO.';
-}
-function rapido(t){ document.getElementById('entrada').value=t; enviar(); }
-function enviar(){
- let e=document.getElementById('entrada'); let t=e.value.trim(); if(!t) return;
- let chat=document.getElementById('chat');
- chat.innerHTML+='<br><br><span class="yo"><b>TU:</b> '+t+'</span>';
- let r=responder(t);
- chat.innerHTML+='<br><br><span class="ia"><b>CENTINELA IA:</b> '+r+'</span>';
- historial.push({yo:t, ia:r, hora:new Date().toLocaleTimeString('es-AR')});
- localStorage.setItem('centinela_ia_chat', JSON.stringify(historial));
- e.value=''; chat.scrollTop=chat.scrollHeight;
-}
-function guardarChat(){ document.getElementById('ok').innerText='GUARDADO. Tu IA ya tiene '+historial.length+' mensajes en memoria.'; }
-</script>
-</body>
-</html>
-CENTINELA IA - Cerebro activado
+<!-- FIN QUÍNTUPLE CANDADO -->
