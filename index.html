@@ -16,14 +16,28 @@ body{background:#0B1020 !important}
 
 <!-- 1. PANTALLA DE INICIO ANTES DEL LOGIN -->
 <div id="centinela-splash">
-<img src="centinela_portada.jpg" alt="CENTINELA">
+<div style="width:100%; height:100vh; overflow:hidden; position:relative; border-radius:0px;">
+  <img src="1795564391051.jpg" alt="CENTINELA" style="width:100%; height:100%; object-fit:cover; animation: mover 6s ease-in-out infinite; transform-style: preserve-3d;">
+  <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(45deg, transparent 40%, rgba(0,255,255,0.3) 50%, transparent 60%); animation: rayos 2s linear infinite;"></div>
+</div>
+<style>
+@keyframes mover {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes rayos {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+</style>
 <h1>🛡️ CENTINELA</h1>
 <p>Bienvenido a CENTINELA. Tu lugar seguro.</p>
 <button id="centinela-btn-entrar" onclick="document.getElementById('centinela-splash').style.display='none'">▶ ENTRAR A CENTINELA</button>
 </div>
 
 <!-- 2. FONDO 3D DENTRO DE LA WEB -->
-<div id="centinela-fondo"><img id="img-fondo" src="centinela_fondo.jpg" alt="CENTINELA FONDO"></div>
+<div style="background-image: url('1795564399940.jpg'); background-size: cover; background-position: center; padding: 40px 20px; border-radius: 15px; text-align: center;">
 
 <script>
 // MOVIMIENTO 3D - Cuando movés el celu o el mouse, el fondo se mueve
