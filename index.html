@@ -1,268 +1,45 @@
-<img src="1795564391051.jpg" style="width:100%; border-radius:15px;">
-
- <!-- CENTINELA PORTADA + FONDO 3D - PESTE LO QUE PESE IGUAL -->
-<style>
-#centinela-splash{position:fixed;inset:0;z-index:999999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden}
-#centinela-splash img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:zoom3d 8s ease-in-out infinite alternate}
-@keyframes zoom3d{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.15) rotate(0.5deg)}}
-#centinela-splash h1{position:relative;color:white;font-size:42px;text-shadow:0 0 20px #00E5FF,0 0 40px #25D366;margin-bottom:8px;letter-spacing:3px}
-#centinela-splash p{position:relative;color:#fff;background:rgba(0,0,0,.6);padding:8px 16px;border-radius:20px;margin-bottom:16px}
-#centinela-btn-entrar{position:relative;background:#25D366;color:white;border:none;padding:16px 40px;border-radius:30px;font-size:18px;font-weight:bold;margin-bottom:30px;box-shadow:0 0 30px #25D366}
-#centinela-fondo{position:fixed;inset:-30px;z-index:-1;overflow:hidden}
-#centinela-fondo img{width:110%;height:110%;object-fit:cover;opacity:.55;filter:brightness(.7);transition:transform .2s;animation:flota3d 10s ease-in-out infinite alternate}
-@keyframes flota3d{from{transform:scale(1.05) translateY(0)}to{transform:scale(1.15) translateY(-12px)}}
-body{background:#0B1020 !important}
-</style>
-
-<!-- 1. PANTALLA DE INICIO ANTES DEL LOGIN -->
-<div id="centinela-splash">
-<div style="width:100%; height:100vh; overflow:hidden; position:relative; border-radius:0px;">
-  <img src="1795564391051.jpg" alt="CENTINELA" style="width:100%; height:100%; object-fit:cover; animation: mover 6s ease-in-out infinite; transform-style: preserve-3d;">
-  <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(45deg, transparent 40%, rgba(0,255,255,0.3) 50%, transparent 60%); animation: rayos 2s linear infinite;"></div>
-</div>
-<style>
-@keyframes mover {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.08) rotate(1deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-@keyframes rayos {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-</style>
-<h1>🛡️ CENTINELA</h1>
-<p>Bienvenido a CENTINELA. Tu lugar seguro.</p>
-<button id="centinela-btn-entrar" onclick="document.getElementById('centinela-splash').style.display='none'">▶ ENTRAR A CENTINELA</button>
-</div>
-
-<!-- 2. FONDO 3D DENTRO DE LA WEB -->
-<div style="background-image: url('1795564399940.jpg'); background-size: cover; background-position: center; padding: 40px 20px; border-radius: 15px; text-align: center;">
-
-<script>
-// MOVIMIENTO 3D - Cuando movés el celu o el mouse, el fondo se mueve
-document.addEventListener('mousemove',function(e){
-var x=(e.clientX/window.innerWidth-0.5)*30;
-var y=(e.clientY/window.innerHeight-0.5)*30;
-var img=document.getElementById('img-fondo');
-if(img) img.style.transform='translate('+x+'px,'+y+'px) scale(1.15)';
-});
-window.addEventListener('deviceorientation',function(e){
-var img=document.getElementById('img-fondo');
-if(img && e.gamma) img.style.transform='translate('+e.gamma+'px,'+e.beta*0.5+'px) scale(1.15)';
-});
-</script>
-<!-- FIN CENTINELA PORTADA + FONDO 3D --> <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sentinela PRO</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-body{background:;color:#fff;min-height:100vh}
-.top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;max-width:480px;margin:auto}
-.logo{font-weight:900;font-size:1.2rem}.logo span{color:#2563EB}
-.card{background:.card{background:transparent;;border:1px solid #1E2A44;border-radius:18px;padding:20px;margin:14px auto;max-width:480px}
-h1{font-size:1.5rem;line-height:1.2}h1 span{color:#60A5FA}
-.sub{color:#8A95A8;font-size:.9rem;margin:10px 0 16px;line-height:1.5}
-input{width:100%;background:#070B14;border:1px solid #1E2A44;color:#fff;padding:14px;border-radius:12px;margin-bottom:10px;font-size:1rem;outline:none}
-input:focus{border-color:#2563EB}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:800;font-size:1rem;cursor:pointer}
-.btn-blue{background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff}
-.btn-ghost{background:#1E2A44;color:#fff;margin-top:10px}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
-.tabs button{padding:12px;border:none;border-radius:10px;background:#1E2A44;color:#fff;font-weight:700;cursor:pointer}
-.tabs button.act{background:#2563EB}
-.pill{display:inline-block;background:#0F2A1A;color:#4ADE80;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:700}
-.hidden{display:none!important}
-.stat{background:#070B14;border:1px solid #1E2A44;border-radius:12px;padding:12px;text-align:center}
-</style></head>
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CENTINELA REAL</title>
+<style>body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:20px}input{padding:12px;margin:8px;width:80%;max-width:300px;border-radius:8px;border:none}button{padding:12px 25px;background:#00ff88;border:none;border-radius:8px;font-weight:bold}.box{background:#1a1a1a;padding:20px;border-radius:15px;max-width:400px;margin:auto}</style>
+</head>
 <body>
-<div class="top"><div class="logo">🛡️ SENTINELA <span>PRO</span></div><span class="pill">● PROTEGIDO</span></div>
-
-<!-- LOGIN -->
-<div id="login" class="card">
-<h1>Hola Nico 👋<br><span>Tu escudo digital</span></h1>
-<p class="sub">Escaneá links, detectá estafas y hablá con tus 3 Agentes IA. Todo en un solo lugar.</p>
-<input id="u" placeholder="Usuario"><input id="p" type="password" placeholder="Contraseña">
-<button class="btn btn-blue" onclick="login()">Entrar a Sentinela →</button>
-<p style="text-align:center;color:#5B6B82;font-size:.8rem;margin-top:12px">Demo: nico / 1234</p>
+<h1>🛡️ CENTINELA REAL</h1>
+<div class="box" id="login">
+<h2>INICIAR SESIÓN REAL</h2>
+<input id="u" placeholder="Usuario"><br>
+<input id="p" type="password" placeholder="Contraseña"><br>
+<button onclick="login()">ENTRAR</button>
+<p id="msg"></p>
 </div>
-
-<!-- APP -->
-<div id="app" class="hidden">
-<div class="card">
-<div class="tabs"><button id="t1" class="act" onclick="showTab(1)">🛡️ Escanear</button><button id="t2" onclick="showTab(2)">📊 Panel</button><button id="t3" onclick="showTab(3)">⚠️ Denunciar</button></div>
-
-<!-- TAB 1 -->
-<div id="tab1">
-<h1>¿Es estafa<br>este link? 🔍</h1><p class="sub">Pegalo acá y te digo en 2 segundos.</p>
-<input id="link" placeholder="Pegá el link acá... https://...">
-<button class="btn btn-blue" onclick="escanear()">🔍 ESCANEAR AHORA</button>
-<div id="res" style="margin-top:14px"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px">
-<div class="stat"><b style="font-size:1.2rem">1,247</b><br><span style="color:#8A95A8;font-size:.75rem">Links analizados</span></div>
-<div class="stat"><b style="font-size:1.2rem;color:#F87171">312</b><br><span style="color:#8A95A8;font-size:.75rem">Estafas bloqueadas</span></div>
-<div class="stat"><b style="font-size:1.2rem;color:#4ADE80">99%</b><br><span style="color:#8A95A8;font-size:.75rem">Precisión</span></div>
+<div class="box" id="app" style="display:none">
+<h2 id="bienvenida"></h2>
+<p>✅ Conectado a la nube real</p>
+<p>Nivel: <b id="nivel">1</b></p>
+<button onclick="salir()">SALIR</button>
 </div>
-</div>
-
-<!-- TAB 2 -->
-<div id="tab2" class="hidden">
-<h1>Tu Panel 📊</h1><p class="sub">Tu actividad y protección en vivo.</p>
-<div style="background:#070B14;border-radius:12px;padding:14px;margin-bottom:10px">🛡️ <b>Guardián</b> <span style="float:right;color:#4ADE80">● Activo</span><br><span style="color:#8A95A8;font-size:.85rem">Vigilando 24/7</span></div>
-<div style="background:#070B14;border-radius:12px;padding:14px;margin-bottom:10px">🧠 <b>Analista</b> <span style="float:right;color:#4ADE80">● Activo</span><br><span style="color:#8A95A8;font-size:.85rem">Último análisis: hace 2 min</span></div>
-<div style="background:#070B14;border-radius:12px;padding:14px">💬 <b>Soporte</b> <span style="float:right;color:#4ADE80">● Activo</span><br><span style="color:#8A95A8;font-size:.85rem">Responde en menos de 1 hora</span></div>
-</div>
-
-<!-- TAB 3 -->
-<div id="tab3" class="hidden">
-<h1>Denunciar estafa ⚠️</h1><p class="sub">Ayudá a otros. Denunciá el número o link.</p>
-<input id="den-num" placeholder="Número o link del estafador">
-<input id="den-desc" placeholder="¿Qué te hicieron? Ej: Me dijeron que gané un premio">
-<button class="btn btn-blue" onclick="denunciar()">Enviar denuncia 🚨</button>
-<div id="den-res" style="margin-top:10px"></div>
-</div>
-
-<!-- ===== AGENTES IA PREMIUM ===== -->
-<div style="background:linear-gradient(180deg,#0B1226,#0A0F1E);border:1px solid #1E3A8A;border-radius:20px;padding:18px;margin-top:16px;box-shadow:0 20px 40px rgba(0,0,0,.6);overflow:hidden;position:relative">
-<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2563EB,#7C3AED,#059669)"></div>
-<div style="display:flex;align-items:center;gap:12px">
-<div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem">✦</div>
-<div style="flex:1"><p style="font-weight:900;font-size:1.05rem">Agentes IA <span style="color:#A78BFA">PRO</span></p><p style="color:#8A95A8;font-size:.8rem">Inteligencia de Sentinela • Premium</p></div>
-<span style="background:#0F2A1A;color:#4ADE80;font-size:.65rem;font-weight:800;padding:5px 9px;border-radius:20px;border:1px solid #14532D">● EN VIVO</span>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px">
-<button onclick="hablarAgente('guardian')" style="padding:14px 6px;background:linear-gradient(180deg,#1E40AF,#1E3A8A);color:#fff;border:1px solid #3B82F6;border-radius:14px"><div style="font-size:1.4rem">🛡️</div><div style="font-weight:900;font-size:.75rem">GUARDIÁN</div><div style="font-size:.65rem;color:#93C5FD">Protección</div></button>
-<button onclick="hablarAgente('analista')" style="padding:14px 6px;background:linear-gradient(180deg,#6D28D9,#5B21B6);color:#fff;border:1px solid #8B5CF6;border-radius:14px"><div style="font-size:1.4rem">🧠</div><div style="font-weight:900;font-size:.75rem">ANALISTA</div><div style="font-size:.65rem;color:#DDD6FE">Inteligencia</div></button>
-<button onclick="hablarAgente('soporte')" style="padding:14px 6px;background:linear-gradient(180deg,#047857,#065F46);color:#fff;border:1px solid #10B981;border-radius:14px"><div style="font-size:1.4rem">💬</div><div style="font-weight:900;font-size:.75rem">SOPORTE</div><div style="font-size:.65rem;color:#A7F3D0">Ayuda 24/7</div></button>
-</div>
-<div id="chat-agentes" style="background:#070B14;border:1px solid #1E2A44;border-radius:14px;padding:12px;margin-top:14px;min-height:160px;max-height:280px;overflow-y:auto;font-size:.92rem;line-height:1.6">
-<div style="display:flex;gap:8px;margin-bottom:10px"><div style="width:32px;height:32px;min-width:32px;background:#2563EB;border-radius:50%;display:flex;align-items:center;justify-content:center">🛡️</div><div style="background:#131C30;padding:10px 12px;border-radius:4px 14px 14px 14px;flex:1"><b>Guardián</b> <span style="color:#4ADE80;font-size:.7rem">● en línea</span><br><span style="color:#CBD5E1">Hola Nico, soy tu Guardián PRO. ¿Qué te llegó?</span></div></div>
-</div>
-<div style="display:flex;gap:8px;margin-top:12px;background:#070B14;border:1px solid #2563EB;border-radius:16px;padding:6px 6px 6px 14px;align-items:center">
-<input id="input-agente" placeholder="Preguntale algo a tu agente..." style="flex:1;margin:0;border:none;background:transparent;padding:10px 0">
-<button onclick="enviarAgente()" style="width:44px;height:44px;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;border:none;border-radius:12px;font-size:1.1rem">➤</button>
-</div>
-<div style="display:flex;justify-content:space-between;margin-top:10px"><span style="color:#5B6B82;font-size:.7rem">🔒 Chat privado</span><span style="color:#5B6B82;font-size:.7rem">⚡ Respuesta en &lt;1s</span></div>
-</div>
-
-<button class="btn" style="background:#1E2A44;color:#F87171;margin-top:16px" onclick="salir()">Cerrar sesión</button>
-</div>
-</div>
-
 <script>
-function login(){var u=document.getElementById('u').value;var p=document.getElementById('p').value;if(u==='nico'&&p==='1234'){localStorage.setItem('sentinela_session',JSON.stringify({u:u}));mostrarApp({u:u});}else{alert('Probá con nico / 1234');}}
-function mostrarApp(s){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');}
-function salir(){localStorage.removeItem('sentinela_session');location.reload();}
-function showTab(n){[1,2,3].forEach(function(i){document.getElementById('tab'+i).classList.toggle('hidden',i!==n);document.getElementById('t'+i).classList.toggle('act',i===n);});}
-function escanear(){var l=document.getElementById('link').value.toLowerCase();var r=document.getElementById('res');if(!l){r.innerHTML='⚠️ Pegá un link primero';return;}if(l.includes('premio')||l.includes('gratis')||l.includes('ganaste')||l.includes('banco')||l.includes('urgente')||l.includes('bit.ly')||l.includes('tinyurl')){r.innerHTML='<div style="background:#3F1D1D;border:1px solid #F87171;padding:14px;border-radius:12px"><b style="color:#F87171">🚨 PELIGROSO - 92% ESTAFA</b><br><span style="color:#FCA5A5;font-size:.9rem">No hagas click. Bloqueá ese número.</span></div>';}else{r.innerHTML='<div style="background:#0F2A1A;border:1px solid #4ADE80;padding:14px;border-radius:12px"><b style="color:#4ADE80">✅ SEGURO - 98% CONFIABLE</b><br><span style="color:#BBF7D0;font-size:.9rem">No detectamos peligro, pero igual desconfiá si te piden datos.</span></div>';}}
-function denunciar(){var n=document.getElementById('den-num').value;if(!n){alert('Poné el número o link');return;}document.getElementById('den-res').innerHTML='✅ Denuncia enviada. Gracias Nico, ayudaste a proteger a otros.';document.getElementById('den-num').value='';document.getElementById('den-desc').value='';}
-// ===== CEREBRO AGENTES =====
-var agenteActual='guardian';
-function hablarAgente(tipo){agenteActual=tipo;var chat=document.getElementById('chat-agentes');var nombre=tipo==='guardian'?'Guardián':tipo==='analista'?'Analista':'Soporte Nico';var msg=tipo==='guardian'?'Hola, soy Guardián PRO. Pegá un link y te digo si es peligroso.':tipo==='analista'?'Hola, soy Analista. Te explico cómo te quieren estafar para que no caigas más.': 'Hola, soy Soporte de Nico. ¿En qué te ayudo?';chat.innerHTML+='<div style="display:flex;gap:8px;margin-bottom:10px"><div style="width:32px;height:32px;min-width:32px;background:#7C3AED;border-radius:50%;display:flex;align-items:center;justify-content:center">🤖</div><div style="background:#131C30;padding:10px 12px;border-radius:4px 14px 14px 14px;flex:1"><b>'+nombre+'</b><br><span style="color:#CBD5E1">'+msg+'</span></div></div>';chat.scrollTop=chat.scrollHeight;}
-function enviarAgente(){var inp=document.getElementById('input-agente');var texto=inp.value.trim();if(!texto)return;var chat=document.getElementById('chat-agentes');chat.innerHTML+='<div style="display:flex;gap:8px;margin-bottom:10px;justify-content:flex-end"><div style="background:#2563EB;padding:10px 12px;border-radius:14px 4px 14px 14px;max-width:85%">🧑 <b>Vos:</b> '+texto+'</div></div>';inp.value='';var t=texto.toLowerCase();var respuesta='';if(agenteActual==='guardian'){if(t.includes('http')||t.includes('www')||t.includes('.com')){respuesta='⚠️ ¡Pará! No hagas click todavía. Pegá ese link en el escáner de arriba y te digo si es seguro.';}else if(t.includes('premio')||t.includes('ganaste')||t.includes('gratis')){respuesta='🚨 Eso es la estafa clásica del premio. Nadie te regala nada por WhatsApp. Bloqueá ese número.';}else if(t.includes('banco')||t.includes('cuenta')||t.includes('bloqueada')){respuesta='🏦 Tu banco NUNCA te pide datos por WhatsApp. Entrá vos mismo a la app del banco, no por el link.';}else{respuesta='🛡️ Entendido. Por las dudas, no hagas click, no pases códigos, y pegá el link acá para revisarlo.';}}if(agenteActual==='analista'){if(t.includes('como')||t.includes('por que')||t.includes('porque')){respuesta='🧠 Te explico: usan 3 trucos: 1) Te apuran (urgente), 2) Te asustan (cuenta bloqueada), 3) Te tientan (ganaste). Si tiene uno de esos, desconfiá.';}else{respuesta='🧠 Regla de oro: si te llegó sin que lo pidas, es sospechoso. Si te pide plata o códigos, es 100% estafa.';}}if(agenteActual==='soporte'){respuesta='💬 Listo, ya lo anoté. Nico te va a responder en menos de 1 hora por WhatsApp. Guardá captura del mensaje.';}setTimeout(function(){chat.innerHTML+='<div style="display:flex;gap:8px;margin-bottom:10px"><div style="width:32px;height:32px;min-width:32px;background:#2563EB;border-radius:50%;display:flex;align-items:center;justify-content:center">🤖</div><div style="background:#131C30;padding:10px 12px;border-radius:4px 14px 14px 14px;flex:1"><b>Agente</b><br><span style="color:#CBD5E1">'+respuesta+'</span></div></div>';chat.scrollTop=chat.scrollHeight;},600);}
-document.addEventListener('keypress',function(e){if(e.key==='Enter'&&document.getElementById('input-agente')===document.activeElement){enviarAgente();}});
-var ses=localStorage.getItem('sentinela_session');if(ses){mostrarApp(JSON.parse(ses));}
-</script>
-</body></html>
-<!-- 🔄🛠️ ACTUALIZACIÓN UNIVERSAL + AUTO-CORRECCIÓN - SOLO NICO - v2.1 -->
-<script>
-(function(){
-  var VERSION_ACTUAL = "2.1";
-  var CLAVE_VERSION = "sentinela_version_universal";
-  var ES_CREADOR = sessionStorage.getItem('lab_nico_ok')==='1' || localStorage.getItem('lab_nico_seg');
-
-  // 1. ACTUALIZACIÓN UNIVERSAL
-  if(localStorage.getItem(CLAVE_VERSION) !== VERSION_ACTUAL){
-    localStorage.setItem(CLAVE_VERSION, VERSION_ACTUAL);
-    if('caches' in window){ caches.keys().then(function(n){ caches.delete(n); }); }
-  }
-
-  // 2. DOCTOR SENTINELA - Revisa si el código salió cortado
-  function avisarSoloANico(mensaje){
-    // SOLO lo ve Nico, nadie más. No se muestra en la app pública.
-    console.log("🛠️ DOCTOR SENTINELA (Solo Nico): " + mensaje);
-    if(ES_CREADOR){
-      // Te lo muestra a vos en un cartelito chiquito, no a la gente
-      setTimeout(function(){
-        var aviso = document.createElement('div');
-        aviso.style.cssText = "position:fixed;bottom:10px;right:10px;background:#111;color:#0f0;padding:10px 14px;border-radius:10px;font-size:12px;z-index:99999;font-family:monospace;max-width:280px;box-shadow:0 4px 20px rgba(0,0,0,.4)";
-        aviso.innerHTML = "🛠️ <b>SOLO VOS, NICO:</b><br>" + mensaje + "<br><span style='color:#aaa;font-size:10px'>Tocalo para cerrar</span>";
-        aviso.onclick = function(){ aviso.remove(); };
-        document.body.appendChild(aviso);
-        setTimeout(function(){ if(aviso.parentNode) aviso.remove(); }, 15000);
-      }, 1000);
-    }
-  }
-
-  // Revisa errores
-  window.addEventListener('error', function(e){
-    avisarSoloANico("Se encontró un error y se intentó corregir.<br>Error: " + (e.message || "código cortado"));
-    // Intenta auto-corregir: recarga sin caché una sola vez
-    if(!sessionStorage.getItem('sentinela_intento_arreglo')){
-      sessionStorage.setItem('sentinela_intento_arreglo','1');
-      setTimeout(function(){ location.reload(true); }, 2000);
-    }
-  });
-
-  // Revisa si el HTML quedó cortado (falta cierre)
-  setTimeout(function(){
-    var html = document.documentElement.outerHTML || "";
-    if(html.length < 500){
-      avisarSoloANico("⚠️ Este archivo salió CORTADO (muy chico).<br>Se está auto-corrigiendo. Volvé a publicar el archivo completo.");
-    } else if(!html.includes("</body>") || !html.includes("</html>")){
-      avisarSoloANico("⚠️ Este archivo salió CORTADO, le faltaba el cierre.<br>Ya lo detecté y lo estoy sosteniendo para que no se rompa. Publicalo de nuevo completo cuando puedas.");
-    } else {
-      console.log("✅ Doctor Sentinela: Archivo sano. v" + VERSION_ACTUAL);
-    }
-  }, 1500);
-
-  window.SENTINELA_UPDATE = function(nuevaVersion, mensaje){
-    if(localStorage.getItem(CLAVE_VERSION) !== nuevaVersion){
-      localStorage.setItem(CLAVE_VERSION, nuevaVersion);
-      if(ES_CREADOR) alert("🔄 ACTUALIZACIÓN UNIVERSAL\n\n" + (mensaje || "Mejora nueva."));
-      location.reload(true);
-    }
-  };
-
-  console.log("✅ Universal + Auto-Corrección Activo - v" + VERSION_ACTUAL);
-})();
-</script>
-<!-- FIN UNIVERSAL v2.1 -->
-<!-- 🆕 CREAR CUENTA SENTINELA -->
-<div style="text-align:center;margin-top:12px">
-  <button onclick="crearCuentaSentinela()" style="background:none;border:none;color:#4da6ff;font-size:14px;text-decoration:underline;cursor:pointer">¿No tenés cuenta? Crear cuenta nueva</button>
-  <br>
-  <button onclick="olvidarCuenta()" style="background:none;border:none;color:#888;font-size:12px;margin-top:6px;cursor:pointer">Olvidé mi contraseña</button>
-</div>
-
-<script>
-function crearCuentaSentinela(){
-  var u = prompt("🆕 CREAR CUENTA SENTINELA\n\nElegí tu usuario:");
-  if(!u) return;
-  var p = prompt("Elegí tu contraseña para " + u + ":");
-  if(!p) return;
-  var cuentas = JSON.parse(localStorage.getItem('sentinela_cuentas') || '{}');
-  if(cuentas[u]){ alert("Ese usuario ya existe. Probá entrar."); return; }
-  cuentas[u] = p;
-  localStorage.setItem('sentinela_cuentas', JSON.stringify(cuentas));
-  alert("✅ ¡Cuenta creada, " + u + "!\n\nAhora poné tu usuario y contraseña arriba y entrá.");
+const SUPABASE_URL = "PEGA_ACA_TU_URL";
+const SUPABASE_KEY = "PEGA_ACA_TU_KEY";
+async function login(){
+  const u=document.getElementById('u').value.trim();
+  const p=document.getElementById('p').value.trim();
+  if(!u||!p){document.getElementById('msg').innerText="Falta usuario o contraseña, JEFE";return;}
+  document.getElementById('msg').innerText="Conectando a la nube real...";
+  try{
+    const r=await fetch(SUPABASE_URL+"/rest/v1/centinela_usuarios?usuario=eq."+u+"&password=eq."+p, {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY}});
+    const d=await r.json();
+    if(d && d.length>0){
+      localStorage.setItem('centinela_user',u);
+      document.getElementById('login').style.display='none';
+      document.getElementById('app').style.display='block';
+      document.getElementById('bienvenida').innerText="Bienvenido, "+u;
+      document.getElementById('nivel').innerText=d[0].nivel||1;
+    }else{document.getElementById('msg').innerText="Usuario o contraseña incorrectos, JEFE";}
+  }catch(e){document.getElementById('msg').innerText="Error, JEFE: "+e.message;}
 }
-function olvidarCuenta(){
-  var u = prompt("¿Cuál es tu usuario?");
-  if(!u) return;
-  var cuentas = JSON.parse(localStorage.getItem('sentinela_cuentas') || '{}');
-  if(cuentas[u]){ alert("Tu contraseña es: " + cuentas[u] + "\n\nSolo vos la ves, Nico."); }
-  else { alert("No encontré ese usuario. Creá una cuenta nueva."); }
-}
-// Hace que el botón Entrar acepte cuentas creadas + demo
-(function(){
-  var btn = document.querySelector('button');
-  // No tocamos tu botón original, solo agregamos la lógica
-  window.entrarConCuenta = function(usuario, pass){
-    var cuentas = JSON.parse(localStorage.getItem('sentinela_cuentas') || '{}');
-    if((usuario==='nico' && pass==='1234') || cuentas[usuario]===pass) return true;
-    return false;
-  };
-})();
+function salir(){localStorage.removeItem('centinela_user');location.reload();}
 </script>
-<!-- FIN CREAR CUENTA -->
+</body>
+</html>
