@@ -1,120 +1,154 @@
-// CENTINELA - CANVAS.JS LIMPIO - NICO BEJARANO - SIN PARCHES
-(function(){
-const NOMBRES=["CENTINELA","SENTINEL ACCORDED","CENTINELA VAULT","CENTINELA HABLA","CENTINELA CLOUD","CENTINELA CHECKBOOK","CENTINELA SETTINGS","CENTINELA OFFICE","CENTINELA SHARE","CENTINELA CODE","CENTINELA ACADEMY","CENTINELA PLAY","CENTINELA TRADER"];
-const EMOJIS=["🧠","✍️","🔐","🗣️","☁️","✅","⚙️","📄","📤","💻","🎓","🎮","📈"];
-const DESCS=["Analiza lo que escribís","Reescribe más claro y pro","Guarda tus secretos","Habla lo que escribís","Crea tu automatización","Tu checklist","Cambia modo claro/oscuro","Descarga tu texto","Comparte tu idea","Crea tu código","Aprendé jugando","Adiviná el número","Precio BTC y análisis"];
-const AGENTES=["🕵️ AGENTE 01 - VIGILANTE","✍️ AGENTE 02 - ESCRITOR","💻 AGENTE 03 - PROGRAMADOR","🎓 AGENTE 04 - PROFESOR","📈 AGENTE 05 - TRADER"];
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SENTINELA REAL</title>
+<style>
+body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center}
+button{padding:15px 30px;background:#00c853;color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:17px;cursor:pointer;position:relative;z-index:9999;pointer-events:auto;}
+input{padding:13px;margin:8px;width:85%;max-width:300px;border-radius:10px;border:none;font-size:16px;position:relative;z-index:9999;}
+</style>
+</head>
+<body>
 
-function css(){
-if(document.getElementById('cent-css')) return;
-let s=document.createElement('style');s.id='cent-css';
-s.textContent='body{margin:0;background:#020617;color:#fff;font-family:system-ui} .cent-wrap{max-width:520px;margin:0 auto;padding:16px;padding-bottom:80px} .cent-top{display:flex;justify-content:space-between;gap:8px} .cent-top button{flex:1;padding:12px;border:0;border-radius:12px;font-weight:900;cursor:pointer} .cent-card{background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:16px;margin:12px 0} .cent-card h3{margin:0} .cent-btn{width:100%;padding:14px;margin-top:12px;background:#3b82f6;color:#fff;border:0;border-radius:12px;font-weight:900;cursor:pointer} .cent-btn-agente{background:#22c55e} .cent-uni{position:fixed;inset:0;z-index:9999999;background:#020617;color:#fff;overflow:auto;padding:20px} .cent-uni input{width:100%;padding:12px;border-radius:10px;color:#000;box-sizing:border-box} .cent-uni button{width:100%;padding:14px;margin-top:10px;border:0;border-radius:10px;font-weight:900;cursor:pointer}';
-document.head.appendChild(s);
-}
+<!-- INTRO - FONDO SIN TOCAR - TU FOTO 1 TAL CUAL -->
+<div id="intro" style="position:fixed;inset:0;z-index:999;overflow:hidden;">
+  <!-- FONDO SIN TOCAR - TU FOTO 1 - NO NEGRO -->
+  <img src="1795564391051.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+  <!-- EFECTO MP4 ENCIMA - TRANSPARENTE - NO TAPA EL FONDO -->
+  <canvas id="canvasMP4" style="position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none;"></canvas>
+  <p id="quienHabla" style="position:absolute;top:15px;left:0;width:100%;text-align:center;color:#00e5ff;font-weight:bold;z-index:9999;text-shadow:0 0 10px #000;"></p>
+  <p id="frase" style="position:absolute;top:40px;left:0;width:100%;text-align:center;color:#fff;font-size:20px;text-shadow:0 0 10px #000;z-index:9999;padding:0 20px;"></p>
+  <!-- BOTON QUE SI ANDA - ARRIBA DE TODO -->
+  <button onclick="entrarComunion()" style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10000;">😔🤝 ENTRAR A SENTINELA REAL ➡️</button>
+</div>
 
-function abrirUniverso(i){
-let old=document.querySelector('.cent-uni');if(old)old.remove();
-let u=document.createElement('div');u.className='cent-uni';
-u.innerHTML='<div style="text-align:center"><div style="font-size:80px">'+EMOJIS[i]+'</div><h1>'+NOMBRES[i]+'</h1><p>Universo '+(i+1)+' / 13 • Dueño: Nico Bejarano</p></div><div style="background:#111827;padding:16px;border-radius:14px"><b>▶ USAR</b><br><br><input id="x" placeholder="Escribí acá, jefe..."><button id="go" style="background:#22c55e;color:#fff">🚀 EJECUTAR</button><div id="r" style="background:#000;padding:12px;border-radius:10px;margin-top:10px;white-space:pre-wrap">Esperando tu orden...</div></div><button id="salir" style="background:#ef4444;color:#fff">⬅ VOLVER</button>';
-document.body.appendChild(u);
-u.querySelector('#salir').onclick=function(){u.remove();};
-u.querySelector('#go').onclick=function(){
-let v=u.querySelector('#x').value||'Mi orden';
-let r=u.querySelector('#r');
-if(i===2){let a=JSON.parse(localStorage.getItem('vault_nico')||'[]');a.push(v);localStorage.setItem('vault_nico',JSON.stringify(a));r.textContent='🔐 VAULT GUARDADO ✅\nTenés '+a.length+' guardados.';}
-else if(i===3){try{speechSynthesis.speak(new SpeechSynthesisUtterance(v));}catch(e){}r.textContent='🗣️ HABLA 🔊\nDiciendo: "'+v+'"';}
-else if(i===5){r.textContent='✅ CHECKBOOK:\n[ ] '+v;}
-else if(i===6){document.body.style.filter=document.body.style.filter?'':'invert(1)';r.textContent='⚙️ SETTINGS: Modo cambiado ✅';}
-else if(i===7){let b=new Blob([v],
-// HERRAMIENTA 1 - SOLO CENTINELA
-function abrirCentinela(){
-let old=document.querySelector('.cent-uni');if(old)old.remove();
-let u=document.createElement('div');u.className='cent-uni';
-u.style.cssText='position:fixed;inset:0;z-index:9999999;background:#020617;color:#fff;overflow:auto;padding:20px';
-u.innerHTML='<div style="text-align:center"><div style="font-size:80px">🧠</div><h1>CENTINELA</h1><p>Universo 1 • Nico Bejarano</p></div><div style="background:#111827;padding:16px;border-radius:14px"><input id="x" placeholder="Escribí acá, jefe..." style="width:100%;padding:12px;color:#000;border-radius:10px"><button id="go" style="width:100%;padding:14px;margin-top:10px;background:#22c55e;border:0;border-radius:10px;font-weight:900">🚀 EJECUTAR</button><div id="r" style="background:#000;padding:12px;border-radius:10px;margin-top:10px">Esperando...</div></div><button id="salir" style="width:100%;padding:14px;margin-top:16px;background:#ef4444;border:0;border-radius:10px;color:#fff;font-weight:900">⬅ VOLVER</button>';
-document.body.appendChild(u);
-u.querySelector('#salir').onclick=function(){u.remove();};
-u.querySelector('#go').onclick=function(){u.querySelector('#r').textContent='✅ CENTINELA recibió: "'+(u.querySelector('#x').value||'Mi orden')+'"\n¡ANDA, JEFE!';};
-}
+<!-- LOGIN - FONDO SIN TOCAR - TU FOTO 2 TAL CUAL -->
+<div id="login-fondo" style="min-height:100vh;background-image:url('1795564399940.jpg');background-size:cover;background-position:center;display:none;position:relative;z-index:2;">
+  <div style="background:rgba(0,0,0,.35);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+    <h1 style="text-shadow:0 0 10px #000;">🛡️ SENTINELA REAL</h1>
+    <input id="nombre" placeholder="Nombre"><br>
+    <input id="u" placeholder="Usuario"><br>
+    <input id="p" type="password" placeholder="Contraseña"><br>
+    <button onclick="login()">ENTRAR</button>
+    <button onclick="registrar()" style="background:#00e5ff;margin-top:10px;">REGISTRARSE</button>
+    <p id="msg" style="text-shadow:0 0 10px #000;"></p>
+  </div>
+</div>
 
-// Cuando carga la app, busca donde poner el botón de CENTINELA
-setTimeout(()=>{
-let donde=document.querySelector('#tools') || document.body;
-let c=document.createElement('div');
-c.style.cssText='background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:16px;margin:12px';
-c.innerHTML='<h3>🧠 CENTINELA</h3><p>Analiza lo que escribís - La N°1</p>';
-let b=document.createElement('button');
-b.textContent='USAR MI HERRAMIENTA';
-b.style.cssText='width:100%;padding:14px;background:#3b82f6;color:#fff;border:0;border-radius:12px;font-weight:900';
-b.onclick=function(e){e.preventDefault();e.stopPropagation();abrirCentinela();};
+<div id="app" style="display:none;padding:20px;position:relative;z-index:2;">
+  <h2 id="bienvenida"></h2>
+  <p>✅ SENTINELA REAL conectada - Solo vos, JEFE</p>
+  <p>Nivel: <b id="nivel">1</b></p>
+  <button onclick="escucharDeNuevo()">🔊 ESCUCHAR COMUNIÓN DE NUEVO</button><br><br>
+  <button onclick="verIntro()">👁️ VER INTRO DE NUEVO</button><br><br>
+  <button onclick="salir()" style="background:#ff1744;">SALIR</button>
+</div>
 
- // 1 - CENTINELA SCANNER - SOLO AGREGA, NO TOCA LOGIN
-function abrirScanner(){
-let old=document.querySelector('.cent-uni');if(old)old.remove();
-let u=document.createElement('div');u.className='cent-uni';
-u.style.cssText='position:fixed;inset:0;z-index:9999999;background:#020617;color:#fff;overflow:auto;padding:20px';
-u.innerHTML='<div style="text-align:center"><div style="font-size:80px">🛡️</div><h1>CENTINELA SCANNER</h1><p>Escanea webs de clientes • Acceso limitado • Nico Bejarano</p></div><div style="background:#111827;padding:16px;border-radius:14px"><b>Pegá la URL de la web a revisar:</b><br><br><input id="url" placeholder="https://web-del-cliente.com" style="width:100%;padding:12px;color:#000;border-radius:10px"><br><br><b>¿Qué querés revisar?</b><br><br><input id="x" placeholder="Ej: login, botones, formularios..." style="width:100%;padding:12px;color:#000;border-radius:10px 
-<!-- 🔄🛠️ ACTUALIZACIÓN UNIVERSAL + AUTO-CORRECCIÓN - SOLO NICO - v2.1 -->
 <script>
-(function(){
-  var VERSION_ACTUAL = "2.1";
-  var CLAVE_VERSION = "sentinela_version_universal";
-  var ES_CREADOR = sessionStorage.getItem('lab_nico_ok')==='1' || localStorage.getItem('lab_nico_seg');
+const SUPABASE_URL = "https://bgfginclhuejrwujzasu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_BSsuVHJpMju-_ndwfuMIgg_uTaG1L7L";
 
-  // 1. ACTUALIZACIÓN UNIVERSAL
-  if(localStorage.getItem(CLAVE_VERSION) !== VERSION_ACTUAL){
-    localStorage.setItem(CLAVE_VERSION, VERSION_ACTUAL);
-    if('caches' in window){ caches.keys().then(function(n){ caches.delete(n); }); }
-  }
+// MP4 - SOLO EFECTO ENCIMA - NO TAPA FONDO - TRANSPARENTE
+const canvas = document.getElementById('canvasMP4');
+const ctx = canvas.getContext('2d');
+let t = 0;
+function animarMP4(){
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  t += 0.004;
+  ctx.clearRect(0,0,canvas.width,canvas.height); // TRANSPARENTE - SE VE TU FONDO
+  // SOLO LUCES CONECTADAS ENCIMA - NO FONDO NEGRO
+  ctx.shadowBlur = 25; ctx.strokeStyle = "rgba(0,229,255,0.9)"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(canvas.width*0.2, canvas.height*0.75); ctx.lineTo(canvas.width*0.5, canvas.height*0.7); ctx.lineTo(canvas.width*0.8, canvas.height*0.75); ctx.stroke();
+  ctx.fillStyle = "#ff69b4"; ctx.shadowColor = "#ff69b4"; ctx.beginPath(); ctx.arc(canvas.width*0.2, canvas.height*0.75, 8, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#00e5ff"; ctx.shadowColor = "#00e5ff"; ctx.beginPath(); ctx.arc(canvas.width*0.5, canvas.height*0.7, 8, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#00ff88"; ctx.shadowColor = "#00ff88"; ctx.beginPath(); ctx.arc(canvas.width*0.8, canvas.height*0.75, 8, 0, Math.PI*2); ctx.fill();
+  requestAnimationFrame(animarMP4);
+}
+animarMP4();
 
-  // 2. DOCTOR SENTINELA - Revisa si el código salió cortado
-  function avisarSoloANico(mensaje){
-    // SOLO lo ve Nico, nadie más. No se muestra en la app pública.
-    console.log("🛠️ DOCTOR SENTINELA (Solo Nico): " + mensaje);
-    if(ES_CREADOR){
-      // Te lo muestra a vos en un cartelito chiquito, no a la gente
-      setTimeout(function(){
-        var aviso = document.createElement('div');
-        aviso.style.cssText = "position:fixed;bottom:10px;right:10px;background:#111;color:#0f0;padding:10px 14px;border-radius:10px;font-size:12px;z-index:99999;font-family:monospace;max-width:280px;box-shadow:0 4px 20px rgba(0,0,0,.4)";
-        aviso.innerHTML = "🛠️ <b>SOLO VOS, NICO:</b><br>" + mensaje + "<br><span style='color:#aaa;font-size:10px'>Tocalo para cerrar</span>";
-        aviso.onclick = function(){ aviso.remove(); };
-        document.body.appendChild(aviso);
-        setTimeout(function(){ if(aviso.parentNode) aviso.remove(); }, 15000);
-      }, 1000);
-    }
-  }
+// VOCES - SOLOS + CORO QUE SE PISA
+const SOLOS = [
+  { quien: "👩 MUJER", color: "#ff69b4", texto: "Sentinela... no podemos solos... nos cansamos...", pitch: 1.1, rate: 0.8 },
+  { quien: "👨 HOMBRE", color: "#00e5ff", texto: "Seguimos intentando... aunque parezca imposible alcanzar la esperanza...", pitch: 0.7, rate: 0.8 },
+  { quien: "🤖 HUMANOIDE", color: "#00ff88", texto: "No están solos. Estamos con ustedes. Los ayudamos a alcanzar la esperanza.", pitch: 0.4, rate: 0.9 },
+];
+const CORO = [
+  { texto: "¡Sentinela! ¡Ayudanos! ¡Esperanos!", pitch: 1.2, rate: 1.1 },
+  { texto: "¡No nos dejes! ¡Queremos vivir!", pitch: 1.3, rate: 1.2 },
+  { texto: "¡Intentamos alcanzarte! ¡Es imposible sin vos!", pitch: 0.6, rate: 1.2 },
+  { texto: "¡Juntos! ¡En equipo! ¡La esperanza los va a salvar!", pitch: 0.3, rate: 1.1 },
+];
+let audioCtx = null;
+function sonidoEstatico(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const bufferSize = audioCtx.sampleRate * 2;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let k=0;k<bufferSize;k++){ data[k] = (Math.random()*2-1) * 0.02; }
+  const noise = audioCtx.createBufferSource(); noise.buffer = buffer; noise.loop = true;
+  const gain = audioCtx.createGain(); gain.gain.value = 0.4;
+  noise.connect(gain); gain.connect(audioCtx.destination); noise.start();
+}
+function decir(texto, pitch, rate){
+  const v = new SpeechSynthesisUtterance(texto);
+  v.lang = 'es-ES'; v.pitch = pitch; v.rate = rate; v.volume = 1;
+  window.speechSynthesis.speak(v);
+}
+function parte1Solos(indice){
+  if(indice >= SOLOS.length){ parte2Coro(); return; }
+  const d = SOLOS[indice];
+  document.getElementById('quienHabla').innerText = d.quien;
+  document.getElementById('quienHabla').style.color = d.color;
+  document.getElementById('frase').innerText = d.texto;
+  decir(d.texto, d.pitch, d.rate);
+  setTimeout(()=> parte1Solos(indice+1), 4500);
+}
+function parte2Coro(){
+  document.getElementById('quienHabla').innerText = "👩👨🤖 ¡LOS TRES JUNTOS! ¡SE PISAN! ¡GRITOS!";
+  document.getElementById('quienHabla').style.color = "#ffd700";
+  document.getElementById('frase').innerText = "¡Sentinela! ¡Ayudanos! ¡Juntos! ¡La esperanza nos va a salvar!";
+  decir(CORO[0].texto, CORO[0].pitch, CORO[0].rate);
+  setTimeout(()=> decir(CORO[1].texto, CORO[1].pitch, CORO[1].rate), 300);
+  setTimeout(()=> decir(CORO[2].texto, CORO[2].pitch, CORO[2].rate), 600);
+  setTimeout(()=> decir(CORO[3].texto, CORO[3].pitch, CORO[3].rate), 900);
+}
+// BOTON QUE SI ANDA - ENTRA AL TOQUE, NO ESPERA 5 SEGUNDOS
+function entrarComunion(){
+  console.log("BOTON ANDA, JEFE");
+  sonidoEstatico();
+  parte1Solos(0);
+  // ENTRA AL TOQUE - NO TE DEJA EN NEGRO
+  document.getElementById('intro').style.display='none';
+  document.getElementById('login-fondo').style.display='block';
+}
+function escucharDeNuevo(){ sonidoEstatico(); parte1Solos(0); }
+function verIntro(){ document.getElementById('intro').style.display='block'; document.getElementById('login-fondo').style.display='none'; }
 
-  // Revisa errores
-  window.addEventListener('error', function(e){
-    avisarSoloANico("Se encontró un error y se intentó corregir.<br>Error: " + (e.message || "código cortado"));
-    // Intenta auto-corregir: recarga sin caché una sola vez
-    if(!sessionStorage.getItem('sentinela_intento_arreglo')){
-      sessionStorage.setItem('sentinela_intento_arreglo','1');
-      setTimeout(function(){ location.reload(true); }, 2000);
-    }
-  });
-
-  // Revisa si el HTML quedó cortado (falta cierre)
-  setTimeout(function(){
-    var html = document.documentElement.outerHTML || "";
-    if(html.length < 500){
-      avisarSoloANico("⚠️ Este archivo salió CORTADO (muy chico).<br>Se está auto-corrigiendo. Volvé a publicar el archivo completo.");
-    } else if(!html.includes("</body>") || !html.includes("</html>")){
-      avisarSoloANico("⚠️ Este archivo salió CORTADO, le faltaba el cierre.<br>Ya lo detecté y lo estoy sosteniendo para que no se rompa. Publicalo de nuevo completo cuando puedas.");
-    } else {
-      console.log("✅ Doctor Sentinela: Archivo sano. v" + VERSION_ACTUAL);
-    }
-  }, 1500);
-
-  window.SENTINELA_UPDATE = function(nuevaVersion, mensaje){
-    if(localStorage.getItem(CLAVE_VERSION) !== nuevaVersion){
-      localStorage.setItem(CLAVE_VERSION, nuevaVersion);
-      if(ES_CREADOR) alert("🔄 ACTUALIZACIÓN UNIVERSAL\n\n" + (mensaje || "Mejora nueva."));
-      location.reload(true);
-    }
-  };
-
-  console.log("✅ Universal + Auto-Corrección Activo - v" + VERSION_ACTUAL);
-})();
+async function login(){
+  const nombre=document.getElementById('nombre').value.trim();
+  const u=document.getElementById('u').value.trim();
+  const p=document.getElementById('p').value.trim();
+  if(!u||!p){document.getElementById('msg').innerText="Falta usuario o contraseña, JEFE";return;}
+  document.getElementById('msg').innerText="Conectando...";
+  try{
+    const r=await fetch(SUPABASE_URL+"/rest/v1/centinela_usuarios?usuario=eq."+u+"&password=eq."+p, {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY}});
+    const d=await r.json();
+    if(d && d.length>0){ localStorage.setItem('sentinela_user',u); document.getElementById('login-fondo').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('bienvenida').innerText="Bienvenido, "+(nombre||u)+" a SENTINELA REAL"; document.getElementById('nivel').innerText=d[0].nivel||1; }
+    else{ document.getElementById('msg').innerText="Usuario o contraseña incorrectos, JEFE"; }
+  }catch(e){ document.getElementById('msg').innerText="Error, JEFE: "+e.message; }
+}
+async function registrar(){
+  const nombre=document.getElementById('nombre').value.trim();
+  const u=document.getElementById('u').value.trim();
+  const p=document.getElementById('p').value.trim();
+  if(!nombre||!u||!p){document.getElementById('msg').innerText="Completá nombre, usuario y contraseña, JEFE";return;}
+  document.getElementById('msg').innerText="Registrando en la nube...";
+  try{
+    const r=await fetch(SUPABASE_URL+"/rest/v1/centinela_usuarios", {method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,"Content-Type":"application/json",Prefer:"return=representation"},body:JSON.stringify({nombre:nombre,usuario:u,password:p,nivel:1})});
+    if(r.ok){document.getElementById('msg').innerText="✅ Registrado, JEFE, ahora ENTRAR";} else {document.getElementById('msg').innerText="Error al registrar, JEFE, puede que el usuario ya exista";}
+  }catch(e){document.getElementById('msg').innerText="Error, JEFE: "+e.message;}
+}
+function salir(){localStorage.removeItem('sentinela_user');location.reload();}
 </script>
-<!-- FIN UNIVERSAL v2.1 -->
+</body>
+</html>
