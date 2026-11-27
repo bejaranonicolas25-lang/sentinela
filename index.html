@@ -3,108 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MP4 UNIVERSAL</title>
-<style>body{margin:0;background:#0a0a2e;color:#fff;font-family:sans-serif}input,button{display:block;width:90%;margin:8px auto;padding:12px;border-radius:10px}canvas{width:100%;height:60vh;display:block}</style>
+<title>MI NUBE - JEFE</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- LOGIN -->
 <input id="usuario" placeholder="Usuario">
 <input id="clave" type="password" placeholder="Contraseña">
 <button onclick="entrar()">Entrar</button>
 <button onclick="crearCuenta()">Crear primera cuenta</button>
 <button onclick="olvidar()">Olvidé contraseña</button>
-<p id="msg" style="text-align:center"></p>
+<p id="msg"></p>
 
-<!-- VOCES -->
 <button onclick="hablar('¡JEFE! ¡Te estoy alcanzando!')">Voz 1 - Centinela</button>
 <button onclick="hablar('¡Corran! ¡Que no nos agarre!')">Voz 2 - Corredores</button>
 <button onclick="hablar('¡Trueno! ¡Cuidado JEFE!')">Voz 3 - Trueno</button>
 
 <canvas id="canvasMP4"></canvas>
 
-<script>
-// ===== LOGIN UNIVERSAL =====
-let dueno = JSON.parse(localStorage.getItem("dueno") || "null");
-function crearCuenta(){
-  if(dueno) return msg.innerText="Ya hay dueño, JEFE";
-  dueno={u:usuario.value, c:clave.value};
-  localStorage.setItem("dueno", JSON.stringify(dueno));
-  msg.innerText="Cuenta de dueño creada, JEFE";
-}
-function entrar(){
-  if(dueno && usuario.value===dueno.u && clave.value===dueno.c){ localStorage.setItem("rol","dueno"); alert("Bienvenido dueño, JEFE - Ves TODO"); return; }
-  if(usuario.value!==""){ localStorage.setItem("rol","visitante"); alert("Bienvenido a mi nube, JEFE"); return; }
-  msg.innerText="Usuario o clave mal, JEFE";
-}
-function olvidar(){
-  if(!dueno) return msg.innerText="No hay cuenta, JEFE";
-  let r=prompt("¿Sos el dueño? Escribí tu usuario");
-  if(r===dueno.u) alert("Tu clave es: "+dueno.c); else alert("Solo el dueño puede verla, JEFE");
-}
-
-// ===== VOCES =====
-function hablar(texto){
-  speechSynthesis.cancel();
-  let v = new SpeechSynthesisUtterance(texto);
-  v.lang="es-AR"; v.rate=1; v.pitch=1;
-  speechSynthesis.speak(v);
-}
-
-// ===== CANVAS MP4 =====
-const c = document.getElementById("canvasMP4");
-const ctx = c.getContext("2d");
-c.width = innerWidth; c.height = innerHeight*0.6;
-let t = 0;
-let audioCtx;
-function trueno(){
-  try{
-    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-    o.type="sawtooth"; o.frequency.value=40;
-    g.gain.setValueAtTime(0.3, audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+0.8);
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start(); o.stop(audioCtx.currentTime+0.8);
-  }catch(e){}
-}
-function personaje(x, y, color, correr, boca){
-  ctx.fillStyle=color;
-  ctx.fillRect(x-15, y, 30, 60);
-  ctx.fillStyle="#ffcc99";
-  ctx.fillRect(x-12, y-30, 24, 30);
-  ctx.fillStyle="#000";
-  const abrir = boca ? Math.abs(Math.sin(t*8))*10 : 2;
-  ctx.fillRect(x-5, y-8, 10, abrir);
-  ctx.strokeStyle=color; ctx.lineWidth=6;
-  const brazo = Math.sin(t*10)*20;
-  ctx.beginPath(); ctx.moveTo(x-15, y+10); ctx.lineTo(x-35, y+20+brazo); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(x+15, y+10); ctx.lineTo(x+35, y+20-brazo); ctx.stroke();
-  ctx.strokeStyle="#222"; ctx.lineWidth=7;
-  const pierna = correr ? Math.sin(t*12)*25 : 0;
-  ctx.beginPath(); ctx.moveTo(x-7, y+60); ctx.lineTo(x-10+pierna, y+100); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(x+7, y+60); ctx.lineTo(x+10-pierna, y+100); ctx.stroke();
-}
-function dibujar(){
-  t+=0.05;
-  ctx.fillStyle = Math.random()<0.02 ? "#fff" : "#0a0a2e";
-  if(Math.random()<0.02) trueno();
-  ctx.fillRect(0,0,c.width,c.height);
-  if(Math.random()<0.03){
-    ctx.strokeStyle="#ffff00"; ctx.lineWidth=4;
-    ctx.beginPath(); ctx.moveTo(c.width*0.5,0);
-    ctx.lineTo(c.width*0.5+40,150); ctx.lineTo(c.width*0.5,250); ctx.stroke();
-  }
-  ctx.fillStyle="#111"; ctx.fillRect(0,c.height-100,c.width,100);
-  let cx = c.width*0.5 + Math.sin(t)*20;
-  personaje(cx, c.height-250, "#ff0000", false, true);
-  const avance = (Math.sin(t*0.5)+1)*30;
-  personaje(cx-120+avance, c.height-220, "#00f", true, true);
-  personaje(cx+120-avance, c.height-220, "#0a0", true, true);
-  personaje(cx-200+avance, c.height-220, "#ff0", true, true);
-  requestAnimationFrame(dibujar);
-}
-dibujar();
-</script>
+<script src="app.js"></script>
+<script src="canvas.js"></script>
 </body>
- </html>
+</html>
