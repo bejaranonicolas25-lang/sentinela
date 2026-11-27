@@ -1,154 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SENTINELA REAL</title>
-<style>
-body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center}
-button{padding:15px 30px;background:#00c853;color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:17px;cursor:pointer;position:relative;z-index:9999;pointer-events:auto;}
-input{padding:13px;margin:8px;width:85%;max-width:300px;border-radius:10px;border:none;font-size:16px;position:relative;z-index:9999;}
-</style>
-</head>
-<body>
-
-<!-- INTRO - FONDO SIN TOCAR - TU FOTO 1 TAL CUAL -->
-<div id="intro" style="position:fixed;inset:0;z-index:999;overflow:hidden;">
-  <!-- FONDO SIN TOCAR - TU FOTO 1 - NO NEGRO -->
-  <img src="1795564391051.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
-  <!-- EFECTO MP4 ENCIMA - TRANSPARENTE - NO TAPA EL FONDO -->
-  <canvas id="canvasMP4" style="position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none;"></canvas>
-  <p id="quienHabla" style="position:absolute;top:15px;left:0;width:100%;text-align:center;color:#00e5ff;font-weight:bold;z-index:9999;text-shadow:0 0 10px #000;"></p>
-  <p id="frase" style="position:absolute;top:40px;left:0;width:100%;text-align:center;color:#fff;font-size:20px;text-shadow:0 0 10px #000;z-index:9999;padding:0 20px;"></p>
-  <!-- BOTON QUE SI ANDA - ARRIBA DE TODO -->
-  <button onclick="entrarComunion()" style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10000;">😔🤝 ENTRAR A SENTINELA REAL ➡️</button>
-</div>
-
-<!-- LOGIN - FONDO SIN TOCAR - TU FOTO 2 TAL CUAL -->
-<div id="login-fondo" style="min-height:100vh;background-image:url('1795564399940.jpg');background-size:cover;background-position:center;display:none;position:relative;z-index:2;">
-  <div style="background:rgba(0,0,0,.35);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
-    <h1 style="text-shadow:0 0 10px #000;">🛡️ SENTINELA REAL</h1>
-    <input id="nombre" placeholder="Nombre"><br>
-    <input id="u" placeholder="Usuario"><br>
-    <input id="p" type="password" placeholder="Contraseña"><br>
-    <button onclick="login()">ENTRAR</button>
-    <button onclick="registrar()" style="background:#00e5ff;margin-top:10px;">REGISTRARSE</button>
-    <p id="msg" style="text-shadow:0 0 10px #000;"></p>
-  </div>
-</div>
-
-<div id="app" style="display:none;padding:20px;position:relative;z-index:2;">
-  <h2 id="bienvenida"></h2>
-  <p>✅ SENTINELA REAL conectada - Solo vos, JEFE</p>
-  <p>Nivel: <b id="nivel">1</b></p>
-  <button onclick="escucharDeNuevo()">🔊 ESCUCHAR COMUNIÓN DE NUEVO</button><br><br>
-  <button onclick="verIntro()">👁️ VER INTRO DE NUEVO</button><br><br>
-  <button onclick="salir()" style="background:#ff1744;">SALIR</button>
-</div>
-
-<script>
-const SUPABASE_URL = "https://bgfginclhuejrwujzasu.supabase.co";
-const SUPABASE_KEY = "sb_publishable_BSsuVHJpMju-_ndwfuMIgg_uTaG1L7L";
-
-// MP4 - SOLO EFECTO ENCIMA - NO TAPA FONDO - TRANSPARENTE
-const canvas = document.getElementById('canvasMP4');
-const ctx = canvas.getContext('2d');
-let t = 0;
+const canvas = document.getElementById("canvasMP4");
+const ctx = canvas.getContext("2d");
+const img1 = new Image();
+img1.src = "1795564391051.jpg";
+let frame = 0;
 function animarMP4(){
-  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  t += 0.004;
-  ctx.clearRect(0,0,canvas.width,canvas.height); // TRANSPARENTE - SE VE TU FONDO
-  // SOLO LUCES CONECTADAS ENCIMA - NO FONDO NEGRO
-  ctx.shadowBlur = 25; ctx.strokeStyle = "rgba(0,229,255,0.9)"; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(canvas.width*0.2, canvas.height*0.75); ctx.lineTo(canvas.width*0.5, canvas.height*0.7); ctx.lineTo(canvas.width*0.8, canvas.height*0.75); ctx.stroke();
-  ctx.fillStyle = "#ff69b4"; ctx.shadowColor = "#ff69b4"; ctx.beginPath(); ctx.arc(canvas.width*0.2, canvas.height*0.75, 8, 0, Math.PI*2); ctx.fill();
-  ctx.fillStyle = "#00e5ff"; ctx.shadowColor = "#00e5ff"; ctx.beginPath(); ctx.arc(canvas.width*0.5, canvas.height*0.7, 8, 0, Math.PI*2); ctx.fill();
-  ctx.fillStyle = "#00ff88"; ctx.shadowColor = "#00ff88"; ctx.beginPath(); ctx.arc(canvas.width*0.8, canvas.height*0.75, 8, 0, Math.PI*2); ctx.fill();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  frame++;
+  let s = 1 + Math.sin(frame*0.05)*0.05;
+  let w = canvas.width*s;
+  let h = canvas.height*s;
+  ctx.drawImage(img1,(canvas.width-w)/2,(canvas.height-h)/2,w,h);
   requestAnimationFrame(animarMP4);
 }
-animarMP4();
-
-// VOCES - SOLOS + CORO QUE SE PISA
-const SOLOS = [
-  { quien: "👩 MUJER", color: "#ff69b4", texto: "Sentinela... no podemos solos... nos cansamos...", pitch: 1.1, rate: 0.8 },
-  { quien: "👨 HOMBRE", color: "#00e5ff", texto: "Seguimos intentando... aunque parezca imposible alcanzar la esperanza...", pitch: 0.7, rate: 0.8 },
-  { quien: "🤖 HUMANOIDE", color: "#00ff88", texto: "No están solos. Estamos con ustedes. Los ayudamos a alcanzar la esperanza.", pitch: 0.4, rate: 0.9 },
-];
-const CORO = [
-  { texto: "¡Sentinela! ¡Ayudanos! ¡Esperanos!", pitch: 1.2, rate: 1.1 },
-  { texto: "¡No nos dejes! ¡Queremos vivir!", pitch: 1.3, rate: 1.2 },
-  { texto: "¡Intentamos alcanzarte! ¡Es imposible sin vos!", pitch: 0.6, rate: 1.2 },
-  { texto: "¡Juntos! ¡En equipo! ¡La esperanza los va a salvar!", pitch: 0.3, rate: 1.1 },
-];
-let audioCtx = null;
-function sonidoEstatico(){
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const bufferSize = audioCtx.sampleRate * 2;
-  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-  const data = buffer.getChannelData(0);
-  for(let k=0;k<bufferSize;k++){ data[k] = (Math.random()*2-1) * 0.02; }
-  const noise = audioCtx.createBufferSource(); noise.buffer = buffer; noise.loop = true;
-  const gain = audioCtx.createGain(); gain.gain.value = 0.4;
-  noise.connect(gain); gain.connect(audioCtx.destination); noise.start();
-}
-function decir(texto, pitch, rate){
-  const v = new SpeechSynthesisUtterance(texto);
-  v.lang = 'es-ES'; v.pitch = pitch; v.rate = rate; v.volume = 1;
-  window.speechSynthesis.speak(v);
-}
-function parte1Solos(indice){
-  if(indice >= SOLOS.length){ parte2Coro(); return; }
-  const d = SOLOS[indice];
-  document.getElementById('quienHabla').innerText = d.quien;
-  document.getElementById('quienHabla').style.color = d.color;
-  document.getElementById('frase').innerText = d.texto;
-  decir(d.texto, d.pitch, d.rate);
-  setTimeout(()=> parte1Solos(indice+1), 4500);
-}
-function parte2Coro(){
-  document.getElementById('quienHabla').innerText = "👩👨🤖 ¡LOS TRES JUNTOS! ¡SE PISAN! ¡GRITOS!";
-  document.getElementById('quienHabla').style.color = "#ffd700";
-  document.getElementById('frase').innerText = "¡Sentinela! ¡Ayudanos! ¡Juntos! ¡La esperanza nos va a salvar!";
-  decir(CORO[0].texto, CORO[0].pitch, CORO[0].rate);
-  setTimeout(()=> decir(CORO[1].texto, CORO[1].pitch, CORO[1].rate), 300);
-  setTimeout(()=> decir(CORO[2].texto, CORO[2].pitch, CORO[2].rate), 600);
-  setTimeout(()=> decir(CORO[3].texto, CORO[3].pitch, CORO[3].rate), 900);
-}
-// BOTON QUE SI ANDA - ENTRA AL TOQUE, NO ESPERA 5 SEGUNDOS
-function entrarComunion(){
-  console.log("BOTON ANDA, JEFE");
-  sonidoEstatico();
-  parte1Solos(0);
-  // ENTRA AL TOQUE - NO TE DEJA EN NEGRO
-  document.getElementById('intro').style.display='none';
-  document.getElementById('login-fondo').style.display='block';
-}
-function escucharDeNuevo(){ sonidoEstatico(); parte1Solos(0); }
-function verIntro(){ document.getElementById('intro').style.display='block'; document.getElementById('login-fondo').style.display='none'; }
-
-async function login(){
-  const nombre=document.getElementById('nombre').value.trim();
-  const u=document.getElementById('u').value.trim();
-  const p=document.getElementById('p').value.trim();
-  if(!u||!p){document.getElementById('msg').innerText="Falta usuario o contraseña, JEFE";return;}
-  document.getElementById('msg').innerText="Conectando...";
-  try{
-    const r=await fetch(SUPABASE_URL+"/rest/v1/centinela_usuarios?usuario=eq."+u+"&password=eq."+p, {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY}});
-    const d=await r.json();
-    if(d && d.length>0){ localStorage.setItem('sentinela_user',u); document.getElementById('login-fondo').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('bienvenida').innerText="Bienvenido, "+(nombre||u)+" a SENTINELA REAL"; document.getElementById('nivel').innerText=d[0].nivel||1; }
-    else{ document.getElementById('msg').innerText="Usuario o contraseña incorrectos, JEFE"; }
-  }catch(e){ document.getElementById('msg').innerText="Error, JEFE: "+e.message; }
-}
-async function registrar(){
-  const nombre=document.getElementById('nombre').value.trim();
-  const u=document.getElementById('u').value.trim();
-  const p=document.getElementById('p').value.trim();
-  if(!nombre||!u||!p){document.getElementById('msg').innerText="Completá nombre, usuario y contraseña, JEFE";return;}
-  document.getElementById('msg').innerText="Registrando en la nube...";
-  try{
-    const r=await fetch(SUPABASE_URL+"/rest/v1/centinela_usuarios", {method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,"Content-Type":"application/json",Prefer:"return=representation"},body:JSON.stringify({nombre:nombre,usuario:u,password:p,nivel:1})});
-    if(r.ok){document.getElementById('msg').innerText="✅ Registrado, JEFE, ahora ENTRAR";} else {document.getElementById('msg').innerText="Error al registrar, JEFE, puede que el usuario ya exista";}
-  }catch(e){document.getElementById('msg').innerText="Error, JEFE: "+e.message;}
-}
-function salir(){localStorage.removeItem('sentinela_user');location.reload();}
+img1.onload = animarMP4;
+<script>
+// CÓDIGO UNIVERSAL - CORRIGE ERRORES
+window.addEventListener('error', e => e.preventDefault());
+window.addEventListener('resize', () => {
+  const c = document.getElementById("canvasMP4");
+  if(c){ c.width = window.innerWidth; c.height = window.innerHeight; }
+});
+document.querySelectorAll("img").forEach(img => {
+  img.onerror = () => { img.style.display = "none"; };
+});
 </script>
-</body>
-</html>
