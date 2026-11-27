@@ -1,45 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CENTINELA REAL</title>
-<style>body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:20px}input{padding:12px;margin:8px;width:80%;max-width:300px;border-radius:8px;border:none}button{padding:12px 25px;background:#00ff88;border:none;border-radius:8px;font-weight:bold}.box{background:#1a1a1a;padding:20px;border-radius:15px;max-width:400px;margin:auto}</style>
+<title>SENTINELA REAL</title>
+<style>
+body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center;overflow-x:hidden}
+button{padding:15px 30px;background:#00c853;color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:17px;cursor:pointer}
+input{padding:13px;margin:8px;width:85%;max-width:300px;border-radius:10px;border:none;font-size:16px}
+.card{background:#111;border:1px solid #00e5ff;border-radius:15px;padding:15px;margin:10px}
+</style>
 </head>
 <body>
-<h1>🛡️ CENTINELA REAL</h1>
-<div class="box" id="login">
-<h2>INICIAR SESIÓN REAL</h2>
-<input id="u" placeholder="Usuario"><br>
-<input id="p" type="password" placeholder="Contraseña"><br>
-<button onclick="login()">ENTRAR</button>
-<p id="msg"></p>
+
+<!-- ============ CODIGO UNIVERSAL - SENTINELA REAL ============ -->
+<!-- SENTINELA con S = LA REAL, NO DEMO, REALISMO, IMAGENES EN VIDA, INTRO = MP4 -->
+<!-- CENTINELA con C = SOLO VOS, JEFE, SOLO NUBE ACTIVA, NADIE MAS LA VE -->
+<!-- NUBE = SUPABASE - SOLO VOS, JEFE -->
+
+<!-- INTRO - TU FOTO 1 CONVERTIDA EN MP4 - SE MUEVE + SONIDO + VOCES -->
+<div id="intro" style="position:fixed;inset:0;z-index:999;background:#000;overflow:hidden;">
+  <canvas id="canvasMP4" style="width:100%;height:100%;display:block;"></canvas>
+  <p id="quienHabla" style="position:absolute;top:15px;left:0;width:100%;text-align:center;color:#00e5ff;font-weight:bold;z-index:10;"></p>
+  <p id="frase" style="position:absolute;top:40px;left:0;width:100%;text-align:center;color:#fff;font-size:20px;text-shadow:0 0 10px #000;z-index:10;padding:0 20px;"></p>
+  <button onclick="entrarComunion()" style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10;">😔🤝 ENTRAR A SENTINELA REAL ➡️</button>
 </div>
-<div class="box" id="app" style="display:none">
-<h2 id="bienvenida"></h2>
-<p>✅ Conectado a la nube real</p>
-<p>Nivel: <b id="nivel">1</b></p>
-<button onclick="salir()">SALIR</button>
+
+<!-- LOGIN REAL - TU FOTO 2 - NOMBRE, USUARIO, CONTRASEÑA -->
+<div id="login-fondo" style="min-height:100vh;background-image:url('1795564399940.jpg');background-size:cover;background-position:center;display:none;position:relative;z-index:2;">
+  <div style="background:rgba(0,0,0,.55);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+    <h1>🛡️ SENTINELA REAL</h1>
+    <p>La real, JEFE, no demo - Con S - Imágenes en vida - Intro = MP4</p>
+    <input id="nombre" placeholder="Nombre"><br>
+    <input id="u" placeholder="Usuario"><br>
+    <input id="p" type="password" placeholder="Contraseña"><br>
+    <button onclick="login()">ENTRAR</button>
+    <button onclick="registrar()" style="background:#00e5ff;margin-top:10px;">REGISTRARSE</button>
+    <p id="msg"></p>
+  </div>
 </div>
+
+<!-- APP - CONECTADA A LA NUBE - TODO LO QUE TENIAMOS -->
+<div id="app" style="display:none;padding:20px;position:relative;z-index:2;">
+  <h2 id="bienvenida"></h2>
+  <p>✅ SENTINELA REAL conectada a la nube - Solo vos, JEFE</p>
+  <div class="card"><p>Nivel: <b id="nivel">1</b></p><p>Usuario: <b id="usuarioMostrado"></b></p><p>Estado: <b>🟢 EN VIDA - MP4 ACTIVO - VOCES EN COMUNIÓN</b></p></div>
+  <div class="card"><h3>🤝 COMUNIÓN</h3><p>👩 Mujer + 👨 Hombre + 🤖 Humanoides</p><p>En equipo, ayudando a alcanzar la esperanza que les va a salvar la vida.</p><button onclick="escucharDeNuevo()">🔊 ESCUCHAR COMUNIÓN DE NUEVO</button></div>
+  <div class="card"><h3>📸 TUS FOTOS EN VIDA</h3><p>Foto 1: Intro MP4 - Se mueve, no estática</p><p>Foto 2: Fondo login - Rayos</p><button onclick="verIntro()">👁️ VER INTRO MP4 DE NUEVO</button></div>
+  <button onclick="salir()" style="background:#ff1744;">SALIR</button>
+</div>
+
 <script>
+// ============ TUS 2 FOTOS GUARDADAS - NO INVENTA NADA MAS ============
+const IMAGEN_1 = "1795564391051.jpg"; // INTRO - SENTINELA - CONVERTIDA EN MP4
+const IMAGEN_2 = "1795564399940.jpg"; // LOGIN - RAYOS
+
+// ============ NUBE - SUPABASE - CONECTADA - SOLO VOS ============
 const SUPABASE_URL = "https://bgfginclhuejrwujzasu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_BSsuVHJpMju-_ndwfuMIgg_uTaG1L7L";
+
+// ============ TU FOTO 1 CONVERTIDA EN MP4 - SE MUEVE - NO ESTATICA ============
+const canvas = document.getElementById('canvasMP4');
+const ctx = canvas.getContext('2d');
+let img1 = new Image(); img1.src = IMAGEN_1;
+let t = 0;
+function animarMP4(){
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  t += 0.004;
+  ctx.filter = "contrast(1.2) saturate(1.3) brightness(1.05)";
+  const zoom = 1 + Math.sin(t) * 0.05;
+  const x = Math.sin(t * 0.5) * 15;
+  const y = Math.cos(t * 0.4) * 12;
+  if(img1.complete && img1.naturalWidth > 0){ ctx.drawImage(img1, x-30, y-30, canvas.width*zoom+60, canvas.height*zoom+60); }
+  ctx.filter = "none"; ctx.shadowBlur = 25; ctx.strokeStyle = "#00e5ff"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(canvas.width*0.2, canvas.height*0.75); ctx.lineTo(canvas.width*0.5, canvas.height*0.7); ctx.lineTo(canvas.width*0.8, canvas.height*0.75); ctx.stroke();
+  ctx.fillStyle = "#ff69b4"; ctx.shadowColor = "#ff69b4"; ctx.beginPath(); ctx.arc(canvas.width*0.2, canvas.height*0.75, 8, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#00e5ff"; ctx.shadowColor = "#00e5ff"; ctx.beginPath(); ctx.arc(canvas.width*0.5, canvas.height*0.7, 8, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#00ff88"; ctx.shadowColor = "#00ff88"; ctx.beginPath(); ctx.arc(canvas.width*0.8, canvas.height*0.75, 8, 0, Math.PI*2); ctx.fill();
+  requestAnimationFrame(animarMP4);
+}
+img1.onload = animarMP4; animarMP4();
+
+// ============ VOCES - COMUNION - MUJER + HOMBRE + MAQUINA ============
+const SOLOS = [
+  { quien: "👩 MUJER", color: "#ff69b4", texto: "Sentinela... no podemos solos... nos cansamos...", pitch: 1.1, rate: 0.8 },
+  { quien: "👨 HOMBRE", color: "#00e5ff", texto: "Seguimos intentando... aunque parezca imposible alcanzar la esperanza...", pitch: 0.7, rate: 0.8 },
+  { quien: "🤖 HUMANOIDE", color: "#00ff88", texto: "No están solos. Estamos con ustedes. Los ayudamos a alcanzar la esperanza.", pitch: 0.4, rate: 0.9 },
+];
+const CORO = [
+  { texto: "¡Sentinela! ¡Ayudanos! ¡Esperanos!", pitch: 1.2, rate: 1.1 },
+  { texto: "¡No nos dejes! ¡Queremos vivir!", pitch: 1.3, rate: 1.2 },
+  { texto: "¡Intentamos alcanzarte! ¡Es imposible sin vos!", pitch: 0.6, rate: 1.2 },
+  { texto: "¡Juntos! ¡En equipo! ¡La esperanza los va a salvar!", pitch: 0.3, rate: 1.1 },
+];
+let audioCtx = null;
+function sonidoEstatico(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const bufferSize = audioCtx.sampleRate * 2;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let k=0;k<bufferSize;k++){ data[k] = (Math.random()*2-1) * 0.02; }
+  const noise = audioCtx.createBufferSource(); noise.buffer = buffer; noise.loop = true;
+  const gain = audioCtx.createGain(); gain.gain.value = 0.4;
+  noise.connect(gain); gain.connect(audioCtx.destination); noise.start();
+}
+function decir(texto, pitch, rate, volume){
+  const v = new SpeechSynthesisUtterance(texto);
+  v.lang = 'es-ES'; v.pitch = pitch; v.rate = rate; v.volume = volume || 1;
+  window.speechSynthesis.speak(v);
+}
+function parte1Solos(indice){
+  if(indice >= SOLOS.length){ parte2Coro(); return; }
+  const d = SOLOS[indice];
+  document.getElementById('quienHabla').innerText = d.quien;
+  document.getElementById('quienHabla').style.color = d.color;
+  document.getElementById('frase').innerText = d.texto;
+  decir(d.texto, d.pitch, d.rate, 1);
+  setTimeout(()=> parte1Solos(indice+1), 4500);
+}
+function parte2Coro(){
+  document.getElementById('quienHabla').innerText = "👩👨🤖 ¡LOS TRES JUNTOS! ¡SE PISAN! ¡GRITOS DESGARRADORES!";
+  document.getElementById('quienHabla').style.color = "#ffd700";
+  document.getElementById('frase').innerText = "¡Sentinela! ¡Ayudanos! ¡Juntos! ¡La esperanza nos va a salvar!";
+  decir(CORO[0].texto, CORO[0].pitch, CORO[0].rate, 1);
+  setTimeout(()=> decir(CORO[1].texto, CORO[1].pitch, CORO[1].rate, 1), 300);
+  setTimeout(()=> decir(CORO[2].texto, CORO[2].pitch, CORO[2].rate, 1), 600);
+  setTimeout(()=> decir(CORO[3].texto, CORO[3].pitch, CORO[3].rate, 1), 900);
+}
+function entrarComunion(){
+  sonidoEstatico();
+  parte1Solos(0);
+  setTimeout(()=>{ document.getElementById('intro').style.display='none'; document.getElementById('login-fondo').style.display='block'; }, 5000);
+}
+function escucharDeNuevo(){ sonidoEstatico(); parte1Solos(0); }
+function verIntro(){ document.getElementById('intro').style.display='block'; parte1Solos(0); setTimeout(()=>{ document.getElementById('intro').style.display='none'; }, 15000); }
+
+// ============ LOGIN REAL - CONECTADO A LA NUBE ============
 async function login(){
+  const nombre=document.getElementById('nombre').value.trim();
   const u=document.getElementById('u').value.trim();
   const p=document.getElementById('p').value.trim();
   if(!u||!p){document.getElementById('msg').innerText="Falta usuario o contraseña, JEFE";return;}
-  document.getElementById('msg').innerText="Conectando a la nube real...";
+  document.getElementById('msg').innerText="Conectando a SENTINELA REAL - Nube...";
   try{
     const r=await fetch(SUPABASE_URL+"/rest/v1/centinela_usuarios?usuario=eq."+u+"&password=eq."+p, {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY}});
     const d=await r.json();
     if(d && d.length>0){
-      localStorage.setItem('centinela_user',u);
-      document.getElementById('login').style.display='none';
+      localStorage.setItem('sentinela_user',u);
+      document.getElementById('login-fondo').style.display='none';
       document.getElementById('app').style.display='block';
-      document.getElementById('bienvenida').innerText="Bienvenido, "+u;
+      document.getElementById('bienvenida').innerText="Bienvenido, "+(nombre||u)+" a SENTINELA REAL";
+      document.getElementById('usuarioMostrado').innerText=u;
       document.getElementById('nivel').innerText=d[0].nivel||1;
     }else{document.getElementById('msg').innerText="Usuario o contraseña incorrectos, JEFE";}
   }catch(e){document.getElementById('msg').innerText="Error, JEFE: "+e.message;}
 }
-function salir(){localStorage.removeItem('centinela_user');location.reload();}
-</script>
-</body>
-</html>
+async function registrar(){
