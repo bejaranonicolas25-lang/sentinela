@@ -4,11 +4,12 @@
 
   // ORDEN SEGURO, JEFE: primero escudo, después cerebro, después app, después canvas
   const archivos = [
-    "escudo.js",
-    "cerebro.js",
-    "app.js",
-    "canvas.js"
-  ];
+    "foto.js",
+"escudo.js",
+"cerebro.js",
+"app.js",
+"canvas.js"
+"index.html",
 
   function cargarUno(i){
     if(i >= archivos.length){
